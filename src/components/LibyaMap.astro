@@ -10,28 +10,27 @@ import { country } from '../lib/data';
 
 const m = libyaMap(720, 600);
 // Named places that appear in project names (approximate coordinates, lon/lat)
-const PLACES: Record<string, { lon: number; lat: number; label: string; dx?: number; dy?: number; anchor?: string }> = {
-  tripoli: { lon: 13.19, lat: 32.89, label: 'Tripoli', dx: 8, dy: -8 },
-  zuwara: { lon: 12.08, lat: 32.93, label: 'Zuwara', dx: -8, dy: -8, anchor: 'end' },
-  zliten: { lon: 14.57, lat: 32.47, label: 'Zliten', dx: 6, dy: 14 },
-  gharyan: { lon: 13.02, lat: 32.17, label: 'Gharyan', dx: -8, dy: 14, anchor: 'end' },
-  jabal: { lon: 12.3, lat: 31.95, label: 'Jabal al Gharbi', dx: -8, dy: 4, anchor: 'end' },
-  nalut: { lon: 10.98, lat: 31.87, label: 'Nalut', dx: 8, dy: 4 },
-  ghadames: { lon: 9.5, lat: 30.13, label: 'Ghadames', dx: 8, dy: 4 },
-  hamada: { lon: 12.9, lat: 29.5, label: 'Hamada field', dx: 8, dy: 4 },
-  misurata: { lon: 15.09, lat: 32.38, label: 'Misurata', dx: 8, dy: -6 },
-  sirte: { lon: 16.59, lat: 31.21, label: 'Sirte', dx: 8, dy: -6 },
-  hun: { lon: 15.95, lat: 29.12, label: 'Hun', dx: 8, dy: 4 },
-  samnu: { lon: 14.87, lat: 27.27, label: 'Samnu', dx: 8, dy: -4 },
-  sebha: { lon: 14.43, lat: 27.04, label: 'Sebha', dx: -8, dy: 12, anchor: 'end' },
-  raguba: { lon: 19.1, lat: 29.1, label: 'Raguba', dx: -8, dy: 4, anchor: 'end' },
-  jalo: { lon: 21.55, lat: 29.03, label: 'Jalo', dx: 8, dy: 4 },
-  nafoora: { lon: 21.6, lat: 29.35, label: 'Nafoora', dx: 8, dy: -4 },
-  messla: { lon: 22.25, lat: 27.9, label: 'Messla', dx: 8, dy: -4 },
-  sarir: { lon: 22.5, lat: 27.6, label: 'Sarir', dx: 8, dy: 12 },
-  benghazi: { lon: 20.07, lat: 32.12, label: 'Benghazi', dx: -8, dy: 14, anchor: 'end' },
-  tobruk: { lon: 23.96, lat: 32.08, label: 'Tobruk', dx: 0, dy: -10, anchor: 'middle' },
-  border: { lon: 25.05, lat: 31.6, label: 'Eastern border', dx: -4, dy: 16, anchor: 'end' },
+const PLACES: Record<string, { lon: number; lat: number; label: string | null; dx: number; dy: number; anchor?: string }> = {
+  tripoli: { lon: 13.19, lat: 32.89, label: 'Tripoli', dx: 10, dy: -12 },
+  zuwara: { lon: 12.08, lat: 32.93, label: null, dx: 0, dy: 0 },
+  gharyan: { lon: 13.02, lat: 32.17, label: null, dx: 0, dy: 0 },
+  jabal: { lon: 12.3, lat: 31.95, label: null, dx: 0, dy: 0 },
+  nalut: { lon: 10.98, lat: 31.87, label: null, dx: 0, dy: 0 },
+  ghadames: { lon: 9.5, lat: 30.13, label: 'Ghadames', dx: 12, dy: 6 },
+  hamada: { lon: 12.9, lat: 29.5, label: 'Hamada field', dx: 14, dy: 6 },
+  misurata: { lon: 15.09, lat: 32.38, label: 'Misurata', dx: 10, dy: -12 },
+  sirte: { lon: 16.59, lat: 31.21, label: 'Sirte', dx: 12, dy: 6 },
+  hun: { lon: 15.95, lat: 29.12, label: 'Hun', dx: 12, dy: 6 },
+  samnu: { lon: 14.87, lat: 27.27, label: 'Samnu', dx: 12, dy: 6 },
+  sebha: { lon: 14.43, lat: 27.04, label: 'Sebha', dx: 0, dy: 28, anchor: 'middle' },
+  raguba: { lon: 19.1, lat: 29.1, label: 'Raguba', dx: 0, dy: 28, anchor: 'middle' },
+  jalo: { lon: 21.55, lat: 29.03, label: 'Jalo', dx: 14, dy: 16 },
+  nafoora: { lon: 21.6, lat: 29.35, label: 'Nafoora', dx: 14, dy: -6 },
+  messla: { lon: 22.25, lat: 27.9, label: 'Messla', dx: 14, dy: -6 },
+  sarir: { lon: 22.5, lat: 27.6, label: 'Sarir', dx: 14, dy: 18 },
+  benghazi: { lon: 20.07, lat: 32.12, label: 'Benghazi', dx: -12, dy: 6, anchor: 'end' },
+  tobruk: { lon: 23.96, lat: 32.08, label: 'Tobruk', dx: 0, dy: -14, anchor: 'middle' },
+  border: { lon: 25.05, lat: 31.6, label: null, dx: 0, dy: 0 },
 };
 const RULES: [RegExp, string[]][] = [
   [/Samnu–Sebha/, ['samnu', 'sebha']],
@@ -41,7 +40,6 @@ const RULES: [RegExp, string[]][] = [
   [/Nalut–Ghadames/, ['nalut', 'ghadames']],
   [/Aziziya to Gharyan/, ['gharyan']],
   [/Tajoura|Tripoli area|Harbour site/, ['tripoli']],
-  [/Zuwara, Al-Asa and Zliten/, ['zuwara', 'zliten']],
   [/Zuwara/, ['zuwara']],
   [/Jabal al Gharbi/, ['jabal']],
   [/Jalo/, ['jalo']],
@@ -64,13 +62,22 @@ for (const p of lib.projects) {
   const key = rule[1][0]!;
   counts[key] = (counts[key] ?? 0) + 1;
 }
+const NAMES: Record<string, string> = {
+  tripoli: 'Tripoli', zuwara: 'Zuwara', gharyan: 'Gharyan', jabal: 'Jabal al Gharbi', nalut: 'Nalut–Ghadames line',
+  hamada: 'Hamada field', misurata: 'Misurata–Sirte line', hun: 'Hun–Samnu line', samnu: 'Samnu–Sebha line',
+  raguba: 'Raguba', jalo: 'Jalo', nafoora: 'Nafoora field', messla: 'Messla field', sarir: 'Sarir field', benghazi: 'Benghazi–eastern border line',
+};
+const legend = Object.entries(counts)
+  .map(([k, n]) => ({ name: NAMES[k] ?? k, n }))
+  .sort((a, b) => b.n - a.n || a.name.localeCompare(b.name));
 const pt = (k: string) => m.at(PLACES[k]!.lon, PLACES[k]!.lat);
+const mid = (a: { x: number; y: number }, b: { x: number; y: number }) => ({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 });
 const routes = [
-  { d: [pt('benghazi'), pt('tobruk'), pt('border')], label: '220 kV · 750 km · 2001' },
-  { d: [pt('samnu'), pt('sebha')], label: '220 kV · 2011' },
-  { d: [pt('hun'), pt('samnu')], label: '220 kV · 1989' },
-  { d: [pt('misurata'), pt('sirte')], label: '220 kV · 1980' },
-  { d: [pt('nalut'), pt('ghadames')], label: '66 kV · 1981' },
+  { d: [pt('benghazi'), pt('tobruk'), pt('border')], label: '220 kV · 750 km · 2001', at: mid(pt('benghazi'), pt('tobruk')), dx: 0, dy: 30, anchor: 'middle' },
+  { d: [pt('samnu'), pt('sebha')], label: '220 kV · 2011', at: mid(pt('samnu'), pt('sebha')), dx: -16, dy: 4, anchor: 'end' },
+  { d: [pt('hun'), pt('samnu')], label: '220 kV · 1989', at: mid(pt('hun'), pt('samnu')), dx: 14, dy: 6, anchor: 'start' },
+  { d: [pt('misurata'), pt('sirte')], label: '220 kV · 1980', at: mid(pt('misurata'), pt('sirte')), dx: -14, dy: 12, anchor: 'end' },
+  { d: [pt('nalut'), pt('ghadames')], label: '66 kV · 1981', at: mid(pt('nalut'), pt('ghadames')), dx: 12, dy: 6, anchor: 'start' },
 ];
 const path = (pts: { x: number; y: number }[]) => pts.map((q, i) => `${i ? 'L' : 'M'}${q.x} ${q.y}`).join('');
 // small tower ticks along each route
@@ -104,12 +111,12 @@ const located = lib.count - unlocated;
     <path d={m.libya} fill="#fbf9f4" stroke="var(--navy)" stroke-width="1.4" />
     <g fill="none" stroke="var(--amber)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
       {routes.map((r) => <path d={path(r.d)} />)}
-      <circle cx={ringCentre.x} cy={ringCentre.y} r="16" stroke-dasharray="4 3" />
+      <circle cx={ringCentre.x} cy={ringCentre.y} r="20" stroke-dasharray="5 4" />
     </g>
     <g fill="none" stroke="var(--navy)" stroke-width="1">
       {routes.map((r) => <path d={ticks(r.d)} />)}
     </g>
-    <g font-family="IBM Plex Mono, Plex Mono Fallback, monospace" font-size="12" fill="var(--navy)">
+    <g font-family="IBM Plex Mono, Plex Mono Fallback, monospace" font-size="17" fill="var(--navy)">
       {Object.entries(PLACES).map(([k, pl]) => {
         const q = pt(k);
         const n = counts[k];
@@ -117,29 +124,31 @@ const located = lib.count - unlocated;
           <g>
             {n ? (
               <>
-                <circle cx={q.x} cy={q.y} r={n > 1 ? 9 : 6} fill="var(--navy)" />
-                {n > 1 && <text x={q.x} y={q.y + 4} text-anchor="middle" fill="var(--paper)" font-size="10">{n}</text>}
+                <circle cx={q.x} cy={q.y} r={n > 1 ? 11 : 7} fill="var(--navy)" />
+                {n > 1 && <text x={q.x} y={q.y + 5} text-anchor="middle" fill="var(--paper)" font-size="13">{n}</text>}
               </>
             ) : (
-              <circle cx={q.x} cy={q.y} r="3" fill="var(--paper)" stroke="var(--navy)" />
+              <circle cx={q.x} cy={q.y} r="4" fill="var(--paper)" stroke="var(--navy)" stroke-width="1.5" />
             )}
-            <text x={q.x + (pl.dx ?? 8)} y={q.y + (pl.dy ?? 4)} text-anchor={pl.anchor ?? 'start'}>{pl.label}</text>
+            {pl.label && <text x={q.x + pl.dx} y={q.y + pl.dy} text-anchor={pl.anchor ?? 'start'}>{pl.label}</text>}
           </g>
         );
       })}
     </g>
-    <g font-family="IBM Plex Mono, Plex Mono Fallback, monospace" font-size="11" fill="var(--amber-ink)">
-      <text x={pt('tobruk').x - 40} y={pt('tobruk').y + 34} text-anchor="middle">{routes[0]!.label}</text>
-      <text x={pt('sebha').x - 12} y={pt('sebha').y + 30} text-anchor="middle">{routes[1]!.label}</text>
-      <text x={pt('hun').x + 10} y={pt('hun').y + 22}>{routes[2]!.label}</text>
-      <text x={pt('sirte').x + 8} y={pt('sirte').y + 18}>{routes[3]!.label}</text>
-      <text x={pt('ghadames').x + 8} y={pt('ghadames').y + 20}>{routes[4]!.label}</text>
-      <text x={ringCentre.x - 20} y={ringCentre.y + 32} text-anchor="end">Tripoli ring · 220 kV · 1980</text>
+    <g font-family="IBM Plex Mono, Plex Mono Fallback, monospace" font-size="15" fill="var(--amber-ink)">
+      {routes.map((r) => (
+        <text x={r.at.x + r.dx} y={r.at.y + r.dy} text-anchor={r.anchor}>{r.label}</text>
+      ))}
     </g>
   </svg>
+  <ul class="legend" aria-label="Projects by place">
+    {legend.map((l) => <li><span class="fig">{l.n}</span> {l.name}</li>)}
+    <li><span class="fig">{unlocated}</span> no location named</li>
+  </ul>
   <figcaption>
-    Schematic. Lines join the named end points and are not surveyed alignments. {located} of {lib.count} projects are
-    placed by the location named in the project title; the other {unlocated} do not name a location.
+    Schematic. Lines join the named end points and are not surveyed alignments; the Benghazi line runs to the eastern
+    border, and the dashed ring marks the 220 kV Tripoli ring (1980). Markers show the number of projects at each place
+    named in a project; the unlabelled markers west of Tripoli are Zuwara, Nalut, Jabal al Gharbi and Gharyan.
   </figcaption>
 </figure>
 
@@ -154,6 +163,24 @@ const located = lib.count - unlocated;
     display: block;
     width: 100%;
     height: auto;
+  }
+  .legend {
+    list-style: none;
+    margin: 0.5rem 0 0;
+    padding: 0.5rem 0 0;
+    border-top: 1px solid var(--rule);
+    columns: 14rem;
+    column-gap: 1.5rem;
+    font-size: var(--step--1);
+  }
+  .legend li {
+    break-inside: avoid;
+    padding: 0.1rem 0;
+  }
+  .legend .fig {
+    display: inline-block;
+    min-width: 1.75rem;
+    color: var(--navy);
   }
   figcaption {
     border-top: 1px solid var(--rule);

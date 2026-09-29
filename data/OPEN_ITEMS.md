@@ -39,7 +39,7 @@ Facts left out, conflicts found, and decisions to confirm. Nothing here is shown
 
 ## D. Content decisions to confirm
 
-27. **Director education**: the second profile says "graduated from the University of Houston, Texas". No degree is stated. The site shows the university only. Confirm the degree.
+27. **Director education**: the second profile says "graduated from the University of Houston, Texas". No degree is stated. The site shows the university only. Confirm the degree. The same page says he served as "Director of Projects and Procurement" without naming the company; the site states the role without a company or dates. Confirm, and supply years and projects led if they should be added.
 28. **Engineers shown** (6 of 11): Syed Muhammad Abbas, Behram Shahrokh Aslam, Abdul Qadir, Ulfat Hussain, Muhammad Shakeel, Mian Athar Mahmood. The profile gives no seniority, so the selection uses discipline and earliest PEC registration. Confirm, and supply one-line roles.
 29. **Syed Imran Hassan**: the profile gives "Expert" with no discipline. Shown as "Adviser".
 30. **Founder portrait and adviser photos** exist in the second profile. Not used (brief: no people photos unless supplied). Confirm if they may be used.

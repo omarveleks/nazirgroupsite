@@ -1,0 +1,33 @@
+{
+ "url": "/capabilities/",
+ "categories": {
+  "url": "/capabilities/",
+  "performance": 100,
+  "accessibility": 100,
+  "bestPractices": 100,
+  "seo": 100,
+  "lcp": 1204,
+  "cls": 0,
+  "tbt": 0,
+  "kb": 58
+ },
+ "failing": [
+  {
+   "k": "unused-css-rules",
+   "title": "Reduce unused CSS",
+   "score": 0,
+   "display": "Est savings of 44 KiB"
+  },
+  {
+   "k": "network-dependency-tree-insight",
+   "title": "Network dependency tree",
+   "score": 0
+  },
+  {
+   "k": "render-blocking-insight",
+   "title": "Render-blocking requests",
+   "score": 0,
+   "display": "Est savings of 380 ms"
+  }
+ ]
+}

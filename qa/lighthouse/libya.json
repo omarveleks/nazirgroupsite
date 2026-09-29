@@ -1,0 +1,33 @@
+{
+ "url": "/libya/",
+ "categories": {
+  "url": "/libya/",
+  "performance": 100,
+  "accessibility": 100,
+  "bestPractices": 100,
+  "seo": 100,
+  "lcp": 1206,
+  "cls": 0,
+  "tbt": 0,
+  "kb": 69
+ },
+ "failing": [
+  {
+   "k": "unused-css-rules",
+   "title": "Reduce unused CSS",
+   "score": 0,
+   "display": "Est savings of 42 KiB"
+  },
+  {
+   "k": "network-dependency-tree-insight",
+   "title": "Network dependency tree",
+   "score": 0
+  },
+  {
+   "k": "render-blocking-insight",
+   "title": "Render-blocking requests",
+   "score": 0,
+   "display": "Est savings of 260 ms"
+  }
+ ]
+}

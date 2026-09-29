@@ -47,6 +47,8 @@ const rest = lib.count - oil - utility;
           The work ranges from 220&nbsp;kV transmission lines to 11 and 33&nbsp;kV networks, underground cables, oil-field
           electrification in hazardous areas, and hot-line maintenance of a 138&nbsp;kV line.
         </p>
+      </div>
+      <div>
         <ul class="figures lfigs" aria-label="Libya figures">
           <li><span class="n">{lib.count}</span><span class="l">Projects documented</span></li>
           <li><span class="n">750</span><span class="l">km of 220&nbsp;kV double-circuit line, one turnkey contract (2001)</span></li>
@@ -54,6 +56,8 @@ const rest = lib.count - oil - utility;
           <li><span class="n">{lib.last! - lib.first!}</span><span class="l">Years of work, {lib.first}–{lib.last}</span></li>
         </ul>
       </div>
+    </div>
+    <div class="container map-row">
       <LibyaMap />
     </div>
   </section>
@@ -124,8 +128,11 @@ const rest = lib.count - oil - utility;
     font-weight: 600;
     color: var(--navy);
   }
-  .lfigs {
-    margin-top: 1.5rem;
+  .map-row {
+    margin-top: 2rem;
+  }
+  .map-row :global(.lmap) {
+    max-width: 52rem;
   }
   @media (min-width: 48rem) {
     .lfigs {

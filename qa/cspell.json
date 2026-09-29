@@ -1,0 +1,10 @@
+{
+  "version": "0.2",
+  "language": "en-GB",
+  "import": ["@cspell/dict-en-gb/cspell-ext.json"],
+  "dictionaries": ["en-gb", "names"],
+  "dictionaryDefinitions": [{ "name": "names", "path": "./cspell-words.txt", "addWords": true }],
+  "ignoreRegExpList": ["/\\b[A-Z]{2,}[a-z]?\\b/g", "/\\b\\d+[a-z]*\\b/g"],
+  "minWordLength": 3,
+  "caseSensitive": false
+}

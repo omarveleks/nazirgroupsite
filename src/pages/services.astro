@@ -1,89 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
 import SectorGlyph from '../components/SectorGlyph.astro';
-import { projects, byNewest, projectUrl, fmtKv, type Project, type Sector } from '../lib/data';
+import { byNewest, projectUrl, fmtKv } from '../lib/data';
+import { services, serviceProjects } from '../lib/services';
 
-interface Service {
-  id: string;
-  title: string;
-  intro: string;
-  sector: Sector;
-  filter: string;
-  match: (p: Project) => boolean;
-}
-
-const tx = projects.filter((p) => p.sector === 'transmission' && p.voltage_kv !== null);
-const minKv = Math.min(...tx.map((p) => p.voltage_kv!));
-const maxAc = Math.max(...tx.filter((p) => !/HVDC/.test(p.name)).map((p) => p.voltage_kv!));
-
-const services: Service[] = [
-  {
-    id: 'transmission',
-    title: `Overhead transmission lines, ${minKv} kV to ${maxAc} kV and HVDC`,
-    intro:
-      'Foundations, tower assembly and erection, conductor stringing and complete turnkey lines, including 500 kV lines in Pakistan and Malaysia, 400 kV lines in Iraq and Iran, 380 kV lines in Saudi Arabia and the ±533 kV HVDC line from Songo to Apollo.',
-    sector: 'transmission',
-    filter: '?sector=transmission',
-    match: (p) => p.sector === 'transmission',
-  },
-  {
-    id: 'substations',
-    title: 'Substations and grid works',
-    intro:
-      'Construction of the 500/220 kV substation at Peshawar, civil works for 30/10 kV substations in Libya, and substations built with 33 kV line contracts in Libya, including four in the Messla field.',
-    sector: 'substation',
-    filter: '?q=substation',
-    match: (p) => /substation/i.test(p.name + p.scope),
-  },
-  {
-    id: 'distribution',
-    title: 'Distribution networks, 11 kV to 35 kV',
-    intro:
-      'Overhead and underground 11, 13.8, 30 and 33 kV networks and cable works, mainly for utilities in Saudi Arabia, Libya and Iraq. Lines at 66 kV are listed under transmission.',
-    sector: 'distribution',
-    filter: '?sector=distribution',
-    match: (p) => p.sector === 'distribution',
-  },
-  {
-    id: 'oilfield',
-    title: 'Industrial and oil-field electrical works',
-    intro:
-      'Well electrification, underground cables, overhead lines and substations in the Sarir, Messla and Nafoora fields, and refurbishment of electrical installations in hazardous areas.',
-    sector: 'oil-and-gas-electrical',
-    filter: '?sector=oil-and-gas-electrical',
-    match: (p) => p.sector === 'oil-and-gas-electrical' || p.sector === 'industrial',
-  },
-  {
-    id: 'maintenance',
-    title: 'Hot-line and transmission line maintenance',
-    intro: 'Hot-line maintenance of a 138 kV line for Waha Oil Company, and maintenance of 220 kV transmission lines in Libya.',
-    sector: 'transmission',
-    filter: '?q=maintenance',
-    match: (p) => p.hotline || /maintenance of 220 kV/i.test(p.scope),
-  },
-  {
-    id: 'civil',
-    title: 'Civil and infrastructure works',
-    intro:
-      'Roads and motorways, carriageways and interchanges, airport landside works, hydropower civil works, water supply, sewerage and housing schemes.',
-    sector: 'civil',
-    filter: '?sector=civil',
-    match: (p) => p.sector === 'civil',
-  },
-  {
-    id: 'telecom',
-    title: 'Telecommunication and pipeline works',
-    intro:
-      'Telephone exchange and cable networks in Iraq, mobile repeater stations in Saudi Arabia, and oil-field flow lines and trunk lines in Libya.',
-    sector: 'other',
-    filter: '?sector=other',
-    match: (p) => p.sector === 'other',
-  },
-];
-
+const SHOW_ALL = 6;
 const rows = services.map((s) => {
-  const list = projects.filter(s.match).sort(byNewest);
-  return { ...s, count: list.length, examples: list.filter((p) => p.year_end !== null).slice(0, 4) };
+  const list = serviceProjects(s).sort(byNewest);
+  const all = list.length <= SHOW_ALL;
+  return { ...s, count: list.length, all, examples: all ? list : list.filter((p) => p.year_end !== null).slice(0, 4) };
 });
 ---
 <Base title="Services" description="Overhead transmission lines, substations, distribution, oil-field electrical, line maintenance and civil works: services of Nazir and Company, each with its documented projects.">
@@ -102,21 +27,26 @@ const rows = services.map((s) => {
           <li id={s.id}>
             <div class="svc-art" aria-hidden="true">
               <span class="svc-n fig">{String(i + 1).padStart(2, '0')}</span>
-              <SectorGlyph sector={s.sector} />
+              <SectorGlyph sector={s.glyph} />
             </div>
             <div class="svc-body">
               <h2>{s.title}</h2>
               <p>{s.intro}</p>
-              <p class="svc-count"><span class="fig">{s.count}</span> documented {s.count === 1 ? 'project' : 'projects'}. Recent examples:</p>
+              <p class="svc-count"><span class="fig">{s.count}</span> documented {s.count === 1 ? 'project' : 'projects'}{s.all ? ':' : '. Recent examples:'}</p>
               <ul class="ex">
                 {s.examples.map((p) => (
                   <li>
                     <a href={projectUrl(p)}>{p.name}</a>
-                    <span class="exm fig">{p.country} · {p.year_end}{p.voltage_kv ? ` · ${fmtKv(p.voltage_kv, p)}` : ''}</span>
+                    <span class="exm fig">{[p.country, p.year_end, p.voltage_kv ? fmtKv(p.voltage_kv, p) : ''].filter(Boolean).join(' · ')}</span>
                   </li>
                 ))}
               </ul>
-              <p><a class="btn btn--ghost" href={`/projects/${s.filter}#register`}>See all {s.count} in the register</a></p>
+              {s.registerFilter && !s.all && (
+                <p><a class="btn btn--ghost" href={`/projects/${s.registerFilter}#register`}>See all {s.count} in the register</a></p>
+              )}
+              {s.relatedFilter && (
+                <p><a class="btn btn--ghost" href={`/projects/${s.relatedFilter.href}#register`}>{s.relatedFilter.label}</a></p>
+              )}
             </div>
           </li>
         ))}
@@ -142,9 +72,12 @@ const rows = services.map((s) => {
     border-top: 0;
     padding-top: 0;
   }
+  .svc > li > * {
+    min-width: 0;
+  }
   @media (min-width: 48rem) {
     .svc > li {
-      grid-template-columns: 14rem minmax(0, 1fr);
+      grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
       gap: 2rem;
     }
   }
@@ -187,6 +120,7 @@ const rows = services.map((s) => {
     max-width: none;
   }
   .ex a {
+    overflow-wrap: anywhere;
     display: inline-flex;
     align-items: center;
     min-height: 2.75rem;

@@ -28,6 +28,7 @@ const d = outline(c.slug, 96, 72);
   .tile {
     position: relative;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 1rem;
     border: 1px solid var(--navy);
@@ -73,5 +74,6 @@ const d = outline(c.slug, 96, 72);
   }
   .txt {
     min-width: 0;
+    overflow-wrap: anywhere;
   }
 </style>

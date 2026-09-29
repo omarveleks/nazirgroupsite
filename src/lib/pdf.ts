@@ -4,6 +4,7 @@
  */
 import { PDFDocument, StandardFonts, rgb, type PDFFont, type PDFPage } from 'pdf-lib';
 import { ROOF_PATH, WORD_OFFSET, WORD_PATH } from './logo';
+import { services } from './services';
 import {
   company,
   contact,
@@ -232,14 +233,7 @@ export async function capabilityPdf(): Promise<Uint8Array> {
   y -= 48;
 
   h('Services, with documented projects');
-  const svc: [string, (p: Project) => boolean][] = [
-    ['Overhead transmission lines, 66 kV to 500 kV and HVDC', (p) => p.sector === 'transmission'],
-    ['Substations and grid works', (p) => /substation/i.test(p.name + p.scope)],
-    ['Distribution networks, 11 kV to 35 kV', (p) => p.sector === 'distribution'],
-    ['Industrial and oil-field electrical works', (p) => p.sector === 'oil-and-gas-electrical' || p.sector === 'industrial'],
-    ['Civil and infrastructure works', (p) => p.sector === 'civil'],
-    ['Telecommunication and pipeline works', (p) => p.sector === 'other'],
-  ];
+  const svc: [string, (p: Project) => boolean][] = services.filter((x) => x.id !== 'maintenance').map((x) => [x.title, x.match]);
   const colW = W / 2;
   svc.forEach(([label, fn], i) => {
     const x = M + (i % 2) * colW;

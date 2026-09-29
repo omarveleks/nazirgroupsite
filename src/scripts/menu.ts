@@ -4,7 +4,7 @@ const menu = document.querySelector<HTMLDetailsElement>('.nav-mobile');
 if (menu) {
   const summary = menu.querySelector('summary');
   summary?.setAttribute('aria-controls', 'mobile-nav');
-  menu.querySelector('nav')?.setAttribute('id', 'mobile-nav');
+  menu.querySelector('.nav-panel')?.setAttribute('id', 'mobile-nav');
   const sync = () => summary?.setAttribute('aria-expanded', String(menu.open));
   sync();
   menu.addEventListener('toggle', sync);

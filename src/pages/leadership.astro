@@ -98,6 +98,13 @@ const shown = engineers.shown.map((id) => engineers.engineers.find((e) => e.id =
     gap: 1rem;
     align-items: flex-start;
   }
+  .person > div {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .lead-grid > * {
+    min-width: 0;
+  }
   .person--lead {
     flex-direction: column;
   }
@@ -136,6 +143,7 @@ const shown = engineers.shown.map((id) => engineers.engineers.find((e) => e.id =
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
   }
   .people .person {
+    flex-wrap: wrap;
     border: 1px solid var(--rule-strong);
     background: var(--panel);
     padding: 1rem;

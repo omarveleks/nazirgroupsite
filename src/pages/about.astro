@@ -96,7 +96,7 @@ const stations = [
             ].map(([y, label]) => (
               <>
                 <circle cx={X(y as number)} cy={Y(0)} r="4" fill="var(--amber)" stroke="var(--paper)" stroke-width="2" />
-                <text x={X(y as number) + 6} y={Y(0) - 10}>{label}</text>
+                <text x={X(y as number) + (y === 1972 ? -6 : 6)} y={Y(0) - 10} text-anchor={y === 1972 ? 'end' : 'start'}>{label}</text>
               </>
             ))}
             <text x={X(stats.lastYear) - 6} y={Y(cum) - 10} text-anchor="end" font-weight="500">{cum} projects by {stats.lastYear}</text>
@@ -205,7 +205,7 @@ const stations = [
     content: '';
     position: absolute;
     left: calc(3.75rem - 5px);
-    top: 0.85rem;
+    top: 1.35rem;
     width: 12px;
     height: 12px;
     background: var(--amber);
@@ -214,21 +214,25 @@ const stations = [
   }
   .ch {
     color: var(--navy);
-    padding-top: 0.2rem;
+    padding-top: 0.75rem;
     font-size: 0.9375rem;
   }
   .route h3 {
     font-size: var(--step-1);
-    margin-bottom: 0.2rem;
+    margin-bottom: 0;
     padding-left: 0.5rem;
+    min-height: 2.75rem;
+    display: flex;
+    align-items: center;
   }
   .route p {
     margin: 0;
     padding-left: 0.5rem;
   }
   .route h3 a {
-    display: inline-block;
-    padding-block: 0.4rem;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
   }
   .plaque {
     border: 1px solid var(--navy);

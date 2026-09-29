@@ -41,7 +41,7 @@ const countries = uniq(all.map((p) => p.country)).sort();
 const norm = (s: string) => s.toLowerCase().replace(/[–—-]/g, ' ');
 ---
 <div class="register" data-register={id}>
-  <form class="filters" data-filters aria-label="Filter projects" action="#">
+  <div class="filters" data-filters role="group" aria-label="Filter projects">
     {search && (
       <div class="f f--search">
         <label for={`${id}-q`}>Search</label>
@@ -87,9 +87,9 @@ const norm = (s: string) => s.toLowerCase().replace(/[–—-]/g, ' ');
       </select>
     </div>
     <div class="f f--reset">
-      <button type="reset" class="btn btn--ghost">Clear filters</button>
+      <button type="button" class="btn btn--ghost" data-reset>Clear filters</button>
     </div>
-  </form>
+  </div>
   <p class="count" aria-live="polite" data-count>
     <span class="fig" data-shown>{all.length}</span> of <span class="fig">{all.length}</span> projects shown
   </p>
@@ -143,6 +143,9 @@ const norm = (s: string) => s.toLowerCase().replace(/[–—-]/g, ' ');
 <script src="../scripts/register.ts"></script>
 
 <style>
+  .register {
+    container-type: inline-size;
+  }
   .filters {
     display: grid;
     gap: 0.75rem 1rem;
@@ -249,6 +252,7 @@ const norm = (s: string) => s.toLowerCase().replace(/[–—-]/g, ' ');
   }
   .reg .nm {
     font-weight: 600;
+    overflow-wrap: anywhere;
   }
   .reg tbody tr:hover {
     background: rgba(224, 161, 0, 0.08);
@@ -261,8 +265,8 @@ const norm = (s: string) => s.toLowerCase().replace(/[–—-]/g, ' ');
     font-style: italic;
   }
 
-  /* Stacked cards on phones */
-  @media (max-width: 47.99rem) {
+  /* Stacked cards on phones (and whenever the register is narrow, e.g. at 200% text) */
+  @container (max-width: 47.99rem) {
     .reg thead {
       position: absolute;
       width: 1px;

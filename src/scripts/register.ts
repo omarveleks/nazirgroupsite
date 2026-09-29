@@ -6,21 +6,21 @@ const norm = (s: string) =>
   s
     .toLowerCase()
     .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
+    .replace(/[\u0300-\u036f]/g, '')
     .replace(/[–—-]/g, ' ')
     .trim();
 
 function setup(root: HTMLElement) {
-  const form = root.querySelector<HTMLFormElement>('[data-filters]');
+  const form = root.querySelector<HTMLElement>('[data-filters]');
   if (!form) return;
+  const field = (k: string) => form.querySelector<HTMLInputElement | HTMLSelectElement>(`[name="${k}"]`);
   const rows = [...root.querySelectorAll<HTMLTableRowElement>('tbody tr')];
   const groups = [...root.querySelectorAll<HTMLElement>('[data-group]')];
   const shown = root.querySelector<HTMLElement>('[data-shown]');
 
   const read = (): Filters => {
-    const fd = new FormData(form);
     const f = {} as Filters;
-    for (const k of KEYS) f[k] = String(fd.get(k) ?? '');
+    for (const k of KEYS) f[k] = field(k)?.value ?? '';
     return f;
   };
 
@@ -57,7 +57,7 @@ function setup(root: HTMLElement) {
   let fromUrl = false;
   for (const k of KEYS) {
     const v = params.get(k);
-    const el = form.elements.namedItem(k) as HTMLInputElement | HTMLSelectElement | null;
+    const el = field(k);
     if (v && el) {
       el.value = v;
       fromUrl = true;
@@ -66,8 +66,15 @@ function setup(root: HTMLElement) {
 
   form.addEventListener('input', apply);
   form.addEventListener('change', apply);
-  form.addEventListener('submit', (e) => e.preventDefault());
-  form.addEventListener('reset', () => setTimeout(apply, 0));
+  form.querySelector('[data-reset]')?.addEventListener('click', () => {
+    for (const k of KEYS) {
+      const el = field(k);
+      if (el) el.value = '';
+    }
+    const g = document.querySelector<HTMLInputElement>(`[data-global-search="${root.dataset.register}"]`);
+    if (g) g.value = '';
+    apply();
+  });
   apply();
 
   const details = root.closest('details');
@@ -75,7 +82,7 @@ function setup(root: HTMLElement) {
 
   // Global search box outside the register (projects index)
   const globalBox = document.querySelector<HTMLInputElement>(`[data-global-search="${root.dataset.register}"]`);
-  const inner = form.elements.namedItem('q') as HTMLInputElement | null;
+  const inner = field('q');
   if (globalBox && inner) {
     if (params.get('q')) globalBox.value = params.get('q') ?? '';
     globalBox.addEventListener('input', () => {

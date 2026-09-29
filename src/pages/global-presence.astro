@@ -64,6 +64,7 @@ const OFF: Record<string, [number, number, string]> = {
       <h2 id="list-h">By country</h2>
       <table class="ctab">
         <caption class="visually-hidden">Documented projects by country</caption>
+        <colgroup><col class="c1" /><col class="c2" /><col class="c3" /></colgroup>
         <thead>
           <tr><th scope="col">Country</th><th scope="col" class="num">Projects</th><th scope="col">Years</th></tr>
         </thead>
@@ -113,6 +114,20 @@ const OFF: Record<string, [number, number, string]> = {
     width: 100%;
     max-width: 36rem;
     border-collapse: collapse;
+    table-layout: fixed;
+  }
+  .ctab .c1 {
+    width: 48%;
+  }
+  .ctab .c2 {
+    width: 20%;
+  }
+  .ctab .c3 {
+    width: 32%;
+  }
+  .ctab th,
+  .ctab td {
+    overflow-wrap: break-word;
   }
   .ctab th,
   .ctab td {

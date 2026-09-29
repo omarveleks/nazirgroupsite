@@ -19,7 +19,7 @@ const csp = [
   `script-src 'self' https://static.cloudflareinsights.com${turnstile ? ' https://challenges.cloudflare.com' : ''}`,
   "style-src 'self'",
   "img-src 'self' data:",
-  "font-src 'self'",
+  "font-src 'self' data:",
   `connect-src 'self' https://cloudflareinsights.com${turnstile ? ' https://challenges.cloudflare.com' : ''}`,
   turnstile ? 'frame-src https://challenges.cloudflare.com' : "frame-src 'none'",
   "object-src 'none'",
@@ -41,9 +41,6 @@ const headers = [
   ...(mode === 'review' ? ['  X-Robots-Tag: noindex, nofollow'] : []),
   '',
   '/assets/*',
-  '  Cache-Control: public, max-age=31536000, immutable',
-  '',
-  '/fonts/*',
   '  Cache-Control: public, max-age=31536000, immutable',
   '',
   '/downloads/*.pdf',
@@ -87,7 +84,7 @@ if (mode === 'live') {
 // the pages.dev -> domain redirect middleware on page requests.
 const routes =
   mode === 'live'
-    ? { version: 1, include: ['/*'], exclude: ['/assets/*', '/fonts/*', '/icons/*', '/og/*', '/favicon.ico'] }
+    ? { version: 1, include: ['/*'], exclude: ['/assets/*', '/icons/*', '/og/*', '/favicon.ico'] }
     : { version: 1, include: ['/api/*'], exclude: [] };
 fs.writeFileSync(path.join(dist, '_routes.json'), JSON.stringify(routes, null, 2) + '\n');
 

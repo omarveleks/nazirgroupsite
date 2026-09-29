@@ -1,29 +1,32 @@
 /* Nazir and Company: "The Corridor" design system */
 
+/* Fonts are subset to the characters the site uses and inlined into this stylesheet at build
+   time (see astro.config.mjs), so text renders in its final font from the first paint. */
+
 @font-face {
   font-family: 'Fraunces';
-  src: url('/fonts/fraunces-600.woff2') format('woff2');
+  src: url('../assets/fonts/fraunces-600.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'IBM Plex Sans';
-  src: url('/fonts/plex-sans-400.woff2') format('woff2');
+  src: url('../assets/fonts/plex-sans-400.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'IBM Plex Sans';
-  src: url('/fonts/plex-sans-600.woff2') format('woff2');
+  src: url('../assets/fonts/plex-sans-600.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'IBM Plex Mono';
-  src: url('/fonts/plex-mono-500.woff2') format('woff2');
+  src: url('../assets/fonts/plex-mono-500.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -132,6 +135,7 @@ svg {
 h1,
 h2,
 h3 {
+  overflow-wrap: anywhere;
   font-family: var(--serif);
   font-weight: 600;
   line-height: 1.15;
@@ -338,6 +342,10 @@ ol {
   background: #f0b21a;
   color: var(--navy);
 }
+.section--navy .btn--amber,
+.section--navy .btn--amber:hover {
+  color: var(--navy);
+}
 .btn[disabled],
 .btn[aria-disabled='true'] {
   opacity: 0.55;
@@ -480,6 +488,8 @@ ol {
   gap: 0.5rem;
 }
 .chips li {
+  max-width: 100%;
+  overflow-wrap: anywhere;
   border: 1px solid var(--rule-strong);
   padding: 0.35rem 0.7rem;
   font-size: var(--step--1);
@@ -496,6 +506,7 @@ ol {
   border-left: 1px solid var(--rule);
 }
 .clients li {
+  overflow-wrap: anywhere;
   display: flex;
   align-items: center;
   min-height: 3.5rem;
@@ -522,6 +533,11 @@ ol {
 .two-col {
   display: grid;
   gap: 2rem;
+}
+.two-col > *,
+.grid > *,
+.tblock > div {
+  min-width: 0;
 }
 @media (min-width: 60rem) {
   .two-col {

@@ -36,6 +36,7 @@ const tx = countries.map((c) => c.name);
     <div class="container">
       <h2 id="enl-h">Enlistments</h2>
       <p>Enlistment letters held by the company, with the year each applied.</p>
+      <div class="etab-wrap">
       <table class="etab">
         <caption class="visually-hidden">Enlistments and the year each applied</caption>
         <thead>
@@ -51,6 +52,7 @@ const tx = countries.map((c) => c.name);
           ))}
         </tbody>
       </table>
+      </div>
       <p class="muted small">Each entry reads “Enlisted with … (year)”: the year shown is the year of the letter or the financial year it covered, not a current validity date.</p>
       <h3>Pre-qualification and financing</h3>
       <p>
@@ -111,6 +113,9 @@ const tx = countries.map((c) => c.name);
   .small {
     font-size: var(--step--1);
   }
+  .etab-wrap {
+    container-type: inline-size;
+  }
   .etab {
     width: 100%;
     border-collapse: collapse;
@@ -135,7 +140,7 @@ const tx = countries.map((c) => c.name);
   .etab td.fig {
     white-space: nowrap;
   }
-  @media (max-width: 47.99rem) {
+  @container (max-width: 47.99rem) {
     .etab thead {
       position: absolute;
       width: 1px;
@@ -160,6 +165,9 @@ const tx = countries.map((c) => c.name);
     .etab td {
       border: 0;
       padding: 0.2rem 0;
+    }
+    .etab td.fig {
+      white-space: normal;
     }
     .etab td::before {
       content: attr(data-label);
