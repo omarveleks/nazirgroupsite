@@ -1,0 +1,71 @@
+---
+// Renders the office address plus any phones, emails and WhatsApp number held in
+// src/data/contact.json. Empty fields render nothing: no labels, no dead links.
+import { contact } from '../lib/data';
+
+interface Props {
+  variant?: 'footer' | 'page';
+}
+const { variant = 'page' } = Astro.props;
+const a = contact.address;
+const tel = (n: string) => `tel:${n.replace(/[^\d+]/g, '')}`;
+const wa = contact.whatsapp ? `https://wa.me/${contact.whatsapp.replace(/[^\d]/g, '')}` : null;
+---
+<div class={`contact-details contact-details--${variant}`}>
+  <address>
+    {a.line1}<br />
+    {a.line2}<br />
+    {a.city}, {a.country}
+  </address>
+  <p class="map"><a href={a.map_url} rel="noopener">Open in maps<span class="visually-hidden"> (opens map service)</span></a></p>
+  {contact.phones.length > 0 && (
+    <ul class="lines">
+      {contact.phones.map((p) => (
+        <li><span class="k">Tel</span> <a href={tel(p)}>{p}</a></li>
+      ))}
+    </ul>
+  )}
+  {contact.emails.length > 0 && (
+    <ul class="lines">
+      {contact.emails.map((e) => (
+        <li><span class="k">Email</span> <a href={`mailto:${e}`}>{e}</a></li>
+      ))}
+    </ul>
+  )}
+  {wa && (
+    <p class="lines"><span class="k">WhatsApp</span> <a href={wa} rel="noopener">{contact.whatsapp}</a></p>
+  )}
+</div>
+
+<style>
+  address {
+    font-style: normal;
+    margin-bottom: 0.5rem;
+  }
+  .map {
+    margin: 0 0 0.75rem;
+  }
+  .map a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
+  .lines {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.5rem;
+  }
+  .lines a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
+  .k {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-right: 0.5rem;
+    opacity: 0.8;
+  }
+</style>

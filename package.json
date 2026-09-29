@@ -1,0 +1,44 @@
+{
+  "name": "nazir-website",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && node scripts/postbuild.mjs",
+    "build:review": "SITE_MODE=review npm run build",
+    "build:live": "SITE_MODE=live npm run build",
+    "check": "astro check",
+    "preview": "node scripts/serve.mjs",
+    "data": "python3 scripts/build-projects.py",
+    "assets": "astro build && node scripts/make-assets.mjs && npm run build",
+    "qa": "node scripts/qa/run.mjs"
+  },
+  "dependencies": {
+    "astro": "^7.3.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@axe-core/playwright": "^4.13.0",
+    "@cspell/dict-en-gb": "^5.0.34",
+    "@fontsource/fraunces": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/ibm-plex-sans": "^5.3.0",
+    "@types/d3-geo": "^3.1.1",
+    "@types/node": "^26.6.3",
+    "@types/topojson-client": "^3.1.5",
+    "@types/topojson-specification": "^1.0.5",
+    "cspell": "^10.3.6",
+    "d3-geo": "^3.1.1",
+    "html-validate": "^11.16.1",
+    "lighthouse": "^13.5.0",
+    "pdf-lib": "^1.17.1",
+    "playwright": "1.56.1",
+    "topojson-client": "^3.1.0",
+    "typescript": "^5.9.3",
+    "world-atlas": "^2.0.2"
+  }
+}

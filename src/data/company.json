@@ -1,0 +1,141 @@
+{
+  "name": "Nazir and Company (Pvt) Ltd",
+  "short_name": "Nazir",
+  "founded": 1958,
+  "incorporated": "1972-08-12",
+  "incorporated_text": "12 August 1972",
+  "founder": {
+    "name": "Alhaj Sheikh Nazir Ahmed",
+    "born": 1930,
+    "died": 2005,
+    "facts": [
+      "Established the company in 1958.",
+      "Registered the company as the first licence holder of the Pakistan Engineering Council.",
+      "Began the company's work outside Pakistan in the 1970s.",
+      "Received a number of lifetime achievement awards.",
+      "Set up schools, orphanages, dispensaries and hospitals, and headed school boards and orphanage organisations."
+    ]
+  },
+  "director": {
+    "name": "Sheikh Tanveer Ahmed",
+    "title": "Director",
+    "joined": 1985,
+    "roles": [
+      {
+        "title": "Director, Libya",
+        "from": 1987,
+        "to": 2002
+      },
+      {
+        "title": "Director, Saudi Arabia",
+        "from": 2004,
+        "to": 2014
+      }
+    ],
+    "education": "University of Houston, Texas",
+    "bio": [
+      "Sheikh Tanveer Ahmed is the Director of Nazir and Company.",
+      "He joined the company in 1985.",
+      "He was the company's Director in Libya from 1987 to 2002 and its Director in Saudi Arabia from 2004 to 2014.",
+      "He has also served as Director of Projects and Procurement.",
+      "He is a graduate of the University of Houston, Texas."
+    ]
+  },
+  "advisors": [
+    {
+      "name": "Syed Imran Hassan",
+      "discipline": "Adviser",
+      "line": "Member of the company's team of advisers."
+    },
+    {
+      "name": "Khalid Mehmood",
+      "discipline": "Telecommunication",
+      "line": "Adviser on telecommunication works."
+    },
+    {
+      "name": "Engr. Muhammad Yousaf Barakzai",
+      "discipline": "Civil works",
+      "line": "Adviser on civil works."
+    },
+    {
+      "name": "Behram Shahrokh Aslam",
+      "discipline": "Electrical",
+      "line": "Adviser; electrical engineer listed on the company's PEC licence."
+    }
+  ],
+  "pec": {
+    "statement": "Registered with the Pakistan Engineering Council, Licence No. 1, category C-A (no limit)",
+    "first_licence": true
+  },
+  "address": "100 Abu Bakr Block, New Garden Town, Lahore, Pakistan",
+  "fields_of_specialisation": [
+    "Roads and pavements",
+    "Bridge structures",
+    "Marine structures",
+    "Dams and water-retaining structures",
+    "Oil and gas pipelines",
+    "Sewerage and water supply",
+    "General civil engineering works",
+    "High-voltage installation",
+    "Telecommunication installation",
+    "Underground cable laying"
+  ],
+  "prequalified_with": [
+    "National Highway Authority (NHA)",
+    "Water and Power Development Authority (WAPDA)",
+    "Communication and Works Department, Government of the Punjab"
+  ],
+  "financiers": [
+    "World Bank",
+    "Asian Development Bank",
+    "Islamic Development Bank"
+  ],
+  "enlistments": [
+    {
+      "body": "Irrigation Department, Government of the Punjab",
+      "detail": "Category A (C-A) contractor, no limit",
+      "year": "2017–18"
+    },
+    {
+      "body": "Defence Housing Authority (DHA) Lahore",
+      "detail": "Category C-A",
+      "year": "2018–19"
+    },
+    {
+      "body": "National Highway Authority (NHA), Central Zone",
+      "detail": "Declared a qualified bidder for periodic maintenance works",
+      "year": "2018"
+    },
+    {
+      "body": "Communication and Works Department, Government of Khyber Pakhtunkhwa",
+      "detail": "Government contractor, category PK-1 (no limit)",
+      "year": "2011"
+    },
+    {
+      "body": "Pakhtunkhwa Highways Authority (PKHA)",
+      "detail": "Category A, road and bridge works up to Rs 1,000 million",
+      "year": "2011"
+    },
+    {
+      "body": "Housing, Urban Development and Public Health Engineering Department, Government of the Punjab",
+      "detail": "Category A contractor, no limit",
+      "year": "2013–14 and 2014–15"
+    }
+  ],
+  "home_selected": [
+    "benghazi-eastern-border-220-kv-double-circuit-lines-750-km",
+    "samnu-sebha-220-kv-double-circuit-twin-bundle-line",
+    "barotha-rewat-500-kv-transmission-lines",
+    "songo-apollo-533-kv-hvdc-transmission-line",
+    "ayer-tawar-junjung-500-kv-double-circuit-line-80-km",
+    "380-110-kv-overhead-lines-and-fibre-optic-network-makkah-taif-and-madinah"
+  ],
+  "historic_branches": [
+    "Saudi Arabia",
+    "Libya",
+    "United Kingdom",
+    "Malaysia",
+    "Mozambique"
+  ],
+  "libya_status": "Historic record in Libya (48 projects, 1978–2011). Now seeking electrical projects and subcontracts in Libya."
+}

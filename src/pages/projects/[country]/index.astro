@@ -1,0 +1,114 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Register from '../../../components/Register.astro';
+import ClientsStrip from '../../../components/ClientsStrip.astro';
+import { countries, range, SECTOR_LABEL, type CountryInfo } from '../../../lib/data';
+import { outline } from '../../../lib/geo';
+
+export function getStaticPaths() {
+  return countries.map((c) => ({ params: { country: c.slug }, props: { c } }));
+}
+
+interface Props {
+  c: CountryInfo;
+}
+const { c } = Astro.props;
+const groups =
+  c.slug === 'pakistan'
+    ? [
+        { id: 'grid', title: 'NTDC/WAPDA (national grid)', projects: c.projects.filter((p) => p.group === 'national-grid') },
+        { id: 'regional', title: 'Regional and provincial works', projects: c.projects.filter((p) => p.group !== 'national-grid') },
+      ]
+    : [{ id: 'all', projects: c.projects }];
+const sectorCounts = Object.entries(
+  c.projects.reduce<Record<string, number>>((acc, p) => {
+    acc[p.sector] = (acc[p.sector] ?? 0) + 1;
+    return acc;
+  }, {}),
+).sort((a, b) => b[1] - a[1]);
+const d = outline(c.slug, 160, 120, 6);
+const crumbs = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Projects', item: new URL('/projects/', Astro.site).href },
+    { '@type': 'ListItem', position: 2, name: c.name, item: new URL(`/projects/${c.slug}/`, Astro.site).href },
+  ],
+};
+---
+<Base
+  title={`Projects in ${c.name}`}
+  description={`${c.count} documented ${c.count === 1 ? 'project' : 'projects'} by Nazir and Company in ${c.name}${range(c) ? `, ${range(c)}` : ''}: register with client, year, voltage and length.`}
+  jsonLd={[crumbs]}
+  current="/projects/"
+>
+  <header class="page-head">
+    <div class="container head">
+      <div>
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/projects/">Projects</a></li>
+            <li aria-current="page">{c.name}</li>
+          </ol>
+        </nav>
+        <h1>{c.name}</h1>
+        <p class="lede">
+          <span class="fig">{c.count}</span> {c.count === 1 ? 'project' : 'projects'} documented{range(c) && <>, completed <span class="fig">{range(c)}</span></>}. Newest first.
+        </p>
+        {c.slug === 'libya' && (
+          <p><a href="/libya/">Libya record, flagship lines and the subcontract offer</a></p>
+        )}
+        <ul class="chips" aria-label="Projects by sector">
+          {sectorCounts.map(([s, n]) => <li>{SECTOR_LABEL[s as keyof typeof SECTOR_LABEL]}: <span class="fig">{n}</span></li>)}
+        </ul>
+      </div>
+      <svg class="big-marker" viewBox="0 0 160 120" width="160" height="120" aria-hidden="true" focusable="false">
+        <path d={d} fill="none" stroke="currentColor" stroke-width="1.2" vector-effect="non-scaling-stroke" />
+      </svg>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <Register id={c.slug} groups={groups} caption={`Projects in ${c.name}, newest first`} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <ClientsStrip list={c.projects} heading={`Clients served in ${c.name}`} id={`clients-${c.slug}`} />
+      <p class="back"><a href="/projects/">All countries</a></p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  .big-marker {
+    flex: none;
+    width: 10rem;
+    height: auto;
+    color: var(--navy);
+    display: none;
+  }
+  @media (min-width: 48rem) {
+    .big-marker {
+      display: block;
+    }
+  }
+  .chips {
+    margin-top: 0.75rem;
+  }
+  .back a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    margin-top: 1rem;
+    font-weight: 600;
+  }
+</style>

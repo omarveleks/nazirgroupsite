@@ -1,0 +1,36 @@
+---
+import type { Project } from '../lib/data';
+import { fmtKm, fmtKv, projectUrl, yearText } from '../lib/data';
+
+interface Props {
+  p: Project;
+  headingLevel?: 'h2' | 'h3';
+  showCountry?: boolean;
+}
+const { p, headingLevel = 'h3', showCountry = true } = Astro.props;
+const H = headingLevel;
+const kv = fmtKv(p.voltage_kv, p);
+const km = fmtKm(p.length_km);
+---
+<article class="card">
+  <p class="meta">{showCountry ? `${p.country} · ` : ''}{yearText(p)}</p>
+  <H><a href={projectUrl(p)}>{p.name}</a></H>
+  <p class="client">{p.client}</p>
+  {(kv || km) && (
+    <p class="tags">
+      {kv && <span>{kv}</span>}
+      {km && <span>{km}</span>}
+    </p>
+  )}
+</article>
+
+<style>
+  .meta,
+  .client {
+    margin: 0;
+  }
+  .client {
+    color: var(--muted);
+    font-size: var(--step--1);
+  }
+</style>

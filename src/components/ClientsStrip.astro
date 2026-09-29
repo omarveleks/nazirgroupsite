@@ -1,0 +1,31 @@
+---
+// "Clients served": client names in text. Logos could not be sourced in usable
+// quality from the clients' own sites (see data/OPEN_ITEMS.md), so names are shown.
+import type { Project } from '../lib/data';
+import { clientsFor, clientCanon } from '../lib/data';
+
+interface Props {
+  list: Project[];
+  heading?: string;
+  limit?: number;
+  id?: string;
+}
+const { list, heading = 'Clients served', limit, id = 'clients' } = Astro.props;
+let names = clientsFor(list);
+// Order by number of projects for each client, most first
+const count = (n: string) => list.filter((p) => p.client.split(' / ').map(clientCanon).includes(n)).length;
+names.sort((a, b) => count(b) - count(a) || a.localeCompare(b));
+if (limit) names = names.slice(0, limit);
+---
+<section class="clients-block" aria-labelledby={id}>
+  <h2 id={id} class="h">{heading}</h2>
+  <ul class="clients">
+    {names.map((n) => <li>{n}</li>)}
+  </ul>
+</section>
+
+<style>
+  .h {
+    font-size: var(--step-2);
+  }
+</style>

@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Accessibility statement" description="Accessibility of the Nazir and Company website: aims, testing and how to report a problem.">
+  <header class="page-head">
+    <div class="container">
+      <p class="eyebrow">Accessibility</p>
+      <h1>Accessibility statement</h1>
+    </div>
+  </header>
+  <section class="section">
+    <div class="container prose">
+      <p>The website aims to meet the Web Content Accessibility Guidelines (WCAG) 2.2 at level AA.</p>
+      <h2>What has been done</h2>
+      <ul>
+        <li>Every page is tested with automated accessibility checks (axe) and has no known violations.</li>
+        <li>Text contrast is at least 4.5:1; body text on the paper background is about 14.8:1.</li>
+        <li>All functions work with a keyboard, focus is always visible, and a “Skip to content” link is provided.</li>
+        <li>Pages work at 200% text zoom and on screens from 320 pixels wide, with no sideways scrolling.</li>
+        <li>Animation is limited to one short fade on the home page drawing and is switched off when the device asks for reduced motion.</li>
+        <li>The project register is a standard table that works without JavaScript; filters add to it but are not required.</li>
+        <li>Maps and drawings have text alternatives, and every figure shown on a map is also given in a table or list.</li>
+      </ul>
+      <h2>Known limitations</h2>
+      <p>Downloadable PDF documents are generated automatically and are not fully tagged for screen readers. The same information is available on the website pages.</p>
+      <h2>Report a problem</h2>
+      <p>Use the <a href="/contact/">enquiry form</a> and choose “Other”.</p>
+    </div>
+  </section>
+</Base>

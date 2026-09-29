@@ -1,0 +1,18 @@
+{
+  "source": { "pdf": "Nazir_and_Sons_profile.pdf", "page": 13, "note": "Engineers listed on the reverse of the company's PEC licence. Registration numbers are held in the source only and are never published." },
+  "shown": ["syed-muhammad-abbas", "behram-shahrokh-aslam", "abdul-qadir", "ulfat-hussain", "muhammad-shakeel", "mian-athar-mahmood"],
+  "selection_basis": "Electrical, electronic and telecommunication engineers with the earliest PEC registrations on the licence list, plus the senior civil engineer. Awaiting confirmation from the company.",
+  "engineers": [
+    { "id": "ulfat-hussain", "name": "Engr. Ulfat Hussain", "discipline": "Telecommunication", "role": "Telecommunication engineer listed on the company's PEC licence." },
+    { "id": "syed-muhammad-abbas", "name": "Engr. Syed Muhammad Abbas", "discipline": "Electrical", "role": "Electrical engineer listed on the company's PEC licence." },
+    { "id": "abdul-qadir", "name": "Engr. Abdul Qadir", "discipline": "Electronics", "role": "Electronics engineer listed on the company's PEC licence." },
+    { "id": "behram-shahrokh-aslam", "name": "Engr. Behram Shahrokh Aslam", "discipline": "Electrical", "role": "Electrical engineer listed on the company's PEC licence; also a company adviser." },
+    { "id": "mian-athar-mahmood", "name": "Engr. Mian Athar Mahmood", "discipline": "Civil", "role": "Civil engineer listed on the company's PEC licence." },
+    { "id": "nadeem-fazil-ayaz", "name": "Engr. Nadeem Fazil Ayaz", "discipline": "Mechanical", "role": "Mechanical engineer listed on the company's PEC licence." },
+    { "id": "muhammad-shakeel", "name": "Engr. Muhammad Shakeel", "discipline": "Electrical", "role": "Electrical engineer listed on the company's PEC licence." },
+    { "id": "muhammad-tariq", "name": "Engr. Muhammad Tariq", "discipline": "Chemical", "role": "Chemical engineer listed on the company's PEC licence." },
+    { "id": "azeem-ul-haq", "name": "Engr. Azeem Ul Haq", "discipline": "Electrical", "role": "Electrical engineer listed on the company's PEC licence." },
+    { "id": "muhammad-hamza-ahsan", "name": "Engr. Muhammad Hamza Ahsan", "discipline": "Mechanical", "role": "Mechanical engineer listed on the company's PEC licence." },
+    { "id": "muhammad-bilal", "name": "Engr. Muhammad Bilal", "discipline": "Electrical", "role": "Electrical engineer listed on the company's PEC licence." }
+  ]
+}

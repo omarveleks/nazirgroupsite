@@ -1,0 +1,213 @@
+---
+import Base from '../layouts/Base.astro';
+import HeroDrawing from '../components/HeroDrawing.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import CountryTile from '../components/CountryTile.astro';
+import ClientsStrip from '../components/ClientsStrip.astro';
+import ContactDetails from '../components/ContactDetails.astro';
+import { company, countries, projects, stats, projectBySlug, country } from '../lib/data';
+
+const selected = company.home_selected.map(projectBySlug);
+const libya = country('libya');
+const countryList = countries.map((c) => c.name);
+const listText = `${countryList.slice(0, -1).join(', ')} and ${countryList.at(-1)}`;
+
+const localBusiness = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': new URL('/#office', Astro.site).href,
+  name: company.name,
+  url: new URL('/', Astro.site).href,
+  image: new URL('/og/nazir.png', Astro.site).href,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '100 Abu Bakr Block, New Garden Town',
+    addressLocality: 'Lahore',
+    addressRegion: 'Punjab',
+    addressCountry: 'PK',
+  },
+  parentOrganization: { '@id': new URL('/#organization', Astro.site).href },
+};
+---
+<Base
+  title="Nazir and Company | Electrical and civil engineering contractor since 1958"
+  description={`Nazir and Company (Pvt) Ltd, Lahore: transmission lines, substations, distribution and civil works since ${stats.founded}. ${stats.projects} documented projects in ${stats.countries} countries, including 48 in Libya.`}
+  jsonLd={[localBusiness]}
+>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <p class="eyebrow">Electrical and civil engineering contractor · Lahore · since {stats.founded}</p>
+        <h1>750&nbsp;km of 220&nbsp;kV line, from Benghazi to Libya’s eastern border, completed in 2001.</h1>
+        <p class="lede">
+          Nazir and Company builds overhead transmission lines, substations, distribution networks and civil works.
+          Its record covers {stats.projects} documented projects in {listText}.
+        </p>
+        <div class="btn-row">
+          <a class="btn" href="/projects/">See the project register</a>
+          <a class="btn btn--ghost" href="/downloads/">Download company documents</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <HeroDrawing />
+      </div>
+    </div>
+    <div class="container">
+      <ul class="figures" aria-label="Key figures">
+        <li><span class="n">{stats.founded}</span><span class="l">Year founded</span></li>
+        <li><span class="n">{stats.projects}</span><span class="l">Projects documented in the company’s records</span></li>
+        <li><span class="n">{stats.countries}</span><span class="l">Countries with documented projects</span></li>
+        <li><span class="n">{stats.recordYears}</span><span class="l">Years of documented projects, {stats.firstYear}–{stats.lastYear}</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="selected">
+    <div class="container">
+      <p class="eyebrow">Selected projects</p>
+      <h2 id="selected">Six lines from the record</h2>
+      <div class="grid">
+        {selected.map((p) => <ProjectCard p={p} />)}
+      </div>
+      <p class="more"><a href="/projects/">All {projects.length} projects, by country</a></p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="regions">
+    <div class="container">
+      <p class="eyebrow">Regions</p>
+      <h2 id="regions">Where the work was done</h2>
+      <div class="regions">
+        {countries.map((c) => <CountryTile c={c} size="small" />)}
+      </div>
+      <p class="more"><a href="/global-presence/">Global presence map</a></p>
+    </div>
+  </section>
+
+  <section class="section section--navy libya-callout" aria-labelledby="libya-h">
+    <div class="container two-col">
+      <div>
+        <p class="eyebrow">For main contractors in Libya</p>
+        <h2 id="libya-h">{libya.count} projects in Libya, {libya.first}–{libya.last}</h2>
+        <p class="lede">{company.libya_status}</p>
+        <p>
+          The Libyan record includes 220&nbsp;kV lines for the national utility, oil-field electrical works for Arabian
+          Gulf Oil Company, Sirte Oil Company and Waha Oil Company, and hot-line maintenance of a 138&nbsp;kV line.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn--amber" href="/libya/">Libya record and subcontract offer</a>
+          <a class="btn btn--ghost on-navy" href="/contact/?type=libya-subcontract">Send a Libya subcontract enquiry</a>
+        </div>
+      </div>
+      <ul class="libya-figs" aria-label="Libya figures">
+        <li><span class="fig">750&nbsp;km</span> 220&nbsp;kV double-circuit lines, Benghazi to the eastern border, 2001</li>
+        <li><span class="fig">220&nbsp;kV</span> double-circuit twin-bundle line, Samnu to Sebha, 2011</li>
+        <li><span class="fig">220&nbsp;kV</span> Hun–Wadi Arial–Samnu line, 1989</li>
+        <li><span class="fig">220&nbsp;kV</span> Misurata–Sirte lines and Tripoli ring, 1980</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <ClientsStrip list={projects} limit={18} id="clients-home" />
+    </div>
+  </section>
+
+  <section class="section contact-strip" aria-labelledby="contact-h">
+    <div class="container two-col">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h2 id="contact-h">Enquiries from clients, main contractors and partners</h2>
+        <p>Send project details through the enquiry form. Registration and enlistment documents are available on request.</p>
+        <div class="btn-row">
+          <a class="btn" href="/contact/">Make an enquiry</a>
+          <a class="btn btn--ghost" href="/downloads/">Downloads</a>
+        </div>
+      </div>
+      <div class="tblock-like">
+        <p class="k">Head office</p>
+        <ContactDetails />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding-block: 2rem 3rem;
+  }
+  .hero-grid {
+    display: grid;
+    gap: 1.5rem;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  .hero h1 {
+    font-size: clamp(1.875rem, 1.2rem + 3.2vw, 3.25rem);
+    max-width: 22ch;
+  }
+  .hero-art {
+    max-width: 40rem;
+  }
+  @media (min-width: 60rem) {
+    .hero {
+      padding-top: 3.5rem;
+    }
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    }
+  }
+  .more {
+    margin-top: 1.25rem;
+  }
+  .more a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    font-weight: 600;
+  }
+  .regions {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  }
+  .libya-figs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid rgba(246, 243, 236, 0.35);
+  }
+  .libya-figs li {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(246, 243, 236, 0.35);
+    color: var(--mist);
+  }
+  .libya-figs .fig {
+    display: block;
+    color: var(--amber);
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+  .on-navy {
+    border-color: var(--paper);
+    color: var(--paper);
+  }
+  .on-navy:hover {
+    background: var(--paper);
+    color: var(--navy);
+  }
+  .tblock-like {
+    border: 1px solid var(--navy);
+    background: var(--panel);
+    padding: 1rem 1.25rem;
+  }
+  .tblock-like .k {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+</style>

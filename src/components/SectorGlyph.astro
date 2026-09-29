@@ -1,0 +1,52 @@
+---
+// Small engineering-style line drawings, one per sector. Decorative.
+import type { Sector } from '../lib/data';
+import { tower, span } from '../lib/tower';
+
+interface Props {
+  sector: Sector;
+  class?: string;
+}
+const { sector, class: cls = '' } = Astro.props;
+
+let d = '';
+let thin = '';
+if (sector === 'transmission') {
+  const a = tower(70, 170, 0.42, true);
+  const b = tower(250, 150, 0.26, false);
+  d = a.body + a.insulators + b.body + b.insulators;
+  thin = a.attach.map((p, i) => span(p, b.attach[i]!, 9)).join('') + a.peaks.map((p, i) => span(p, b.peaks[i]!, 7)).join('');
+  thin += 'M0 170H320M0 150H320';
+} else if (sector === 'substation') {
+  d = 'M30 60H290M30 100H290M60 60V150M160 60V150M260 60V150';
+  d += 'M160 150a18 18 0 1 0 0.1 0M160 186a18 18 0 1 0 0.1 0M60 150v40M260 150v40M40 190h40M240 190h40';
+  thin = 'M0 204H320M110 60v-30M210 60v-30M100 30h20M200 30h20';
+} else if (sector === 'distribution') {
+  for (const x of [40, 130, 220, 300]) d += `M${x} 190V60M${x - 24} 72H${x + 24}M${x - 16} 72v8M${x} 72v8M${x + 16} 72v8`;
+  thin = 'M16 80Q85 96 106 80T196 80T276 80T324 80M40 80Q85 96 130 80M0 190H320';
+} else if (sector === 'civil') {
+  d = 'M10 150H310M40 150L60 120H260L280 150M60 120H260';
+  thin = 'M0 170H320M0 185H320M30 150v35M290 150v35M100 120v-6M160 120v-6M220 120v-6';
+} else if (sector === 'oil-and-gas-electrical' || sector === 'industrial') {
+  d = 'M60 190L90 50L120 190M72 130H108M66 160H114M80 90H100M90 50V30M200 190V110H290V190M215 110V80H240V110M250 80h25v30';
+  thin = 'M0 190H320M120 150Q160 140 200 150';
+} else {
+  d = 'M40 150H280M40 140V160M280 140V160M120 150V70M110 70h20M104 60h32M160 150V90M150 90h20';
+  thin = 'M0 190H320M60 150v40M260 150v40';
+}
+---
+<svg class={`glyph ${cls}`} viewBox="0 0 320 210" width="320" height="210" aria-hidden="true" focusable="false">
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d={thin} stroke-width="0.8" opacity="0.7" />
+    <path d={d} stroke-width="1.2" />
+  </g>
+</svg>
+
+<style>
+  .glyph {
+    display: block;
+    width: 100%;
+    height: auto;
+    color: var(--navy);
+  }
+</style>

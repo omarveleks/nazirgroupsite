@@ -1,0 +1,148 @@
+---
+import Base from '../layouts/Base.astro';
+import { countries, company, range, stats } from '../lib/data';
+import { worldMap } from '../lib/geo';
+
+const m = worldMap(countries.map((c) => c.slug).concat('united-kingdom'));
+const info = Object.fromEntries(countries.map((c) => [c.slug, c]));
+// label offsets to keep markers readable
+const OFF: Record<string, [number, number, string]> = {
+  pakistan: [14, 4, 'start'],
+  'saudi-arabia': [-14, 20, 'end'],
+  libya: [-14, 4, 'end'],
+  iraq: [0, -16, 'middle'],
+  iran: [14, -10, 'start'],
+  malaysia: [0, -18, 'middle'],
+  mozambique: [14, 4, 'start'],
+  'united-kingdom': [14, 4, 'start'],
+};
+---
+<Base
+  title="Global presence"
+  description={`Nazir and Company's documented projects by country: ${countries.map((c) => `${c.name} ${c.count}`).join(', ')}.`}
+>
+  <header class="page-head">
+    <div class="container">
+      <p class="eyebrow">Global presence</p>
+      <h1>{stats.projects} projects in {stats.countries} countries</h1>
+      <p class="lede">Documented projects by country, with the years of completion. Select a country for its register.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <figure class="wmap">
+        <svg viewBox={`0 0 ${m.w} ${m.h}`} width={m.w} height={m.h} role="img" aria-labelledby="wm-t wm-d">
+          <title id="wm-t">Map from the United Kingdom to Malaysia and Mozambique marking the countries with documented projects</title>
+          <desc id="wm-d">{countries.map((c) => `${c.name}: ${c.count} projects, ${range(c)}`).join('. ')}. United Kingdom: historic branch office.</desc>
+          <path d={m.base} fill="#fbf9f4" stroke="var(--rule-strong)" stroke-width="0.6" />
+          {m.hi.map((h) => (
+            <path d={h.d} fill={h.slug === 'united-kingdom' ? '#fbf9f4' : 'rgba(224,161,0,0.28)'} stroke="var(--navy)" stroke-width="1" />
+          ))}
+          <g font-family="IBM Plex Mono, Plex Mono Fallback, monospace" font-size="15" fill="var(--navy)">
+            {m.points.map((p) => {
+              const c = info[p.slug];
+              const [dx, dy, anchor] = OFF[p.slug] ?? [12, 4, 'start'];
+              return (
+                <g>
+                  <circle cx={p.x} cy={p.y} r={c ? 7 : 5} fill={c ? 'var(--navy)' : 'var(--paper)'} stroke="var(--navy)" stroke-width="1.5" />
+                  <text x={p.x + dx} y={p.y + dy} text-anchor={anchor} font-weight="500">
+                    {c ? `${c.name} ${c.count}` : 'UK (branch)'}
+                  </text>
+                </g>
+              );
+            })}
+          </g>
+        </svg>
+        <figcaption>Country outlines: Natural Earth. Markers are placed at each country’s centre (peninsular Malaysia for Malaysia).</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="list-h">
+    <div class="container">
+      <h2 id="list-h">By country</h2>
+      <table class="ctab">
+        <caption class="visually-hidden">Documented projects by country</caption>
+        <thead>
+          <tr><th scope="col">Country</th><th scope="col" class="num">Projects</th><th scope="col">Years</th></tr>
+        </thead>
+        <tbody>
+          {countries.map((c) => (
+            <tr>
+              <th scope="row"><a href={`/projects/${c.slug}/`}>{c.name}</a></th>
+              <td class="num fig">{c.count}</td>
+              <td class="fig">{range(c)}</td>
+            </tr>
+          ))}
+        </tbody>
+        <tfoot>
+          <tr><th scope="row">Total</th><td class="num fig">{stats.projects}</td><td class="fig">{stats.firstYear}–{stats.lastYear}</td></tr>
+        </tfoot>
+      </table>
+      <div class="note">
+        <p>
+          The company profile also lists historic branch offices in {company.historic_branches.slice(0, -1).join(', ')} and {company.historic_branches.at(-1)}.
+          No projects in the United Kingdom are documented.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .wmap {
+    margin: 0;
+    border: 1px solid var(--navy);
+    padding: 0.75rem;
+    background: var(--paper);
+  }
+  .wmap svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .wmap figcaption {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--rule);
+    font-size: var(--step--1);
+    color: var(--muted);
+  }
+  .ctab {
+    width: 100%;
+    max-width: 36rem;
+    border-collapse: collapse;
+  }
+  .ctab th,
+  .ctab td {
+    text-align: left;
+    padding: 0.2rem 0.6rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .ctab thead th {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--navy);
+    padding-block: 0.6rem;
+  }
+  .ctab tbody th a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
+  .ctab tfoot th,
+  .ctab tfoot td {
+    border-top: 1px solid var(--navy);
+    border-bottom: 0;
+    padding-block: 0.6rem;
+    font-weight: 600;
+  }
+  .ctab .num {
+    text-align: right;
+  }
+</style>

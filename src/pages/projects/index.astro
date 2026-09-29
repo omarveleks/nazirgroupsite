@@ -1,0 +1,112 @@
+---
+import Base from '../../layouts/Base.astro';
+import CountryTile from '../../components/CountryTile.astro';
+import Register from '../../components/Register.astro';
+import ClientsStrip from '../../components/ClientsStrip.astro';
+import { countries, projects, stats, byNewest } from '../../lib/data';
+
+const all = [...projects].sort(byNewest);
+---
+<Base
+  title="Project register"
+  description={`${stats.projects} documented projects by Nazir and Company in ${stats.countries} countries, ${stats.firstYear}–${stats.lastYear}: transmission lines, substations, distribution and civil works.`}
+>
+  <header class="page-head">
+    <div class="container">
+      <p class="eyebrow">Project register</p>
+      <h1>Projects by country</h1>
+      <p class="lede">
+        {stats.projects} projects from the company’s records, in {stats.countries} countries, completed between {stats.firstYear} and {stats.lastYear}.
+        Choose a country, or search the full register.
+      </p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="visually-hidden">Countries</h2>
+      <div class="tiles">
+        {countries.map((c) => <CountryTile c={c} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="all-h">
+    <div class="container">
+      <h2 id="all-h">Search all projects</h2>
+      <div class="global">
+        <label for="global-q">Search the register</label>
+        <input id="global-q" type="search" inputmode="search" autocomplete="off" placeholder="For example: 220 kV, Sebha, WAPDA" data-global-search="all" />
+      </div>
+      <details class="allc" id="register">
+        <summary><span>All countries</span> <span class="fig">({stats.projects} projects)</span></summary>
+        <div class="allc-body">
+          <Register id="all" groups={[{ id: 'all', projects: all }]} showCountry caption="All documented projects, newest first" />
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <ClientsStrip list={projects} id="clients-projects" />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .tiles {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  }
+  .global {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    max-width: 36rem;
+    margin-bottom: 1rem;
+  }
+  .global label {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .global input {
+    font: inherit;
+    font-size: 1rem;
+    min-height: 3rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--navy);
+    border-radius: var(--radius);
+    background: #fff;
+  }
+  @media (scripting: none) {
+    .global {
+      display: none;
+    }
+  }
+  .allc {
+    border-top: 1px solid var(--navy);
+  }
+  .allc summary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    cursor: pointer;
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: var(--step-2);
+    color: var(--navy);
+  }
+  .allc summary .fig {
+    font-size: 1rem;
+    color: var(--muted);
+  }
+  .allc-body {
+    padding-top: 1rem;
+  }
+</style>

@@ -1,0 +1,76 @@
+---
+import Base from '../../layouts/Base.astro';
+import { projectListPdf, capabilityPdf } from '../../lib/pdf';
+import { stats } from '../../lib/data';
+
+const kb = (b: Uint8Array) => `${Math.max(1, Math.round(b.byteLength / 1024))} KB`;
+const list = await projectListPdf();
+const cap = await capabilityPdf();
+---
+<Base title="Downloads" description="Download the Nazir and Company project list and one-page capability statement, generated from the project register.">
+  <header class="page-head">
+    <div class="container">
+      <p class="eyebrow">Downloads</p>
+      <h1>Company documents</h1>
+      <p class="lede">The project list and capability statement are generated from the same register as this website.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <ul class="docs">
+        <li>
+          <div>
+            <h2>Capability statement</h2>
+            <p>One page: registration, services, key figures, selected projects, enlistments.</p>
+          </div>
+          <a class="btn" href="/downloads/nazir-capability-statement.pdf" download>Download PDF <span class="fig">({kb(cap)})</span></a>
+        </li>
+        <li>
+          <div>
+            <h2>Project list</h2>
+            <p>All {stats.projects} documented projects by country, with client, year, voltage and length.</p>
+          </div>
+          <a class="btn" href="/downloads/nazir-project-list.pdf" download>Download PDF <span class="fig">({kb(list)})</span></a>
+        </li>
+        <li>
+          <div>
+            <h2>Company profile</h2>
+            <p>The full company profile is sent on request.</p>
+          </div>
+          <a class="btn btn--ghost" href="/contact/?type=client">Request the profile</a>
+        </li>
+      </ul>
+      <p class="muted">Copies of the Pakistan Engineering Council licence, certificate of incorporation and enlistment letters are also available on request.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .docs {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    border-top: 1px solid var(--navy);
+  }
+  .docs li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .docs h2 {
+    font-size: var(--step-2);
+    margin-bottom: 0.25rem;
+  }
+  .docs p {
+    margin: 0;
+  }
+  .docs .fig {
+    font-weight: 400;
+    font-size: 0.875rem;
+  }
+</style>

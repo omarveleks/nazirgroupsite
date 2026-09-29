@@ -1,0 +1,205 @@
+---
+import Base from '../../layouts/Base.astro';
+import ContactDetails from '../../components/ContactDetails.astro';
+import { FORM_ENABLED, TURNSTILE_SITE_KEY, countries } from '../../lib/data';
+
+const types = [
+  { v: 'client', l: 'Client' },
+  { v: 'subcontract', l: 'Main contractor subcontract enquiry' },
+  { v: 'partnership', l: 'Partnership' },
+  { v: 'careers', l: 'Careers' },
+  { v: 'other', l: 'Other' },
+];
+const countryHints = [...countries.map((c) => c.name), 'United Arab Emirates', 'Qatar', 'Oman', 'Kuwait', 'Egypt', 'Tunisia', 'Algeria'];
+const turnstile = FORM_ENABLED && TURNSTILE_SITE_KEY;
+---
+<Base title="Contact" description="Send an enquiry to Nazir and Company: clients, main contractors (including Libya subcontracts), partnerships and careers. Head office: 100 Abu Bakr Block, New Garden Town, Lahore.">
+  <header class="page-head">
+    <div class="container">
+      <p class="eyebrow">Contact</p>
+      <h1>Make an enquiry</h1>
+      <p class="lede">For clients, main contractors, partners and job applicants. Registration documents and the full project list are available on request.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container two-col">
+      <div>
+        {!FORM_ENABLED && (
+          <div class="notice" role="status">
+            <p><strong>Form not yet connected.</strong> Enquiries cannot be sent from this page yet.</p>
+          </div>
+        )}
+        <form class="enq" action="/api/contact" method="post" enctype="multipart/form-data" data-enquiry>
+          <div class="field">
+            <label for="type">Type of enquiry <span class="req">(required)</span></label>
+            <select id="type" name="type" required>
+              {types.map((t) => <option value={t.v}>{t.l}</option>)}
+            </select>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="name">Your name <span class="req">(required)</span></label>
+              <input id="name" name="name" type="text" autocomplete="name" required maxlength="200" />
+            </div>
+            <div class="field">
+              <label for="org">Organisation</label>
+              <input id="org" name="organisation" type="text" autocomplete="organization" maxlength="200" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="email">Email <span class="req">(required)</span></label>
+              <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required maxlength="254" />
+            </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="40" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="country">Country of the project</label>
+            <input id="country" name="country" type="text" list="country-list" autocomplete="country-name" maxlength="80" />
+            <datalist id="country-list">
+              {countryHints.map((c) => <option value={c} />)}
+            </datalist>
+          </div>
+          <div class="field">
+            <label for="details">Project details <span class="req">(required)</span></label>
+            <textarea id="details" name="details" rows="7" required minlength="10" maxlength="5000" aria-describedby="details-hint"></textarea>
+            <p class="hint" id="details-hint">Scope, voltage, length, location and timing, as far as known.</p>
+          </div>
+          <div class="field">
+            <label for="file">Attach a file</label>
+            <input id="file" name="file" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" aria-describedby="file-hint" />
+            <p class="hint" id="file-hint">Optional. PDF, Word, Excel, JPEG or PNG, up to 5 MB.</p>
+          </div>
+          <div class="hp" aria-hidden="true">
+            <label for="website">Leave this field empty</label>
+            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+          {turnstile && <div class="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} data-theme="light"></div>}
+          <p class="hint">The details are used only to reply to this enquiry. <a href="/privacy/">Privacy note</a>.</p>
+          <p class="status" data-status role="status" aria-live="polite"></p>
+          <button class="btn" type="submit" disabled={!FORM_ENABLED} aria-disabled={!FORM_ENABLED ? 'true' : undefined}>Send enquiry</button>
+        </form>
+      </div>
+      <aside class="side" aria-labelledby="office-h">
+        <h2 id="office-h">Head office</h2>
+        <ContactDetails />
+        <p class="muted small">No map is embedded on this page to keep it fast; the link opens a map service.</p>
+      </aside>
+    </div>
+  </section>
+  {turnstile && <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+  <script src="../../scripts/contact.ts"></script>
+</Base>
+
+<style>
+  .notice {
+    border: 1px solid var(--navy);
+    border-left: 4px solid var(--amber);
+    background: var(--panel);
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .notice p {
+    margin: 0;
+  }
+  .enq {
+    display: grid;
+    gap: 1.1rem;
+  }
+  .row {
+    display: grid;
+    gap: 1.1rem;
+  }
+  @media (min-width: 40rem) {
+    .row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 0;
+  }
+  label {
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .req {
+    font-weight: 400;
+    color: var(--muted);
+    font-size: var(--step--1);
+  }
+  input,
+  select,
+  textarea {
+    font: inherit;
+    font-size: 1rem;
+    min-height: 2.75rem;
+    width: 100%;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius);
+    background: #fff;
+    color: var(--text);
+  }
+  input[type='file'] {
+    padding: 0.5rem;
+  }
+  textarea {
+    resize: vertical;
+    line-height: 1.5;
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: var(--navy);
+  }
+  input[aria-invalid='true'],
+  textarea[aria-invalid='true'] {
+    border-color: #a4262c;
+  }
+  .hint {
+    margin: 0;
+    font-size: var(--step--1);
+    color: var(--muted);
+  }
+  .hp {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .cf-turnstile {
+    min-height: 65px;
+  }
+  .status {
+    margin: 0;
+    font-weight: 600;
+  }
+  .status:empty {
+    display: none;
+  }
+  .status[data-kind='error'] {
+    color: #a4262c;
+  }
+  .status[data-kind='ok'] {
+    color: #1d5e2e;
+  }
+  .side {
+    border: 1px solid var(--navy);
+    background: var(--panel);
+    padding: 1.25rem;
+  }
+  .side h2 {
+    font-size: var(--step-2);
+  }
+  .small {
+    font-size: var(--step--1);
+  }
+</style>

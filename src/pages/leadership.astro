@@ -1,0 +1,158 @@
+---
+import Base from '../layouts/Base.astro';
+import PersonPlaceholder from '../components/PersonPlaceholder.astro';
+import { company, engineers } from '../lib/data';
+
+const d = company.director;
+const shown = engineers.shown.map((id) => engineers.engineers.find((e) => e.id === id)!);
+---
+<Base title="Leadership and team" description="Sheikh Tanveer Ahmed, Director of Nazir and Company; the founder, Alhaj Sheikh Nazir Ahmed (1930–2005); key advisers and engineers.">
+  <header class="page-head">
+    <div class="container">
+      <p class="eyebrow">Leadership and team</p>
+      <h1>Leadership and team</h1>
+    </div>
+  </header>
+
+  <section class="section" aria-labelledby="dir-h">
+    <div class="container lead-grid">
+      <article class="person person--lead">
+        <PersonPlaceholder size={120} />
+        <div>
+          <p class="eyebrow">{d.title}</p>
+          <h2 id="dir-h">{d.name}</h2>
+          {d.bio.map((s) => <p>{s}</p>)}
+          <dl class="tblock">
+            <div><dt>With the company since</dt><dd class="fig">{d.joined}</dd></div>
+            {d.roles.map((r) => (
+              <div><dt>{r.title}</dt><dd class="fig">{r.from}–{r.to}</dd></div>
+            ))}
+          </dl>
+        </div>
+      </article>
+      <aside class="tribute" aria-labelledby="founder-h">
+        <p class="eyebrow">Founder</p>
+        <h2 id="founder-h">{company.founder.name}</h2>
+        <p class="fig years">{company.founder.born}–{company.founder.died}</p>
+        <ul>
+          {company.founder.facts.map((t) => <li>{t}</li>)}
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="adv-h">
+    <div class="container">
+      <h2 id="adv-h">Key advisers</h2>
+      <ul class="people">
+        {company.advisors.map((a) => (
+          <li class="person">
+            <PersonPlaceholder size={72} />
+            <div>
+              <h3>{a.name}</h3>
+              <p class="disc">{a.discipline}</p>
+              <p>{a.line}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="eng-h">
+    <div class="container">
+      <h2 id="eng-h">Engineers</h2>
+      <p>A selection of the engineers registered with the Pakistan Engineering Council and listed on the company’s licence.</p>
+      <ul class="people">
+        {shown.map((e) => (
+          <li class="person">
+            <PersonPlaceholder size={72} />
+            <div>
+              <h3>{e.name}</h3>
+              <p class="disc">{e.discipline}</p>
+              <p>{e.role}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <div class="note">
+        <p>The full technical team is available on request. <a href="/contact/">Contact</a>.</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lead-grid {
+    display: grid;
+    gap: 2rem;
+  }
+  @media (min-width: 60rem) {
+    .lead-grid {
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+      align-items: start;
+    }
+  }
+  .person {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .person--lead {
+    flex-direction: column;
+  }
+  @media (min-width: 40rem) {
+    .person--lead {
+      flex-direction: row;
+      gap: 1.5rem;
+    }
+  }
+  .person--lead .tblock {
+    margin-top: 1rem;
+  }
+  .tribute {
+    border: 1px solid var(--navy);
+    border-top: 4px solid var(--navy);
+    background: var(--panel);
+    padding: 1.25rem;
+  }
+  .tribute h2 {
+    font-size: var(--step-2);
+    margin-bottom: 0.2rem;
+  }
+  .years {
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+  .tribute li {
+    margin-bottom: 0.4rem;
+  }
+  .people {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  }
+  .people .person {
+    border: 1px solid var(--rule-strong);
+    background: var(--panel);
+    padding: 1rem;
+  }
+  .people h3 {
+    font-size: var(--step-1);
+    margin-bottom: 0.1rem;
+  }
+  .people p {
+    margin: 0 0 0.3rem;
+    font-size: var(--step--1);
+  }
+  .disc {
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--amber-ink);
+  }
+</style>

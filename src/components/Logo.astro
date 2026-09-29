@@ -1,0 +1,27 @@
+---
+import { ROOF_PATH, WORD_OFFSET, WORD_PATH } from '../lib/logo';
+
+interface Props {
+  class?: string;
+  title?: string;
+  height?: number;
+}
+const { class: cls = '', title, height = 40 } = Astro.props;
+const width = Math.round((height * 200) / 94);
+---
+<svg
+  class={`logo ${cls}`}
+  viewBox="0 0 200 94"
+  width={width}
+  height={height}
+  role={title ? 'img' : undefined}
+  aria-hidden={title ? undefined : 'true'}
+  aria-label={title}
+  focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path d={ROOF_PATH} fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="miter" />
+  <g transform={`translate(${WORD_OFFSET.x} ${WORD_OFFSET.y})`} fill="currentColor">
+    <path d={WORD_PATH} />
+  </g>
+</svg>

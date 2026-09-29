@@ -1,0 +1,157 @@
+---
+import Base from '../layouts/Base.astro';
+import LibyaMap from '../components/LibyaMap.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Register from '../components/Register.astro';
+import ClientsStrip from '../components/ClientsStrip.astro';
+import { company, country, projectBySlug } from '../lib/data';
+
+const lib = country('libya');
+const flagships = [
+  'samnu-sebha-220-kv-double-circuit-twin-bundle-line',
+  'benghazi-eastern-border-220-kv-double-circuit-lines-750-km',
+  'hun-wadi-arial-samnu-220-kv-transmission-line',
+  'misurata-sirte-220-kv-lines-and-tripoli-ring',
+].map(projectBySlug);
+const n = (re: RegExp) => lib.projects.filter((p) => re.test(p.client)).length;
+const oil = n(/^(Arabian Gulf Oil Company|Sirte Oil Company|Waha Oil Company)$/);
+const utility = n(/^(GECOL|GECOL \(formerly ELPCO\)|GEC|S\.O\.E\.)$/);
+const rest = lib.count - oil - utility;
+---
+<Base
+  title="Libya: 48 projects, 1978–2011"
+  description="Nazir and Company's historic record in Libya: 48 projects from 1978 to 2011, including 220 kV lines and oil-field electrical works. Now seeking electrical projects and subcontracts in Libya."
+>
+  <header class="page-head">
+    <div class="container">
+      <p class="eyebrow">Libya</p>
+      <h1>{lib.count} projects in Libya, {lib.first}–{lib.last}</h1>
+      <p class="lede status">{company.libya_status}</p>
+      <div class="btn-row">
+        <a class="btn" href="/contact/?type=subcontract&amp;country=Libya">Send a Libya subcontract enquiry</a>
+        <a class="btn btn--ghost" href="#register">See all {lib.count} Libyan projects</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container two-col">
+      <div>
+        <h2>The record</h2>
+        <p>
+          From {lib.first} to {lib.last} the company completed {lib.count} contracts in Libya: {utility} for GECOL (formerly ELPCO), GEC and
+          S.O.E.; {oil} for Arabian Gulf Oil Company, Sirte Oil Company and Waha Oil Company; and {rest} for other clients,
+          including international contractors.
+        </p>
+        <p>
+          The work ranges from 220&nbsp;kV transmission lines to 11 and 33&nbsp;kV networks, underground cables, oil-field
+          electrification in hazardous areas, and hot-line maintenance of a 138&nbsp;kV line.
+        </p>
+        <ul class="figures lfigs" aria-label="Libya figures">
+          <li><span class="n">{lib.count}</span><span class="l">Projects documented</span></li>
+          <li><span class="n">750</span><span class="l">km of 220&nbsp;kV double-circuit line, one turnkey contract (2001)</span></li>
+          <li><span class="n">{oil}</span><span class="l">Oil-company contracts</span></li>
+          <li><span class="n">{lib.last! - lib.first!}</span><span class="l">Years of work, {lib.first}–{lib.last}</span></li>
+        </ul>
+      </div>
+      <LibyaMap />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="flag-h">
+    <div class="container">
+      <p class="eyebrow">Flagship lines</p>
+      <h2 id="flag-h">220 kV lines in Libya</h2>
+      <div class="grid">
+        {flagships.map((p) => <ProjectCard p={p} showCountry={false} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--navy" aria-labelledby="mc-h">
+    <div class="container">
+      <p class="eyebrow">Working with main contractors</p>
+      <h2 id="mc-h">What the company offers as an electrical subcontractor</h2>
+      <div class="offer">
+        <div>
+          <h3>Scope</h3>
+          <ul>
+            <li>Overhead line foundations, tower erection and conductor stringing, 66 to 220&nbsp;kV in Libya and up to 500&nbsp;kV elsewhere</li>
+            <li>11, 30 and 33&nbsp;kV overhead lines, underground cables and terminations</li>
+            <li>Substation civil works</li>
+            <li>Oil-field electrical works, including installations in hazardous areas</li>
+            <li>Maintenance of 220&nbsp;kV lines and hot-line maintenance</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Engineers</h3>
+          <p>Electrical, telecommunication, civil and mechanical engineers registered with the Pakistan Engineering Council are listed on the company’s licence. Details are available on request.</p>
+          <h3>Mobilisation</h3>
+          <p>The company has access to a large fleet of construction and stringing equipment, and can mobilise it per project.</p>
+        </div>
+        <div>
+          <h3>Documents on request</h3>
+          <ul>
+            <li>Pakistan Engineering Council licence (Licence No. 1, category C-A)</li>
+            <li>Certificate of incorporation</li>
+            <li>Enlistment letters</li>
+            <li>Full project list</li>
+          </ul>
+          <div class="btn-row">
+            <a class="btn btn--amber" href="/contact/?type=subcontract&amp;country=Libya">Libya subcontract enquiry</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <ClientsStrip list={lib.projects} heading="Clients served in Libya" id="clients-libya" />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="register-h" id="register">
+    <div class="container">
+      <h2 id="register-h">All projects in Libya</h2>
+      <Register id="libya-page" groups={[{ id: 'all', projects: lib.projects }]} caption="Projects in Libya, newest first" />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .status {
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .lfigs {
+    margin-top: 1.5rem;
+  }
+  @media (min-width: 48rem) {
+    .lfigs {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .offer {
+    display: grid;
+    gap: 2rem;
+    margin-top: 1.5rem;
+  }
+  @media (min-width: 60rem) {
+    .offer {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .offer h3 {
+    font-size: var(--step-1);
+    color: var(--amber);
+    font-family: var(--sans);
+  }
+  .offer li {
+    margin-bottom: 0.4rem;
+  }
+  .offer p,
+  .offer li {
+    color: var(--paper);
+  }
+</style>
