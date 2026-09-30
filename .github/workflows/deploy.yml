@@ -13,9 +13,10 @@ on:
     branches: [main, claude/gallant-knuth-fh3j1q]
   workflow_dispatch:
 
+# A new push cancels any older run, queued or running: only the latest commit deploys.
 concurrency:
   group: pages-deploy
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   qa-and-deploy:
