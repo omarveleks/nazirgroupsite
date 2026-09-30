@@ -3,6 +3,8 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import Statement from '../components/Statement.astro';
+import PecFields from '../components/PecFields.astro';
+import Img from '../components/Img.astro';
 import { company } from '../lib/data';
 import { CAPABILITIES } from '../lib/site';
 
@@ -47,21 +49,28 @@ import { CAPABILITIES } from '../lib/site';
   </section>
 
 
-  <section class="sec" aria-labelledby="fields-h">
+  <section class="sec sec--soft" id="licence" aria-labelledby="licence-h">
+    <div class="w">
+      <div class="grid2 head-row">
+        <div>
+          <span class="eb">Pakistan Engineering Council, Licence No. 1</span>
+          <h2 class="h" id="licence-h">Licensed Across Four Disciplines</h2>
+        </div>
+        <p class="body-grey">The company's licence covers electrical, civil, mechanical and building works.</p>
+      </div>
+      <PecFields />
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="strength-h">
     <div class="w duo">
       <div class="duo-t">
-        <span class="eb">Fields of Work</span>
-        <h2 class="h" id="fields-h">Power, Civil and Communications</h2>
-        <ul class="pills fields">
-          {company.fields_of_specialisation.map((f) => <li>{f}</li>)}
-        </ul>
+        <span class="eb">Engineering and Mobilisation</span>
+        <h2 class="h" id="strength-h">Equipped for Every Project</h2>
+        <p class="lede">{company.engineering_strength.lede}</p>
+        <p class="body-grey">The company has access to a large fleet of construction and stringing equipment, and can mobilise it per project. Further documents are available on request.</p>
       </div>
-      <div class="duo-t">
-        <span class="eb">Mobilisation</span>
-        <h2 class="h">Equipped for Every Project</h2>
-        <p class="lede">The company has access to a large fleet of construction and stringing equipment, and can mobilise it per project.</p>
-        <p class="body-grey">The Pakistan Engineering Council licence, the certificate of incorporation, the company profile and the full project list are available on request.</p>
-      </div>
+      <div class="duo-p"><Img name="site-engineer" alt="Site engineer supervising construction" sizes="(min-width: 60em) 50vw, 100vw" /></div>
     </div>
   </section>
 

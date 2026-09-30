@@ -1,0 +1,38 @@
+---
+// Fields covered by the company's Pakistan Engineering Council licence, in plain terms.
+import { company } from '../lib/data';
+---
+<div class="pecf">
+  {company.pec_fields.map((g) => (
+    <div>
+      <h3>{g.group}</h3>
+      <ul>
+        {g.items.map((i) => <li>{i}</li>)}
+      </ul>
+    </div>
+  ))}
+</div>
+<style>
+  .pecf {
+    display: grid;
+    gap: 2.5rem 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  }
+  .pecf h3 {
+    padding-bottom: 0.875rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid var(--ink);
+    font: 400 1.25rem/1.2 var(--display);
+  }
+  .pecf ul {
+    list-style: none;
+    padding: 0;
+  }
+  .pecf li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.96875rem;
+    color: var(--slate);
+    overflow-wrap: anywhere;
+  }
+</style>

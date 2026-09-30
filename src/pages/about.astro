@@ -74,12 +74,13 @@ const list = (xs: string[]) => (xs.length > 1 ? `${xs.slice(0, -1).join(', ')} a
           <li><b>Pre-qualified</b> · {company.prequalified_short.join(' · ')}</li>
         </ul>
         <p class="body-grey fin">Projects financed by the {list(company.financiers)}.</p>
+        <p class="body-grey">The licence covers electrical, civil, mechanical and building works. <a href="/capabilities/#licence">Licensed fields</a>.</p>
       </div>
     </div>
   </section>
 
   <Statement
-    text={`The company is led by its Director, ${d.name}, with the support of senior advisers and engineers registered with the Pakistan Engineering Council.`}
+    text={`The company is led by its Director, ${d.name}, with the support of senior advisers and a developed network of engineers across Pakistan.`}
     link={{ href: '/leadership/', label: 'Meet the Leadership' }}
   >
     The People Behind the Delivery

@@ -2,7 +2,7 @@
 // Company profile (build-only): rendered to public/downloads/nazir-company-profile.pdf
 import Print from '../../layouts/Print.astro';
 import Logo from '../../components/Logo.astro';
-import { company, contact, engineers, projects, stats, byNewest, clientsFor, country, fmtKm, fmtKv, fmtValue, projectBySlug, ROLE_LABEL, SECTOR_LABEL } from '../../lib/data';
+import { company, contact, projects, stats, byNewest, clientsFor, country, fmtKm, fmtKv, fmtValue, projectBySlug, ROLE_LABEL, SECTOR_LABEL } from '../../lib/data';
 import { CAPABILITIES, CLIENT_MARKS, LIBYA_FEATURED, MAX_AC_KV, PRESENCE_ORDER, countryMeta, numberWord, projectPhoto } from '../../lib/site';
 import { services, serviceProjects } from '../../lib/services';
 import { milestones } from '../../lib/milestones';
@@ -13,7 +13,6 @@ import { jpg, person, pad2, list } from '../../lib/print';
 const d = company.director;
 const f = company.founder;
 const edition = new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
-const shown = engineers.shown.map((id) => engineers.engineers.find((e) => e.id === id)!);
 const selected = projects.filter((p) => p.flagship || p.value.show).sort(byNewest);
 const featuredA = selected.slice(0, 6);
 const featuredB = selected.slice(6, 12);
@@ -39,7 +38,7 @@ const contents: [string, number][] = [
   ['About the Company', 3],
   ['Six Decades of Delivery', 4],
   ['Leadership', 5],
-  ['Advisers and Engineers', 6],
+  ['Advisers and Engineering', 6],
   ['Capabilities', 8],
   ['Services', 9],
   ['Featured Projects', 11],
@@ -202,21 +201,20 @@ const fact = (p: (typeof projects)[number]) =>
   <section class="page">
     <div class="bleed shade eng-img"><img src={jpg('site-engineer', 1400)} alt="" /></div>
     <div class="on-photo eng-t">
-      <span class="p-eb">Engineers</span>
-      <h2 class="p-h1">Engineering Depth</h2>
-      <p class="p-lede">Engineers registered with the Pakistan Engineering Council and listed on the company licence.</p>
+      <span class="p-eb">Engineering</span>
+      <h2 class="p-h1">Engineering Strength</h2>
+      <p class="p-lede">{company.engineering_strength.lede}</p>
     </div>
     <div class="pad eng-pad">
-      <ul class="clean eng">
-        {shown.map((e) => (
+      <ol class="clean eng">
+        {company.engineering_strength.points.map(([t, x], i) => (
           <li>
-            <p class="p-h3">{e.name}</p>
-            <span class="p-eb adv-d">{e.discipline}</span>
-            <p class="p-body">{e.role}</p>
+            <span class="num">{pad2(i + 1)}</span>
+            <p class="p-h3 eng-h">{t}</p>
+            <p class="p-body">{x}</p>
           </li>
         ))}
-      </ul>
-      <p class="p-body eng-note">The full technical team is available on request.</p>
+      </ol>
     </div>
     <footer class="pfoot"><span>{Foot}</span><b>07</b></footer>
   </section>
@@ -431,20 +429,16 @@ const fact = (p: (typeof projects)[number]) =>
         <li><span class="reg-k">Projects financed by</span><span class="reg-v">{list(company.financiers)}</span></li>
         <li><span class="reg-k">Incorporated</span><span class="reg-v">{company.incorporated_text}</span></li>
       </ul>
-      <div class="two reg-two">
-        <div>
-          <span class="p-eb">Fields of Work</span>
-          <ul class="clean pillz">
-            {company.fields_of_specialisation.map((x) => <li>{x}</li>)}
-          </ul>
-        </div>
-        <div>
-          <span class="p-eb">Mobilisation</span>
-          <p class="p-h3">Equipped for Every Project</p>
-          <p class="p-body mob">The company has access to a large fleet of construction and stringing equipment, and can mobilise it per project. Further documents are available on request.</p>
-        </div>
+      <span class="p-eb lic-h">Licensed Disciplines</span>
+      <div class="lic">
+        {company.pec_fields.map((g) => (
+          <div>
+            <p class="p-h3 lic-g">{g.group}</p>
+            <ul class="clean">{g.items.map((i) => <li>{i}</li>)}</ul>
+          </div>
+        ))}
       </div>
-      <div class="ph reg-ph"><img src={jpg('engineering-drawings', 1400)} alt="" /></div>
+      <p class="p-body mob"><strong>Mobilisation.</strong> The company has access to a large fleet of construction and stringing equipment, and can mobilise it per project. Further documents are available on request.</p>
     </div>
     <footer class="pfoot"><span>{Foot}</span><b>17</b></footer>
   </section>
@@ -515,7 +509,8 @@ const fact = (p: (typeof projects)[number]) =>
   .eng-img { height: 118mm; }
   .eng-t { top: 50mm; }
   .eng-pad { top: 118mm; padding-top: 12mm; }
-  .eng { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10mm 8mm; }
+  .eng { display: grid; grid-template-columns: 1fr 1fr; gap: 10mm 12mm; }
+  .eng-h { margin: 2mm 0 2mm; font-size: 14pt; }
   .eng li { padding-top: 4mm; border-top: 0.6pt solid var(--line); }
   .eng-note { margin-top: 10mm; color: var(--ink); font-weight: 500; }
 
@@ -574,7 +569,11 @@ const fact = (p: (typeof projects)[number]) =>
   .reg li { display: grid; grid-template-columns: 62mm 1fr; padding: 3.8mm 0; border-bottom: 0.6pt solid var(--line); }
   .reg-k { font: 600 7pt/1.4 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--grey); }
   .reg-v { font: 300 12pt/1.3 var(--display); color: var(--ink); }
-  .reg-two { margin-top: 11mm; }
+  .lic-h { margin-top: 9mm; }
+  .lic { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6mm; }
+  .lic-g { font-size: 10.5pt; padding-bottom: 2mm; margin-bottom: 1mm; border-bottom: 0.6pt solid var(--ink); }
+  .lic li { padding: 1.3mm 0; border-bottom: 0.4pt solid var(--line); font: 300 7.8pt/1.35 var(--body); color: var(--slate); }
+  .mob { margin-top: 8mm; }
   .pillz { display: flex; flex-wrap: wrap; gap: 2mm; }
   .pillz li { padding: 1.4mm 3mm; border: 0.6pt solid var(--line-strong); border-radius: 99px; font: 400 7.5pt/1.3 var(--display); color: var(--ink); }
   .mob { margin-top: 2.5mm; }

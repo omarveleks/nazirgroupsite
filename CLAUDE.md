@@ -125,3 +125,5 @@ These override the sections above where they conflict.
 4. **Registrations:** show only "Pakistan Engineering Council, Licence No. 1" and pre-qualification (NHA, WAPDA as documented; NTDC only with a document). No categories, grades, years or enlistments.
 5. **Contract values:** shown for projects listed above Rs 2 billion or the equivalent, in original currency and year (`value.show` in projects.json).
 6. **Company profile PDF:** generated from the data (`src/lib/profile-pdf.ts`).
+7. **Engineers:** no named engineers anywhere (site or PDFs). Use "Engineering Strength" wording (experienced leadership, ability to recruit and mobilise teams, developed network in Pakistan) from `company.json`.
+8. **PEC licence fields:** shown in plain terms, grouped as Electrical and Electronics, Civil, Mechanical and Buildings (`pec_fields` in company.json); never the licence codes.

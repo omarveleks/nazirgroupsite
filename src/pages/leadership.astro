@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Leadership from '../components/Leadership.astro';
 import Advisers from '../components/Advisers.astro';
-import Engineers from '../components/Engineers.astro';
+import EngineeringStrength from '../components/EngineeringStrength.astro';
 import Statement from '../components/Statement.astro';
 import { company } from '../lib/data';
 
@@ -10,12 +10,12 @@ const d = company.director;
 ---
 <Base
   title="Leadership and team"
-  description={`${d.name}, Director of Nazir and Company; the founder, ${company.founder.name} (${company.founder.born}–${company.founder.died}); key advisers and selected engineers.`}
+  description={`${d.name}, Director of Nazir and Company; the founder, ${company.founder.name} (${company.founder.born}–${company.founder.died}); key advisers and the company's engineering strength.`}
 >
   <header class="page-head w">
     <span class="eb">Leadership and Team</span>
     <h1 class="h h--xl">The People Behind the Delivery</h1>
-    <p class="lede">The company is led by its Director, {d.name}, with the support of a team of senior advisers and engineers registered with the Pakistan Engineering Council.</p>
+    <p class="lede">The company is led by its Director, {d.name}, with the support of a team of senior advisers and a developed network of engineers across Pakistan.</p>
   </header>
 
   <section class="sec--tight" aria-labelledby="director-h">
@@ -33,16 +33,16 @@ const d = company.director;
     </div>
   </section>
 
-  <section class="sec" aria-labelledby="engineers-h">
+  <section class="sec" aria-labelledby="engineering-h">
     <div class="w">
       <div class="grid2 head-row">
         <div>
-          <span class="eb">Engineers</span>
-          <h2 class="h" id="engineers-h">Selected Engineers</h2>
+          <span class="eb">Engineering</span>
+          <h2 class="h" id="engineering-h">Engineering Strength</h2>
         </div>
-        <p class="body-grey">Engineers listed on the company licence. The full technical team is available on request.</p>
+        <p class="body-grey">{company.engineering_strength.lede}</p>
       </div>
-      <Engineers />
+      <EngineeringStrength />
     </div>
   </section>
 

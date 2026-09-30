@@ -62,7 +62,7 @@
     {
       "name": "Behram Shahrokh Aslam",
       "discipline": "Electrical",
-      "line": "Adviser; electrical engineer listed on the company's PEC licence.",
+      "line": "Adviser on electrical works.",
       "photo": "behram-shahrokh-aslam"
     }
   ],
@@ -145,5 +145,75 @@
   "prequalified_short": [
     "NHA",
     "WAPDA"
-  ]
+  ],
+  "pec_fields": [
+    {
+      "group": "Electrical and Electronics",
+      "items": [
+        "High-voltage installation",
+        "Low-voltage installation",
+        "Telecommunication installations",
+        "External telecommunication works",
+        "Security, safety and surveillance systems",
+        "Specialised lighting systems",
+        "Building automation and energy generation systems",
+        "Solar",
+        "IT and software engineering",
+        "General electronics works"
+      ]
+    },
+    {
+      "group": "Civil",
+      "items": [
+        "Roads, pavements and drainage",
+        "Bridge structures and piling",
+        "Marine structures and dredging",
+        "Dams, irrigation and flood control",
+        "Sewerage and water supply",
+        "Oil and gas pipelines",
+        "General civil engineering works"
+      ]
+    },
+    {
+      "group": "Mechanical",
+      "items": [
+        "Air conditioning, refrigeration and ventilation",
+        "Fire detection, alarm and suppression systems",
+        "Specialised fabrication and plant",
+        "Workshop, mill and quarry systems",
+        "General mechanical works",
+        "General industrial works",
+        "General metallurgy works"
+      ]
+    },
+    {
+      "group": "Buildings",
+      "items": [
+        "Prefabricated steel and concrete buildings",
+        "Building restoration and conservation",
+        "General buildings and maintenance"
+      ]
+    }
+  ],
+  "engineering_strength": {
+    "lede": "Nazir and Company draws on strong, experienced engineering leadership, a developed network of engineers, specialists and subcontractors across Pakistan, and the ability to recruit and mobilise the right teams for each project.",
+    "points": [
+      [
+        "Experienced Leadership",
+        "Senior management and advisers with decades of experience delivering transmission, distribution and civil works in Pakistan and abroad."
+      ],
+      [
+        "Teams Built for Each Project",
+        "Engineers, supervisors and skilled crews are recruited and mobilised to match the scope, scale and location of each contract."
+      ],
+      [
+        "A Developed Network in Pakistan",
+        "Long-standing relationships with engineers, specialists, suppliers and subcontractors across Pakistan's power and construction sectors."
+      ],
+      [
+        "Equipment on Call",
+        "Access to a large fleet of construction and stringing equipment, mobilised per project."
+      ]
+    ]
+  }
 }
