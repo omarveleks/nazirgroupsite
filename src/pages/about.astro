@@ -3,20 +3,17 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Portrait from '../components/Portrait.astro';
 import Decades from '../components/Decades.astro';
-import Leadership from '../components/Leadership.astro';
-import Advisers from '../components/Advisers.astro';
-import Engineers from '../components/Engineers.astro';
 import Statement from '../components/Statement.astro';
-import Go from '../components/Go.astro';
 import { company, stats } from '../lib/data';
 import { MAX_AC_KV, numberWord } from '../lib/site';
 
 const d = company.director;
 const f = company.founder;
+const list = (xs: string[]) => (xs.length > 1 ? `${xs.slice(0, -1).join(', ')} and ${xs.at(-1)}` : xs[0]);
 ---
 <Base
   title="About"
-  description={`Nazir and Company, Lahore: founded in ${company.founded}, incorporated on ${company.incorporated_text}, holder of Licence No. 1 of the Pakistan Engineering Council. Heritage, leadership and engineers.`}
+  description={`Nazir and Company, Lahore: founded in ${company.founded}, incorporated on ${company.incorporated_text}, holder of Licence No. 1 of the Pakistan Engineering Council. Heritage and registration.`}
   heroPhoto="tower-sky"
 >
   <PageHero
@@ -62,48 +59,50 @@ const f = company.founder;
     </ul>
   </section>
 
-  <section class="sec" id="leadership" aria-labelledby="leadership-h">
-    <div class="w">
-      <div class="grid2 head-row">
-        <div>
-          <span class="eb">Leadership</span>
-          <h2 class="h" id="leadership-h">Leadership</h2>
-        </div>
-        <p class="body-grey">The company is led by its Director, {d.name}, with the support of a team of senior advisers.</p>
+  <section class="sec sec--soft" id="registration" aria-labelledby="reg-h">
+    <div class="w grid2 top">
+      <div>
+        <span class="eb">Registration</span>
+        <h2 class="h" id="reg-h">Licence No. 1</h2>
+        <p class="lede reg-l">
+          {company.pec.statement}, the first licence the Council issued. The company was incorporated as a private limited company on {company.incorporated_text}.
+        </p>
       </div>
-      <Leadership />
-    </div>
-  </section>
-
-  <section class="sec sec--soft" aria-labelledby="advisers-h">
-    <div class="w">
-      <span class="eb">Advisers</span>
-      <h2 class="h head-row" id="advisers-h">Key Advisers</h2>
-      <Advisers />
-    </div>
-  </section>
-
-  <section class="sec" id="engineers" aria-labelledby="engineers-h">
-    <div class="w">
-      <div class="grid2 head-row">
-        <div>
-          <span class="eb">Engineers</span>
-          <h2 class="h" id="engineers-h">Selected Engineers</h2>
-        </div>
-        <p class="body-grey">Engineers registered with the Pakistan Engineering Council and listed on the company licence. The full technical team is available on request.</p>
+      <div>
+        <ul class="regs regs--stack">
+          <li><b>Pakistan Engineering Council</b> · Licence No. 1</li>
+          <li><b>Pre-qualified</b> · {company.prequalified_short.join(' · ')}</li>
+        </ul>
+        <p class="body-grey fin">Projects financed by the {list(company.financiers)}.</p>
       </div>
-      <Engineers />
-      <div class="row-links more"><Go href="/leadership/" label="Leadership and Team" /></div>
     </div>
   </section>
 
-  <Statement text="Discuss transmission, substation and infrastructure programmes with the business development team." link={{ href: '/contact/?type=partnership', label: 'Contact' }}>
-    Partner With Nazir and Company
+  <Statement
+    text={`The company is led by its Director, ${d.name}, with the support of senior advisers and engineers registered with the Pakistan Engineering Council.`}
+    link={{ href: '/leadership/', label: 'Meet the Leadership' }}
+  >
+    The People Behind the Delivery
   </Statement>
 </Base>
 
 <style>
-  .more {
-    margin-top: 3.5rem;
+  .top {
+    align-items: start;
+  }
+  .reg-l {
+    margin-top: 2rem;
+  }
+  .regs--stack {
+    flex-direction: column;
+    margin-top: 0;
+    font-size: 1.1875rem;
+  }
+  .regs--stack li {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .fin {
+    margin-top: 2rem;
   }
 </style>

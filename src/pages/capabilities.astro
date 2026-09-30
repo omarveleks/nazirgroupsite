@@ -6,7 +6,6 @@ import Statement from '../components/Statement.astro';
 import { company } from '../lib/data';
 import { CAPABILITIES } from '../lib/site';
 
-const list = (xs: string[]) => (xs.length > 1 ? `${xs.slice(0, -1).join(', ')} and ${xs.at(-1)}` : xs[0]);
 ---
 <Base
   title="Capabilities"
@@ -47,24 +46,6 @@ const list = (xs: string[]) => (xs.length > 1 ? `${xs.slice(0, -1).join(', ')} a
     </div>
   </section>
 
-  <section class="sec sec--soft" id="registration" aria-labelledby="reg-h">
-    <div class="w grid2 top">
-      <div>
-        <span class="eb">Registration</span>
-        <h2 class="h" id="reg-h">Licence No. 1</h2>
-        <p class="lede reg-l">
-          {company.pec.statement}, the first licence the Council issued. The company was incorporated as a private limited company on {company.incorporated_text}.
-        </p>
-      </div>
-      <div>
-        <ul class="regs regs--stack">
-          <li><b>Pakistan Engineering Council</b> · Licence No. 1</li>
-          <li><b>Pre-qualified</b> · {company.prequalified_short.join(' · ')}</li>
-        </ul>
-        <p class="body-grey fin">Projects financed by the {list(company.financiers)}.</p>
-      </div>
-    </div>
-  </section>
 
   <section class="sec" aria-labelledby="fields-h">
     <div class="w duo">
