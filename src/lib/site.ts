@@ -86,11 +86,13 @@ export const HERO_SLIDES: Slide[] = [
 export const FEATURED: Slide[] = [
   card('benghazi-eastern-border-220-kv-double-circuit-lines-750-km', 'Benghazi–Eastern Border 220 kV Transmission', 'tower-mono'),
   card('380-110-kv-overhead-lines-and-fibre-optic-network-makkah-taif-and-madinah', 'Makkah, Taif & Madinah 380 kV Network', 'substation'),
-  card('barotha-rewat-500-kv-transmission-lines', 'Barotha–Rewat 500 kV Transmission', 'distribution-pole'),
-  card('songo-apollo-533-kv-hvdc-transmission-line', 'Songo–Apollo ±533 kV HVDC Transmission', 'tower-sky'),
-  card('samnu-sebha-220-kv-double-circuit-twin-bundle-line', 'Samnu–Sebha 220 kV Transmission', 'desert-lines'),
+  card('ghazi-barotha-hydropower-project-civil-works', 'Ghazi-Barotha Hydropower Project', 'power-channel'),
+  card('nasiriya-wasit-baghdad-400-kv-line-358-km', 'Nasiriya–Wasit–Baghdad 400 kV Transmission', 'desert-lines'),
+  card('samnu-sebha-220-kv-double-circuit-twin-bundle-line', 'Samnu–Sebha 220 kV Transmission', 'tower-sky'),
   card('shoaiba-jeddah-380-kv-overhead-transmission-line', 'Shoaiba–Jeddah 380 kV Transmission', 'transmission-towers'),
-  card('fatima-jinnah-town-phase-i-infrastructure-multan', 'Fatima Jinnah Town, Multan', 'construction-site'),
+  card('pindi-bhattian-faisalabad-motorway-m-3', 'Pindi Bhattian–Faisalabad Motorway (M-3)', 'site-engineer'),
+  card('songo-apollo-533-kv-hvdc-transmission-line', 'Songo–Apollo ±533 kV HVDC Transmission', 'distribution-pole'),
+  card('larkana-jamshoro-500-kv-transmission-line', 'Larkana–Jamshoro 500 kV Transmission', 'tower-mono'),
 ];
 
 export const LIBYA_FEATURED: Slide[] = [
