@@ -8,12 +8,10 @@ import type { Project } from '../lib/data';
 import {
   SECTOR_LABEL,
   VOLTAGE_BANDS,
-  decade,
   fmtKm,
   fmtKv,
   projectUrl,
   voltageBand,
-  yearText,
   clientCanon,
 } from '../lib/data';
 
@@ -34,8 +32,6 @@ const all = groups.flatMap((g) => g.projects);
 const uniq = <T,>(xs: T[]) => [...new Set(xs)];
 const sectors = uniq(all.map((p) => p.sector)).sort((a, b) => SECTOR_LABEL[a].localeCompare(SECTOR_LABEL[b]));
 const bands = Object.keys(VOLTAGE_BANDS).filter((b) => all.some((p) => voltageBand(p) === b));
-const decades = uniq(all.map(decade)).filter((d) => d !== 'na').sort().reverse();
-const hasUndated = all.some((p) => decade(p) === 'na');
 const clients = uniq(all.flatMap((p) => p.client.split(' / ').map(clientCanon))).sort((a, b) => a.localeCompare(b));
 const countries = uniq(all.map((p) => p.country)).sort();
 const norm = (s: string) => s.toLowerCase().replace(/[–—-]/g, ' ');
@@ -78,14 +74,6 @@ const norm = (s: string) => s.toLowerCase().replace(/[–—-]/g, ' ');
         {clients.map((c) => <option value={c}>{c}</option>)}
       </select>
     </div>
-    <div class="f">
-      <label for={`${id}-decade`}>Decade</label>
-      <select id={`${id}-decade`} name="decade">
-        <option value="">All years</option>
-        {decades.map((d) => <option value={d}>{d}</option>)}
-        {hasUndated && <option value="na">Year not stated</option>}
-      </select>
-    </div>
     <div class="f f--reset">
       <button type="button" data-reset>Clear filters</button>
     </div>
@@ -105,7 +93,6 @@ const norm = (s: string) => s.toLowerCase().replace(/[–—-]/g, ' ');
         <caption class="visually-hidden">{caption}{g.title ? `: ${g.title}` : ''}</caption>
         <thead>
           <tr>
-            <th scope="col">Year</th>
             <th scope="col">Project</th>
             {showCountry && <th scope="col">Country</th>}
             <th scope="col">Client</th>
@@ -120,11 +107,9 @@ const norm = (s: string) => s.toLowerCase().replace(/[–—-]/g, ' ');
               data-sector={p.sector}
               data-band={voltageBand(p)}
               data-client={p.client.split(' / ').map(clientCanon).join('|')}
-              data-decade={decade(p)}
               data-country={p.country}
               data-text={norm(`${p.name} ${p.client} ${p.country} ${p.region ?? ''} ${p.scope} ${p.voltage_kv ?? ''} kv`)}
             >
-              <td class="yr fig" data-label="Year">{yearText(p)}</td>
               <th scope="row" class="nm" data-label="Project"><a href={projectUrl(p)}>{p.name}</a></th>
               {showCountry && <td data-label="Country">{p.country}</td>}
               <td data-label="Client">{p.client}</td>

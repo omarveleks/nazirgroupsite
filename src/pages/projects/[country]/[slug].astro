@@ -99,7 +99,7 @@ const desc = [p.name, p.client, c.name, p.year_end ? String(p.year_end) : '', kv
           </div>
           <ul class="cards">
             {others.map((o) => (
-              <li><ProjectCard item={{ tag: yearText(o) === 'Not stated' ? SECTOR_LABEL[o.sector] : `${yearText(o)} · ${SECTOR_LABEL[o.sector]}`, title: o.name, href: projectUrl(o), photo: projectPhoto(o) }} sizes="(min-width: 60em) 30vw, (min-width: 40em) 45vw, 100vw" /></li>
+              <li><ProjectCard item={{ tag: SECTOR_LABEL[o.sector], title: o.name, href: projectUrl(o), photo: projectPhoto(o) }} sizes="(min-width: 60em) 30vw, (min-width: 40em) 45vw, 100vw" /></li>
             ))}
           </ul>
         </div>

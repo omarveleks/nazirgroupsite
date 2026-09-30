@@ -31,7 +31,7 @@ const rows = services.map((s) => {
           {s.examples.length > 0 && (
             <ul class="ex">
               {s.examples.map((p) => (
-                <li><a href={projectUrl(p)}>{p.name}</a><span>{p.country}, {p.year_end}</span></li>
+                <li><a href={projectUrl(p)}>{p.name}</a><span>{p.country}</span></li>
               ))}
             </ul>
           )}
