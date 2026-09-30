@@ -6,17 +6,29 @@
   "accessibility": 100,
   "bestPractices": 100,
   "seo": 100,
-  "lcp": 1206,
+  "lcp": 1728,
   "cls": 0,
   "tbt": 0,
-  "kb": 70
+  "kb": 120
  },
  "failing": [
   {
    "k": "unused-css-rules",
    "title": "Reduce unused CSS",
    "score": 0,
-   "display": "Est savings of 43 KiB"
+   "display": "Est savings of 54 KiB"
+  },
+  {
+   "k": "cache-insight",
+   "title": "Use efficient cache lifetimes",
+   "score": 0,
+   "display": "Est savings of 48 KiB"
+  },
+  {
+   "k": "image-delivery-insight",
+   "title": "Improve image delivery",
+   "score": 0.5,
+   "display": "Est savings of 9 KiB"
   },
   {
    "k": "network-dependency-tree-insight",
@@ -27,7 +39,7 @@
    "k": "render-blocking-insight",
    "title": "Render-blocking requests",
    "score": 0,
-   "display": "Est savings of 260 ms"
+   "display": "Est savings of 390 ms"
   }
  ]
 }

@@ -6,17 +6,34 @@
   "accessibility": 100,
   "bestPractices": 100,
   "seo": 100,
-  "lcp": 1356,
+  "lcp": 1504,
   "cls": 0,
   "tbt": 0,
-  "kb": 74
+  "kb": 143
  },
  "failing": [
   {
    "k": "unused-css-rules",
    "title": "Reduce unused CSS",
    "score": 0,
-   "display": "Est savings of 44 KiB"
+   "display": "Est savings of 50 KiB"
+  },
+  {
+   "k": "cache-insight",
+   "title": "Use efficient cache lifetimes",
+   "score": 0.5,
+   "display": "Est savings of 67 KiB"
+  },
+  {
+   "k": "forced-reflow-insight",
+   "title": "Forced reflow",
+   "score": 0
+  },
+  {
+   "k": "image-delivery-insight",
+   "title": "Improve image delivery",
+   "score": 0.5,
+   "display": "Est savings of 17 KiB"
   },
   {
    "k": "network-dependency-tree-insight",
@@ -27,7 +44,7 @@
    "k": "render-blocking-insight",
    "title": "Render-blocking requests",
    "score": 0,
-   "display": "Est savings of 220 ms"
+   "display": "Est savings of 430 ms"
   }
  ]
 }

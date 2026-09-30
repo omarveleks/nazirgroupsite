@@ -1,0 +1,19 @@
+---
+// Stroke icons used by links and controls. Always decorative: the control carries the name.
+interface Props {
+  name: 'right' | 'up-right' | 'long' | 'left' | 'chevron-left' | 'chevron-right' | 'download';
+}
+const { name } = Astro.props;
+const d: Record<Props['name'], string> = {
+  right: 'M5 12h14M13 6l6 6-6 6',
+  'up-right': 'M7 17L17 7M9 7h8v8',
+  long: 'M0 6h44M38 1l6 5-6 5',
+  left: 'M19 12H5M11 6l-6 6 6 6',
+  'chevron-left': 'M15 5l-7 7 7 7',
+  'chevron-right': 'M9 5l7 7-7 7',
+  download: 'M12 4v11M7 10l5 5 5-5M5 20h14',
+};
+const box = name === 'long' ? '0 0 46 12' : '0 0 24 24';
+const [w, h] = name === 'long' ? [46, 12] : [24, 24];
+---
+<svg viewBox={box} width={w} height={h} aria-hidden="true" focusable="false"><path d={d[name]} /></svg>

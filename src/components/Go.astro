@@ -1,0 +1,15 @@
+---
+// Round blue arrow link ("Explore the Projects"). `up` uses the diagonal arrow.
+import Icon from './Icon.astro';
+interface Props {
+  href: string;
+  label?: string;
+  up?: boolean;
+  ariaLabel?: string;
+  class?: string;
+}
+const { href, label, up = false, ariaLabel, class: cls = '' } = Astro.props;
+---
+<a class={`go${up ? ' go--up' : ''} ${cls}`.trim()} href={href} aria-label={ariaLabel}>
+  <span class="go-i"><Icon name={up ? 'up-right' : 'right'} /></span>{label}
+</a>

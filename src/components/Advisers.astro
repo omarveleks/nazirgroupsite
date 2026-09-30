@@ -1,0 +1,15 @@
+---
+// Key advisers with rounded portraits.
+import Portrait from './Portrait.astro';
+import { company } from '../lib/data';
+---
+<ul class="people">
+  {company.advisors.map((a) => (
+    <li class="person">
+      <Portrait name={a.photo} alt={`Portrait of ${a.name}`} width={136} />
+      <h3>{a.name}</h3>
+      <span class="role">{a.discipline}</span>
+      <p>{a.line}</p>
+    </li>
+  ))}
+</ul>

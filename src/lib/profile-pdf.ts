@@ -5,14 +5,14 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { StandardFonts, rgb, type PDFDocument, type PDFFont, type PDFImage, type PDFPage } from 'pdf-lib';
-import { A4, AMBER, M, MUTED, NAVY, RULE, logo, safe, setup, wrap, type Fonts } from './pdf';
-import { services, serviceProjects } from './services';
+import { rgb, type PDFDocument, type PDFFont, type PDFImage, type PDFPage } from 'pdf-lib';
+import { A4, BLUE, M, MUTED, NAVY, RULE, logo, safe, setup, wrap, type Fonts } from './pdf';
+import { services } from './services';
 import { milestones } from './milestones';
+import { CAPABILITIES, MAX_AC_KV, PRESENCE_ORDER, countryMeta, numberWord } from './site';
 import {
   company,
   contact,
-  countries,
   engineers,
   projects,
   stats,
@@ -23,7 +23,6 @@ import {
   fmtKv,
   fmtValue,
   projectBySlug,
-  range,
   yearText,
   ROLE_LABEL,
   type Project,
@@ -31,7 +30,7 @@ import {
 
 const PAPER = rgb(246 / 255, 243 / 255, 236 / 255);
 const PANEL = rgb(251 / 255, 249 / 255, 244 / 255);
-const AMBER_INK = rgb(138 / 255, 99 / 255, 0);
+const SKY = rgb(157 / 255, 187 / 255, 1); // light blue on ink
 const W = A4[0] - 2 * M;
 const TOP = A4[1] - M - 30; // below the running header
 const BOTTOM = M + 16; // above the footer
@@ -58,7 +57,7 @@ class Writer {
     this.pages.push(this.page);
     const top = A4[1] - M;
     logo(this.page, M, top + 6, 18);
-    this.t(section.toUpperCase(), A4[0] - M - this.f.mono.widthOfTextAtSize(section.toUpperCase(), 7.5), top - 6, 7.5, this.f.mono, MUTED);
+    this.t(section.toUpperCase(), A4[0] - M - this.f.light.widthOfTextAtSize(section.toUpperCase(), 7.5), top - 6, 7.5, this.f.light, MUTED);
     this.page.drawLine({ start: { x: M, y: top - 12 }, end: { x: A4[0] - M, y: top - 12 }, thickness: 0.6, color: NAVY });
     this.y = TOP;
   }
@@ -74,12 +73,12 @@ class Writer {
 
   h1(s: string, kicker?: string) {
     if (kicker) {
-      this.t(kicker.toUpperCase(), M, this.y, 8, this.f.mono, AMBER_INK);
+      this.t(kicker.toUpperCase(), M, this.y, 8, this.f.light, BLUE);
       this.y -= 22;
     }
     this.t(s, M, this.y, 24, this.f.serif);
     this.y -= 12;
-    this.page.drawRectangle({ x: M, y: this.y, width: 36, height: 2.5, color: AMBER });
+    this.page.drawRectangle({ x: M, y: this.y, width: 36, height: 2.5, color: BLUE });
     this.y -= 22;
   }
 
@@ -108,7 +107,7 @@ class Writer {
     for (const it of items) {
       const lines = wrap(this.f.reg, size, it, width - 12);
       this.need(lines.length * size * 1.4, section);
-      this.page.drawRectangle({ x, y: this.y + 2, width: 4, height: 4, color: AMBER });
+      this.page.drawRectangle({ x, y: this.y + 2, width: 4, height: 4, color: BLUE });
       for (const l of lines) {
         this.t(l, x + 12, this.y, size, this.f.reg);
         this.y -= size * 1.42;
@@ -124,8 +123,8 @@ class Writer {
     figs.forEach(([n, l], i) => {
       const x = M + i * fw;
       this.page.drawRectangle({ x, y: this.y - 40, width: fw - 8, height: 52, borderColor: color, borderWidth: 0.8 });
-      this.page.drawLine({ start: { x: x + 8, y: this.y + 12 }, end: { x: x + 8, y: this.y + 6 }, thickness: 0.8, color: AMBER });
-      this.t(n, x + 8, this.y - 12, 18, this.f.mono, color);
+      this.page.drawLine({ start: { x: x + 8, y: this.y + 12 }, end: { x: x + 8, y: this.y + 6 }, thickness: 0.8, color: BLUE });
+      this.t(n, x + 8, this.y - 12, 18, this.f.light, color);
       wrap(this.f.reg, 7.5, l, fw - 24).forEach((line, j) => this.t(line, x + 8, this.y - 26 - j * 9, 7.5, this.f.reg, dark ? PAPER : MUTED));
     });
     this.y -= 60;
@@ -137,11 +136,18 @@ class Writer {
     this.page.drawImage(image, { x, y: yTop - h, width: w, height: h });
     if (caption) {
       this.page.drawLine({ start: { x: x - 3, y: yTop - h - 3 }, end: { x: x + w + 3, y: yTop - h - 3 }, thickness: 0.6, color: NAVY });
-      this.t(caption.toUpperCase(), x, yTop - h - 14, 6.5, this.f.mono, MUTED);
+      this.t(caption.toUpperCase(), x, yTop - h - 14, 6.5, this.f.light, MUTED);
     }
     return h + (caption ? 18 : 6);
   }
 }
+
+const FIGURES: [string, string][] = [
+  [String(stats.founded), 'Founded in Lahore'],
+  [String(stats.countries), 'Countries across Asia, the Middle East and Africa'],
+  [`${MAX_AC_KV} kV`, 'Transmission capability, up to HVDC'],
+  ['No. 1', 'Licence of the Pakistan Engineering Council'],
+];
 
 function meta(p: Project, withCountry = true): string {
   return [p.client, withCountry ? p.country : '', yearText(p) === 'Not stated' ? '' : yearText(p), fmtKv(p.voltage_kv, p), fmtKm(p.length_km), p.role !== 'unknown' ? ROLE_LABEL[p.role] : '']
@@ -155,7 +161,8 @@ function list(items: string[]): string {
 
 export async function companyProfilePdf(): Promise<Uint8Array> {
   const { doc, fonts } = await setup('Nazir and Company: company profile');
-  const f: ProfileFonts = { ...fonts, serif: await doc.embedFont(StandardFonts.TimesRomanBold) };
+  // headlines are set light (never bold): Helvetica regular at display sizes
+  const f: ProfileFonts = { ...fonts, serif: fonts.reg };
   const w = new Writer(doc, f);
   const libya = country('libya');
 
@@ -164,32 +171,23 @@ export async function companyProfilePdf(): Promise<Uint8Array> {
     const page = doc.addPage(A4);
     w.page = page;
     page.drawRectangle({ x: 0, y: 0, width: A4[0], height: A4[1], color: NAVY });
-    // grid ticks along the left edge (drawing-sheet border)
-    for (let y = 60; y < A4[1] - 40; y += 24) page.drawLine({ start: { x: 18, y }, end: { x: y % 120 === 60 ? 28 : 24, y }, thickness: 0.5, color: PAPER, opacity: 0.5 });
-    page.drawRectangle({ x: 14, y: 14, width: A4[0] - 28, height: A4[1] - 28, borderColor: PAPER, borderWidth: 0.6, borderOpacity: 0.5 });
+    page.drawRectangle({ x: 0, y: 0, width: A4[0], height: 8, color: BLUE });
     let y = A4[1] - 70;
     logo(page, M, y, 64, PAPER);
     y -= 120;
-    w.t('COMPANY PROFILE', M, y, 10, f.mono, AMBER);
+    w.t('COMPANY PROFILE', M, y, 10, f.bold, SKY);
     y -= 38;
-    w.t(company.name, M, y, 30, f.serif, PAPER);
+    w.t('Powering Nations Since ' + company.founded, M, y, 30, f.serif, PAPER);
     y -= 26;
-    w.t(`Electrical and civil engineering contractor  ·  Lahore  ·  Founded ${company.founded}`, M, y, 11, f.reg, PAPER);
+    w.t(company.name, M, y, 12, f.reg, PAPER);
     y -= 30;
-    const cover = await img(doc, 'images/photos/substation-960.jpg');
+    const cover = await img(doc, 'images/photos/tower-sky-960.jpg');
     const h = (W * cover.height) / cover.width;
-    page.drawRectangle({ x: M - 4, y: y - h - 4, width: W + 8, height: h + 8, borderColor: PAPER, borderWidth: 0.6 });
     page.drawImage(cover, { x: M, y: y - h, width: W, height: h });
-    w.t('HIGH-VOLTAGE SUBSTATION (ILLUSTRATION)', M, y - h - 16, 6.5, f.mono, PAPER);
     y -= h + 44;
     w.y = y;
     w.figures(
-      [
-        [String(stats.founded), 'Year founded'],
-        [String(stats.projects), 'Projects documented'],
-        [String(stats.countries), 'Countries'],
-        [String(stats.recordYears), `Years of record, ${stats.firstYear}–${stats.lastYear}`],
-      ],
+      FIGURES,
       true,
     );
     w.t(company.pec.statement, M, M + 14, 8.5, f.reg, PAPER);
@@ -199,29 +197,23 @@ export async function companyProfilePdf(): Promise<Uint8Array> {
   // ---------- the company ----------
   let S = 'The company';
   w.newPage(S);
-  w.h1('The company', 'About');
+  w.h1('Delivering the Infrastructure Nations Run On', 'About');
   w.para(
-    `${company.name} is an electrical and civil engineering contractor based in Lahore, Pakistan. It was founded in ${company.founded} by ${company.founder.name} and incorporated as a private limited company on ${company.incorporated_text}.`,
+    `For more than six decades, ${company.name} has built the high-voltage networks, substations and civil infrastructure that power economies. From its headquarters in Lahore, the company delivers landmark projects for national utilities and energy leaders across Asia, the Middle East and Africa.`,
     S,
     { size: 11 },
   );
   w.para(
-    `The company builds overhead transmission lines, substations, distribution networks and civil works. Its records document ${stats.projects} projects in ${list(countries.map((c) => c.name))}, completed between ${stats.firstYear} and ${stats.lastYear}.`,
+    `${company.founder.name} founded the company in ${company.founded}. It was incorporated as a private limited company on ${company.incorporated_text}, and holds Licence No. 1 of the Pakistan Engineering Council, the first the Council ever issued.`,
     S,
-    { size: 11 },
+    { size: 11, gap: 14 },
   );
-  w.para(`${company.pec.statement}. The company was the first licence holder of the Pakistan Engineering Council.`, S, { size: 11, gap: 14 });
-  w.figures([
-    [String(stats.founded), 'Year founded'],
-    [String(stats.projects), 'Projects documented'],
-    [String(stats.countries), 'Countries with documented projects'],
-    [String(stats.recordYears), `Years of documented projects, ${stats.firstYear}–${stats.lastYear}`],
-  ]);
-  w.h2('Milestones', S);
+  w.figures(FIGURES);
+  w.h2('Six Decades of Delivery', S);
   for (const m of milestones) {
     const lines = wrap(f.reg, 8.8, m.text, W - 70);
     w.need(11.5 + lines.length * 11, S);
-    w.t(m.year, M, w.y, 9, f.mono, AMBER_INK);
+    w.t(m.year, M, w.y, 9, f.light, BLUE);
     w.t(m.title, M + 70, w.y, 9.2, f.bold);
     w.y -= 11.5;
     for (const l of lines) {
@@ -241,7 +233,7 @@ export async function companyProfilePdf(): Promise<Uint8Array> {
     const ph = w.photo(await img(doc, 'images/people/director-480.jpg'), M + 3, w.y, pw);
     const x = M + pw + 24;
     const top = w.y;
-    w.t('DIRECTOR', x, w.y, 8, f.mono, AMBER_INK);
+    w.t('DIRECTOR', x, w.y, 8, f.light, BLUE);
     w.y -= 20;
     w.t(d.name, x, w.y, 17, f.serif);
     w.y -= 18;
@@ -251,7 +243,7 @@ export async function companyProfilePdf(): Promise<Uint8Array> {
     for (const [k, v] of rows) {
       w.page.drawLine({ start: { x, y: w.y + 10 }, end: { x: A4[0] - M, y: w.y + 10 }, thickness: 0.4, color: RULE });
       w.t(k, x, w.y, 8.5, f.reg, MUTED);
-      w.t(v, A4[0] - M - f.mono.widthOfTextAtSize(v, 9), w.y, 9, f.mono);
+      w.t(v, A4[0] - M - f.light.widthOfTextAtSize(v, 9), w.y, 9, f.light);
       w.y -= 14;
     }
     w.y = Math.min(w.y, top - ph) - 14;
@@ -270,12 +262,12 @@ export async function companyProfilePdf(): Promise<Uint8Array> {
     w.page.drawRectangle({ x: M, y: w.y - 3, width: W, height: 3, color: NAVY });
     w.photo(image, M + 12, w.y - 12, pw);
     let y = w.y - 26;
-    w.t('FOUNDER', x, y, 8, f.mono, AMBER_INK);
+    w.t('FOUNDER', x, y, 8, f.light, BLUE);
     y -= 17;
     w.t(`${fd.name}, ${fd.born}–${fd.died}`, x, y, 13, f.serif);
     y -= 16;
     for (const lines of factLines) {
-      w.page.drawRectangle({ x, y: y + 2, width: 3.5, height: 3.5, color: AMBER });
+      w.page.drawRectangle({ x, y: y + 2, width: 3.5, height: 3.5, color: BLUE });
       for (const l of lines) {
         w.t(l, x + 10, y, 8.8, f.reg);
         y -= 12.5;
@@ -300,7 +292,7 @@ export async function companyProfilePdf(): Promise<Uint8Array> {
         let y = rowTop - 8;
         w.t(a.name, tx, y, 10, f.bold);
         y -= 13;
-        w.t(a.discipline.toUpperCase(), tx, y, 7.5, f.mono, AMBER_INK);
+        w.t(a.discipline.toUpperCase(), tx, y, 7.5, f.light, BLUE);
         y -= 13;
         for (const l of wrap(f.reg, 8.5, a.line, colW - pw - 20)) {
           w.t(l, tx, y, 8.5, f.reg, MUTED);
@@ -326,7 +318,7 @@ export async function companyProfilePdf(): Promise<Uint8Array> {
         w.page.drawLine({ start: { x, y: y + 11 }, end: { x: x + colW, y: y + 11 }, thickness: 0.4, color: RULE });
         w.t(e.name, x, y, 9.5, f.bold);
         y -= 12;
-        w.t(e.discipline.toUpperCase(), x, y, 7.5, f.mono, AMBER_INK);
+        w.t(e.discipline.toUpperCase(), x, y, 7.5, f.light, BLUE);
         y -= 11;
         for (const l of wrap(f.reg, 8.5, e.role, colW)) {
           w.t(l, x, y, 8.5, f.reg, MUTED);
@@ -342,14 +334,11 @@ export async function companyProfilePdf(): Promise<Uint8Array> {
   // ---------- services ----------
   S = 'Services';
   w.newPage(S);
-  w.h1('Services', 'What the company builds');
-  w.para('Each service is backed by projects in the company register. Counts are computed from the same records as the project list.', S, { color: MUTED });
+  w.h1('End-to-End Delivery Across the Power Value Chain', 'Services');
+  w.para('Transmission, substations, distribution, oil-field power, civil infrastructure and telecommunications, each backed by projects in the company record.', S, { color: MUTED });
   for (const s of services) {
-    const n = serviceProjects(s).length;
     w.need(52, S);
-    const label = `${n} ${n === 1 ? 'PROJECT' : 'PROJECTS'}`;
     w.t(s.title, M, w.y, 10.5, f.bold);
-    w.t(label, A4[0] - M - f.mono.widthOfTextAtSize(label, 8), w.y, 8, f.mono, AMBER_INK);
     w.y -= 14;
     w.para(s.intro, S, { size: 9, color: MUTED, gap: 8 });
   }
@@ -390,15 +379,15 @@ export async function companyProfilePdf(): Promise<Uint8Array> {
     const value = fmtValue(p);
     if (value) {
       const label = p.role === 'jv' ? 'JV CONTRACT VALUE' : 'CONTRACT VALUE';
-      w.t(label, A4[0] - M - f.mono.widthOfTextAtSize(label, 6.5), w.y + 1, 6.5, f.mono, MUTED);
-      w.t(safe(f.mono, value), A4[0] - M - f.mono.widthOfTextAtSize(safe(f.mono, value), 9), w.y - 10, 9, f.mono);
+      w.t(label, A4[0] - M - f.light.widthOfTextAtSize(label, 6.5), w.y + 1, 6.5, f.light, MUTED);
+      w.t(safe(f.light, value), A4[0] - M - f.light.widthOfTextAtSize(safe(f.light, value), 9), w.y - 10, 9, f.light);
     }
     for (const l of nameLines) {
       w.t(l, M, w.y, 10.5, f.bold);
       w.y -= 13;
     }
-    for (const l of wrap(f.mono, 7.8, meta(p), W - 150)) {
-      w.t(l, M, w.y, 7.8, f.mono, AMBER_INK);
+    for (const l of wrap(f.light, 7.8, meta(p), W - 150)) {
+      w.t(l, M, w.y, 7.8, f.light, BLUE);
       w.y -= 11;
     }
     w.y -= 3;
@@ -412,14 +401,17 @@ export async function companyProfilePdf(): Promise<Uint8Array> {
   // ---------- Libya ----------
   S = 'Libya';
   w.newPage(S);
-  w.h1(`Libya: ${libya.count} projects, ${libya.first}–${libya.last}`, 'Libya');
-  w.para(company.libya_status, S, { size: 11.5, font: f.bold, gap: 10 });
-  const oil = libya.projects.filter((p) => /^(Arabian Gulf Oil Company|Sirte Oil Company|Waha Oil Company)$/.test(p.client)).length;
+  w.h1('A Legacy of Delivery in Libya', 'Libya');
   w.para(
-    `From ${libya.first} to ${libya.last} the company completed ${libya.count} contracts in Libya for the national electricity utility, for oil companies (${oil} contracts for Arabian Gulf Oil Company, Sirte Oil Company and Waha Oil Company) and for international contractors. The work ranges from 220 kV transmission lines to 11 and 33 kV networks, underground cables, oil-field electrification in hazardous areas, and hot-line maintenance of a 138 kV line.`,
+    `For over three decades, ${company.name} built the backbone of Libya's power network: high-voltage lines from Tripoli to Benghazi and deep into the Fezzan, and critical electrical systems for the country's leading oil producers. ${company.libya_status}`,
+    S,
+    { size: 11, gap: 10 },
+  );
+  w.para(
+    'The work ranges from 220 kV transmission lines to 11 and 33 kV networks, underground cables, oil-field electrification in hazardous areas, and live-line maintenance, for the national utility, the Arabian Gulf Oil, Sirte Oil and Waha Oil companies, and international contractors.',
     S,
   );
-  w.h2('220 kV lines in Libya', S);
+  w.h2('Landmark Lines in Libya', S);
   for (const slug of [
     'samnu-sebha-220-kv-double-circuit-twin-bundle-line',
     'benghazi-eastern-border-220-kv-double-circuit-lines-750-km',
@@ -430,10 +422,10 @@ export async function companyProfilePdf(): Promise<Uint8Array> {
     w.need(30, S);
     w.t(p.name, M, w.y, 10, f.bold);
     w.y -= 12;
-    w.para(meta(p, false), S, { size: 8, font: f.mono, color: AMBER_INK, gap: 7 });
+    w.para(meta(p, false), S, { size: 8, font: f.light, color: BLUE, gap: 7 });
   }
-  w.h2('Working with main contractors', S);
-  w.para('What the company offers as an electrical subcontractor:', S, { size: 9.5, font: f.bold });
+  w.h2('Working With Main Contractors', S);
+  w.para('The company takes on the electrical scope of transmission, distribution and oil-sector programmes for main contractors:', S, { size: 9.5, font: f.bold });
   w.bullets(
     [
       'Overhead line foundations, tower erection and conductor stringing, 66 to 220 kV in Libya and up to 500 kV elsewhere',
@@ -445,95 +437,80 @@ export async function companyProfilePdf(): Promise<Uint8Array> {
     S,
   );
   w.para(
-    'Electrical, telecommunication, civil and mechanical engineers registered with the Pakistan Engineering Council are listed on the company licence. The company has access to a large fleet of construction and stringing equipment, and can mobilise it per project.',
+    'The work is delivered by the company\'s own teams. The company has access to a large fleet of construction and stringing equipment, and can mobilise it per project.',
     S,
     { size: 9 },
   );
   w.para(
-    'Documents available on request: Pakistan Engineering Council licence (Licence No. 1, category C-A), certificate of incorporation, enlistment letters and the full project list.',
+    'Documents available on request: the Pakistan Engineering Council licence (Licence No. 1), the certificate of incorporation and the full project list.',
     S,
     { size: 9 },
   );
-  w.h2('Clients served in Libya', S);
+  w.h2('Clients in Libya', S);
   w.para(clientsFor(libya.projects).join('   ·   '), S, { size: 9 });
 
   // ---------- global presence ----------
   S = 'Global presence';
   w.newPage(S);
-  w.h1(`${stats.projects} projects in ${stats.countries} countries`, 'Global presence');
+  w.h1(`${numberWord(stats.countries)} Countries, Three Regions`, 'Global presence');
   {
     const cols = [
       { k: 'Country', x: M, w: 110 },
-      { k: 'Projects', x: M + 110, w: 50, right: true },
-      { k: 'Years', x: M + 176, w: 70 },
-      { k: 'Clients served (selection)', x: M + 250, w: W - 250 },
+      { k: 'Capability', x: M + 110, w: 150 },
+      { k: 'Selected clients', x: M + 270, w: W - 270 },
     ];
-    for (const c of cols) w.t(c.k.toUpperCase(), c.right ? c.x + c.w - f.mono.widthOfTextAtSize(c.k.toUpperCase(), 7) : c.x, w.y, 7, f.mono, MUTED);
+    for (const c of cols) w.t(c.k.toUpperCase(), c.x, w.y, 7, f.light, MUTED);
     w.y -= 5;
     w.page.drawLine({ start: { x: M, y: w.y }, end: { x: A4[0] - M, y: w.y }, thickness: 0.8, color: NAVY });
     w.y -= 13;
-    for (const c of countries) {
+    for (const slug of PRESENCE_ORDER) {
+      const c = country(slug);
       // most frequent clients first
       const freq = (n: string) => c.projects.filter((p) => clientsFor([p]).includes(n)).length;
       const cl = clientsFor(c.projects).sort((x, y) => freq(y) - freq(x));
-      const names = wrap(f.reg, 8.2, cl.slice(0, 4).join('; ') + (cl.length > 4 ? `; and ${cl.length - 4} more` : ''), cols[3]!.w);
+      const names = wrap(f.reg, 8.2, cl.slice(0, 4).join('; '), cols[2]!.w);
+      const cap = wrap(f.reg, 8.6, countryMeta(slug).descriptor, cols[1]!.w - 10);
       w.t(c.name, M, w.y, 9.5, f.bold);
-      const n = String(c.count);
-      w.t(n, cols[1]!.x + cols[1]!.w - f.mono.widthOfTextAtSize(n, 9.5), w.y, 9.5, f.mono);
-      w.t(range(c), cols[2]!.x, w.y, 9, f.mono);
-      names.forEach((l, j) => w.t(l, cols[3]!.x, w.y - j * 10.5, 8.2, f.reg, MUTED));
-      w.y -= Math.max(1, names.length) * 10.5 + 4;
+      cap.forEach((l, j) => w.t(l, cols[1]!.x, w.y - j * 10.5, 8.6, f.reg));
+      names.forEach((l, j) => w.t(l, cols[2]!.x, w.y - j * 10.5, 8.2, f.reg, MUTED));
+      w.y -= Math.max(1, names.length, cap.length) * 10.5 + 4;
       w.page.drawLine({ start: { x: M, y: w.y + 6 }, end: { x: A4[0] - M, y: w.y + 6 }, thickness: 0.4, color: RULE });
       w.y -= 6;
     }
-    const total = String(stats.projects);
-    w.t('Total', M, w.y, 9.5, f.bold);
-    w.t(total, cols[1]!.x + cols[1]!.w - f.mono.widthOfTextAtSize(total, 9.5), w.y, 9.5, f.mono);
-    w.t(`${stats.firstYear}–${stats.lastYear}`, cols[2]!.x, w.y, 9, f.mono);
-    w.y -= 22;
+    w.y -= 16;
   }
   w.para(
-    `The company profile also lists historic branch offices in ${list(company.historic_branches)}. No projects in the United Kingdom are documented.`,
+    `The company has also held branch offices in ${list(company.historic_branches.map((b) => (b === 'United Kingdom' ? 'the United Kingdom' : b)))}.`,
     S,
     { size: 9, color: MUTED, gap: 10 },
   );
-  w.h2('Clients served', S);
+  w.h2('Selected Clients', S);
   w.para(clientsFor(projects).join('   ·   '), S, { size: 8.6 });
 
   // ---------- capabilities ----------
-  S = 'Capabilities and compliance';
+  S = 'Capabilities and registration';
   w.newPage(S);
-  w.h1('Capabilities and compliance', 'Compliance');
-  w.h2('Registration', S);
-  w.para(`${company.pec.statement}. The company was the first licence holder of the Pakistan Engineering Council. Incorporated on ${company.incorporated_text}.`, S);
-  w.h2('Enlistments', S);
-  for (const e of company.enlistments) {
-    const body = wrap(f.bold, 9.2, e.body, W - 90);
-    const lines = wrap(f.reg, 8.8, e.detail, W - 90);
-    const years = wrap(f.mono, 8.8, e.year, 80);
-    w.need(Math.max(years.length, body.length + lines.length) * 12 + 4, S);
-    const top = w.y;
-    years.forEach((l, i) => w.t(l, M, top - i * 12, 8.8, f.mono, AMBER_INK));
-    for (const l of body) {
-      w.t(l, M + 90, w.y, 9.2, f.bold);
-      w.y -= 12;
-    }
+  w.h1('Built to Deliver at National Scale', 'Capabilities');
+  for (const [i, c] of CAPABILITIES.entries()) {
+    const lines = wrap(f.reg, 9, c.text, W - 40);
+    w.need(18 + lines.length * 12, S);
+    w.t(String(i + 1).padStart(2, '0'), M, w.y, 9, f.light, BLUE);
+    w.t(c.title, M + 40, w.y, 11, f.reg);
+    w.y -= 14;
     for (const l of lines) {
-      w.t(l, M + 90, w.y, 8.8, f.reg, MUTED);
+      w.t(l, M + 40, w.y, 9, f.reg, MUTED);
       w.y -= 12;
     }
-    w.y = Math.min(w.y, top - years.length * 12) - 4;
+    w.y -= 8;
   }
-  w.h2('Pre-qualification and financing', S);
-  w.para(
-    `The company is recorded as pre-qualified by the ${list(company.prequalified_with)}, and has executed projects financed by the ${list(company.financiers)}.`,
-    S,
-  );
-  w.h2('Fields of specialisation', S);
+  w.h2('Registration', S);
+  w.para(`Pakistan Engineering Council, Licence No. 1: the first licence the Council issued. Incorporated on ${company.incorporated_text}.`, S);
+  w.para(`Pre-qualified: ${company.prequalified_short.join(', ')}. Projects financed by the ${list(company.financiers)}.`, S);
+  w.h2('Fields of Work', S);
   w.para(company.fields_of_specialisation.join('   ·   '), S, { size: 9 });
-  w.h2('Engineers and equipment', S);
+  w.h2('Mobilisation', S);
   w.para(
-    'Engineers registered with the Pakistan Engineering Council are listed on the company licence. The company has access to a large fleet of construction and stringing equipment, and can mobilise it per project. Registration and enlistment documents are available on request.',
+    'The company has access to a large fleet of construction and stringing equipment, and can mobilise it per project. The Pakistan Engineering Council licence, the certificate of incorporation and the full project list are available on request.',
     S,
   );
   // office block
@@ -544,7 +521,7 @@ export async function companyProfilePdf(): Promise<Uint8Array> {
     w.need(h + 10, S);
     w.y -= 6;
     w.page.drawRectangle({ x: M, y: w.y - h, width: W, height: h, color: NAVY });
-    w.t('HEAD OFFICE', M + 16, w.y - 20, 8, f.mono, AMBER);
+    w.t('HEAD OFFICE', M + 16, w.y - 20, 8, f.bold, SKY);
     lines.forEach((l, i) => w.t(l, M + 16, w.y - 38 - i * 13, 10.5, i === 0 ? f.bold : f.reg, PAPER));
     logo(w.page, A4[0] - M - 90, w.y - 16, 30, PAPER);
     w.y -= h + 10;
@@ -556,7 +533,7 @@ export async function companyProfilePdf(): Promise<Uint8Array> {
   w.pages.forEach((pg, i) => {
     const n = `${i + 2}`;
     pg.drawText(safe(f.reg, `${company.name}  ·  Company profile  ·  ${edition}`), { x: M, y: M - 18, size: 7.5, font: f.reg, color: MUTED });
-    pg.drawText(n, { x: A4[0] - M - f.mono.widthOfTextAtSize(n, 8), y: M - 18, size: 8, font: f.mono, color: MUTED });
+    pg.drawText(n, { x: A4[0] - M - f.light.widthOfTextAtSize(n, 8), y: M - 18, size: 8, font: f.light, color: MUTED });
   });
   return doc.save({ useObjectStreams: true });
 }

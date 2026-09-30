@@ -1,0 +1,38 @@
+---
+// Bechtel-style capability list: large light titles on the left, a photo panel on the
+// right that follows the active item (click, keyboard or hover; see src/scripts/ui.ts).
+import Img from './Img.astro';
+import More from './More.astro';
+import { CAPABILITIES } from '../lib/site';
+---
+<div class="cx" data-tabs>
+  <div class="ctabs" role="tablist" aria-label="Capabilities" aria-orientation="vertical">
+    {CAPABILITIES.map((c, i) => (
+      <button
+        class="ctab"
+        type="button"
+        role="tab"
+        id={`cap-tab-${c.id}`}
+        aria-selected={i === 0 ? 'true' : 'false'}
+        aria-controls={`cap-panel-${c.id}`}
+        tabindex={i === 0 ? 0 : -1}
+      >
+        {c.title}
+      </button>
+    ))}
+  </div>
+  <div class="cpanel on-dark">
+    {CAPABILITIES.map((c, i) => (
+      <div class={`cpanel-img${i === 0 ? ' is-on' : ''}`} data-img>
+        <Img name={c.photo} sizes="(min-width: 60em) 50vw, 100vw" />
+      </div>
+    ))}
+    {CAPABILITIES.map((c, i) => (
+      <div class="cpanel-t" role="tabpanel" id={`cap-panel-${c.id}`} aria-labelledby={`cap-tab-${c.id}`} hidden={i > 0}>
+        <h3>{c.title}</h3>
+        <p>{c.text}</p>
+        <More href={c.href} label="Learn More" context={` about ${c.title}`} />
+      </div>
+    ))}
+  </div>
+</div>

@@ -1,9 +1,11 @@
 ---
 import Base from '../../../layouts/Base.astro';
+import PageHero from '../../../components/PageHero.astro';
 import Register from '../../../components/Register.astro';
-import ClientsStrip from '../../../components/ClientsStrip.astro';
-import { countries, range, SECTOR_LABEL, type CountryInfo } from '../../../lib/data';
-import { outline } from '../../../lib/geo';
+import Go from '../../../components/Go.astro';
+import More from '../../../components/More.astro';
+import { countries, clientsFor, type CountryInfo } from '../../../lib/data';
+import { countryMeta } from '../../../lib/site';
 
 export function getStaticPaths() {
   return countries.map((c) => ({ params: { country: c.slug }, props: { c } }));
@@ -13,6 +15,7 @@ interface Props {
   c: CountryInfo;
 }
 const { c } = Astro.props;
+const m = countryMeta(c.slug);
 const groups =
   c.slug === 'pakistan'
     ? [
@@ -20,13 +23,7 @@ const groups =
         { id: 'regional', title: 'Regional and provincial works', projects: c.projects.filter((p) => p.group !== 'national-grid') },
       ]
     : [{ id: 'all', projects: c.projects }];
-const sectorCounts = Object.entries(
-  c.projects.reduce<Record<string, number>>((acc, p) => {
-    acc[p.sector] = (acc[p.sector] ?? 0) + 1;
-    return acc;
-  }, {}),
-).sort((a, b) => b[1] - a[1]);
-const d = outline(c.slug, 160, 120, 6);
+const clients = clientsFor(c.projects);
 const crumbs = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -35,80 +32,68 @@ const crumbs = {
     { '@type': 'ListItem', position: 2, name: c.name, item: new URL(`/projects/${c.slug}/`, Astro.site).href },
   ],
 };
+const others = countries.filter((x) => x.slug !== c.slug);
 ---
 <Base
   title={`Projects in ${c.name}`}
-  description={`${c.count} documented ${c.count === 1 ? 'project' : 'projects'} by Nazir and Company in ${c.name}${range(c) ? `, ${range(c)}` : ''}: register with client, year, voltage and length.`}
+  description={`Nazir and Company in ${c.name}. ${m.descriptor.replace(' · ', '. ').replace('&', 'and')}. Project list with client, year, voltage and length for each project.`}
   jsonLd={[crumbs]}
   current="/projects/"
+  heroPhoto={m.photo}
 >
-  <header class="page-head">
-    <div class="container head">
-      <div>
-        <nav class="breadcrumb" aria-label="Breadcrumb">
-          <ol>
-            <li><a href="/projects/">Projects</a></li>
-            <li aria-current="page">{c.name}</li>
-          </ol>
-        </nav>
-        <h1>{c.name}</h1>
-        <p class="lede">
-          <span class="fig">{c.count}</span> {c.count === 1 ? 'project' : 'projects'} documented{range(c) && <>, completed <span class="fig">{range(c)}</span></>}. Newest first.
-        </p>
-        {c.slug === 'libya' && (
-          <p><a href="/libya/">Libya record, flagship lines and the subcontract offer</a></p>
-        )}
-        <ul class="chips" aria-label="Projects by sector">
-          {sectorCounts.map(([s, n]) => <li>{SECTOR_LABEL[s as keyof typeof SECTOR_LABEL]}: <span class="fig">{n}</span></li>)}
+  <PageHero
+    photo={m.photo}
+    eyebrow={m.region}
+    lede={m.descriptor}
+    crumbs={[{ href: '/projects/', label: 'Projects' }, { label: c.name }]}
+  >
+    <Fragment slot="title">{c.slug === 'libya' ? <>Projects in <span class="accent">Libya</span></> : c.name}</Fragment>
+    {c.slug === 'libya' && (
+      <div class="row-links"><Go href="/libya/" label="Nazir in Libya" /></div>
+    )}
+  </PageHero>
+
+  {clients.length > 0 && (
+    <section class="sec--tight" aria-labelledby="clients-h">
+      <div class="w">
+        <span class="eb">Clients</span>
+        <h2 class="h" id="clients-h">Clients in {c.name}</h2>
+        <ul class="names cl-names">
+          {clients.map((n) => <li>{n}</li>)}
         </ul>
       </div>
-      <svg class="big-marker" viewBox="0 0 160 120" width="160" height="120" aria-hidden="true" focusable="false">
-        <path d={d} fill="none" stroke="currentColor" stroke-width="1.2" vector-effect="non-scaling-stroke" />
-      </svg>
-    </div>
-  </header>
+    </section>
+  )}
 
-  <section class="section">
-    <div class="container">
-      <Register id={c.slug} groups={groups} caption={`Projects in ${c.name}, newest first`} />
+  <section class="sec sec--soft" id="register" aria-labelledby="reg-h">
+    <div class="w">
+      <span class="eb">Project List</span>
+      <h2 class="h" id="reg-h">Projects in {c.name}</h2>
+      <div class="reg-wrap">
+        <Register id={c.slug} groups={groups} caption={`Projects in ${c.name}, newest first`} />
+      </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <ClientsStrip list={c.projects} heading={`Clients served in ${c.name}`} id={`clients-${c.slug}`} />
-      <p class="back"><a href="/projects/">All countries</a></p>
+  <section class="sec--tight" aria-labelledby="other-h">
+    <div class="w">
+      <h2 class="eb" id="other-h">Other Countries</h2>
+      <ul class="row-links other">
+        {others.map((o) => <li><More href={`/projects/${o.slug}/`} label={o.name} /></li>)}
+      </ul>
     </div>
   </section>
 </Base>
 
 <style>
-  .head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 1.5rem;
+  .cl-names {
+    margin-top: 2.5rem;
   }
-  .big-marker {
-    flex: none;
-    width: 10rem;
-    height: auto;
-    color: var(--navy);
-    display: none;
+  .reg-wrap {
+    margin-top: 2.5rem;
   }
-  @media (min-width: 48rem) {
-    .big-marker {
-      display: block;
-    }
-  }
-  .chips {
-    margin-top: 0.75rem;
-  }
-  .back a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 2.75rem;
-    margin-top: 1rem;
-    font-weight: 600;
+  .other {
+    list-style: none;
+    padding: 0;
   }
 </style>

@@ -1,0 +1,31 @@
+---
+// Photo hero for inner pages: breadcrumb, eyebrow, large light title and lede.
+import Img from './Img.astro';
+interface Crumb {
+  href?: string;
+  label: string;
+}
+interface Props {
+  photo: string;
+  eyebrow?: string;
+  lede?: string;
+  crumbs?: Crumb[];
+}
+const { photo, eyebrow, lede, crumbs } = Astro.props;
+---
+<section class="phero on-dark">
+  <Img name={photo} class="phero-img" priority />
+  <div class="w phero-in">
+    {crumbs && (
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <ol>
+          {crumbs.map((c) => (c.href ? <li><a href={c.href}>{c.label}</a></li> : <li><span aria-current="page">{c.label}</span></li>))}
+        </ol>
+      </nav>
+    )}
+    {eyebrow && <span class="eb">{eyebrow}</span>}
+    <h1 class="h h--xl"><slot name="title" /></h1>
+    {lede && <p class="phero-lede">{lede}</p>}
+    <slot />
+  </div>
+</section>

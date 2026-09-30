@@ -1,36 +1,27 @@
 ---
-import type { Project } from '../lib/data';
-import { fmtKm, fmtKv, projectUrl, yearText } from '../lib/data';
+// Tall rounded photo card: light-blue tag, title and a round arrow. The photo is a
+// general illustration of the type of work, never presented as the project itself.
+import Img from './Img.astro';
+import Icon from './Icon.astro';
+import type { Slide } from '../lib/site';
 
 interface Props {
-  p: Project;
-  headingLevel?: 'h2' | 'h3';
-  showCountry?: boolean;
+  item: Slide & { sub?: string };
+  sizes?: string;
+  level?: 'h2' | 'h3';
 }
-const { p, headingLevel = 'h3', showCountry = true } = Astro.props;
-const H = headingLevel;
-const kv = fmtKv(p.voltage_kv, p);
-const km = fmtKm(p.length_km);
+// the card is min(80vw, 30rem) wide in rows, so 30rem from 600 px up
+const { item, sizes = '(min-width: 37.5em) 30rem, 80vw', level = 'h3' } = Astro.props;
+const H = level;
 ---
-<article class="card">
-  <p class="meta">{showCountry ? `${p.country} · ` : ''}{yearText(p)}</p>
-  <H><a href={projectUrl(p)}>{p.name}</a></H>
-  <p class="client">{p.client}</p>
-  {(kv || km) && (
-    <p class="tags">
-      {kv && <span>{kv}</span>}
-      {km && <span>{km}</span>}
-    </p>
-  )}
-</article>
-
-<style>
-  .meta,
-  .client {
-    margin: 0;
-  }
-  .client {
-    color: var(--muted);
-    font-size: var(--step--1);
-  }
-</style>
+<a class="pc" href={item.href}>
+  <Img name={item.photo} sizes={sizes} />
+  <div class="pc-t">
+    <div>
+      <span class="tag">{item.tag}</span>
+      <H>{item.title}</H>
+      {item.sub && <span class="pc-sub">{item.sub}</span>}
+    </div>
+    <span class="go go--up" aria-hidden="true"><span class="go-i"><Icon name="up-right" /></span></span>
+  </div>
+</a>

@@ -1,16 +1,18 @@
 ---
 import Base from '../layouts/Base.astro';
-import HeroDrawing from '../components/HeroDrawing.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import CountryTile from '../components/CountryTile.astro';
-import ClientsStrip from '../components/ClientsStrip.astro';
-import ContactDetails from '../components/ContactDetails.astro';
-import { company, countries, projects, stats, projectBySlug, country } from '../lib/data';
-
-const selected = company.home_selected.map(projectBySlug);
-const libya = country('libya');
-const countryList = countries.map((c) => c.name);
-const listText = `${countryList.slice(0, -1).join(', ')} and ${countryList.at(-1)}`;
+import Img from '../components/Img.astro';
+import Icon from '../components/Icon.astro';
+import Go from '../components/Go.astro';
+import More from '../components/More.astro';
+import Band from '../components/Band.astro';
+import Track from '../components/Track.astro';
+import CapTabs from '../components/CapTabs.astro';
+import Decades from '../components/Decades.astro';
+import Presence from '../components/Presence.astro';
+import ClientsGrid from '../components/ClientsGrid.astro';
+import Connect from '../components/Connect.astro';
+import { company, stats } from '../lib/data';
+import { HERO_SLIDES, FEATURED, MAX_AC_KV, numberWord } from '../lib/site';
 
 const localBusiness = {
   '@context': 'https://schema.org',
@@ -28,189 +30,176 @@ const localBusiness = {
   },
   parentOrganization: { '@id': new URL('/#organization', Astro.site).href },
 };
+const n = HERO_SLIDES.length;
 ---
 <Base
-  title="Nazir and Company | Electrical and civil engineering contractor since 1958"
-  description={`Nazir and Company (Pvt) Ltd, Lahore: transmission lines, substations, distribution and civil works since ${stats.founded}. ${stats.projects} documented projects in ${stats.countries} countries, including 48 in Libya.`}
+  title="Nazir and Company | Powering Nations Since 1958"
+  description="Nazir and Company (Pvt) Ltd, Lahore: high-voltage transmission, substations and critical infrastructure for national utilities, energy producers and governments across Asia, the Middle East and Africa since 1958."
   jsonLd={[localBusiness]}
+  heroPhoto="tower-sky"
 >
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-text">
-        <p class="eyebrow">Electrical and civil engineering contractor · Lahore · since {stats.founded}</p>
-        <h1>750&nbsp;km of 220&nbsp;kV line, from Benghazi to Libya’s eastern border, completed in 2001.</h1>
+  <section class="hero on-dark">
+    <Img name="tower-sky" alt="High-voltage transmission tower against the sky" class="hero-img" priority />
+    <div class="w hero-in">
+      <div class="hero-copy">
+        <h1>Powering Nations Since {company.founded}</h1>
+        <p>High-voltage transmission, substations and critical infrastructure for national utilities, energy producers and governments across Asia, the Middle East and Africa.</p>
+        <Go href="/projects/" label="Explore the Projects" up />
+      </div>
+      <div class="hc" data-carousel>
+        <div class="hcard">
+          {HERO_SLIDES.map((s, i) => (
+            <div class="hc-slide" data-slide hidden={i > 0} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${n}`}>
+              <div class="ph"><Img name={s.photo} sizes="21rem" /></div>
+              <p class="hc-tag">{s.tag}</p>
+              <p class="hc-t">{s.title}</p>
+              <Go href={s.href} up class="hc-go" ariaLabel={`Open project: ${s.title}`} />
+            </div>
+          ))}
+          <div class="dots">
+            {HERO_SLIDES.map((_, i) => (
+              <button class="dot" type="button" data-to={i} aria-label={`Show project ${i + 1} of ${n}`} aria-current={i === 0 ? 'true' : 'false'}></button>
+            ))}
+          </div>
+        </div>
+        <button class="arr arr--l" type="button" data-prev aria-label="Previous project"><Icon name="chevron-left" /></button>
+        <button class="arr arr--r" type="button" data-next aria-label="Next project"><Icon name="chevron-right" /></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="ab" aria-labelledby="about-h">
+    <div class="w abg">
+      <div class="abp"><Img name="substation" alt="Grid substation" sizes="(min-width: 60em) 45vw, 100vw" /></div>
+      <div class="abt">
+        <span class="eb">About Nazir and Company</span>
+        <h2 class="h" id="about-h">Delivering the Infrastructure Nations <mark class="hl">Run On</mark></h2>
         <p class="lede">
-          Nazir and Company builds overhead transmission lines, substations, distribution networks and civil works.
-          Its record covers {stats.projects} documented projects in {listText}.
+          For more than six decades, Nazir and Company has built the high-voltage networks, substations and civil infrastructure that power economies. From its headquarters in Lahore, the company delivers landmark projects for national utilities and energy leaders across Asia, the Middle East and Africa, with a reputation for engineering depth, disciplined execution and performance in the most demanding environments.
         </p>
-        <div class="btn-row">
-          <a class="btn" href="/projects/">See the project register</a>
-          <a class="btn btn--ghost" href="/downloads/">Download company documents</a>
-        </div>
-      </div>
-      <div class="hero-art">
-        <HeroDrawing />
+        <Go href="/about/" label="About the Company" />
       </div>
     </div>
-    <div class="container">
-      <ul class="figures" aria-label="Key figures">
-        <li><span class="n">{stats.founded}</span><span class="l">Year founded</span></li>
-        <li><span class="n">{stats.projects}</span><span class="l">Projects documented in the company’s records</span></li>
-        <li><span class="n">{stats.countries}</span><span class="l">Countries with documented projects</span></li>
-        <li><span class="n">{stats.recordYears}</span><span class="l">Years of documented projects, {stats.firstYear}–{stats.lastYear}</span></li>
+  </section>
+
+  <section class="sb sb--under on-dark" aria-label="Key figures">
+    <ul class="w sg">
+      <li><span class="sg-n">{company.founded}</span><span class="sg-l">Founded in Lahore</span></li>
+      <li><span class="sg-n">{stats.countries}</span><span class="sg-l">Countries across Asia, the Middle East and Africa</span></li>
+      <li><span class="sg-n">{MAX_AC_KV}<small>kV</small></span><span class="sg-l">Transmission capability, up to HVDC</span></li>
+      <li><span class="sg-n">No. 1</span><span class="sg-l">Licence of the Pakistan Engineering Council</span></li>
+    </ul>
+  </section>
+
+  <section class="sec lined" aria-labelledby="cap-h">
+    <div class="w">
+      <div class="grid2 head-row">
+        <div>
+          <span class="eb">Capabilities</span>
+          <h2 class="h" id="cap-h">End-to-End Delivery Across the Power Value Chain</h2>
+        </div>
+        <p class="body-grey">
+          From foundations and tower erection to stringing and turnkey lines, Nazir and Company executes complex programmes with its own teams, and mobilises a large fleet of construction and stringing equipment for each project.
+        </p>
+      </div>
+      <CapTabs />
+    </div>
+  </section>
+
+  <Band photo="desert-lines" alt="High-voltage transmission lines crossing the desert">
+    <Fragment slot="title">Built for the World’s Toughest Terrain</Fragment>
+    <p>From the Sahara to the Arabian Peninsula, Nazir and Company delivers high-voltage transmission where conditions are most extreme and reliability matters most.</p>
+    <div class="row-links"><Go href="/projects/" label="View Projects" /></div>
+  </Band>
+
+  <section class="sec" aria-labelledby="feat-h">
+    <div class="w grid2 head-row">
+      <div>
+        <span class="eb">Projects</span>
+        <h2 class="h" id="feat-h">Featured Projects</h2>
+      </div>
+      <p class="body-grey">Landmark transmission and infrastructure projects for national utilities and energy leaders across Asia, the Middle East and Africa.</p>
+    </div>
+    <Track items={FEATURED} label="Featured projects" />
+  </section>
+
+  <Band photo="engineering-drawings" alt="Engineering drawings on site">
+    <Fragment slot="title">A Legacy of Delivery in <span class="accent">Libya</span></Fragment>
+    <p>
+      For over three decades, Nazir and Company built the backbone of Libya’s power network: high-voltage lines from Tripoli to Benghazi and deep into the Fezzan, and critical electrical systems for the country’s leading oil producers. {company.libya_status}
+    </p>
+    <div class="row-links"><Go href="/libya/" label="Nazir in Libya" /></div>
+  </Band>
+
+  <section class="sec lined" aria-labelledby="heritage-h">
+    <div class="w lg">
+      <div class="lgt">
+        <span class="eb">Heritage</span>
+        <h2 class="h" id="heritage-h">Six Decades of Delivery</h2>
+        <p class="body-grey">
+          Founded in Lahore in {company.founded}, Nazir and Company holds Licence No. 1 of the Pakistan Engineering Council, the first the Council ever issued. By the late 1970s the company was building high-voltage transmission in Iraq and Libya, and it has since delivered across {numberWord(stats.countries).toLowerCase()} countries in Asia, the Middle East and Africa.
+        </p>
+        <p class="body-grey">Today, Nazir and Company combines six decades of field experience with the capacity to execute complex power and infrastructure programmes at national scale.</p>
+        <div class="row-links"><Go href="/about/#heritage" label="Company History" /></div>
+      </div>
+      <Decades />
+    </div>
+  </section>
+
+  <section class="sec sec--soft" aria-labelledby="presence-h">
+    <div class="w">
+      <div class="grid2 head-row">
+        <div>
+          <span class="eb">Global Presence</span>
+          <h2 class="h" id="presence-h">{numberWord(stats.countries)} Countries, Three Regions</h2>
+        </div>
+        <div>
+          <p class="body-grey">Headquartered in Lahore, Nazir and Company has delivered across Asia, the Middle East and Africa.</p>
+          <More href="/global-presence/" label="View All Locations" />
+        </div>
+      </div>
+      <Presence />
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="discover-h">
+    <div class="w">
+      <div class="grid2 head-row">
+        <div>
+          <span class="eb">Explore</span>
+          <h2 class="h" id="discover-h">Discover Nazir and Company</h2>
+        </div>
+        <div>
+          <p class="body-grey">Capabilities, regions and the heritage behind six decades of delivery.</p>
+          <More href="/about/" label="View All" />
+        </div>
+      </div>
+      <div class="mg">
+        <a class="mt m1" href="/libya/"><Img name="desert-lines" sizes="(min-width: 60em) 58vw, 100vw" /><div class="mt-t"><span class="chip">Region</span><h3>Libya: Powering the Next Chapter</h3></div></a>
+        <a class="mt m2" href="/services/#substations"><Img name="substation" sizes="(min-width: 60em) 42vw, 100vw" /><div class="mt-t"><span class="chip">Capability</span><h3>Grid Substations</h3></div></a>
+        <a class="mt m3" href={HERO_SLIDES[1]!.href}><Img name="tower-mono" sizes="(min-width: 60em) 42vw, 100vw" /><div class="mt-t"><span class="chip">Project</span><h3>Makkah, Taif &amp; Madinah 380 kV</h3></div></a>
+        <a class="mt m4" href="/contact/?type=careers"><Img name="site-engineer" sizes="(min-width: 60em) 50vw, 100vw" /><div class="mt-t"><span class="chip">People</span><h3>Careers in Critical Infrastructure</h3></div></a>
+        <a class="mt m5" href="/about/"><Img name="engineering-drawings" sizes="(min-width: 60em) 50vw, 100vw" /><div class="mt-t"><span class="chip">Company</span><h3>Six Decades of Engineering Heritage</h3></div></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--tight" aria-labelledby="clients-h">
+    <div class="w">
+      <div class="grid2 head-row">
+        <div>
+          <span class="eb">Clients</span>
+          <h2 class="h" id="clients-h">Trusted by National Utilities and Energy Leaders</h2>
+        </div>
+        <p class="body-grey">Nazir and Company has delivered for the organisations that build and run national power, energy and road networks.</p>
+      </div>
+      <ClientsGrid />
+      <ul class="regs">
+        <li><b>Pakistan Engineering Council</b> · Licence No. 1</li>
+        <li><b>Pre-qualified</b> · {company.prequalified_short.join(' · ')}</li>
       </ul>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="selected">
-    <div class="container">
-      <p class="eyebrow">Selected projects</p>
-      <h2 id="selected">Six lines from the record</h2>
-      <div class="grid">
-        {selected.map((p) => <ProjectCard p={p} />)}
-      </div>
-      <p class="more"><a href="/projects/">All {projects.length} projects, by country</a></p>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="regions">
-    <div class="container">
-      <p class="eyebrow">Regions</p>
-      <h2 id="regions">Where the work was done</h2>
-      <div class="regions">
-        {countries.map((c) => <CountryTile c={c} size="small" />)}
-      </div>
-      <p class="more"><a href="/global-presence/">Global presence map</a></p>
-    </div>
-  </section>
-
-  <section class="section section--navy libya-callout" aria-labelledby="libya-h">
-    <div class="container two-col">
-      <div>
-        <p class="eyebrow">For main contractors in Libya</p>
-        <h2 id="libya-h">{libya.count} projects in Libya, {libya.first}–{libya.last}</h2>
-        <p class="lede">{company.libya_status}</p>
-        <p>
-          The Libyan record includes 220&nbsp;kV lines for the national utility, oil-field electrical works for Arabian
-          Gulf Oil Company, Sirte Oil Company and Waha Oil Company, and hot-line maintenance of a 138&nbsp;kV line.
-        </p>
-        <div class="btn-row">
-          <a class="btn btn--amber" href="/libya/">Libya record and subcontract offer</a>
-          <a class="btn btn--ghost on-navy" href="/contact/?type=libya-subcontract">Send a Libya subcontract enquiry</a>
-        </div>
-      </div>
-      <ul class="libya-figs" aria-label="Libya figures">
-        <li><span class="fig">750&nbsp;km</span> 220&nbsp;kV double-circuit lines, Benghazi to the eastern border, 2001</li>
-        <li><span class="fig">220&nbsp;kV</span> double-circuit twin-bundle line, Samnu to Sebha, 2011</li>
-        <li><span class="fig">220&nbsp;kV</span> Hun–Wadi Arial–Samnu line, 1989</li>
-        <li><span class="fig">220&nbsp;kV</span> Misurata–Sirte lines and Tripoli ring, 1980</li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <ClientsStrip list={projects} limit={18} id="clients-home" />
-    </div>
-  </section>
-
-  <section class="section contact-strip" aria-labelledby="contact-h">
-    <div class="container two-col">
-      <div>
-        <p class="eyebrow">Contact</p>
-        <h2 id="contact-h">Enquiries from clients, main contractors and partners</h2>
-        <p>Send project details through the enquiry form. Registration and enlistment documents are available on request.</p>
-        <div class="btn-row">
-          <a class="btn" href="/contact/">Make an enquiry</a>
-          <a class="btn btn--ghost" href="/downloads/">Downloads</a>
-        </div>
-      </div>
-      <div class="tblock-like">
-        <p class="k">Head office</p>
-        <ContactDetails />
-      </div>
-    </div>
-  </section>
+  <Connect />
 </Base>
-
-<style>
-  .hero {
-    padding-block: 2rem 3rem;
-  }
-  .hero-grid {
-    display: grid;
-    gap: 1.5rem;
-    align-items: center;
-    margin-bottom: 2rem;
-  }
-  .hero h1 {
-    font-size: clamp(1.875rem, 1.2rem + 3.2vw, 3.25rem);
-    max-width: 22ch;
-  }
-  .hero-art {
-    max-width: 40rem;
-  }
-  @media (min-width: 60rem) {
-    .hero {
-      padding-top: 3.5rem;
-    }
-    .hero-grid {
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-    }
-  }
-  .hero .btn {
-    min-width: min(100%, 17.5rem);
-  }
-  .more {
-    margin-top: 1.25rem;
-  }
-  .more a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 2.75rem;
-    font-weight: 600;
-  }
-  .regions {
-    display: grid;
-    gap: 0.75rem;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
-  }
-  .libya-figs {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    border-top: 1px solid rgba(246, 243, 236, 0.35);
-  }
-  .libya-figs li {
-    padding: 0.8rem 0;
-    border-bottom: 1px solid rgba(246, 243, 236, 0.35);
-    color: var(--mist);
-  }
-  .libya-figs .fig {
-    display: block;
-    color: var(--amber);
-    font-size: 1.5rem;
-    line-height: 1.2;
-  }
-  .on-navy {
-    border-color: var(--paper);
-    color: var(--paper);
-  }
-  .on-navy:hover {
-    background: var(--paper);
-    color: var(--navy);
-  }
-  .tblock-like {
-    border: 1px solid var(--navy);
-    background: var(--panel);
-    padding: 1rem 1.25rem;
-  }
-  .tblock-like .k {
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 0.4rem;
-  }
-</style>

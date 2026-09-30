@@ -62,46 +62,130 @@
     }
   },
   "photos": {
+    "construction-site": {
+      "widths": [
+        480,
+        900
+      ],
+      "width": 900,
+      "height": 809
+    },
+    "desert-lines": {
+      "widths": [
+        480,
+        960,
+        1600,
+        2000
+      ],
+      "width": 2000,
+      "height": 1125
+    },
+    "distribution-pole": {
+      "widths": [
+        480,
+        900
+      ],
+      "width": 900,
+      "height": 599
+    },
+    "engineering-drawings": {
+      "widths": [
+        480,
+        960,
+        1400
+      ],
+      "width": 1400,
+      "height": 934
+    },
+    "industrial-plant": {
+      "widths": [
+        480,
+        960,
+        1400
+      ],
+      "width": 1400,
+      "height": 930
+    },
+    "offshore-platform": {
+      "widths": [
+        480,
+        960,
+        1400
+      ],
+      "width": 1400,
+      "height": 934
+    },
     "pipeline": {
       "widths": [
         480,
         600
       ],
-      "ratio": [
-        16,
-        9
-      ]
+      "width": 600,
+      "height": 384
     },
     "power-channel": {
       "widths": [
         480,
         960,
-        1600
+        1600,
+        2000
       ],
-      "ratio": [
-        16,
-        9
-      ]
+      "width": 2000,
+      "height": 1000
+    },
+    "site-engineer": {
+      "widths": [
+        480,
+        960,
+        1400
+      ],
+      "width": 1400,
+      "height": 934
     },
     "substation": {
       "widths": [
         480,
-        960
+        960,
+        1440
       ],
-      "ratio": [
-        16,
-        9
-      ]
+      "width": 1440,
+      "height": 810
+    },
+    "tower-mono": {
+      "widths": [
+        480,
+        900
+      ],
+      "width": 900,
+      "height": 645
+    },
+    "tower-sky": {
+      "widths": [
+        480,
+        960,
+        1600,
+        2200
+      ],
+      "width": 2200,
+      "height": 948
     },
     "transmission-towers": {
       "widths": [
         480,
-        567
+        626
       ],
-      "ratio": [
-        16,
-        9
-      ]
+      "width": 626,
+      "height": 319
+    }
+  },
+  "logos": {
+    "saudi-electricity-company": {
+      "width": 416,
+      "height": 128
+    },
+    "tenaga-nasional": {
+      "width": 231,
+      "height": 116
     }
   }
 }

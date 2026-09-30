@@ -3,14 +3,12 @@ import Base from '../layouts/Base.astro';
 import { company } from '../lib/data';
 ---
 <Base title="Privacy note" description="How the Nazir and Company website handles personal data: no cookies, cookieless analytics, and enquiry details used only to reply.">
-  <header class="page-head">
-    <div class="container">
-      <p class="eyebrow">Privacy</p>
-      <h1>Privacy note</h1>
-    </div>
+  <header class="page-head w">
+    <span class="eb">Privacy</span>
+    <h1 class="h h--xl">Privacy Note</h1>
   </header>
-  <section class="section">
-    <div class="container prose">
+  <section class="sec--tight page-body">
+    <div class="w prose">
       <h2>Who is responsible</h2>
       <p>{company.name}, {company.address}.</p>
       <h2>Cookies and analytics</h2>

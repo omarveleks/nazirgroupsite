@@ -1,0 +1,24 @@
+---
+// Maire-style statement: a huge uppercase line on white, a hairline, text and a pill.
+import Icon from './Icon.astro';
+interface Props {
+  text?: string;
+  link?: { href: string; label: string };
+  level?: 'h1' | 'h2';
+  id?: string;
+  eyebrow?: string;
+}
+const { text, link, level = 'h2', id, eyebrow } = Astro.props;
+const H = level;
+---
+<section class="stmt" id={id}>
+  <div class="w">
+    {eyebrow && <span class="eb">{eyebrow}</span>}
+    <H class="stmt-t"><slot /></H>
+    <hr class="stmt-rule" />
+    <div class="stmt-row">
+      {text && <p>{text}</p>}
+      {link && <a class="pill" href={link.href}>{link.label} <Icon name="right" /></a>}
+    </div>
+  </div>
+</section>

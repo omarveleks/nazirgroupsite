@@ -1,8 +1,10 @@
 ---
 import '../styles/global.css';
 import Logo from '../components/Logo.astro';
+import Icon from '../components/Icon.astro';
 import ContactDetails from '../components/ContactDetails.astro';
 import { SITE_MODE, company, stats } from '../lib/data';
+import { photo, PHONE_MQ, WIDE_MQ } from '../lib/images';
 
 interface Props {
   title: string;
@@ -11,24 +13,37 @@ interface Props {
   jsonLd?: Record<string, unknown>[];
   noindex?: boolean;
   current?: string;
+  /** Photo shown in the first screen: preloaded with the same sources as its <picture> */
+  heroPhoto?: string;
 }
 
-const { title, description, ogImage = '/og/nazir.png', jsonLd = [], noindex = false, current } = Astro.props;
+const { title, description, ogImage = '/og/nazir.png', jsonLd = [], noindex = false, current, heroPhoto } = Astro.props;
 const site = Astro.site!;
 const canonical = new URL(Astro.url.pathname, site).href;
 const fullTitle = Astro.url.pathname === '/' ? title : `${title} | Nazir and Company`;
 const robots = SITE_MODE === 'review' || noindex ? 'noindex, nofollow' : 'index, follow';
 const nav = [
-  { href: '/projects/', label: 'Projects' },
-  { href: '/services/', label: 'Services' },
-  { href: '/libya/', label: 'Libya' },
   { href: '/about/', label: 'About' },
   { href: '/capabilities/', label: 'Capabilities' },
+  { href: '/projects/', label: 'Projects' },
+  { href: '/libya/', label: 'Libya' },
+  { href: '/contact/?type=careers', label: 'Careers', match: '/contact/careers' },
+];
+const menu = [
+  { href: '/about/', label: 'About' },
+  { href: '/leadership/', label: 'Leadership' },
+  { href: '/capabilities/', label: 'Capabilities' },
+  { href: '/services/', label: 'Services' },
+  { href: '/projects/', label: 'Projects' },
+  { href: '/libya/', label: 'Libya' },
+  { href: '/global-presence/', label: 'Global Presence' },
+  { href: '/downloads/', label: 'Downloads' },
   { href: '/contact/', label: 'Contact' },
 ];
 const path = Astro.url.pathname;
-const isCurrent = (href: string) => (current ? current === href : path === href || (href !== '/' && path.startsWith(href)));
+const isCurrent = (href: string) => (current ? current === href : path === href || (href !== '/' && !href.includes('?') && path.startsWith(href)));
 const year = new Date().getFullYear();
+const hero = heroPhoto ? photo(heroPhoto) : null;
 
 const org = {
   '@context': 'https://schema.org',
@@ -46,7 +61,7 @@ const org = {
     addressLocality: 'Lahore',
     addressCountry: 'PK',
   },
-  description: `Electrical and civil engineering contractor, founded in ${company.founded}, with ${stats.projects} documented projects in ${stats.countries} countries.`,
+  description: `Electrical and civil engineering contractor, founded in ${company.founded}, with projects in ${stats.countries} countries.`,
 };
 const ld = [org, ...jsonLd];
 ---
@@ -59,12 +74,18 @@ const ld = [org, ...jsonLd];
     <meta name="description" content={description} />
     <meta name="robots" content={robots} />
     <link rel="canonical" href={canonical} />
-    <meta name="theme-color" content="#0b1f3a" />
+    <meta name="theme-color" content="#0b1b2e" />
     <meta name="format-detection" content="telephone=no" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    {hero && (
+      <>
+        <link rel="preload" as="image" type="image/avif" media={PHONE_MQ} imagesrcset={hero.phone('avif')} imagesizes="100vw" fetchpriority="high" />
+        <link rel="preload" as="image" type="image/avif" media={WIDE_MQ} imagesrcset={hero.wide('avif')} imagesizes="100vw" fetchpriority="high" />
+      </>
+    )}
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Nazir and Company" />
     <meta property="og:title" content={fullTitle} />
@@ -73,35 +94,44 @@ const ld = [org, ...jsonLd];
     <meta property="og:image" content={new URL(ogImage, site).href} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Line drawing of a 220 kV transmission tower with the Nazir logo" />
+    <meta property="og:image:alt" content="Nazir and Company: Powering Nations Since 1958" />
     <meta property="og:locale" content="en_GB" />
     <meta name="twitter:card" content="summary_large_image" />
     {ld.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header">
-      <div class="container bar">
-        <a class="brand" href="/" aria-label="Nazir and Company, home">
-          <Logo height={38} />
-          <span class="brand-name">Nazir and Company</span>
+    <header class="hd">
+      <div class="hd-in">
+        <a class="hd-logo" href="/" aria-label="Nazir and Company, home">
+          <Logo height={42} />
         </a>
-        <nav class="site-nav" aria-label="Main">
-          <ul class="nav-desktop">
+        <nav class="nl" aria-label="Main">
+          <ul class="nl-links">
             {nav.map((n) => (
               <li><a href={n.href} aria-current={isCurrent(n.href) ? 'page' : undefined}>{n.label}</a></li>
             ))}
           </ul>
-          <details class="nav-mobile">
+          <a class="nl-sec" href="/contact/?type=partnership">Partner With Nazir</a>
+          <details class="menu nav-mobile">
             <summary>
-              <span class="burger" aria-hidden="true"><span></span></span>
               <span>Menu</span>
+              <span class="hb-i" aria-hidden="true"><b></b><b></b><b></b></span>
             </summary>
-            <ul class="nav-panel">
-              {nav.map((n) => (
-                <li><a href={n.href} aria-current={isCurrent(n.href) ? 'page' : undefined}>{n.label}</a></li>
-              ))}
-            </ul>
+            <div class="nav-panel on-dark">
+              <div class="w mp">
+                <ul class="mp-main">
+                  {menu.map((n) => (
+                    <li><a href={n.href} aria-current={isCurrent(n.href) ? 'page' : undefined}>{n.label}</a></li>
+                  ))}
+                </ul>
+                <div class="mp-side">
+                  <a class="pill pill--light" href="/contact/?type=partnership">Partner With Nazir <Icon name="right" /></a>
+                  <a class="rm" href="/contact/?type=careers">Careers <Icon name="long" /></a>
+                  <ContactDetails variant="footer" />
+                </div>
+              </div>
+            </div>
           </details>
         </nav>
       </div>
@@ -111,251 +141,76 @@ const ld = [org, ...jsonLd];
       <slot />
     </main>
 
-    <footer class="site-footer">
-      <div class="container foot">
-        <div class="foot-brand">
-          <Logo height={44} />
-          <p class="foot-name">{company.name}</p>
-          <p class="muted-light">Electrical and civil engineering contractor. Founded {company.founded}. Incorporated {company.incorporated_text}.</p>
-          <p class="muted-light">{company.pec.statement}.</p>
+    <footer class="ft">
+      <div class="w">
+        <div class="ft-top">
+          <p class="ft-tag">Powering Nations<br /><span>Since {company.founded}</span></p>
+          <div class="ft-cols">
+            <div>
+              <h2>Company</h2>
+              <ul>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/leadership/">Leadership</a></li>
+                <li><a href="/about/#heritage">Heritage</a></li>
+                <li><a href="/capabilities/#registration">Registration</a></li>
+                <li><a href="/downloads/">Downloads</a></li>
+              </ul>
+            </div>
+            <div>
+              <h2>Capabilities</h2>
+              <ul>
+                <li><a href="/services/#transmission">Transmission</a></li>
+                <li><a href="/services/#substations">Substations</a></li>
+                <li><a href="/services/#distribution">Distribution</a></li>
+                <li><a href="/services/#civil">Infrastructure</a></li>
+              </ul>
+            </div>
+            <div>
+              <h2>Projects</h2>
+              <ul>
+                <li><a href="/projects/">Featured</a></li>
+                <li><a href="/projects/#countries">By Country</a></li>
+                <li><a href="/libya/">Libya</a></li>
+                <li><a href="/global-presence/">Global Presence</a></li>
+              </ul>
+            </div>
+            <div>
+              <h2>Contact</h2>
+              <ul>
+                <li><a href="/contact/?type=partnership">Business Development</a></li>
+                <li><a href="/contact/?type=careers">Careers</a></li>
+              </ul>
+              <ContactDetails variant="footer" />
+            </div>
+          </div>
         </div>
-        <div>
-          <h2 class="foot-h">Office</h2>
-          <ContactDetails variant="footer" />
-        </div>
-        <div>
-          <h2 class="foot-h">Company</h2>
-          <ul class="foot-links">
-            <li><a href="/about/">About</a></li>
-            <li><a href="/leadership/">Leadership and team</a></li>
-            <li><a href="/capabilities/">Capabilities and compliance</a></li>
-            <li><a href="/services/">Services</a></li>
-            <li><a href="/contact/">Contact</a></li>
+        <div class="ft-base">
+          <Logo height={36} />
+          <p class="ft-copy">© {year} {company.name}</p>
+          <ul>
+            <li><a href="/privacy/">Privacy</a></li>
+            <li><a href="/accessibility/">Accessibility</a></li>
           </ul>
         </div>
-        <div>
-          <h2 class="foot-h">Record</h2>
-          <ul class="foot-links">
-            <li><a href="/projects/">Project register</a></li>
-            <li><a href="/global-presence/">Global presence</a></li>
-            <li><a href="/libya/">Libya</a></li>
-            <li><a href="/downloads/">Downloads</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="container foot-base">
-        <p>© {year} {company.name}</p>
-        <ul class="foot-links foot-links--inline">
-          <li><a href="/privacy/">Privacy</a></li>
-          <li><a href="/accessibility/">Accessibility</a></li>
-        </ul>
       </div>
     </footer>
     <script src="../scripts/menu.ts"></script>
+    <script src="../scripts/ui.ts"></script>
   </body>
 </html>
 
 <style>
-  .site-header {
-    position: relative;
-    z-index: 20;
-    background: var(--paper);
-    border-bottom: 1px solid var(--navy);
+  .hd-logo :global(.logo) {
+    color: #fff;
+    width: 5.5rem;
+    height: auto;
   }
-  .bar {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem 1rem;
-    min-height: 4rem;
-    padding-block: 0.5rem;
+  .ft-base :global(.logo) {
+    color: #fff;
+    width: 5.75rem;
+    height: auto;
   }
-  .brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    color: var(--navy);
-    text-decoration: none;
-    min-height: 2.75rem;
-  }
-  .brand-name {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: 1.125rem;
-    line-height: 1.1;
-  }
-  @media (max-width: 23rem) {
-    .brand-name {
-      display: none;
-    }
-  }
-  .nav-desktop {
-    display: none;
-  }
-  .nav-desktop,
-  .nav-panel {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .nav-desktop {
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 0 0.25rem;
-  }
-  .nav-desktop a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 2.75rem;
-    padding: 0 0.7rem;
-    text-decoration: none;
-    font-weight: 600;
-    color: var(--navy);
-    border-bottom: 2px solid transparent;
-  }
-  .nav-desktop a:hover {
-    border-bottom-color: var(--amber);
-  }
-  .nav-desktop a[aria-current='page'] {
-    border-bottom-color: var(--navy);
-  }
-  .nav-mobile {
-    position: static;
-  }
-  .nav-mobile summary {
-    list-style: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    min-height: 2.75rem;
-    min-width: 2.75rem;
-    padding: 0 0.75rem;
-    border: 1px solid var(--navy);
-    border-radius: var(--radius);
-    cursor: pointer;
-    font-weight: 600;
-    color: var(--navy);
-  }
-  .nav-mobile summary::-webkit-details-marker {
-    display: none;
-  }
-  .burger {
-    position: relative;
-    width: 18px;
-    height: 12px;
-    border-top: 2px solid currentColor;
-    border-bottom: 2px solid currentColor;
-  }
-  .burger span {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 3px;
-    height: 2px;
-    background: currentColor;
-  }
-  .nav-panel {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 100%;
-    background: var(--paper);
-    border-bottom: 1px solid var(--navy);
-    box-shadow: 0 12px 24px rgba(11, 31, 58, 0.12);
-  }
-  .nav-mobile li {
-    border-top: 1px solid var(--rule);
-  }
-  .nav-mobile a {
-    display: flex;
-    align-items: center;
-    min-height: 3rem;
-    padding: 0 max(1rem, env(safe-area-inset-left));
-    font-weight: 600;
-    text-decoration: none;
-  }
-  .nav-mobile a[aria-current='page'] {
-    box-shadow: inset 4px 0 0 var(--amber);
-  }
-  @media (min-width: 60rem) {
-    .nav-desktop {
-      display: flex;
-    }
-    .nav-mobile {
-      display: none;
-    }
-  }
-
-  .site-footer {
-    background: var(--navy);
-    color: var(--paper);
-    margin-top: 0;
-    padding-top: 3rem;
-    padding-bottom: max(1rem, env(safe-area-inset-bottom));
-  }
-  .site-footer a {
-    color: var(--paper);
-  }
-  .foot {
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: 1fr;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(246, 243, 236, 0.25);
-  }
-  @media (min-width: 48rem) {
-    .foot {
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
-    }
-  }
-  .foot > * {
-    min-width: 0;
-  }
-  .foot-name {
-    font-family: var(--serif);
-    font-size: 1.25rem;
-    margin: 0.75rem 0 0.5rem;
-  }
-  .muted-light {
-    color: var(--mist);
-    font-size: var(--step--1);
-  }
-  .foot-h {
-    font-family: var(--mono);
-    font-weight: 500;
-    font-size: 0.8125rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--amber);
-    margin-bottom: 0.75rem;
-  }
-  .foot-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .foot-links a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 2.75rem;
-  }
-  .foot-links--inline {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 1.5rem;
-  }
-  .foot-base {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.5rem 2rem;
-    padding-top: 1rem;
-    font-size: var(--step--1);
-    color: var(--mist);
-  }
-  .foot-base p {
+  .ft-copy {
     margin: 0;
   }
 </style>

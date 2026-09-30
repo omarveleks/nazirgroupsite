@@ -2,24 +2,22 @@
 import Base from '../layouts/Base.astro';
 ---
 <Base title="Accessibility statement" description="Accessibility of the Nazir and Company website: aims, testing and how to report a problem.">
-  <header class="page-head">
-    <div class="container">
-      <p class="eyebrow">Accessibility</p>
-      <h1>Accessibility statement</h1>
-    </div>
+  <header class="page-head w">
+    <span class="eb">Accessibility</span>
+    <h1 class="h h--xl">Accessibility Statement</h1>
   </header>
-  <section class="section">
-    <div class="container prose">
+  <section class="sec--tight page-body">
+    <div class="w prose">
       <p>The website aims to meet the Web Content Accessibility Guidelines (WCAG) 2.2 at level AA.</p>
       <h2>What has been done</h2>
       <ul>
         <li>Every page is tested with automated accessibility checks (axe) and has no known violations.</li>
-        <li>Text contrast is at least 4.5:1; body text on the paper background is about 14.8:1.</li>
+        <li>Text contrast is at least 4.5:1, including text set over photographs, which sits on a dark gradient.</li>
         <li>All functions work with a keyboard, focus is always visible, and a “Skip to content” link is provided.</li>
         <li>Pages work at 200% text zoom and on screens from 320 pixels wide, with no sideways scrolling.</li>
-        <li>Animation is limited to one short fade on the home page drawing and is switched off when the device asks for reduced motion.</li>
-        <li>The project register is a standard table that works without JavaScript; filters add to it but are not required.</li>
-        <li>Maps and drawings have text alternatives, and every figure shown on a map is also given in a table or list.</li>
+        <li>Motion is limited to short hover and focus transitions; nothing moves on its own, and transitions are switched off when the device asks for reduced motion.</li>
+        <li>The project list is a standard table that works without JavaScript; filters add to it but are not required. Carousels and tabs show their first item without JavaScript and never advance on their own.</li>
+        <li>Maps have text alternatives, and every country shown on a map is also given in a list. Photographs have text alternatives or are marked as decorative.</li>
       </ul>
       <h2>Known limitations</h2>
       <p>Downloadable PDF documents are generated automatically and are not fully tagged for screen readers. The same information is available on the website pages.</p>

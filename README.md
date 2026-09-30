@@ -15,6 +15,8 @@ Built with Astro (static output), TypeScript and plain CSS. Hosted on Cloudflare
 | `npm run qa` | Release gate: builds live and review versions and runs every check (see QA_REPORT.md). Must pass before any deploy |
 | `npm run data` | Regenerate `src/data/projects.json` from the transcription in `scripts/build-projects.py` |
 | `npm run assets` | Regenerate the Open Graph image and favicons |
+| `node scripts/images.mjs` | Regenerate responsive photos, portraits and logos from `source/photos`, `source/portraits` and `source/logos` |
+| `python3 scripts/fonts.py` | Re-subset the self-hosted fonts (after adding a character to the site) |
 
 ## Where things are
 
@@ -23,7 +25,9 @@ Built with Astro (static output), TypeScript and plain CSS. Hosted on Cloudflare
 - `src/data/facts.md` (also `data/facts.md`): every fact with its source page or URL.
 - `data/OPEN_ITEMS.md`: conflicts, withheld facts and questions for the company.
 - `src/data/image-credits.json`: internal record of image sources (never published).
-- `source/`: the two company profiles the content is taken from (not published).
+- `source/`: the two company profiles the content is taken from, and the original photos, portraits and logos (not published).
+- `src/lib/site.ts`: design content choices (photos per page, featured projects, capability and decade panels, country descriptors).
+- `docs/REDESIGN_V7.md`: the approved v7 design brief (the preview HTML's photos are in `source/photos/`).
 - `functions/`: Cloudflare Pages Functions (enquiry form, pages.dev redirect).
 - `scripts/postbuild.mjs`: writes `_headers` (CSP and security headers), `robots.txt`, `sitemap.xml` (live only) and `_routes.json`.
 - `scripts/qa/`: the QA gate.

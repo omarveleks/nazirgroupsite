@@ -3,8 +3,7 @@
 // then removed from dist by scripts/postbuild.mjs. Never deployed.
 import '../styles/global.css';
 import Logo from '../components/Logo.astro';
-import HeroDrawing from '../components/HeroDrawing.astro';
-import { stats } from '../lib/data';
+import { company } from '../lib/data';
 ---
 <!doctype html>
 <html lang="en-GB">
@@ -15,17 +14,13 @@ import { stats } from '../lib/data';
   </head>
   <body>
     <div class="card">
-      <div class="l">
-        <Logo height={70} />
-        <p class="name">Nazir and Company</p>
-        <p class="tag">Electrical and civil engineering contractor · Lahore · since {stats.founded}</p>
-        <ul>
-          <li><span class="fig">{stats.projects}</span> projects documented</li>
-          <li><span class="fig">{stats.countries}</span> countries</li>
-          <li><span class="fig">750 km</span> 220 kV line, Libya, 2001</li>
-        </ul>
+      <img src="/images/photos/tower-sky-1600.jpg" alt="" width="1600" height="689" />
+      <div class="t">
+        <Logo height={60} />
+        <p class="h1">Powering Nations<br />Since {company.founded}</p>
+        <p class="sub">Transmission, substations and infrastructure across Asia, the Middle East and Africa</p>
       </div>
-      <div class="r"><HeroDrawing labels={false} /></div>
+      <span class="bar"></span>
     </div>
   </body>
 </html>
@@ -34,48 +29,54 @@ import { stats } from '../lib/data';
     margin: 0;
   }
   .card {
+    position: relative;
     width: 1200px;
     height: 630px;
-    box-sizing: border-box;
-    padding: 64px;
-    display: grid;
-    grid-template-columns: 520px 1fr;
-    gap: 32px;
-    align-items: center;
-    background: var(--paper);
-    color: var(--navy);
-    border-bottom: 14px solid var(--navy);
+    overflow: hidden;
+    background: #081428;
+    color: #fff;
   }
-  .name {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: 58px;
-    line-height: 1.05;
-    margin: 28px 0 12px;
-  }
-  .tag {
-    font-size: 22px;
-    color: var(--muted);
-    margin: 0 0 28px;
-  }
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    font-size: 22px;
-    border-top: 1px solid var(--navy);
-  }
-  li {
-    padding: 10px 0;
-    border-bottom: 1px solid var(--rule);
-  }
-  .fig {
-    font-size: 26px;
-    margin-right: 8px;
-  }
-  .r :global(svg) {
+  .card img {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
-    animation: none;
+    height: 100%;
+    object-fit: cover;
+    object-position: 74% 40%;
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(8, 16, 28, 0.9), rgba(8, 16, 28, 0.55) 55%, rgba(8, 16, 28, 0.15));
+  }
+  .t {
+    position: absolute;
+    z-index: 2;
+    left: 72px;
+    top: 64px;
+    right: 470px;
+  }
+  .t :global(.logo) {
+    color: #fff;
+  }
+  .h1 {
+    margin: 64px 0 24px;
+    font: 300 84px/1 var(--display);
+    letter-spacing: -0.035em;
+  }
+  .sub {
+    margin: 0;
+    font: 300 24px/1.4 var(--body);
+    color: rgba(255, 255, 255, 0.88);
+  }
+  .bar {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 12px;
+    background: var(--blue);
   }
 </style>

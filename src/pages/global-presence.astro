@@ -1,102 +1,84 @@
 ---
 import Base from '../layouts/Base.astro';
-import { countries, company, range, stats } from '../lib/data';
+import Presence from '../components/Presence.astro';
+import Statement from '../components/Statement.astro';
+import { countries, company, stats } from '../lib/data';
 import { worldMap } from '../lib/geo';
+import { numberWord } from '../lib/site';
 
 const m = worldMap(countries.map((c) => c.slug).concat('united-kingdom'));
 const info = Object.fromEntries(countries.map((c) => [c.slug, c]));
 // label offsets to keep markers readable
 const OFF: Record<string, [number, number, string]> = {
-  pakistan: [14, 4, 'start'],
-  'saudi-arabia': [-14, 20, 'end'],
-  libya: [-14, 4, 'end'],
+  pakistan: [14, 5, 'start'],
+  'saudi-arabia': [-14, 22, 'end'],
+  libya: [-14, 5, 'end'],
   iraq: [0, -16, 'middle'],
   iran: [14, -10, 'start'],
   malaysia: [0, -18, 'middle'],
-  mozambique: [14, 4, 'start'],
-  'united-kingdom': [14, 4, 'start'],
+  mozambique: [14, 5, 'start'],
+  'united-kingdom': [14, 5, 'start'],
 };
+const branches = company.historic_branches.map((b) => (b === 'United Kingdom' ? 'the United Kingdom' : b));
 ---
 <Base
   title="Global presence"
-  description={`Nazir and Company's documented projects by country: ${countries.map((c) => `${c.name} ${c.count}`).join(', ')}.`}
+  description={`Nazir and Company across ${numberWord(stats.countries).toLowerCase()} countries in Asia, the Middle East and Africa: ${countries.map((c) => c.name).join(', ')}. Headquarters in Lahore.`}
 >
-  <header class="page-head">
-    <div class="container">
-      <p class="eyebrow">Global presence</p>
-      <h1>{stats.projects} projects in {stats.countries} countries</h1>
-      <p class="lede">Documented projects by country, with the years of completion. Select a country for its register.</p>
-    </div>
+  <header class="page-head w">
+    <span class="eb">Global Presence</span>
+    <h1 class="h h--xl">{numberWord(stats.countries)} Countries, Three Regions</h1>
+    <p class="lede">Headquartered in Lahore, Nazir and Company has delivered across Asia, the Middle East and Africa.</p>
   </header>
 
-  <section class="section">
-    <div class="container">
+  <section class="sec--tight">
+    <div class="w">
       <figure class="wmap">
         <svg viewBox={`0 0 ${m.w} ${m.h}`} width={m.w} height={m.h} role="img" aria-labelledby="wm-t wm-d">
-          <title id="wm-t">Map from the United Kingdom to Malaysia and Mozambique marking the countries with documented projects</title>
-          <desc id="wm-d">{countries.map((c) => `${c.name}: ${c.count} projects, ${range(c)}`).join('. ')}. United Kingdom: historic branch office.</desc>
-          <path d={m.base} fill="#fbf9f4" stroke="var(--rule-strong)" stroke-width="0.6" />
+          <title id="wm-t">Map from the United Kingdom to Malaysia and Mozambique marking the countries where Nazir and Company has delivered projects</title>
+          <desc id="wm-d">{countries.map((c) => c.name).join(', ')}. United Kingdom: historic branch office.</desc>
+          <path d={m.base} fill="#f5f6f8" stroke="#cfd5dc" stroke-width="0.6" />
           {m.hi.map((h) => (
-            <path d={h.d} fill={h.slug === 'united-kingdom' ? '#fbf9f4' : 'rgba(224,161,0,0.28)'} stroke="var(--navy)" stroke-width="1" />
+            <path d={h.d} fill={h.slug === 'united-kingdom' ? '#f5f6f8' : '#e7eefb'} stroke="#1f4fb8" stroke-width="1" />
           ))}
-          <g font-family="IBM Plex Mono, Plex Mono Fallback, monospace" font-size="15" fill="var(--navy)">
+          <g font-family="Inter Tight, Inter Tight Fallback, Arial, sans-serif" font-size="16" fill="#0b1b2e">
             {m.points.map((p) => {
               const c = info[p.slug];
               const [dx, dy, anchor] = OFF[p.slug] ?? [12, 4, 'start'];
               return (
                 <g>
-                  <circle cx={p.x} cy={p.y} r={c ? 7 : 5} fill={c ? 'var(--navy)' : 'var(--paper)'} stroke="var(--navy)" stroke-width="1.5" />
-                  <text x={p.x + dx} y={p.y + dy} text-anchor={anchor} font-weight="500">
-                    {c ? `${c.name} ${c.count}` : 'UK (branch)'}
+                  <circle cx={p.x} cy={p.y} r={c ? 7 : 5} fill={c ? '#1f4fb8' : '#ffffff'} stroke="#1f4fb8" stroke-width="1.5" />
+                  <text x={p.x + dx} y={p.y + dy} text-anchor={anchor} font-weight="400">
+                    {c ? c.name : 'UK (branch)'}
                   </text>
                 </g>
               );
             })}
           </g>
         </svg>
-        <figcaption>Country outlines: Natural Earth. Markers are placed at each country’s centre (peninsular Malaysia for Malaysia).</figcaption>
+        <figcaption>Country outlines: Natural Earth.</figcaption>
       </figure>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="list-h">
-    <div class="container">
-      <h2 id="list-h">By country</h2>
-      <table class="ctab">
-        <caption class="visually-hidden">Documented projects by country</caption>
-        <colgroup><col class="c1" /><col class="c2" /><col class="c3" /></colgroup>
-        <thead>
-          <tr><th scope="col">Country</th><th scope="col" class="num">Projects</th><th scope="col">Years</th></tr>
-        </thead>
-        <tbody>
-          {countries.map((c) => (
-            <tr>
-              <th scope="row"><a href={`/projects/${c.slug}/`}>{c.name}</a></th>
-              <td class="num fig">{c.count}</td>
-              <td class="fig">{range(c)}</td>
-            </tr>
-          ))}
-        </tbody>
-        <tfoot>
-          <tr><th scope="row">Total</th><td class="num fig">{stats.projects}</td><td class="fig">{stats.firstYear}–{stats.lastYear}</td></tr>
-        </tfoot>
-      </table>
-      <div class="note">
-        <p>
-          The company profile also lists historic branch offices in {company.historic_branches.slice(0, -1).join(', ')} and {company.historic_branches.at(-1)}.
-          No projects in the United Kingdom are documented.
-        </p>
-      </div>
+  <section class="sec sec--soft" aria-labelledby="countries-h">
+    <div class="w">
+      <h2 class="visually-hidden" id="countries-h">Countries</h2>
+      <Presence />
+      <p class="body-grey branches">
+        The company has also held branch offices in {branches.slice(0, -1).join(', ')} and {branches.at(-1)}.
+      </p>
     </div>
   </section>
+
+  <Statement text="Discuss transmission, substation and infrastructure programmes with the business development team." link={{ href: '/contact/?type=partnership', label: 'Contact' }}>
+    Partner With Nazir and Company
+  </Statement>
 </Base>
 
 <style>
   .wmap {
     margin: 0;
-    border: 1px solid var(--navy);
-    padding: 0.75rem;
-    background: var(--paper);
   }
   .wmap svg {
     display: block;
@@ -104,60 +86,11 @@ const OFF: Record<string, [number, number, string]> = {
     height: auto;
   }
   .wmap figcaption {
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
-    border-top: 1px solid var(--rule);
-    font-size: var(--step--1);
-    color: var(--muted);
+    margin-top: 1rem;
+    font-size: 0.8125rem;
+    color: var(--grey);
   }
-  .ctab {
-    width: 100%;
-    max-width: 36rem;
-    border-collapse: collapse;
-    table-layout: fixed;
-  }
-  .ctab .c1 {
-    width: 48%;
-  }
-  .ctab .c2 {
-    width: 20%;
-  }
-  .ctab .c3 {
-    width: 32%;
-  }
-  .ctab th,
-  .ctab td {
-    overflow-wrap: break-word;
-  }
-  .ctab th,
-  .ctab td {
-    text-align: left;
-    padding: 0.2rem 0.6rem;
-    border-bottom: 1px solid var(--rule);
-  }
-  .ctab thead th {
-    font-family: var(--mono);
-    font-weight: 500;
-    font-size: 0.75rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted);
-    border-bottom: 1px solid var(--navy);
-    padding-block: 0.6rem;
-  }
-  .ctab tbody th a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 2.75rem;
-  }
-  .ctab tfoot th,
-  .ctab tfoot td {
-    border-top: 1px solid var(--navy);
-    border-bottom: 0;
-    padding-block: 0.6rem;
-    font-weight: 600;
-  }
-  .ctab .num {
-    text-align: right;
+  .branches {
+    margin-top: 2.5rem;
   }
 </style>

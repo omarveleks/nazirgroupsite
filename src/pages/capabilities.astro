@@ -1,190 +1,114 @@
 ---
 import Base from '../layouts/Base.astro';
-import { company, stats, countries } from '../lib/data';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import Statement from '../components/Statement.astro';
+import { company } from '../lib/data';
+import { CAPABILITIES } from '../lib/site';
 
-const tx = countries.map((c) => c.name);
+const list = (xs: string[]) => (xs.length > 1 ? `${xs.slice(0, -1).join(', ')} and ${xs.at(-1)}` : xs[0]);
 ---
 <Base
-  title="Capabilities and compliance"
-  description="Pakistan Engineering Council registration (Licence No. 1, category C-A, no limit), enlistments, engineers and equipment of Nazir and Company."
+  title="Capabilities"
+  description="Capabilities of Nazir and Company: power transmission, substations, distribution and industrial power, civil infrastructure and telecommunications. Registered with the Pakistan Engineering Council, Licence No. 1."
+  heroPhoto="transmission-towers"
 >
-  <header class="page-head">
-    <div class="container">
-      <p class="eyebrow">Capabilities and compliance</p>
-      <h1>Registration, enlistments and resources</h1>
-      <p class="lede">What the company holds on record, and what it can provide to clients and main contractors on request.</p>
-    </div>
-  </header>
+  <PageHero
+    photo="transmission-towers"
+    eyebrow="Capabilities"
+    lede="From foundations and tower erection to stringing and turnkey lines, delivered by the company’s own teams."
+  >
+    <Fragment slot="title">Built to Deliver at National Scale</Fragment>
+  </PageHero>
 
-  <section class="section" aria-labelledby="pec-h">
-    <div class="container two-col">
-      <div>
-        <h2 id="pec-h">Pakistan Engineering Council</h2>
-        <p class="pec">{company.pec.statement}.</p>
-        <p>The company was the first licence holder of the Pakistan Engineering Council. A copy of the licence is available on request.</p>
+  <section class="sec" aria-labelledby="caps-h">
+    <div class="w">
+      <div class="grid2 head-row">
+        <div>
+          <span class="eb">What the Company Delivers</span>
+          <h2 class="h" id="caps-h">Five Capabilities</h2>
+        </div>
+        <p class="body-grey">Each capability is backed by projects in the company’s record. Select one for the services and projects behind it.</p>
       </div>
-      <dl class="tblock">
-        <div><dt>Licence No.</dt><dd class="fig">1</dd></div>
-        <div><dt>Category</dt><dd class="fig">C-A</dd></div>
-        <div><dt>Limit</dt><dd>No limit</dd></div>
-        <div><dt>Incorporated</dt><dd class="fig">{company.incorporated_text}</dd></div>
-      </dl>
+      <ol class="rows">
+        {CAPABILITIES.map((c, i) => (
+          <li>
+            <a href={c.href}>
+              <span class="n">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <h3>{c.title}</h3>
+                <p>{c.text}</p>
+              </div>
+              <span class="go-i"><Icon name="right" /></span>
+            </a>
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="enl-h">
-    <div class="container">
-      <h2 id="enl-h">Enlistments</h2>
-      <p>Enlistment letters held by the company, with the year each applied.</p>
-      <div class="etab-wrap">
-      <table class="etab">
-        <caption class="visually-hidden">Enlistments and the year each applied</caption>
-        <thead>
-          <tr><th scope="col">Body</th><th scope="col">Enlistment</th><th scope="col">Year</th></tr>
-        </thead>
-        <tbody>
-          {company.enlistments.map((e) => (
-            <tr>
-              <th scope="row" data-label="Body">{e.body}</th>
-              <td data-label="Enlistment">{e.detail}</td>
-              <td class="fig" data-label="Year">{e.year}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+  <section class="sec sec--soft" id="registration" aria-labelledby="reg-h">
+    <div class="w grid2 top">
+      <div>
+        <span class="eb">Registration</span>
+        <h2 class="h" id="reg-h">Licence No. 1</h2>
+        <p class="lede reg-l">
+          {company.pec.statement}, the first licence the Council issued. The company was incorporated as a private limited company on {company.incorporated_text}.
+        </p>
       </div>
-      <p class="muted small">Each entry reads “Enlisted with … (year)”: the year shown is the year of the letter or the financial year it covered, not a current validity date.</p>
-      <h3>Pre-qualification and financing</h3>
-      <p>
-        The company is recorded as pre-qualified by the {company.prequalified_with.slice(0, -1).join(', ')} and the {company.prequalified_with.at(-1)},
-        and has executed projects financed by the {company.financiers.slice(0, -1).join(', ')} and the {company.financiers.at(-1)}.
-      </p>
+      <div>
+        <ul class="regs regs--stack">
+          <li><b>Pakistan Engineering Council</b> · Licence No. 1</li>
+          <li><b>Pre-qualified</b> · {company.prequalified_short.join(' · ')}</li>
+        </ul>
+        <p class="body-grey fin">Projects financed by the {list(company.financiers)}.</p>
+      </div>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="spec-h">
-    <div class="container two-col">
-      <div>
-        <h2 id="spec-h">Fields of specialisation</h2>
-        <ul class="chips">
+  <section class="sec" aria-labelledby="fields-h">
+    <div class="w duo">
+      <div class="duo-t">
+        <span class="eb">Fields of Work</span>
+        <h2 class="h" id="fields-h">Power, Civil and Communications</h2>
+        <ul class="pills fields">
           {company.fields_of_specialisation.map((f) => <li>{f}</li>)}
         </ul>
       </div>
-      <div>
-        <h2>Engineers and equipment</h2>
-        <p>
-          Engineers registered with the Pakistan Engineering Council in electrical, electronic, telecommunication, civil,
-          mechanical and chemical engineering are listed on the company’s licence. <a href="/leadership/">Leadership and team</a>.
-        </p>
-        <p>The company has access to a large fleet of construction and stringing equipment, and can mobilise it per project.</p>
+      <div class="duo-t">
+        <span class="eb">Mobilisation</span>
+        <h2 class="h">Equipped for Every Project</h2>
+        <p class="lede">The company has access to a large fleet of construction and stringing equipment, and can mobilise it per project.</p>
+        <p class="body-grey">The Pakistan Engineering Council licence, the certificate of incorporation, the company profile and the full project list are available on request.</p>
       </div>
     </div>
   </section>
 
-  <section class="section section--navy" aria-labelledby="docs-h">
-    <div class="container two-col">
-      <div>
-        <h2 id="docs-h">Documents available on request</h2>
-        <ul>
-          <li>Pakistan Engineering Council licence</li>
-          <li>Certificate of incorporation</li>
-          <li>Enlistment letters listed above</li>
-          <li>Full project list ({stats.projects} projects, {tx.length} countries)</li>
-          <li>Details of the technical team</li>
-        </ul>
-      </div>
-      <div>
-        <p>Copies are sent to clients and main contractors on request, with the project list and the details they need for pre-qualification.</p>
-        <div class="btn-row">
-          <a class="btn btn--amber" href="/contact/?type=client">Request documents</a>
-          <a class="btn btn--ghost on-navy" href="/downloads/">Downloads</a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <Statement text="Discuss transmission, substation and infrastructure programmes with the business development team." link={{ href: '/contact/?type=partnership', label: 'Contact' }}>
+    Partner With Nazir and Company
+  </Statement>
 </Base>
 
 <style>
-  .pec {
-    font-weight: 600;
-    font-size: var(--step-1);
-    color: var(--navy);
+  .top {
+    align-items: start;
   }
-  .small {
-    font-size: var(--step--1);
+  .reg-l {
+    margin-top: 2rem;
   }
-  .etab-wrap {
-    container-type: inline-size;
+  .regs--stack {
+    flex-direction: column;
+    margin-top: 0;
+    font-size: 1.1875rem;
   }
-  .etab {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 0.75rem;
+  .regs--stack li {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line-strong);
   }
-  .etab th,
-  .etab td {
-    text-align: left;
-    vertical-align: top;
-    padding: 0.7rem 0.6rem;
-    border-bottom: 1px solid var(--rule);
+  .fin {
+    margin-top: 2rem;
   }
-  .etab thead th {
-    font-family: var(--mono);
-    font-weight: 500;
-    font-size: 0.75rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted);
-    border-bottom: 1px solid var(--navy);
-  }
-  .etab td.fig {
-    white-space: nowrap;
-  }
-  @container (max-width: 47.99rem) {
-    .etab thead {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-      clip: rect(0 0 0 0);
-    }
-    .etab,
-    .etab tbody,
-    .etab tr,
-    .etab th,
-    .etab td {
-      display: block;
-    }
-    .etab tr {
-      border: 1px solid var(--navy);
-      background: var(--panel);
-      padding: 0.5rem 0.75rem;
-      margin-bottom: 0.75rem;
-    }
-    .etab th,
-    .etab td {
-      border: 0;
-      padding: 0.2rem 0;
-    }
-    .etab td.fig {
-      white-space: normal;
-    }
-    .etab td::before {
-      content: attr(data-label);
-      display: block;
-      font-family: var(--mono);
-      font-size: 0.6875rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-  }
-  .on-navy {
-    border-color: var(--paper);
-    color: var(--paper);
-  }
-  .on-navy:hover {
-    background: var(--paper);
-    color: var(--navy);
+  .fields {
+    margin-top: 2.25rem;
   }
 </style>

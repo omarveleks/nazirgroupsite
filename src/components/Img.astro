@@ -1,0 +1,33 @@
+---
+// Responsive photo: AVIF and WebP with a JPEG fallback, phone-capped sizes, explicit
+// dimensions (the box is sized in CSS, so there is no layout shift) and lazy loading
+// unless `priority` is set (the hero, which is also preloaded in the page head).
+import { photo, PHONE_MQ } from '../lib/images';
+
+interface Props {
+  name: string;
+  alt?: string;
+  sizes?: string;
+  priority?: boolean;
+  class?: string;
+}
+const { name, alt = '', sizes = '100vw', priority = false, class: cls } = Astro.props;
+const p = photo(name);
+---
+<picture class={cls}>
+  <source type="image/avif" media={PHONE_MQ} srcset={p.phone('avif')} sizes={sizes} />
+  <source type="image/avif" srcset={p.wide('avif')} sizes={sizes} />
+  <source type="image/webp" media={PHONE_MQ} srcset={p.phone('webp')} sizes={sizes} />
+  <source type="image/webp" srcset={p.wide('webp')} sizes={sizes} />
+  <img
+    src={p.fallback}
+    srcset={p.wide('jpg')}
+    sizes={sizes}
+    width={p.width}
+    height={p.height}
+    alt={alt}
+    loading={priority ? 'eager' : 'lazy'}
+    fetchpriority={priority ? 'high' : undefined}
+    decoding={priority ? 'sync' : 'async'}
+  />
+</picture>

@@ -32,9 +32,9 @@ Facts left out, conflicts found, and decisions to confirm. Nothing here is shown
 
 ## C. Web verification not possible from this session
 
-23. The session's network policy blocked direct access to nescon.com.ly, gecol.ly, ntdc.gov.pk, wapda.gov.pk, se.com.sa, tnb.com.my, ci2000.net, Wikipedia and Wikimedia. Web checks used search summaries only (facts.md section 8). No web source found names the company on a project. **No contract value can be shown** until each flagship value is verified against an original client document.
-24. **Photos.** Image hosts are blocked in this session, so no photos could be downloaded from Google. Used: portraits from the second profile (founder, Director, four advisers) and four general photos supplied by Omar (transmission towers, substation, hydropower channel, pipelines), captioned as illustrations. The channel photo resembles the Ghazi-Barotha power channel; if Omar confirms it is, it can go on that project page.
-25. **Client logos.** Could not be downloaded from client sites. The "Clients served" strips show client names in text, as the brief allows.
+23. The session's network policy blocked direct access to nescon.com.ly, gecol.ly, ntdc.gov.pk, wapda.gov.pk, se.com.sa, tnb.com.my, ci2000.net, Wikipedia and Wikimedia. Web checks used search summaries only (facts.md section 8). Only the Ghazi-Barotha record (ICSID, Impregilo v. Pakistan) names the company on a project. Contract values are shown for seven projects on Omar's instruction; none is verified against a client document.
+24. **Photos.** Image hosts are blocked in this session, so no photos could be downloaded from Google. Used: portraits from the second profile, four general photos supplied by Omar, and nine general photos embedded in the approved v7 design preview. None is presented as a photo of a specific company project: project pages say the photograph is illustrative. The terrain band uses the preview's desert photo (labelled there as Wikimedia Commons, Qatar); replace it with a licensed or real Nazir desert photo when one is available.
+25. **Client logos.** The Home and Projects pages show official logos for Saudi Electricity Company and Tenaga Nasional Berhad (from the preview) and text marks for GECOL, NGC (formerly NTDC), WAPDA, NHA, Arabian Gulf Oil, Sirte Oil and Waha Oil. The official logo files for those seven could not be downloaded from this session (client sites blocked); supply them to replace the text marks.
 26. **nazirandcompany.com**: Omar says the domain is hacked. Left alone; not linked or referenced.
 
 ## D. Content decisions to confirm
@@ -53,3 +53,13 @@ Facts left out, conflicts found, and decisions to confirm. Nothing here is shown
 35. **Deployed** (30 Sep 2026) by GitHub Actions to a new Cloudflare Pages project, `nazir-and-company`: https://nazir-and-company.pages.dev (review mode, noindex). Every push to `main` or `claude/gallant-knuth-fh3j1q` runs `npm run qa` and redeploys. The workflow only creates a new project or updates this one; it never deletes anything or touches other Cloudflare resources.
 36. **MAIL_TO / mail provider** not set: the contact form shows "Form not yet connected".
 37. **Turnstile site key** not set: the form works without it in review mode; set it before going live.
+
+## F. v7 redesign (30 Sep 2026): where the preview copy was adjusted to stay factual
+
+38. **Pre-qualification row**: the redesign brief asks for "NHA, NTDC and WAPDA". The profile records pre-qualification with NHA, WAPDA and the Punjab C&W Department (P1 p.3); NTDC is not stated. The site shows "Pre-qualified · NHA · WAPDA". Confirm NTDC pre-qualification with a document and it can be added in one line (`prequalified_short` in company.json).
+39. **"Three continents"**: every documented project is in Asia (including the Middle East) or Africa, so "three continents" is shown as "Asia, the Middle East and Africa" and "Seven Countries, Three Regions". The only European presence is the historic UK branch office.
+40. **Capabilities copy**: "survey", "energisation" and "its own equipment and supply chain" are not in the records, so the transmission and substation lines use documented scope, and equipment keeps the brief's wording (access to a large fleet, mobilised per project).
+41. **Libya wording**: the brief's "Now seeking electrical projects and subcontracts in Libya" is replaced, as the redesign brief bans "seeking", by the approved preview line "Today the company is positioned to play a central role in the next chapter of Libya's grid." No current office or contract is claimed.
+42. **Registration**: the site now shows only "Pakistan Engineering Council, Licence No. 1" and the pre-qualification row. Categories (C-A), enlistments (Punjab Irrigation, DHA, NHA Central Zone, KP C&W, PKHA, Punjab HUD&PHE) and their years are no longer shown, on the site or in the PDFs. They remain in company.json and facts.md.
+43. **Heritage 1950s card** on Home does not name the founder (the brief keeps people off the Home page); the About page names him.
+44. **Clients heading** "Trusted by National Utilities and Energy Leaders" is the approved preview copy; the original brief preferred "Clients served". Confirm.

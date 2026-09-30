@@ -6,17 +6,23 @@
   "accessibility": 100,
   "bestPractices": 100,
   "seo": 100,
-  "lcp": 1204,
+  "lcp": 1356,
   "cls": 0,
   "tbt": 0,
-  "kb": 59
+  "kb": 81
  },
  "failing": [
   {
    "k": "unused-css-rules",
    "title": "Reduce unused CSS",
    "score": 0,
-   "display": "Est savings of 45 KiB"
+   "display": "Est savings of 55 KiB"
+  },
+  {
+   "k": "cache-insight",
+   "title": "Use efficient cache lifetimes",
+   "score": 0.5,
+   "display": "Est savings of 11 KiB"
   },
   {
    "k": "network-dependency-tree-insight",

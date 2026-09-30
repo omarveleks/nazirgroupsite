@@ -1,0 +1,15 @@
+---
+// Country rows in two columns, each with a capability descriptor (no counts).
+import { PRESENCE_ORDER, countryMeta } from '../lib/site';
+import { country } from '../lib/data';
+---
+<ul class="gl">
+  {PRESENCE_ORDER.map((slug) => (
+    <li>
+      <a href={`/projects/${slug}/`}>
+        <h3>{country(slug).name}</h3>
+        <span>{countryMeta(slug).descriptor}</span>
+      </a>
+    </li>
+  ))}
+</ul>

@@ -74,6 +74,38 @@ export function runContentChecks(dist, mode) {
     }
   });
 
+  check('Copy tone: no banned phrasing ("small", "seeking", "looking for", "can request", "open to", "has engineers")', (d) => {
+    const re = /\b(small|seeking|looking for|can request|open to|has engineers)\b/gi;
+    for (const p of pages) {
+      const m = p.text.match(re);
+      if (m) d.push(`${p.url}: ${[...new Set(m.map((x) => x.toLowerCase()))].join(', ')}`);
+    }
+  });
+
+  check('Registrations: only PEC Licence No. 1 and pre-qualification (no categories, grades or enlistments)', (d) => {
+    const re = /\b(C-A|category C|enlist\w*|grade [A-Z0-9]|PK-1|no limit)\b/gi;
+    for (const p of pages) {
+      const m = p.text.match(re);
+      if (m) d.push(`${p.url}: ${[...new Set(m)].join(', ')}`);
+    }
+  });
+
+  check('Design rules: no amber or orange, no monospace, serif accent on letters only', (d) => {
+    const walk = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(path.join(dir, e.name)) : [path.join(dir, e.name)]));
+    for (const f of walk(dist).filter((x) => x.endsWith('.css'))) {
+      const css = fs.readFileSync(f, 'utf8').replace(/url\(data:[^)]*\)/g, '');
+      if (/#e0a100|#e8a|amber|orange/i.test(css)) d.push(`${path.relative(dist, f)}: amber or orange colour`);
+      if (/monospace|\bmono\b|Plex Mono|JetBrains/i.test(css)) d.push(`${path.relative(dist, f)}: monospace font`);
+    }
+    for (const p of pages) {
+      if (/#e0a100|monospace/i.test(p.html)) d.push(`${p.url}: amber or monospace in HTML`);
+      for (const el of p.root.querySelectorAll('.accent')) {
+        if (!/^[A-Za-z ]+$/.test(el.text.trim())) d.push(`${p.url}: serif accent "${el.text.trim()}" has characters outside the letters-only subset`);
+      }
+      if (p.root.querySelectorAll('.accent').length > 1) d.push(`${p.url}: more than one serif accent word`);
+    }
+  });
+
   check('Contract values only where approved (value.show), in original currency and year', (d) => {
     const data = JSON.parse(fs.readFileSync('src/data/projects.json', 'utf8'));
     const allowed = new Map();

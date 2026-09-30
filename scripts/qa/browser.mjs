@@ -48,7 +48,7 @@ function track(page, bag) {
   });
 }
 
-export async function runBrowserChecks({ base, urls, screensDir, representative, keyPages }) {
+export async function runBrowserChecks({ base, urls, screensDir, representative, keyPages, signoff }) {
   const browser = await chromium.launch();
   const results = [];
   const add = (name, details, extra = {}) => results.push({ name, pass: details.length === 0, details: details.slice(0, 40), count: details.length, ...extra });
@@ -140,6 +140,33 @@ export async function runBrowserChecks({ base, urls, screensDir, representative,
       await ctx.close();
     }
     add(`Screenshots saved at 360, 768 and 1280 px (${representative.length} pages each)`, d);
+  }
+
+  // 3b. Key pages at 390 and 1440 px (the redesign sign-off set)
+  {
+    const d = [];
+    for (const w of [390, 1440]) {
+      const dir = path.join(screensDir, String(w));
+      fs.mkdirSync(dir, { recursive: true });
+      const ctx = await browser.newContext({ viewport: { width: w, height: 900 } });
+      const page = await ctx.newPage();
+      for (const u of signoff) {
+        await page.goto(base + u, { waitUntil: 'networkidle' });
+        // scroll through so lazy images load before the full-page capture
+        await page.evaluate(async () => {
+          for (let y = 0; y < document.body.scrollHeight; y += 700) {
+            window.scrollTo(0, y);
+            await new Promise((r) => setTimeout(r, 50));
+          }
+          window.scrollTo(0, 0);
+        });
+        await page.waitForLoadState('networkidle');
+        const name = (u.replace(/^\/|\/$/g, '').replace(/\//g, '__') || 'home') + '.jpg';
+        await page.screenshot({ path: path.join(dir, name), fullPage: true, type: 'jpeg', quality: 60 });
+      }
+      await ctx.close();
+    }
+    add(`Screenshots saved at 390 and 1440 px (${signoff.length} key pages)`, d);
   }
 
   // 4. Emulated devices with throttling: vitals, weight, interactions

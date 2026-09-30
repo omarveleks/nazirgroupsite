@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ContactDetails from '../../components/ContactDetails.astro';
+import Icon from '../../components/Icon.astro';
 import { FORM_ENABLED, TURNSTILE_SITE_KEY, countries } from '../../lib/data';
 
 const types = [
@@ -13,33 +14,31 @@ const types = [
 const countryHints = [...countries.map((c) => c.name), 'United Arab Emirates', 'Qatar', 'Oman', 'Kuwait', 'Egypt', 'Tunisia', 'Algeria'];
 const turnstile = FORM_ENABLED && TURNSTILE_SITE_KEY;
 ---
-<Base title="Contact" description="Send an enquiry to Nazir and Company: clients, main contractors (including Libya subcontracts), partnerships and careers. Head office: 100 Abu Bakr Block, New Garden Town, Lahore.">
-  <header class="page-head">
-    <div class="container">
-      <p class="eyebrow">Contact</p>
-      <h1>Make an enquiry</h1>
-      <p class="lede">For clients, main contractors, partners and job applicants. Registration documents and the full project list are available on request.</p>
-    </div>
+<Base title="Contact" description="Contact Nazir and Company: clients, main contractors (including Libya subcontracts), partnerships and careers. Head office: 100 Abu Bakr Block, New Garden Town, Lahore.">
+  <header class="page-head w">
+    <span class="eb">Contact</span>
+    <h1 class="h h--xl">Let’s Build What’s Next</h1>
+    <p class="lede">For clients, main contractors, partners and engineers who want to join the company’s project teams.</p>
   </header>
 
-  <section class="section">
-    <div class="container two-col">
+  <section class="sec--tight contact-sec">
+    <div class="w contact-grid">
       <div>
         {!FORM_ENABLED && (
-          <div class="notice" role="status">
+          <div class="note" role="status">
             <p><strong>Form not yet connected.</strong> Enquiries cannot be sent from this page yet.</p>
           </div>
         )}
-        <form class="enq" action="/api/contact" method="post" enctype="multipart/form-data" data-enquiry>
+        <form class="form enq" action="/api/contact" method="post" enctype="multipart/form-data" data-enquiry>
           <div class="field">
             <label for="type">Type of enquiry <span class="req">(required)</span></label>
             <select id="type" name="type" required>
               {types.map((t) => <option value={t.v}>{t.l}</option>)}
             </select>
           </div>
-          <div class="row">
+          <div class="form-2">
             <div class="field">
-              <label for="name">Your name <span class="req">(required)</span></label>
+              <label for="name">Name <span class="req">(required)</span></label>
               <input id="name" name="name" type="text" autocomplete="name" required maxlength="200" />
             </div>
             <div class="field">
@@ -47,7 +46,7 @@ const turnstile = FORM_ENABLED && TURNSTILE_SITE_KEY;
               <input id="org" name="organisation" type="text" autocomplete="organization" maxlength="200" />
             </div>
           </div>
-          <div class="row">
+          <div class="form-2">
             <div class="field">
               <label for="email">Email <span class="req">(required)</span></label>
               <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required maxlength="254" />
@@ -81,13 +80,16 @@ const turnstile = FORM_ENABLED && TURNSTILE_SITE_KEY;
           {turnstile && <div class="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} data-theme="light"></div>}
           <p class="hint">The details are used only to reply to this enquiry. <a href="/privacy/">Privacy note</a>.</p>
           <p class="status" data-status role="status" aria-live="polite"></p>
-          <button class="btn" type="submit" disabled={!FORM_ENABLED} aria-disabled={!FORM_ENABLED ? 'true' : undefined}>Send enquiry</button>
+          <div>
+            <button class="pill" type="submit" disabled={!FORM_ENABLED} aria-disabled={!FORM_ENABLED ? 'true' : undefined}>Send Enquiry <Icon name="right" /></button>
+          </div>
         </form>
       </div>
       <aside class="side" aria-labelledby="office-h">
-        <h2 id="office-h">Head office</h2>
+        <span class="eb">Head Office</span>
+        <h2 class="side-h" id="office-h">Lahore, Pakistan</h2>
         <ContactDetails />
-        <p class="muted small">No map is embedded on this page to keep it fast; the link opens a map service.</p>
+        <p class="hint">No map is embedded on this page to keep it fast; the link opens a map service.</p>
       </aside>
     </div>
   </section>
@@ -96,77 +98,33 @@ const turnstile = FORM_ENABLED && TURNSTILE_SITE_KEY;
 </Base>
 
 <style>
-  .notice {
-    border: 1px solid var(--navy);
-    border-left: 4px solid var(--amber);
-    background: var(--panel);
-    padding: 0.75rem 1rem;
-    margin-bottom: 1.5rem;
-  }
-  .notice p {
-    margin: 0;
-  }
-  .enq {
+  .contact-grid {
     display: grid;
-    gap: 1.1rem;
+    gap: 4rem;
+    align-items: start;
   }
-  .row {
-    display: grid;
-    gap: 1.1rem;
-  }
-  @media (min-width: 40rem) {
-    .row {
-      grid-template-columns: 1fr 1fr;
+  @media (min-width: 60em) {
+    .contact-grid {
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      column-gap: clamp(3rem, 7vw, 8rem);
     }
   }
-  .field {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    min-width: 0;
+  .contact-sec {
+    padding-bottom: var(--sec);
   }
-  label {
-    font-weight: 600;
-    color: var(--navy);
+  .note {
+    margin: 0 0 2.5rem;
   }
   .req {
-    font-weight: 400;
-    color: var(--muted);
-    font-size: var(--step--1);
-  }
-  input,
-  select,
-  textarea {
-    font: inherit;
-    font-size: 1rem;
-    min-height: 2.75rem;
-    width: 100%;
-    padding: 0.55rem 0.7rem;
-    border: 1px solid var(--rule-strong);
-    border-radius: var(--radius);
-    background: #fff;
-    color: var(--text);
-  }
-  input[type='file'] {
-    padding: 0.5rem;
-  }
-  textarea {
-    resize: vertical;
-    line-height: 1.5;
-  }
-  input:focus,
-  select:focus,
-  textarea:focus {
-    border-color: var(--navy);
-  }
-  input[aria-invalid='true'],
-  textarea[aria-invalid='true'] {
-    border-color: #a4262c;
+    font: 300 0.8125rem/1 var(--body);
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--grey);
   }
   .hint {
     margin: 0;
-    font-size: var(--step--1);
-    color: var(--muted);
+    font-size: 0.9375rem;
+    color: var(--grey);
   }
   .hp {
     position: absolute;
@@ -180,26 +138,26 @@ const turnstile = FORM_ENABLED && TURNSTILE_SITE_KEY;
   }
   .status {
     margin: 0;
-    font-weight: 600;
+    font-weight: 500;
   }
   .status:empty {
     display: none;
   }
   .status[data-kind='error'] {
-    color: #a4262c;
+    color: #b3261e;
   }
   .status[data-kind='ok'] {
     color: #1d5e2e;
   }
   .side {
-    border: 1px solid var(--navy);
-    background: var(--panel);
-    padding: 1.25rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
   }
-  .side h2 {
-    font-size: var(--step-2);
+  .side-h {
+    font: 300 clamp(1.75rem, 3vw, 2.5rem) / 1.1 var(--display);
+    margin-bottom: 1.5rem;
   }
-  .small {
-    font-size: var(--step--1);
+  .side .hint {
+    margin-top: 1.5rem;
   }
 </style>

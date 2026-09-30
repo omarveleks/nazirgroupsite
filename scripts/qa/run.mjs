@@ -73,7 +73,8 @@ if (build('live')) {
   const server = await serve();
   try {
     if (!quick) {
-      const b = await runBrowserChecks({ base, urls, screensDir: path.join(qaDir, 'screens'), representative, keyPages });
+      const signoff = ['/', '/projects/', '/projects/libya/', '/projects/libya/benghazi-eastern-border-220-kv-double-circuit-lines-750-km/', '/libya/', '/about/'];
+      const b = await runBrowserChecks({ base, urls, screensDir: path.join(qaDir, 'screens'), representative, keyPages, signoff });
       b.forEach((r) => record('browser', r));
       const lh = await runLighthouse({
         base,
@@ -149,13 +150,13 @@ INP is the longest interaction measured while opening the menu and typing in the
 
 ## Screenshots
 
-Full-page screenshots of every page type at 360, 768 and 1280 px are in \`qa/screens/360\`, \`qa/screens/768\` and \`qa/screens/1280\` (all non-project pages, one project page per country, and the flagship Libya line). Device screenshots are in \`qa/screens/devices\`. All 184 project pages share one template; each of them is checked automatically (axe, console, network, overflow, tap targets) at 390 px.
+Sign-off screenshots of Home, Projects, the Libya country page, the Benghazi–eastern border project page, Libya and About at 390 and 1440 px are in \`qa/screens/390\` and \`qa/screens/1440\`. Full-page screenshots of every page type at 360, 768 and 1280 px are in \`qa/screens/360\`, \`qa/screens/768\` and \`qa/screens/1280\` (all non-project pages, one project page per country, and the flagship Libya line). Device screenshots are in \`qa/screens/devices\`. All ${JSON.parse(fs.readFileSync(path.join(root, 'src/data/projects.json'), 'utf8')).length} project pages share one template; each of them is checked automatically (axe, console, network, overflow, tap targets) at 390 px.
 
 ## Notes on method
 
-- Fonts: three families (Fraunces 600, IBM Plex Sans 400/600, IBM Plex Mono 500), WOFF2, subset to exactly the characters the site uses (about 43 KB for all four files) and inlined into the single stylesheet. Text therefore renders in its final font from the first paint, so fonts cause no layout shift; \`font-display: swap\` and size-adjusted local fallbacks remain declared as a safety net. A QA check fails the build if a page uses a character outside the subset.
-- JavaScript: about 1.7 KB gzipped for the whole site (menu enhancement, register filters, form enhancement). Budget 40 KB.
-- No raster images are used on pages (line drawings are inline SVG), so the image rules (AVIF/WebP, srcset, lazy loading) have nothing to apply to yet. They apply when photos are added.
+- Fonts: three families (Inter Tight 300/400/600, Inter 300/500, Instrument Serif italic for one accent word per page), WOFF2, subset to exactly the characters the site uses (about 51 KB for all six files) and inlined into the single stylesheet. Text therefore renders in its final font from the first paint, so fonts cause no layout shift; \`font-display: swap\` and metric-matched local fallbacks remain declared as a safety net. A QA check fails the build if a page uses a character outside the subset.
+- JavaScript: about 3 KB gzipped for the whole site (menu, hero card, capability tabs, featured rows, decade selector, register filters, form). No autoplay. Budget 40 KB.
+- Images: AVIF and WebP with a JPEG fallback, widths 480/960/1600 (phones capped at 960 px), explicit dimensions, lazy loading except the first-screen photo, which is preloaded with the same sources as its <picture>. Warm photos carry a navy monochrome grade.
 - Pages were read at 390 px for typos and figures against \`src/data/facts.md\` (see REVIEW.md for the checklist given to the company).
 - The W3C validator is not reachable from the build environment; html-validate with its recommended rule set is used instead.
 

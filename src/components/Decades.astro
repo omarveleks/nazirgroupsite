@@ -1,0 +1,24 @@
+---
+// Heritage timeline: decade pills switch the photo card (src/scripts/ui.ts).
+import Img from './Img.astro';
+import { DECADES, DEFAULT_DECADE } from '../lib/site';
+---
+<div class="tl" data-decades>
+  <ul class="dec" aria-label="Decades">
+    {DECADES.map((d) => (
+      <li><button type="button" data-d={d.label} aria-pressed={d.label === DEFAULT_DECADE ? 'true' : 'false'}>{d.label}</button></li>
+    ))}
+  </ul>
+  <div class="lc on-dark" aria-live="polite">
+    {DECADES.map((d) => (
+      <article class="lc-s" data-dslide={d.label} hidden={d.label !== DEFAULT_DECADE}>
+        <Img name={d.photo} sizes="(min-width: 60em) 45vw, 100vw" />
+        <div class="lc-t">
+          <span class="tag">{d.tag}</span>
+          <h3>{d.title}</h3>
+          <p>{d.text}</p>
+        </div>
+      </article>
+    ))}
+  </div>
+</div>

@@ -67,8 +67,9 @@
     }
   ],
   "pec": {
-    "statement": "Registered with the Pakistan Engineering Council, Licence No. 1, category C-A (no limit)",
-    "first_licence": true
+    "statement": "Registered with the Pakistan Engineering Council, Licence No. 1",
+    "first_licence": true,
+    "short": "Pakistan Engineering Council, Licence No. 1"
   },
   "address": "100 Abu Bakr Block, New Garden Town, Lahore, Pakistan",
   "fields_of_specialisation": [
@@ -140,5 +141,9 @@
     "Malaysia",
     "Mozambique"
   ],
-  "libya_status": "Historic record in Libya (48 projects, 1978–2011). Now seeking electrical projects and subcontracts in Libya."
+  "libya_status": "Today the company is positioned to play a central role in the next chapter of Libya's grid.",
+  "prequalified_short": [
+    "NHA",
+    "WAPDA"
+  ]
 }

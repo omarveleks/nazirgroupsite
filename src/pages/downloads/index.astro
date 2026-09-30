@@ -1,78 +1,61 @@
 ---
 import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
 import { projectListPdf, capabilityPdf } from '../../lib/pdf';
 import { companyProfilePdf } from '../../lib/profile-pdf';
-import { stats } from '../../lib/data';
 
 const kb = (b: Uint8Array) => `${Math.max(1, Math.round(b.byteLength / 1024))} KB`;
 const list = await projectListPdf();
 const cap = await capabilityPdf();
 const profile = await companyProfilePdf();
+const docs = [
+  {
+    title: 'Company Profile',
+    text: 'Heritage, leadership, services, selected projects, Libya, global presence and registration.',
+    href: '/downloads/nazir-company-profile.pdf',
+    size: kb(profile),
+  },
+  {
+    title: 'Capability Statement',
+    text: 'One page: registration, services, key figures and selected projects.',
+    href: '/downloads/nazir-capability-statement.pdf',
+    size: kb(cap),
+  },
+  {
+    title: 'Project List',
+    text: 'Every project by country, with client, year, voltage and length.',
+    href: '/downloads/nazir-project-list.pdf',
+    size: kb(list),
+  },
+];
 ---
-<Base title="Downloads" description="Download the Nazir and Company company profile, project list and one-page capability statement, generated from the project register.">
-  <header class="page-head">
-    <div class="container">
-      <p class="eyebrow">Downloads</p>
-      <h1>Company documents</h1>
-      <p class="lede">All three documents are generated from the same register as this website, so their figures match it.</p>
-    </div>
+<Base title="Downloads" description="Download the Nazir and Company company profile, one-page capability statement and project list, generated from the same records as this website.">
+  <header class="page-head w">
+    <span class="eb">Downloads</span>
+    <h1 class="h h--xl">Company Documents</h1>
+    <p class="lede">Generated from the same records as this website, so every figure matches it.</p>
   </header>
 
-  <section class="section">
-    <div class="container">
+  <section class="sec--tight">
+    <div class="w">
       <ul class="docs">
-        <li>
-          <div>
-            <h2>Company profile</h2>
-            <p>History, leadership, services, selected projects with contract values, Libya, global presence and compliance.</p>
-          </div>
-          <a class="btn" href="/downloads/nazir-company-profile.pdf" download>Download PDF <span class="fig">({kb(profile)})</span></a>
-        </li>
-        <li>
-          <div>
-            <h2>Capability statement</h2>
-            <p>One page: registration, services, key figures, selected projects, enlistments.</p>
-          </div>
-          <a class="btn" href="/downloads/nazir-capability-statement.pdf" download>Download PDF <span class="fig">({kb(cap)})</span></a>
-        </li>
-        <li>
-          <div>
-            <h2>Project list</h2>
-            <p>All {stats.projects} documented projects by country, with client, year, voltage and length.</p>
-          </div>
-          <a class="btn" href="/downloads/nazir-project-list.pdf" download>Download PDF <span class="fig">({kb(list)})</span></a>
-        </li>
+        {docs.map((d) => (
+          <li>
+            <div>
+              <h2>{d.title}</h2>
+              <p>{d.text}</p>
+            </div>
+            <a class="pill" href={d.href} download>Download PDF <span class="size">({d.size})</span> <Icon name="download" /></a>
+          </li>
+        ))}
       </ul>
-      <p class="muted">Copies of the Pakistan Engineering Council licence, certificate of incorporation and enlistment letters are also available on request.</p>
+      <p class="body-grey more">Copies of the Pakistan Engineering Council licence and the certificate of incorporation are available on request. <a href="/contact/">Contact</a>.</p>
     </div>
   </section>
 </Base>
 
 <style>
-  .docs {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 1.5rem;
-    border-top: 1px solid var(--navy);
-  }
-  .docs li {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem 2rem;
-    padding: 1.25rem 0;
-    border-bottom: 1px solid var(--rule);
-  }
-  .docs h2 {
-    font-size: var(--step-2);
-    margin-bottom: 0.25rem;
-  }
-  .docs p {
-    margin: 0;
-  }
-  .docs .fig {
-    font-weight: 400;
-    font-size: 0.875rem;
+  .more {
+    margin-top: 2.5rem;
   }
 </style>

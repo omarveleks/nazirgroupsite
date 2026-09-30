@@ -1,16 +1,21 @@
 ---
+import More from '../../components/More.astro';
 import Base from '../../layouts/Base.astro';
 ---
 <Base title="Enquiry sent" description="The enquiry has been sent to Nazir and Company and will be answered by the company." noindex>
-  <header class="page-head">
-    <div class="container">
-      <p class="eyebrow">Contact</p>
-      <h1>Thank you</h1>
-      <p class="lede">The enquiry has been sent and will be answered by the company.</p>
-      <div class="btn-row">
-        <a class="btn" href="/projects/">Project register</a>
-        <a class="btn btn--ghost" href="/">Home</a>
-      </div>
+  <header class="page-head w">
+    <span class="eb">Contact</span>
+    <h1 class="h h--xl">Thank You</h1>
+    <p class="lede">The enquiry has been sent and will be answered by the company.</p>
+    <div class="row-links actions">
+      <More href="/projects/" label="Explore the Projects" />
+      <More href="/" label="Home" />
     </div>
   </header>
 </Base>
+
+<style>
+  .actions {
+    margin-top: 2.5rem;
+  }
+</style>

@@ -1,4 +1,4 @@
-// Company milestones, used by the About page timeline and the company profile PDF.
+// Company milestones, used by the company profile PDF (the site shows them by decade: src/lib/site.ts).
 import { company } from './data';
 
 export interface Milestone {

@@ -116,3 +116,12 @@ Omar authorised using photos that appear in web searches for **"nescon libya"** 
 4. Which 6 to 10 flagship projects should show values, once you have verified them.
 5. Any project years, headcount, or certificates (ISO, HSE) that can be shown with evidence.
 6. Confirm the shortlist of up to 6 engineers shown, and any extra facts for the Director bio (education, years, projects led) plus portrait photos.
+
+## 11. Changes after the brief (Omar, 30 Sep 2026)
+These override the sections above where they conflict.
+1. **Design:** section 3 ("The Corridor") is replaced by the v7 design in `docs/REDESIGN_V7.md` (white-first, Inter Tight / Inter / Instrument Serif, corporate blue `#1F4FB8`, no amber, no monospace). The preview's photos and logos are in `source/photos/` and `source/logos/`.
+2. **Copy tone:** confident and corporate; no "small", "seeking", "looking for", "can request", "open to", "has engineers"; no project counts or year ranges as selling points; no founder or Director on the Home page. Facts still come only from the sources (section 2, rule 1).
+3. **Libya wording:** "Today the company is positioned to play a central role in the next chapter of Libya's grid." (replaces rule 2.5's "Now seeking" line). Still no current office or contracts claimed.
+4. **Registrations:** show only "Pakistan Engineering Council, Licence No. 1" and pre-qualification (NHA, WAPDA as documented; NTDC only with a document). No categories, grades, years or enlistments.
+5. **Contract values:** shown for projects listed above Rs 2 billion or the equivalent, in original currency and year (`value.show` in projects.json).
+6. **Company profile PDF:** generated from the data (`src/lib/profile-pdf.ts`).

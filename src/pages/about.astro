@@ -1,251 +1,109 @@
 ---
 import Base from '../layouts/Base.astro';
-import Logo from '../components/Logo.astro';
+import PageHero from '../components/PageHero.astro';
 import Portrait from '../components/Portrait.astro';
-import { company, projects, stats, projectBySlug, projectUrl, countries } from '../lib/data';
-import { milestones } from '../lib/milestones';
+import Decades from '../components/Decades.astro';
+import Leadership from '../components/Leadership.astro';
+import Advisers from '../components/Advisers.astro';
+import Engineers from '../components/Engineers.astro';
+import Statement from '../components/Statement.astro';
+import Go from '../components/Go.astro';
+import { company, stats } from '../lib/data';
+import { MAX_AC_KV, numberWord } from '../lib/site';
 
-// Route profile: cumulative documented projects by completion year (build-time SVG)
-const W = 960;
-const H = 260;
-const padL = 44;
-const padR = 20;
-const padT = 24;
-const padB = 40;
-const x0 = company.founded;
-const x1 = new Date().getFullYear();
-const dated = projects.filter((p) => p.year_end !== null);
-const undated = projects.length - dated.length;
-const X = (y: number) => padL + ((y - x0) / (x1 - x0)) * (W - padL - padR);
-const Y = (n: number) => H - padB - (n / dated.length) * (H - padT - padB);
-let cum = 0;
-const pts: [number, number][] = [[X(x0), Y(0)]];
-for (let y = x0; y <= stats.lastYear; y++) {
-  const n = dated.filter((p) => p.year_end === y).length;
-  if (n) {
-    pts.push([X(y), Y(cum)]);
-    cum += n;
-    pts.push([X(y), Y(cum)]);
-  }
-}
-pts.push([X(x1), Y(cum)]);
-const line = pts.map(([x, y], i) => `${i ? 'L' : 'M'}${x.toFixed(1)} ${y.toFixed(1)}`).join('');
-const area = `${line}L${X(x1).toFixed(1)} ${Y(0)}L${X(x0)} ${Y(0)}Z`;
-const decadeTicks = [1960, 1970, 1980, 1990, 2000, 2010, 2020];
-
-const stations = milestones.map((m) => ({ ...m, href: m.slug ? projectUrl(projectBySlug(m.slug)) : undefined }));
+const d = company.director;
+const f = company.founder;
 ---
-<Base title="About" description={`Nazir and Company, founded ${company.founded} and incorporated ${company.incorporated_text}: the company's history, founder and present work.`}>
-  <header class="page-head">
-    <div class="container">
-      <p class="eyebrow">About</p>
-      <h1>From 1958 to today</h1>
-      <p class="lede">
-        Nazir and Company (Pvt) Ltd is an electrical and civil engineering contractor based in Lahore. It was founded in
-        {company.founded} and incorporated in 1972. Its documented record runs from {stats.firstYear} to {stats.lastYear}
-        across {stats.countries} countries.
-      </p>
-    </div>
-  </header>
+<Base
+  title="About"
+  description={`Nazir and Company, Lahore: founded in ${company.founded}, incorporated on ${company.incorporated_text}, holder of Licence No. 1 of the Pakistan Engineering Council. Heritage, leadership and engineers.`}
+  heroPhoto="tower-sky"
+>
+  <PageHero
+    photo="tower-sky"
+    eyebrow="About Nazir and Company"
+    lede="For more than six decades, Nazir and Company has built the high-voltage networks, substations and civil infrastructure that power economies."
+  >
+    <Fragment slot="title">Delivering the Infrastructure Nations Run On</Fragment>
+  </PageHero>
 
-  <section class="section" aria-labelledby="profile-h">
-    <div class="container">
-      <p class="eyebrow">Route profile</p>
-      <h2 id="profile-h">Documented projects over time</h2>
-      <figure class="profile">
-        <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} role="img" aria-labelledby="pf-t pf-d">
-          <title id="pf-t">Cumulative number of documented projects by completion year, {x0} to {x1}</title>
-          <desc id="pf-d">{`The line rises from the first documented completions in ${stats.firstYear} to ${cum} dated projects by ${stats.lastYear}.`}</desc>
-          <g stroke="var(--rule)" stroke-width="1">
-            {[0.25, 0.5, 0.75, 1].map((k) => <path d={`M${padL} ${Y(dated.length * k).toFixed(1)}H${W - padR}`} />)}
-          </g>
-          <path d={area} fill="rgba(11,31,58,0.06)" />
-          <path d={line} fill="none" stroke="var(--navy)" stroke-width="2" stroke-linejoin="round" />
-          <path d={`M${padL} ${Y(0)}H${W - padR}`} stroke="var(--navy)" stroke-width="1" />
-          <g font-family="IBM Plex Mono, Plex Mono Fallback, monospace" font-size="12" fill="var(--muted)">
-            {decadeTicks.map((y) => (
-              <>
-                <path d={`M${X(y).toFixed(1)} ${Y(0)}v6`} stroke="var(--navy)" />
-                <text x={X(y)} y={H - padB + 20} text-anchor="middle">{y}</text>
-              </>
-            ))}
-            <text x={padL - 8} y={Y(dated.length) + 4} text-anchor="end">{dated.length}</text>
-            <text x={padL - 8} y={Y(0) + 4} text-anchor="end">0</text>
-          </g>
-          <g font-family="IBM Plex Mono, Plex Mono Fallback, monospace" font-size="12" fill="var(--navy)">
-            {[
-              [company.founded, 'Founded 1958'],
-              [1972, 'Incorporated'],
-              [2001, '750 km, Libya'],
-            ].map(([y, label]) => (
-              <>
-                <circle cx={X(y as number)} cy={Y(0)} r="4" fill="var(--amber)" stroke="var(--paper)" stroke-width="2" />
-                <text x={X(y as number) + (y === 1972 ? -6 : 6)} y={Y(0) - 10} text-anchor={y === 1972 ? 'end' : 'start'}>{label}</text>
-              </>
-            ))}
-            <text x={X(stats.lastYear) - 6} y={Y(cum) - 10} text-anchor="end" font-weight="500">{cum} projects by {stats.lastYear}</text>
-          </g>
-        </svg>
-        <figcaption>
-          Cumulative count by completion year, from the project register.{undated > 0 && ` ${undated} projects without a stated year are not plotted.`}
-        </figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="tl-h">
-    <div class="container">
-      <h2 id="tl-h">Stations along the way</h2>
-      <ol class="route">
-        {stations.map((s) => (
-          <li>
-            <span class="ch fig">{s.year}</span>
-            <div>
-              <h3>{s.href ? <a href={s.href}>{s.title}</a> : s.title}</h3>
-              <p>{s.text}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="founder-h">
-    <div class="container two-col">
-      <div>
-        <p class="eyebrow">The founder</p>
-        <h2 id="founder-h">{company.founder.name}, {company.founder.born}–{company.founder.died}</h2>
-        <ul class="prose-list">
-          {company.founder.facts.map((t) => <li>{t}</li>)}
-        </ul>
-        <p><a href="/leadership/">Leadership and team</a></p>
-      </div>
-      <div class="founder-art">
-        <Portrait name="founder" alt={`Portrait of ${company.founder.name}`} width={200} />
-        <div class="plaque" aria-hidden="true">
-          <Logo height={56} />
-          <p class="fig">EST. {company.founded}</p>
+  <section class="sec lined" id="heritage" aria-labelledby="heritage-h">
+    <div class="w lg">
+      <div class="lgt">
+        <span class="eb">Heritage</span>
+        <h2 class="h" id="heritage-h">Six Decades of Delivery</h2>
+        <p class="body-grey">
+          {f.name} founded the company in Lahore in {company.founded}. It was incorporated as a private limited company on {company.incorporated_text}, and holds Licence No. 1 of the Pakistan Engineering Council, the first the Council ever issued.
+        </p>
+        <p class="body-grey">
+          By the late 1970s the company was building high-voltage transmission in Iraq and Libya. It has since delivered across {numberWord(stats.countries).toLowerCase()} countries in Asia, the Middle East and Africa, for national utilities, energy producers and governments.
+        </p>
+        <div class="heads">
+          <div class="head">
+            <Portrait name="founder" alt="" width={72} />
+            <div><b>{f.name}</b><span>Founder, {f.born}–{f.died}</span></div>
+          </div>
+          <div class="head">
+            <Portrait name="director" alt="" width={72} />
+            <div><b>{d.name}</b><span>{d.title}</span></div>
+          </div>
         </div>
       </div>
+      <Decades />
     </div>
   </section>
 
-  <section class="section section--navy" aria-labelledby="today-h">
-    <div class="container">
-      <p class="eyebrow">Today</p>
-      <h2 id="today-h">What the company is today</h2>
-      <ul class="today">
-        <li>Head office at 100 Abu Bakr Block, New Garden Town, Lahore.</li>
-        <li>{company.pec.statement}. The company was the first licence holder of the Pakistan Engineering Council.</li>
-        <li>Holds enlistment letters from Punjab and Khyber Pakhtunkhwa authorities, DHA Lahore and the National Highway Authority, dated 2011 to 2018. <a href="/capabilities/">Capabilities and compliance</a>.</li>
-        <li>Directed by Sheikh Tanveer Ahmed, with the company since 1985.</li>
-        <li>{company.libya_status}</li>
-        <li>A documented record of {stats.projects} projects in {countries.map((c) => c.name).join(', ')}.</li>
-      </ul>
+  <section class="sb on-dark" aria-label="Key figures">
+    <ul class="w sg">
+      <li><span class="sg-n">{company.founded}</span><span class="sg-l">Founded in Lahore</span></li>
+      <li><span class="sg-n">{stats.countries}</span><span class="sg-l">Countries across Asia, the Middle East and Africa</span></li>
+      <li><span class="sg-n">{MAX_AC_KV}<small>kV</small></span><span class="sg-l">Transmission capability, up to HVDC</span></li>
+      <li><span class="sg-n">No. 1</span><span class="sg-l">Licence of the Pakistan Engineering Council</span></li>
+    </ul>
+  </section>
+
+  <section class="sec" id="leadership" aria-labelledby="leadership-h">
+    <div class="w">
+      <div class="grid2 head-row">
+        <div>
+          <span class="eb">Leadership</span>
+          <h2 class="h" id="leadership-h">Leadership</h2>
+        </div>
+        <p class="body-grey">The company is led by its Director, {d.name}, with the support of a team of senior advisers.</p>
+      </div>
+      <Leadership />
     </div>
   </section>
+
+  <section class="sec sec--soft" aria-labelledby="advisers-h">
+    <div class="w">
+      <span class="eb">Advisers</span>
+      <h2 class="h head-row" id="advisers-h">Key Advisers</h2>
+      <Advisers />
+    </div>
+  </section>
+
+  <section class="sec" id="engineers" aria-labelledby="engineers-h">
+    <div class="w">
+      <div class="grid2 head-row">
+        <div>
+          <span class="eb">Engineers</span>
+          <h2 class="h" id="engineers-h">Selected Engineers</h2>
+        </div>
+        <p class="body-grey">Engineers registered with the Pakistan Engineering Council and listed on the company licence. The full technical team is available on request.</p>
+      </div>
+      <Engineers />
+      <div class="row-links more"><Go href="/leadership/" label="Leadership and Team" /></div>
+    </div>
+  </section>
+
+  <Statement text="Discuss transmission, substation and infrastructure programmes with the business development team." link={{ href: '/contact/?type=partnership', label: 'Contact' }}>
+    Partner With Nazir and Company
+  </Statement>
 </Base>
 
 <style>
-  .profile {
-    margin: 0;
-    border: 1px solid var(--navy);
-    background: var(--panel);
-    padding: 0.75rem;
-  }
-  .profile svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    min-height: 9rem;
-  }
-  .profile figcaption {
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
-    border-top: 1px solid var(--rule);
-    font-size: var(--step--1);
-    color: var(--muted);
-  }
-  .route {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    position: relative;
-  }
-  .route::before {
-    content: '';
-    position: absolute;
-    left: 3.75rem;
-    top: 0.5rem;
-    bottom: 0.5rem;
-    width: 2px;
-    background: var(--navy);
-  }
-  .route li {
-    position: relative;
-    display: grid;
-    grid-template-columns: 3.25rem minmax(0, 1fr);
-    gap: 1.25rem;
-    padding: 0.5rem 0 1rem;
-  }
-  .route li::before {
-    content: '';
-    position: absolute;
-    left: calc(3.75rem - 5px);
-    top: 1.35rem;
-    width: 12px;
-    height: 12px;
-    background: var(--amber);
-    border: 2px solid var(--paper);
-    border-radius: 50%;
-  }
-  .ch {
-    color: var(--navy);
-    padding-top: 0.75rem;
-    font-size: 0.9375rem;
-  }
-  .route h3 {
-    font-size: var(--step-1);
-    margin-bottom: 0;
-    padding-left: 0.5rem;
-    min-height: 2.75rem;
-    display: flex;
-    align-items: center;
-  }
-  .route p {
-    margin: 0;
-    padding-left: 0.5rem;
-  }
-  .route h3 a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 2.75rem;
-  }
-  .founder-art {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-items: flex-end;
-  }
-  .plaque {
-    border: 1px solid var(--navy);
-    background: var(--panel);
-    padding: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-    color: var(--navy);
-  }
-  .plaque p {
-    margin: 0;
-    letter-spacing: 0.2em;
-  }
-  .prose-list li {
-    margin-bottom: 0.4rem;
-  }
-  .today li {
-    margin-bottom: 0.6rem;
-    max-width: 70ch;
+  .more {
+    margin-top: 3.5rem;
   }
 </style>

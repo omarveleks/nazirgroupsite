@@ -79,7 +79,7 @@
       "source": "Supplied by Omar in the build session (source/photos/), original web page not recorded",
       "owner": "Unknown; Omar confirms the company holds the rights",
       "date_fetched": "2026-09-30",
-      "depicts": "Lattice transmission towers at sunset (generic)",
+      "depicts": "Lattice transmission towers at sunset, navy monochrome grade applied (generic)",
       "nazir_project": false,
       "used_on": [
         "/services/",
@@ -120,6 +120,129 @@
       "used_on": [
         "/services/",
         "/downloads/nazir-company-profile.pdf"
+      ]
+    },
+    {
+      "file": "public/images/photos/tower-sky-*.{avif,webp,jpg}",
+      "source": "Embedded in nazir-homepage-v7.html (design preview approved by Omar, 30 Sep 2026); original web page not recorded. Kept in source/photos/",
+      "owner": "Unknown; Omar confirms the company holds the rights",
+      "date_fetched": "2026-09-30",
+      "depicts": "High-voltage lattice tower against a cloudy sky (generic; Home hero, About hero, OG image, profile PDF cover)",
+      "nazir_project": false,
+      "used_on": [
+        "site-wide (v7 design)"
+      ]
+    },
+    {
+      "file": "public/images/photos/tower-mono-*.{avif,webp,jpg}",
+      "source": "Embedded in nazir-homepage-v7.html (design preview approved by Omar, 30 Sep 2026); original web page not recorded. Kept in source/photos/",
+      "owner": "Unknown; Omar confirms the company holds the rights",
+      "date_fetched": "2026-09-30",
+      "depicts": "Lattice transmission tower and conductors, monochrome (generic)",
+      "nazir_project": false,
+      "used_on": [
+        "site-wide (v7 design)"
+      ]
+    },
+    {
+      "file": "public/images/photos/desert-lines-*.{avif,webp,jpg}",
+      "source": "Embedded in nazir-homepage-v7.html (design preview approved by Omar, 30 Sep 2026); original web page not recorded. Kept in source/photos/",
+      "owner": "Unknown; Omar confirms the company holds the rights",
+      "date_fetched": "2026-09-30",
+      "depicts": "Overhead power lines in a desert; the preview labels it \"Overhead power lines in Qatari desert\" (Wikimedia Commons). Generic, not a company project",
+      "nazir_project": false,
+      "used_on": [
+        "site-wide (v7 design)"
+      ]
+    },
+    {
+      "file": "public/images/photos/distribution-pole-*.{avif,webp,jpg}",
+      "source": "Embedded in nazir-homepage-v7.html (design preview approved by Omar, 30 Sep 2026); original web page not recorded. Kept in source/photos/",
+      "owner": "Unknown; Omar confirms the company holds the rights",
+      "date_fetched": "2026-09-30",
+      "depicts": "Pole-mounted distribution transformer (generic)",
+      "nazir_project": false,
+      "used_on": [
+        "site-wide (v7 design)"
+      ]
+    },
+    {
+      "file": "public/images/photos/offshore-platform-*.{avif,webp,jpg}",
+      "source": "Embedded in nazir-homepage-v7.html (design preview approved by Omar, 30 Sep 2026); original web page not recorded. Kept in source/photos/",
+      "owner": "Unknown; Omar confirms the company holds the rights",
+      "date_fetched": "2026-09-30",
+      "depicts": "Offshore oil and gas platform at sunset, navy monochrome grade applied (generic)",
+      "nazir_project": false,
+      "used_on": [
+        "site-wide (v7 design)"
+      ]
+    },
+    {
+      "file": "public/images/photos/construction-site-*.{avif,webp,jpg}",
+      "source": "Embedded in nazir-homepage-v7.html (design preview approved by Omar, 30 Sep 2026); original web page not recorded. Kept in source/photos/",
+      "owner": "Unknown; Omar confirms the company holds the rights",
+      "date_fetched": "2026-09-30",
+      "depicts": "Building construction site with cranes (generic)",
+      "nazir_project": false,
+      "used_on": [
+        "site-wide (v7 design)"
+      ]
+    },
+    {
+      "file": "public/images/photos/engineering-drawings-*.{avif,webp,jpg}",
+      "source": "Embedded in nazir-homepage-v7.html (design preview approved by Omar, 30 Sep 2026); original web page not recorded. Kept in source/photos/",
+      "owner": "Unknown; Omar confirms the company holds the rights",
+      "date_fetched": "2026-09-30",
+      "depicts": "Excavator and engineering drawings, monochrome (generic)",
+      "nazir_project": false,
+      "used_on": [
+        "site-wide (v7 design)"
+      ]
+    },
+    {
+      "file": "public/images/photos/site-engineer-*.{avif,webp,jpg}",
+      "source": "Embedded in nazir-homepage-v7.html (design preview approved by Omar, 30 Sep 2026); original web page not recorded. Kept in source/photos/",
+      "owner": "Unknown; Omar confirms the company holds the rights",
+      "date_fetched": "2026-09-30",
+      "depicts": "Site engineer with radio and clipboard (generic)",
+      "nazir_project": false,
+      "used_on": [
+        "site-wide (v7 design)"
+      ]
+    },
+    {
+      "file": "public/images/photos/industrial-plant-*.{avif,webp,jpg}",
+      "source": "Embedded in nazir-homepage-v7.html (design preview approved by Omar, 30 Sep 2026); original web page not recorded. Kept in source/photos/",
+      "owner": "Unknown; Omar confirms the company holds the rights",
+      "date_fetched": "2026-09-30",
+      "depicts": "Industrial plant structure (generic)",
+      "nazir_project": false,
+      "used_on": [
+        "site-wide (v7 design)"
+      ]
+    },
+    {
+      "file": "public/images/logos/saudi-electricity-company.{webp,png}",
+      "source": "Embedded in nazir-homepage-v7.html (design preview); official logo file of the client. Kept in source/logos/",
+      "owner": "Saudi Electricity Company",
+      "date_fetched": "2026-09-30",
+      "depicts": "Saudi Electricity Company logo",
+      "nazir_project": false,
+      "used_on": [
+        "/",
+        "/projects/"
+      ]
+    },
+    {
+      "file": "public/images/logos/tenaga-nasional.{webp,png}",
+      "source": "Embedded in nazir-homepage-v7.html (design preview); official logo file of the client. Kept in source/logos/",
+      "owner": "Tenaga Nasional Berhad",
+      "date_fetched": "2026-09-30",
+      "depicts": "Tenaga Nasional Berhad logo",
+      "nazir_project": false,
+      "used_on": [
+        "/",
+        "/projects/"
       ]
     }
   ]

@@ -23,7 +23,7 @@ const maxAc = Math.max(...tx.filter((p) => !/HVDC/.test(p.name)).map((p) => p.vo
 export const services: Service[] = [
   {
     id: 'transmission',
-    title: `Overhead transmission lines, ${minKv} kV to ${maxAc} kV and HVDC`,
+    title: `Overhead Transmission Lines, ${minKv} kV to ${maxAc} kV and HVDC`,
     intro:
       'Foundations, tower assembly and erection, conductor stringing and complete turnkey lines, including 500 kV lines in Pakistan and Malaysia, 400 kV lines in Iraq and Iran, 380 kV lines in Saudi Arabia and the ±533 kV HVDC line from Songo to Apollo.',
     glyph: 'transmission',
@@ -33,7 +33,7 @@ export const services: Service[] = [
   },
   {
     id: 'substations',
-    title: 'Substations and grid works',
+    title: 'Substations and Grid Works',
     intro:
       'Construction of the 500/220 kV substation at Peshawar, civil works for 30/10 kV substations in Libya, and substations built with 33 kV line contracts in Libya, including four in the Messla field.',
     glyph: 'substation',
@@ -42,32 +42,35 @@ export const services: Service[] = [
   },
   {
     id: 'distribution',
-    title: 'Distribution networks, 11 kV to 35 kV',
+    title: 'Distribution Networks, 11 kV to 35 kV',
     intro:
       'Overhead and underground 11, 13.8, 30 and 33 kV networks and cable works, mainly for utilities in Saudi Arabia, Libya and Iraq. Lines at 66 kV are listed under transmission.',
     glyph: 'distribution',
     match: (p) => p.sector === 'distribution',
     registerFilter: '?sector=distribution',
+    photo: { name: 'distribution-pole', alt: 'Pole-mounted distribution transformer and insulators', caption: 'Distribution network (illustration)' },
   },
   {
     id: 'oilfield',
-    title: 'Industrial and oil-field electrical works',
+    title: 'Industrial and Oil-Field Electrical Works',
     intro:
       'Well electrification, underground cables, overhead lines and substations in the Sarir, Messla and Nafoora fields, refurbishment of electrical installations in hazardous areas, and installation works at the Ammonia I and II plants.',
     glyph: 'oil-and-gas-electrical',
     match: (p) => p.sector === 'oil-and-gas-electrical' || p.sector === 'industrial',
     relatedFilter: { href: '?sector=oil-and-gas-electrical', label: 'Oil-field electrical projects in the register' },
+    photo: { name: 'industrial-plant', alt: 'Industrial process plant with steel structures', caption: 'Industrial plant (illustration)' },
   },
   {
     id: 'maintenance',
-    title: 'Hot-line and transmission line maintenance',
+    title: 'Hot-Line and Transmission Line Maintenance',
     intro: 'Hot-line maintenance of a 138 kV line for Waha Oil Company, and maintenance of 220 kV transmission lines in Libya.',
     glyph: 'transmission',
     match: (p) => p.hotline || /^Maintenance of 220 kV/.test(p.scope),
+    photo: { name: 'tower-mono', alt: 'Lattice transmission tower and conductors', caption: 'Transmission line (illustration)' },
   },
   {
     id: 'civil',
-    title: 'Civil and infrastructure works',
+    title: 'Civil and Infrastructure Works',
     intro:
       'Roads and motorways, carriageways and interchanges, airport landside works, hydropower civil works, water supply, sewerage and housing schemes.',
     glyph: 'civil',
@@ -77,7 +80,7 @@ export const services: Service[] = [
   },
   {
     id: 'telecom',
-    title: 'Telecommunication and pipeline works',
+    title: 'Telecommunication and Pipeline Works',
     intro:
       'Telephone exchange and cable networks in Iraq, mobile repeater stations in Saudi Arabia, and oil-field flow lines and trunk lines in Libya.',
     glyph: 'other',

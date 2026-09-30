@@ -1,0 +1,26 @@
+---
+// Full-bleed photo band: headline bottom-left, text and link bottom-right.
+import Img from './Img.astro';
+interface Props {
+  photo: string;
+  alt?: string;
+  level?: 'h1' | 'h2';
+  eyebrow?: string;
+  priority?: boolean;
+  id?: string;
+}
+const { photo, alt = '', level = 'h2', eyebrow, priority = false, id } = Astro.props;
+const H = level;
+---
+<section class="band on-dark" id={id}>
+  <Img name={photo} alt={alt} class="band-img" priority={priority} />
+  <div class="w band-in">
+    <div>
+      {eyebrow && <span class="eb">{eyebrow}</span>}
+      <H><slot name="title" /></H>
+    </div>
+    <div>
+      <slot />
+    </div>
+  </div>
+</section>

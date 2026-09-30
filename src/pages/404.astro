@@ -1,17 +1,22 @@
 ---
+import More from '../components/More.astro';
 import Base from '../layouts/Base.astro';
 ---
 <Base title="Page not found" description="The page could not be found on the Nazir and Company website. Go to the home page, the project register or the contact page." noindex>
-  <header class="page-head">
-    <div class="container">
-      <p class="eyebrow">Error 404</p>
-      <h1>Page not found</h1>
-      <p class="lede">The address may be mistyped, or the page may have moved.</p>
-      <div class="btn-row">
-        <a class="btn" href="/">Home</a>
-        <a class="btn btn--ghost" href="/projects/">Project register</a>
-        <a class="btn btn--ghost" href="/contact/">Contact</a>
-      </div>
+  <header class="page-head w">
+    <span class="eb">Error 404</span>
+    <h1 class="h h--xl">Page Not Found</h1>
+    <p class="lede">The address may be mistyped, or the page may have moved.</p>
+    <div class="row-links actions">
+      <More href="/" label="Home" />
+      <More href="/projects/" label="Projects" />
+      <More href="/contact/" label="Contact" />
     </div>
   </header>
 </Base>
+
+<style>
+  .actions {
+    margin-top: 2.5rem;
+  }
+</style>

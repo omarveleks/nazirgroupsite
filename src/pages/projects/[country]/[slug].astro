@@ -1,7 +1,8 @@
 ---
 import Base from '../../../layouts/Base.astro';
-import SectorGlyph from '../../../components/SectorGlyph.astro';
+import PageHero from '../../../components/PageHero.astro';
 import ProjectCard from '../../../components/ProjectCard.astro';
+import More from '../../../components/More.astro';
 import {
   projects,
   country as getCountry,
@@ -15,6 +16,7 @@ import {
   yearText,
   type Project,
 } from '../../../lib/data';
+import { projectPhoto } from '../../../lib/site';
 
 export function getStaticPaths() {
   return projects.map((p) => ({ params: { country: p.country_slug, slug: p.slug }, props: { p } }));
@@ -38,6 +40,7 @@ const others = c.projects
 const kv = fmtKv(p.voltage_kv, p);
 const km = fmtKm(p.length_km);
 const value = fmtValue(p);
+const photo = projectPhoto(p);
 const url = new URL(projectUrl(p), Astro.site).href;
 const crumbs = {
   '@context': 'https://schema.org',
@@ -50,57 +53,55 @@ const crumbs = {
 };
 const desc = [p.name, p.client, c.name, p.year_end ? String(p.year_end) : '', kv, km].filter(Boolean).join(' · ');
 ---
-<Base title={`${p.name}, ${c.name}`} description={`${desc}. Project record of Nazir and Company.`} jsonLd={[crumbs]} current="/projects/">
+<Base title={`${p.name}, ${c.name}`} description={`${desc}. Project of Nazir and Company.`} jsonLd={[crumbs]} current="/projects/" heroPhoto={photo}>
   <article>
-    <header class="page-head">
-      <div class="container">
-        <nav class="breadcrumb" aria-label="Breadcrumb">
-          <ol>
-            <li><a href="/projects/">Projects</a></li>
-            <li><a href={`/projects/${c.slug}/`}>{c.name}</a></li>
-            <li aria-current="page">{p.name}</li>
-          </ol>
-        </nav>
-        <p class="eyebrow">{SECTOR_LABEL[p.sector]}{p.flagship ? ' · Flagship' : ''}</p>
-        <h1>{p.name}</h1>
-      </div>
-    </header>
+    <PageHero
+      photo={photo}
+      eyebrow={`${c.name} · ${SECTOR_LABEL[p.sector]}`}
+      crumbs={[{ href: '/projects/', label: 'Projects' }, { href: `/projects/${c.slug}/`, label: c.name }, { label: p.name }]}
+    >
+      <Fragment slot="title">{p.name}</Fragment>
+    </PageHero>
 
-    <section class="section">
-      <div class="container sheet">
-        <div class="main">
-          <dl class="tblock">
-            <div><dt>Client</dt><dd>{p.client}</dd></div>
-            <div><dt>Country</dt><dd>{c.name}</dd></div>
-            {p.region && <div><dt>Region</dt><dd>{p.region}</dd></div>}
-            <div><dt>Completed</dt><dd class="fig">{yearText(p)}</dd></div>
-            {kv && <div><dt>Voltage</dt><dd class="fig">{kv}</dd></div>}
-            {km && <div><dt>Length</dt><dd class="fig">{km}</dd></div>}
-            {p.role !== 'unknown' && <div><dt>Role</dt><dd>{ROLE_LABEL[p.role]}</dd></div>}
-            <div><dt>Sector</dt><dd>{SECTOR_LABEL[p.sector]}</dd></div>
-            {value && <div><dt>{p.role === 'jv' ? 'Joint-venture contract value' : 'Contract value'}</dt><dd class="fig">{value}</dd></div>}
-          </dl>
-          <h2 class="h">Scope</h2>
-          <p class="scope">{p.scope}</p>
-          <p class="src"><span class="k">Source</span> {sourceText(p)}{p.source.url && <>; also <a href={p.source.url} rel="noopener">{new URL(p.source.url).hostname.replace(/^www\./, '')}</a></>}</p>
+    <section class="sec" aria-labelledby="facts-h">
+      <div class="w">
+        <h2 class="visually-hidden" id="facts-h">Project facts</h2>
+        <dl class="facts">
+          <div><dt>Client</dt><dd>{p.client}</dd></div>
+          <div><dt>Country</dt><dd><a href={`/projects/${c.slug}/`}>{c.name}</a></dd></div>
+          {p.region && <div><dt>Region</dt><dd>{p.region}</dd></div>}
+          <div><dt>Completed</dt><dd>{yearText(p)}</dd></div>
+          {kv && <div><dt>Voltage</dt><dd>{kv}</dd></div>}
+          {km && <div><dt>Length</dt><dd>{km}</dd></div>}
+          {p.role !== 'unknown' && <div><dt>Role</dt><dd>{ROLE_LABEL[p.role]}</dd></div>}
+          <div><dt>Sector</dt><dd>{SECTOR_LABEL[p.sector]}</dd></div>
+          {value && <div><dt>{p.role === 'jv' ? 'Joint-venture contract value' : 'Contract value'}</dt><dd>{value}</dd></div>}
+        </dl>
+        <div class="grid2 scope-row">
+          <div>
+            <span class="eb">Scope</span>
+            <p class="scope">{p.scope}</p>
+          </div>
+          <p class="src">
+            <strong>Source:</strong> {sourceText(p)}{p.source.url && <>; also <a href={p.source.url} rel="noopener">{new URL(p.source.url).hostname.replace(/^www\./, '')}</a></>}.
+            The photograph shows the type of work and is illustrative.
+          </p>
         </div>
-        <figure class="drawing">
-          <SectorGlyph sector={p.sector} />
-          <figcaption>
-            <span class="k">Drawing</span> Schematic of the type of work. Not a drawing of this project.
-          </figcaption>
-        </figure>
       </div>
     </section>
 
     {others.length > 0 && (
-      <section class="section" aria-labelledby="more-h">
-        <div class="container">
-          <h2 id="more-h">More from {c.name}</h2>
-          <div class="grid">
-            {others.map((o) => <ProjectCard p={o} showCountry={false} />)}
+      <section class="sec sec--soft" aria-labelledby="more-h">
+        <div class="w">
+          <div class="grid2 head-row">
+            <h2 class="h" id="more-h">More from {c.name}</h2>
+            <More href={`/projects/${c.slug}/`} label={`All Projects in ${c.name}`} />
           </div>
-          <p class="back"><a href={`/projects/${c.slug}/`}>All {c.count} projects in {c.name}</a></p>
+          <ul class="cards">
+            {others.map((o) => (
+              <li><ProjectCard item={{ tag: yearText(o) === 'Not stated' ? SECTOR_LABEL[o.sector] : `${yearText(o)} · ${SECTOR_LABEL[o.sector]}`, title: o.name, href: projectUrl(o), photo: projectPhoto(o) }} sizes="(min-width: 60em) 30vw, (min-width: 40em) 45vw, 100vw" /></li>
+            ))}
+          </ul>
         </div>
       </section>
     )}
@@ -108,54 +109,11 @@ const desc = [p.name, p.client, c.name, p.year_end ? String(p.year_end) : '', kv
 </Base>
 
 <style>
-  .sheet {
-    display: grid;
-    gap: 2rem;
+  .scope-row {
+    margin-top: clamp(3rem, 6vw, 5rem);
+    align-items: start;
   }
-  @media (min-width: 60rem) {
-    .sheet {
-      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-      align-items: start;
-    }
-  }
-  .h {
-    font-size: var(--step-2);
-    margin-top: 1.75rem;
-  }
-  .scope {
-    font-size: var(--step-1);
-  }
-  .src {
-    font-size: var(--step--1);
-    color: var(--muted);
-    border-top: 1px dashed var(--rule);
-    padding-top: 0.75rem;
-  }
-  .k {
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-right: 0.5rem;
-  }
-  .drawing {
+  .scope-row .src {
     margin: 0;
-    border: 1px solid var(--navy);
-    background: var(--panel);
-    padding: 1rem;
-  }
-  .drawing figcaption {
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
-    border-top: 1px solid var(--rule);
-    font-size: var(--step--1);
-    color: var(--muted);
-  }
-  .back a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 2.75rem;
-    margin-top: 1rem;
-    font-weight: 600;
   }
 </style>

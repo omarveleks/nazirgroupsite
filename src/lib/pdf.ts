@@ -5,11 +5,11 @@
 import { PDFDocument, StandardFonts, rgb, type PDFFont, type PDFPage } from 'pdf-lib';
 import { ROOF_PATH, WORD_OFFSET, WORD_PATH } from './logo';
 import { services } from './services';
+import { MAX_AC_KV } from './site';
 import {
   company,
   contact,
   countries,
-  projects,
   stats,
   byNewest,
   fmtKv,
@@ -17,13 +17,12 @@ import {
   yearText,
   range,
   projectBySlug,
-  type Project,
 } from './data';
 
-export const NAVY = rgb(11 / 255, 31 / 255, 58 / 255);
-export const MUTED = rgb(91 / 255, 103 / 255, 115 / 255);
-export const AMBER = rgb(224 / 255, 161 / 255, 0);
-export const RULE = rgb(201 / 255, 194 / 255, 178 / 255);
+export const NAVY = rgb(11 / 255, 27 / 255, 46 / 255); // ink #0B1B2E
+export const MUTED = rgb(95 / 255, 107 / 255, 119 / 255); // grey #5F6B77
+export const BLUE = rgb(31 / 255, 79 / 255, 184 / 255); // corporate blue #1F4FB8
+export const RULE = rgb(207 / 255, 213 / 255, 220 / 255); // #CFD5DC
 export const A4: [number, number] = [595.28, 841.89];
 export const M = 42;
 
@@ -31,7 +30,7 @@ export const M = 42;
 export interface Fonts {
   reg: PDFFont;
   bold: PDFFont;
-  mono: PDFFont;
+  light: PDFFont;
 }
 
 export async function setup(title: string) {
@@ -45,7 +44,8 @@ export async function setup(title: string) {
   const fonts: Fonts = {
     reg: await doc.embedFont(StandardFonts.Helvetica),
     bold: await doc.embedFont(StandardFonts.HelveticaBold),
-    mono: await doc.embedFont(StandardFonts.Courier),
+    // no monospace anywhere: figures and labels use Helvetica
+    light: await doc.embedFont(StandardFonts.Helvetica),
   };
   return { doc, fonts };
 }
@@ -131,8 +131,8 @@ export async function projectListPdf(): Promise<Uint8Array> {
   const header = () => {
     let x = M;
     for (const c of cols) {
-      const tw = f.mono.widthOfTextAtSize(c.k.toUpperCase(), 7);
-      text(page, c.k.toUpperCase(), c.right ? x + c.w - tw - 4 : x, y, 7, f.mono, MUTED);
+      const tw = f.light.widthOfTextAtSize(c.k.toUpperCase(), 7);
+      text(page, c.k.toUpperCase(), c.right ? x + c.w - tw - 4 : x, y, 7, f.light, MUTED);
       x += c.w;
     }
     y -= 5;
@@ -143,7 +143,7 @@ export async function projectListPdf(): Promise<Uint8Array> {
   newPage(true);
   for (const c of countries) {
     if (y < M + 80) newPage();
-    page.drawRectangle({ x: M, y: y - 4, width: 3, height: 16, color: AMBER });
+    page.drawRectangle({ x: M, y: y - 4, width: 3, height: 16, color: BLUE });
     text(page, `${c.name}`, M + 9, y, 12, f.bold);
     const sub = `${c.count} ${c.count === 1 ? 'project' : 'projects'}${range(c) ? `, ${range(c)}` : ''}`;
     text(page, sub, M + 9 + f.bold.widthOfTextAtSize(c.name, 12) + 8, y, 9, f.reg, MUTED);
@@ -165,7 +165,7 @@ export async function projectListPdf(): Promise<Uint8Array> {
       let x = M;
       cells.forEach((lines, i) => {
         const col = cols[i]!;
-        const font = i === 1 ? f.bold : i === 0 || i >= 3 ? f.mono : f.reg;
+        const font = i === 1 ? f.bold : i === 0 || i >= 3 ? f.light : f.reg;
         lines.forEach((l, j) => {
           const tw = font.widthOfTextAtSize(safe(font, l), size);
           text(page, l, col.right ? x + col.w - tw - 4 : x, y - j * lh, size, font, i === 2 ? MUTED : NAVY);
@@ -206,45 +206,45 @@ export async function capabilityPdf(): Promise<Uint8Array> {
   };
   const h = (s: string) => {
     y -= 4;
-    text(page, s.toUpperCase(), M, y, 8, f.mono, MUTED);
+    text(page, s.toUpperCase(), M, y, 8, f.light, MUTED);
     y -= 13;
   };
 
   para(
-    `Electrical and civil engineering contractor, Lahore. Founded ${company.founded}; incorporated ${company.incorporated_text}. ${company.pec.statement}; the first licence holder of the Pakistan Engineering Council.`,
+    `High-voltage transmission, substations and critical infrastructure for national utilities, energy producers and governments across Asia, the Middle East and Africa. Founded in Lahore in ${company.founded}; incorporated on ${company.incorporated_text}. ${company.pec.statement}, the first licence the Council issued.`,
     10.5,
   );
   y -= 6;
 
   // key figures
   const figs: [string, string][] = [
-    [String(stats.founded), 'founded'],
-    [String(stats.projects), 'projects documented'],
+    [String(stats.founded), 'founded in Lahore'],
     [String(stats.countries), 'countries'],
-    [`${stats.firstYear}-${stats.lastYear}`, 'documented record'],
+    [`${MAX_AC_KV} kV`, 'transmission, up to HVDC'],
+    ['No. 1', 'Pakistan Engineering Council licence'],
   ];
   const fw = W / figs.length;
   figs.forEach(([n, l], i) => {
     const x = M + i * fw;
     page.drawRectangle({ x, y: y - 30, width: fw - 6, height: 40, borderColor: NAVY, borderWidth: 0.8 });
-    text(page, n, x + 8, y - 8, 15, f.mono);
-    text(page, l, x + 8, y - 23, 8, f.reg, MUTED);
+    text(page, n, x + 8, y - 8, 15, f.light);
+    wrap(f.reg, 7.5, l, fw - 20).forEach((line, j) => text(page, line, x + 8, y - 21 - j * 8.5, 7.5, f.reg, MUTED));
   });
   y -= 48;
 
-  h('Services, with documented projects');
-  const svc: [string, (p: Project) => boolean][] = services.filter((x) => x.id !== 'maintenance').map((x) => [x.title, x.match]);
+  h('Services');
+  const svc = services.filter((x) => x.id !== 'maintenance').map((x) => x.title);
   const colW = W / 2;
-  svc.forEach(([label, fn], i) => {
+  svc.forEach((label, i) => {
     const x = M + (i % 2) * colW;
     const yy = y - Math.floor(i / 2) * 13;
-    text(page, `${projects.filter(fn).length}`.padStart(3, ' '), x, yy, 9, f.mono);
-    text(page, label, x + 24, yy, 9, f.reg);
+    page.drawRectangle({ x, y: yy + 2, width: 4, height: 4, color: BLUE });
+    text(page, label, x + 12, yy, 9, f.reg);
   });
   y -= Math.ceil(svc.length / 2) * 13 + 4;
 
-  h('Projects by country');
-  const line = countries.map((c) => `${c.name} ${c.count} (${range(c)})`).join('   ·   ');
+  h('Countries');
+  const line = countries.map((c) => c.name).join('   ·   ');
   para(line, 9);
 
   h('Selected projects');
@@ -258,15 +258,13 @@ export async function capabilityPdf(): Promise<Uint8Array> {
   }
 
   h('Libya');
-  para(company.libya_status, 9.5, f.bold);
+  para(`For over three decades the company built high-voltage lines and oil-field electrical systems in Libya. ${company.libya_status}`, 9.5);
 
-  h('Enlistments (year of letter or financial year covered)');
-  for (const e of company.enlistments) {
-    para(`${e.body}: ${e.detail} (${e.year})`, 8.5);
-  }
+  h('Registration');
+  para(`Pakistan Engineering Council, Licence No. 1. Pre-qualified: ${company.prequalified_short.join(', ')}.`, 9);
 
   h('Resources');
-  para('Engineers registered with the Pakistan Engineering Council are listed on the company licence. The company has access to a large fleet of construction and stringing equipment, and can mobilise it per project. Registration and enlistment documents are available on request.', 9);
+  para('Engineers registered with the Pakistan Engineering Council are listed on the company licence. The company has access to a large fleet of construction and stringing equipment, and can mobilise it per project. Registration documents are available on request.', 9);
 
   h('Office');
   const a = contact.address;

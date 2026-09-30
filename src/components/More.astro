@@ -1,0 +1,12 @@
+---
+// Secondary link: "UPPERCASE LABEL" with a long thin arrow.
+import Icon from './Icon.astro';
+interface Props {
+  href: string;
+  label: string;
+  /** Extra words for screen readers and search engines, e.g. " about Substations" */
+  context?: string;
+}
+const { href, label, context } = Astro.props;
+---
+<a class="rm" href={href}>{label}{context && <span class="visually-hidden">{context}</span>} <Icon name="long" /></a>

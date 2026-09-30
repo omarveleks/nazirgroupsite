@@ -1,0 +1,27 @@
+---
+// Clients: 3 x 3 grid of greyscale logos (colour on hover) or text marks where no
+// official logo file is held. Names only; no endorsement is implied.
+import { CLIENT_MARKS } from '../lib/site';
+import { logo } from '../lib/images';
+---
+<ul class="lgrid" aria-label="Selected clients">
+  {CLIENT_MARKS.map((c) => {
+    const l = c.logo ? logo(c.logo) : null;
+    return (
+      <li>
+        {l ? (
+          <picture>
+            <source type="image/webp" srcset={l.webp} />
+            <img src={l.png} alt={c.name} width={l.width} height={l.height} loading="lazy" decoding="async" />
+          </picture>
+        ) : (
+          <p class={`wm${c.mark && c.mark.length <= 5 ? ' wm--acr' : ''}`}>
+            <span class="visually-hidden">{c.name}: </span>
+            <span aria-hidden="true">{c.mark}</span>
+            <small aria-hidden="true">{c.sub}</small>
+          </p>
+        )}
+      </li>
+    );
+  })}
+</ul>

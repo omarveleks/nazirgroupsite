@@ -2,21 +2,32 @@
  "url": "/projects/",
  "categories": {
   "url": "/projects/",
-  "performance": 100,
+  "performance": 99,
   "accessibility": 100,
   "bestPractices": 100,
   "seo": 100,
-  "lcp": 1356,
+  "lcp": 1732,
   "cls": 0,
   "tbt": 0,
-  "kb": 91
+  "kb": 161
  },
  "failing": [
   {
    "k": "unused-css-rules",
    "title": "Reduce unused CSS",
    "score": 0,
-   "display": "Est savings of 46 KiB"
+   "display": "Est savings of 55 KiB"
+  },
+  {
+   "k": "cache-insight",
+   "title": "Use efficient cache lifetimes",
+   "score": 0.5,
+   "display": "Est savings of 69 KiB"
+  },
+  {
+   "k": "forced-reflow-insight",
+   "title": "Forced reflow",
+   "score": 0
   },
   {
    "k": "network-dependency-tree-insight",
@@ -27,7 +38,7 @@
    "k": "render-blocking-insight",
    "title": "Render-blocking requests",
    "score": 0,
-   "display": "Est savings of 230 ms"
+   "display": "Est savings of 430 ms"
   }
  ]
 }

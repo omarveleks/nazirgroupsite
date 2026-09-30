@@ -1,0 +1,31 @@
+---
+// Director, founder tribute and key advisers (About and Leadership pages).
+import Portrait from './Portrait.astro';
+import { company } from '../lib/data';
+
+interface Props {
+  level?: 'h2' | 'h3';
+}
+const d = company.director;
+const f = company.founder;
+---
+<div class="lead">
+  <Portrait name="director" alt={`Portrait of ${d.name}`} width={352} />
+  <div>
+    <h3>{d.name}</h3>
+    <p class="role">{d.title}</p>
+    {d.bio.map((s) => <p>{s}</p>)}
+  </div>
+</div>
+
+<div class="tribute sec--top">
+  <Portrait name="founder" alt={`Portrait of ${f.name}`} width={160} />
+  <div>
+    <span class="eb">Founder</span>
+    <h3>{f.name}</h3>
+    <p class="body-grey">{f.born}–{f.died}</p>
+    <ul>
+      {f.facts.map((t) => <li>{t}</li>)}
+    </ul>
+  </div>
+</div>

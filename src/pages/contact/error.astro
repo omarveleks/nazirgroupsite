@@ -2,20 +2,28 @@
 import Base from '../../layouts/Base.astro';
 ---
 <Base title="Enquiry not sent" description="The enquiry to Nazir and Company could not be sent. Check the form fields and the attached file, then try again." noindex>
-  <header class="page-head">
-    <div class="container">
-      <p class="eyebrow">Contact</p>
-      <h1>The enquiry was not sent</h1>
-      <p class="lede">Please check the form and try again.</p>
-      <ul>
-        <li>Name, email, type of enquiry and project details are required.</li>
-        <li>An attached file must be a PDF, Word, Excel, JPEG or PNG file of up to 5 MB.</li>
-        <li>The security check needs JavaScript to be enabled.</li>
-        <li>Several enquiries sent in a few minutes are held back; wait ten minutes and try again.</li>
-      </ul>
-      <div class="btn-row">
-        <a class="btn" href="/contact/">Back to the form</a>
-      </div>
+  <header class="page-head w">
+    <span class="eb">Contact</span>
+    <h1 class="h h--xl">The Enquiry Was Not Sent</h1>
+    <p class="lede">Please check the form and try again.</p>
+    <ul class="list-num checks">
+      <li>Name, email, type of enquiry and project details are required.</li>
+      <li>An attached file must be a PDF, Word, Excel, JPEG or PNG file of up to 5 MB.</li>
+      <li>The security check needs JavaScript to be enabled.</li>
+      <li>Several enquiries sent in a few minutes are held back; wait ten minutes and try again.</li>
+    </ul>
+    <div class="row-links actions">
+      <a class="pill" href="/contact/">Back to the Form</a>
     </div>
   </header>
 </Base>
+
+<style>
+  .checks {
+    margin-top: 2.5rem;
+    max-width: 46rem;
+  }
+  .actions {
+    margin-top: 2.5rem;
+  }
+</style>

@@ -1,113 +1,95 @@
 ---
 import Base from '../../layouts/Base.astro';
-import CountryTile from '../../components/CountryTile.astro';
+import Statement from '../../components/Statement.astro';
+import Track from '../../components/Track.astro';
 import Register from '../../components/Register.astro';
-import ClientsStrip from '../../components/ClientsStrip.astro';
+import ClientsGrid from '../../components/ClientsGrid.astro';
 import { countries, projects, stats, byNewest } from '../../lib/data';
+import { countryMeta, numberWord, PRESENCE_ORDER } from '../../lib/site';
 
 const all = [...projects].sort(byNewest);
+// Country cards, largest record first (Libya keeps its own page for prominence)
+const cards = [...countries]
+  .sort((a, b) => b.count - a.count || PRESENCE_ORDER.indexOf(a.slug) - PRESENCE_ORDER.indexOf(b.slug))
+  .map((c) => {
+    const m = countryMeta(c.slug);
+    return { tag: m.region, title: c.name, sub: m.descriptor, href: `/projects/${c.slug}/`, photo: m.photo };
+  });
 ---
 <Base
-  title="Project register"
-  description={`${stats.projects} documented projects by Nazir and Company in ${stats.countries} countries, ${stats.firstYear}–${stats.lastYear}: transmission lines, substations, distribution and civil works.`}
+  title="Projects"
+  description={`Projects by Nazir and Company in ${numberWord(stats.countries).toLowerCase()} countries: high-voltage transmission lines, substations, distribution networks and civil infrastructure for national utilities, energy producers and governments.`}
 >
-  <header class="page-head">
-    <div class="container">
-      <p class="eyebrow">Project register</p>
-      <h1>Projects by country</h1>
-      <p class="lede">
-        {stats.projects} projects from the company’s records, in {stats.countries} countries, completed between {stats.firstYear} and {stats.lastYear}.
-        Choose a country, or search the full register.
-      </p>
-    </div>
-  </header>
+  <Statement
+    level="h1"
+    eyebrow="Projects"
+    text="High-voltage transmission, substations, distribution networks and civil infrastructure for national utilities, energy producers and governments. Choose a country, or search every project."
+    link={{ href: '#register', label: 'Search All Projects' }}
+  >
+    Projects That Power Nations
+  </Statement>
 
-  <section class="section">
-    <div class="container">
-      <h2 class="visually-hidden">Countries</h2>
-      <div class="tiles">
-        {countries.map((c) => <CountryTile c={c} />)}
+  <section class="sec--tight" id="countries" aria-labelledby="countries-h">
+    <div class="w grid2 head-row">
+      <div>
+        <span class="eb">By Country</span>
+        <h2 class="h" id="countries-h">{numberWord(stats.countries)} Countries, Three Regions</h2>
       </div>
+      <p class="body-grey">From the national grid in Pakistan to the Libyan Sahara, the Holy Cities and the Zambezi.</p>
     </div>
+    <Track items={cards} label="Countries" />
   </section>
 
-  <section class="section" aria-labelledby="all-h">
-    <div class="container">
-      <h2 id="all-h">Search all projects</h2>
-      <div class="global">
-        <label for="global-q">Search the register</label>
-        <input id="global-q" type="search" inputmode="search" autocomplete="off" placeholder="For example: 220 kV, Sebha, WAPDA" data-global-search="all" />
+  <section class="sec" aria-labelledby="all-h">
+    <div class="w">
+      <div class="grid2 head-row">
+        <div>
+          <span class="eb">Project List</span>
+          <h2 class="h" id="all-h">Search All Projects</h2>
+        </div>
+        <div class="field">
+          <label for="global-q">Search</label>
+          <input id="global-q" type="search" inputmode="search" autocomplete="off" placeholder="For example: 220 kV, Sebha, WAPDA" data-global-search="all" />
+        </div>
       </div>
       <details class="allc" id="register">
-        <summary><span>All countries</span> <span class="fig">({stats.projects} projects)</span></summary>
+        <summary class="pill">All countries <span class="allc-n">({stats.projects})</span></summary>
         <div class="allc-body">
-          <Register id="all" groups={[{ id: 'all', projects: all }]} showCountry caption="All documented projects, newest first" />
+          <Register id="all" groups={[{ id: 'all', projects: all }]} showCountry caption="All projects, newest first" />
         </div>
       </details>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <ClientsStrip list={projects} id="clients-projects" />
+  <section class="sec sec--soft" aria-labelledby="clients-h">
+    <div class="w">
+      <div class="grid2 head-row">
+        <div>
+          <span class="eb">Clients</span>
+          <h2 class="h" id="clients-h">Selected Clients</h2>
+        </div>
+        <p class="body-grey">National utilities, energy producers and road authorities in Asia, the Middle East and Africa.</p>
+      </div>
+      <ClientsGrid />
     </div>
   </section>
 </Base>
 
 <style>
-  .tiles {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  .allc > summary {
+    list-style: none;
   }
-  .global {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    max-width: 36rem;
-    margin-bottom: 1rem;
+  .allc > summary::-webkit-details-marker {
+    display: none;
   }
-  .global label {
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted);
+  .allc-n {
+    font-weight: 300;
+    opacity: 0.8;
   }
-  .global input {
-    font: inherit;
-    font-size: 1rem;
-    min-height: 3rem;
-    padding: 0.5rem 0.75rem;
-    border: 1px solid var(--navy);
-    border-radius: var(--radius);
-    background: #fff;
-  }
-  @media (scripting: none) {
-    .global {
-      display: none;
-    }
-  }
-  .allc {
-    border-top: 1px solid var(--navy);
-  }
-  .allc summary {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem;
-    min-height: 3rem;
-    cursor: pointer;
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: var(--step-2);
-    color: var(--navy);
-  }
-  .allc summary .fig {
-    font-size: 1rem;
-    color: var(--muted);
+  .allc[open] > summary {
+    margin-bottom: 2.5rem;
   }
   .allc-body {
-    padding-top: 1rem;
+    min-width: 0;
   }
 </style>
