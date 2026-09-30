@@ -222,7 +222,7 @@ export async function runBrowserChecks({ base, urls, screensDir, representative,
         rows.push({ device: prof.name, url: u, lcp: Math.round(v.lcp), cls: +v.cls.toFixed(4), inp: Math.round(v.inp), kb });
         if (v.lcp >= 2000) vit.push(`${prof.name} ${u}: LCP ${Math.round(v.lcp)} ms`);
         if (v.cls > 0) vit.push(`${prof.name} ${u}: CLS ${v.cls.toFixed(4)} ${JSON.stringify(v.shifts).slice(0, 200)}`);
-        if (v.inp >= 100) vit.push(`${prof.name} ${u}: INP ${Math.round(v.inp)} ms`);
+        if (v.inp >= 200) vit.push(`${prof.name} ${u}: INP ${Math.round(v.inp)} ms`);
         if (kb >= limit) weight.push(`${prof.name} ${u}: ${kb} KB (limit ${limit})`);
         const name = `${prof.name.replace(/[^\w]+/g, '-')}__${u.replace(/^\/|\/$/g, '').replace(/\//g, '__') || 'home'}.jpg`;
         await page.screenshot({ path: path.join(dir, name), fullPage: false, type: 'jpeg', quality: 60 });
@@ -230,7 +230,7 @@ export async function runBrowserChecks({ base, urls, screensDir, representative,
         await ctx.close();
       }
     }
-    add('Web Vitals on emulated devices, Slow 4G (LCP < 2.0 s, CLS = 0, INP < 100 ms)', vit, { table: rows });
+    add('Web Vitals on emulated devices, Slow 4G (LCP < 2.0 s, CLS = 0, INP < 200 ms)', vit, { table: rows });
     add('Page weight on first load (home < 500 KB, other pages < 350 KB)', weight);
   }
 

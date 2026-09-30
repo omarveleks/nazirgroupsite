@@ -64,7 +64,13 @@ function setup(root: HTMLElement) {
     }
   }
 
-  form.addEventListener('input', apply);
+  // wait for a pause in typing before filtering, so each keystroke stays responsive
+  let t = 0;
+  const later = () => {
+    clearTimeout(t);
+    t = window.setTimeout(apply, 120);
+  };
+  form.addEventListener('input', later);
   form.addEventListener('change', apply);
   form.querySelector('[data-reset]')?.addEventListener('click', () => {
     for (const k of KEYS) {
@@ -88,7 +94,7 @@ function setup(root: HTMLElement) {
     globalBox.addEventListener('input', () => {
       inner.value = globalBox.value;
       if (details && globalBox.value) details.open = true;
-      apply();
+      later();
     });
   }
 }
