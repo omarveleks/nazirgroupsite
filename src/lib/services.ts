@@ -12,6 +12,8 @@ export interface Service {
   registerFilter?: string;
   /** Register link to the closest sector, when the match is wider or narrower */
   relatedFilter?: { href: string; label: string };
+  /** General illustration (not a photograph of a company project) */
+  photo?: { name: string; alt: string; caption: string };
 }
 
 const tx = projects.filter((p) => p.sector === 'transmission' && p.voltage_kv !== null);
@@ -27,6 +29,7 @@ export const services: Service[] = [
     glyph: 'transmission',
     match: (p) => p.sector === 'transmission',
     registerFilter: '?sector=transmission',
+    photo: { name: 'transmission-towers', alt: 'Lattice steel transmission towers and conductors against an evening sky', caption: 'Overhead transmission lines (illustration)' },
   },
   {
     id: 'substations',
@@ -35,6 +38,7 @@ export const services: Service[] = [
       'Construction of the 500/220 kV substation at Peshawar, civil works for 30/10 kV substations in Libya, and substations built with 33 kV line contracts in Libya, including four in the Messla field.',
     glyph: 'substation',
     match: (p) => p.sector === 'substation' || /lines and (four )?substations/i.test(p.name),
+    photo: { name: 'substation', alt: 'Outdoor high-voltage substation with gantries, busbars and switchgear', caption: 'High-voltage substation (illustration)' },
   },
   {
     id: 'distribution',
@@ -69,6 +73,7 @@ export const services: Service[] = [
     glyph: 'civil',
     match: (p) => p.sector === 'civil',
     registerFilter: '?sector=civil',
+    photo: { name: 'power-channel', alt: 'Concrete-lined power channel with a road bridge and fenced embankments', caption: 'Hydropower channel (illustration)' },
   },
   {
     id: 'telecom',
@@ -78,6 +83,7 @@ export const services: Service[] = [
     glyph: 'other',
     match: (p) => p.sector === 'other',
     registerFilter: '?sector=other',
+    photo: { name: 'pipeline', alt: 'Above-ground pipelines on steel supports across open ground', caption: 'Above-ground pipelines (illustration)' },
   },
 ];
 

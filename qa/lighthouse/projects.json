@@ -6,17 +6,17 @@
   "accessibility": 100,
   "bestPractices": 100,
   "seo": 100,
-  "lcp": 1358,
+  "lcp": 1356,
   "cls": 0,
   "tbt": 0,
-  "kb": 90
+  "kb": 91
  },
  "failing": [
   {
    "k": "unused-css-rules",
    "title": "Reduce unused CSS",
    "score": 0,
-   "display": "Est savings of 45 KiB"
+   "display": "Est savings of 46 KiB"
   },
   {
    "k": "network-dependency-tree-insight",
@@ -27,7 +27,7 @@
    "k": "render-blocking-insight",
    "title": "Render-blocking requests",
    "score": 0,
-   "display": "Est savings of 250 ms"
+   "display": "Est savings of 230 ms"
   }
  ]
 }

@@ -12,17 +12,16 @@ How to use this list: open each page on a phone and on a computer, read every se
 - **Phone numbers, email address and WhatsApp.** None are shown yet. When supplied, they are added in one file (`src/data/contact.json`) and appear everywhere automatically.
 - **Domain.** The site runs on the free pages.dev address until the domain is bought (GO_LIVE.md).
 - **Enquiry form destination.** The form is built but shows "Form not yet connected" until a mailbox is set.
-- **Contract values.** Not shown for any project until each is checked against an original client document.
-- **Photographs.** No project or people photos yet. Line drawings are used instead. Photos can be added when supplied.
+- **Contract values of smaller projects.** Values are shown only for the seven projects listed above Rs 2 billion (or the equivalent), as printed in the company profile.
+- **Project photographs.** No photo is yet confirmed to show a company project. The Services page uses four general photos marked "illustration".
 - **Client logos.** Client names are shown in text in the "Clients served" lists.
-- **Company profile PDF.** The Downloads page offers it "on request" until a public version is supplied. The project list and one-page capability statement are generated automatically.
 - **Equipment list, tax number, bank details, PEC certificate scan and dates.** Deliberately never published.
 
 ## Page by page
 
 ### Home (`/`)
 - [ ] Headline: 750 km of 220 kV line, Benghazi to the eastern border, 2001.
-- [ ] Four figures: founded 1958; 184 projects documented; 7 countries; 43 years of documented projects (1977–2020).
+- [ ] Four figures: founded 1958; 187 projects documented; 7 countries; 43 years of documented projects (1977–2020).
 - [ ] The six selected projects are the right ones to lead with.
 - [ ] Libya call-out wording: "Historic record in Libya (48 projects, 1978–2011). Now seeking electrical projects and subcontracts in Libya."
 - [ ] Client names in "Clients served" are correct and may be shown.
@@ -39,6 +38,8 @@ How to use this list: open each page on a phone and on a computer, read every se
 - [ ] Title block: client, country, region, year, voltage, length, role, sector.
 - [ ] Role is shown only where the profile states it (joint-venture shares, turnkey contracts, work for another contractor).
 - [ ] Source line (profile and page).
+- [ ] Contract value, on the seven largest projects only, in the original currency and year: Ghazi-Barotha (Rs 15,898.26 million, joint-venture contract), M-3 motorway (Rs 7,290 million, joint-venture contract), Barotha–Rewat (Rs 2,608 million), Makkah/Taif/Madinah distribution (SR 288,000,000), Makkah/Taif/Madinah 380/110 kV (SR 112,598,244), Benghazi–eastern border (LD 151 million), Samnu–Sebha (LD 28.65 million).
+- [ ] Sialkot Airport III-A-3, Sambrial–Dhanawali road and TMP-BWP fencing now appear as separate projects for each year.
 
 ### Libya (`/libya/`)
 - [ ] 48 projects, 1978–2011, split by client group.
@@ -49,17 +50,18 @@ How to use this list: open each page on a phone and on a computer, read every se
 
 ### Services (`/services/`)
 - [ ] Seven services, each with the number of documented projects and recent examples.
+- [ ] Four general photos (towers, substation, hydropower channel, pipelines), each captioned "illustration".
 
 ### About (`/about/`)
 - [ ] Timeline stations from 1958 to 2020.
-- [ ] Founder section: Alhaj Sheikh Nazir Ahmed (1930–2005).
+- [ ] Founder section: Alhaj Sheikh Nazir Ahmed (1930–2005), with his portrait.
 - [ ] "Today" section.
 
 ### Leadership and team (`/leadership/`)
-- [ ] Director: Sheikh Tanveer Ahmed. Bio: joined 1985; Director in Libya 1987–2002; Director in Saudi Arabia 2004–2014; Director of Projects and Procurement; graduate of the University of Houston, Texas. **Please supply the degree.**
+- [ ] Director: Sheikh Tanveer Ahmed. Bio: joined 1985; Director in Libya 1987–2002; Director in Saudi Arabia 2004–2014; graduate of the University of Houston, Texas. Portrait from the 2023 profile. **Please supply the degree.**
 - [ ] Advisers: Syed Imran Hassan, Khalid Mehmood (telecommunication), Engr. Muhammad Yousaf Barakzai (civil works), Behram Shahrokh Aslam.
-- [ ] Six engineers shown out of the eleven on the PEC licence. Confirm the choice and give each a one-line role.
-- [ ] Portraits: line-art placeholders until photos are supplied.
+- [ ] Six engineers shown out of the eleven on the PEC licence.
+- [ ] Portraits of the Director, founder and advisers; engineers have line-art placeholders.
 
 ### Capabilities and compliance (`/capabilities/`)
 - [ ] PEC statement: "Registered with the Pakistan Engineering Council, Licence No. 1, category C-A (no limit)".
@@ -70,7 +72,8 @@ How to use this list: open each page on a phone and on a computer, read every se
 - [ ] Map and country table. The United Kingdom is shown only as a historic branch office.
 
 ### Downloads (`/downloads/`)
-- [ ] Open both PDFs: capability statement (one page) and project list (six pages).
+- [ ] Open all three PDFs: company profile (nine pages), capability statement (one page) and project list.
+- [ ] Company profile: every page, especially the Director bio, the selected projects and their values.
 
 ### Contact (`/contact/`)
 - [ ] Enquiry types: Client, Main contractor subcontract enquiry, Partnership, Careers, Other.

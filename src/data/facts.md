@@ -48,7 +48,7 @@ Nothing on the site uses a fact that is not listed here.
 | With the company since 1985 | Supplied by Omar (build brief, section 5.9) |
 | Director in Libya, 1987–2002 | Supplied by Omar; P2 p.7 ("Resident Director of Libya for Nazir & Co.") |
 | Director in Saudi Arabia, 2004–2014 | Supplied by Omar; P2 p.7 ("Resident Director in KSA for Nazir & Co.") |
-| Director of Projects and Procurement | P2 p.7 |
+| The company's Director; he leads the company (effectively its only director) | Omar, 30 Sep 2026. The "Director of Projects and Procurement" line in P2 p.7 is not used (Omar: not his current role). |
 | Graduated from the University of Houston, Texas (degree not stated) | P2 p.7. P1 has no education detail (P1 p.6 checked). |
 
 ## 4. Advisers
@@ -84,7 +84,7 @@ All projects are in `src/data/projects.json`, each with `source.pdf` and `source
 | List in the profile | Pages | Rows | Notes |
 |---|---|---|---|
 | Some NTDC completed projects in Pakistan | P1 p.29 | 9 | Values in Rs million |
-| Some completed regional projects in Pakistan | P1 pp.30–34 | 56 | Values in Rs million. Four pairs of rows describe the same contract (see OPEN_ITEMS) and are shown once. |
+| Some completed regional projects in Pakistan | P1 pp.30–34 | 56 | Values in Rs million. The Ghazi-Barotha rows (2004, 2005) describe one contract and are shown once. Three pairs with the same name but different years and values (Sialkot Airport III-A-3, Sambrial–Dhanawali road, TMP-BWP fencing) are separate projects at the same location (Omar, 30 Sep 2026) and are shown separately. |
 | Projects completed in Saudi Arabia | P1 pp.35–38 | 42 | Values in SR. Items 36 and 37 are identical and shown once. |
 | Some completed projects in Libya | P1 pp.39–43 | 48 | Values in LD million. Completion years 1978–2011. |
 | Some completed projects in Iraq | P1 pp.43–45 | 23 | Values in USD thousand |
@@ -96,7 +96,19 @@ All projects are in `src/data/projects.json`, each with `source.pdf` and `source
 
 **Computed figures** (built from `projects.json` at build time, never typed by hand): number of projects documented, number of countries, year range per country, years of documented record (first to last completion year).
 
-**Contract values** are stored exactly as printed (amount and currency) but are not rendered anywhere: none has yet been verified against an original client source (build brief rule 2.6).
+**Contract values** are stored exactly as printed (amount and currency). Omar (30 Sep 2026) asked for values to be shown for the projects whose listed value is above Rs 2 billion or the equivalent in another currency. Seven qualify and are shown on their project pages and in the company profile PDF, in the original currency with the year of the listing, never converted (`value.show` in `projects.json`). The currency comparison used for selection only (not published): LD 1 ≈ USD 0.8 in 2001 and 2011; SR 1 = USD 0.2667; Rs ≈ 60 per USD in 2005–2007.
+
+| Project | Value as listed | Source | Basis for "above Rs 2 billion" |
+|---|---|---|---|
+| Ghazi-Barotha Hydropower Project civil works (JV, 2.4%) | Rs 15,898.26 million (2005) | P1 p.32 | Rupee value |
+| Pindi Bhattian–Faisalabad Motorway M-3 (JV, 10%) | Rs 7,290 million (2005) | P1 p.32 | Rupee value |
+| Barotha–Rewat 500 kV | Rs 2,608 million (2007) | P1 p.29 | Rupee value |
+| Distribution network up to 33 kV, Makkah, Taif and Madinah | SR 288,000,000 (2014) | P1 p.35 | ≈ USD 77 million |
+| 380/110 kV lines and fibre-optic network, Makkah, Taif and Madinah | SR 112,598,244 (2014) | P1 p.35 | ≈ USD 30 million |
+| Benghazi–eastern border 220 kV, 750 km | LD 151 million (2001) | P1 p.39 | ≈ USD 290 million at the 2001 official rate |
+| Samnu–Sebha 220 kV | LD 28.65 million (2011) | P1 p.40 | ≈ USD 23 million, ≈ Rs 2.0 billion |
+
+For joint ventures the value is that of the whole joint-venture contract, and the site labels it so. Values are marked `verified: false`: no client source states them. Excluded: Iraq (USD thousand, all small), Iran and Mozambique (currency not stated), Malaysia (one combined "6,300MR" figure), Multan Development Authority (Rs 1,989 million, below the threshold).
 
 **Roles.** `jv` only where the profile states a joint-venture share (M-3 motorway 10%, Ghazi-Barotha 2.4%, Makran Coastal Highway 51%). `main` only where the profile describes a turnkey contract for the owner. `sub` where the listed client is itself a contractor (Siemens, Energoinvest, Consorzio Italia 2000, Furukawa, James Scott, ITOCHU, Mitsubishi, Nippon Telecommunication Construction, IEC, EWR/MASS/N.P.C.C/Suedrohrbau). All others `unknown` (not shown).
 
@@ -108,12 +120,13 @@ All projects are in `src/data/projects.json`, each with `source.pdf` and `source
 | Barotha–Rewat 500 kV, 2007 | https://www.adb.org/projects/documents/pak-59002-001-rp-0 | A 500 kV Ghazi-Barotha–Rewat line exists in the NTDC network. Does not name the company. |
 | Samnu–Sebha 220 kV, 2011 | https://libyaninvestment.com/gecol-220-kv-transmission-lines-and-substation-projects/ | GECOL 220 kV network in the Sebha region. Does not confirm this line or the company. |
 | Benghazi–eastern border 220 kV, 750 km, 2001 | https://www.tdworld.com/overhead-transmission/article/20969595/conflict-damage-and-reconstruction | 220 kV network in eastern Libya up to the Egyptian interconnection at Tobruk. Does not confirm this contract. |
+| Ghazi-Barotha Hydropower Project civil works, 2004–2005 | https://www.italaw.com/sites/default/files/case-documents/ita0422.pdf ; https://www.meed.com/pakistan-impregilo-clinches-ghazi-barotha-contracts/ | ICSID decision, Impregilo S.p.A. v. Pakistan: the civil works contracts were awarded to Ghazi-Barotha Contractors (GBC), a joint venture of Impregilo (lead), Ed. Züblin AG, Campenon Bernard, Saadullah Khan & Brothers and Nazir & Company. **Names the company.** |
 | Hun–Wadi Arial–Samnu 220 kV, 1989 | none found | — |
 | Misurata–Sirte and Tripoli ring 220 kV, 1980 | none found | — |
 | Ayer Tawar–Junjung 500 kV, 1998 | https://en.wikipedia.org/wiki/National_Grid_(Malaysia) (search summary) | TNB 500 kV system from Gurun southwards, begun 1994, includes Ayer Tawar. Does not name the company. |
 | 380/110 kV Makkah, Taif and Madinah, 2014 | none found | — |
 
-No web source found names the company on any project. Projects stay on the site because they are in the company's own records; no detail beyond the profile is added.
+Only the Ghazi-Barotha record names the company; no web source found names it on any other project. Projects stay on the site because they are in the company's own records; no detail beyond the profile is added.
 
 ## 9. Client names (current name first)
 
@@ -129,7 +142,11 @@ No web source found names the company on any project. Projects stay on the site 
 | C. Itoh & Co of Japan | ITOCHU Corporation (formerly C. Itoh & Co.) | C. Itoh & Co. renamed ITOCHU in 1992 |
 | Consorzia Italia 2000 (Italy) | Consorzio Italia 2000 | Company's own spelling: https://www.ci2000.net/ |
 | TENAGA of Malaysia | Tenaga Nasional Berhad (TNB) | https://en.wikipedia.org/wiki/Tenaga_Nasional |
-| EECO Company / ECCO Company | ECCO | One spelling kept (see OPEN_ITEMS) |
+| EECO Company / ECCO Company | Electrical Construction Company (ECCO) | Libyan electrical contractor: https://libyamonitor.com/directory/construction/contracting-and-engineering/electrical-construction-company-ecco |
+| GBC | Ghazi-Barotha Contractors (GBC) | Joint venture led by Impregilo: https://www.italaw.com/sites/default/files/case-documents/ita0422.pdf |
+| N.P.C.C | National Power Construction Corporation | Pakistani state construction company, est. 1974: https://www.developmentaid.org/organizations/view/104301/npcc |
+| S.S.E.M | Saudi Services for Electro-Mechanic Works (SSEM) | https://www.bayt.com/en/company/saudi-services-for-electro-mechanic-works-co-ssem-1732781/ |
+| MODA (Saudi Arabia) | Ministry of Defence and Aviation (MODA) | The Saudi ministry's name until 2011 |
 
 ## 10. Place spellings
 

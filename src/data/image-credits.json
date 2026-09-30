@@ -1,4 +1,126 @@
 {
   "_note": "Internal build-time record only. Never rendered, linked or listed in the sitemap. One entry per image used on the site.",
-  "images": []
+  "images": [
+    {
+      "file": "public/images/people/founder-*.{avif,webp,jpg}",
+      "source": "Company profile, 2023 edition (source/Second_profile.pdf), p.4, extracted with pdfimages",
+      "owner": "Nazir and Company",
+      "date_fetched": "2026-09-29",
+      "depicts": "Alhaj Sheikh Nazir Ahmed (founder)",
+      "nazir_project": false,
+      "used_on": [
+        "/about/",
+        "/leadership/",
+        "/downloads/nazir-company-profile.pdf"
+      ]
+    },
+    {
+      "file": "public/images/people/director-*.{avif,webp,jpg}",
+      "source": "Company profile, 2023 edition (source/Second_profile.pdf), p.7, extracted with pdfimages",
+      "owner": "Nazir and Company",
+      "date_fetched": "2026-09-29",
+      "depicts": "Sheikh Tanveer Ahmed (Director)",
+      "nazir_project": false,
+      "used_on": [
+        "/leadership/",
+        "/downloads/nazir-company-profile.pdf"
+      ]
+    },
+    {
+      "file": "public/images/people/syed-imran-hassan-*.{avif,webp,jpg}",
+      "source": "Company profile, 2023 edition (source/Second_profile.pdf), p.15, extracted with pdfimages",
+      "owner": "Nazir and Company",
+      "date_fetched": "2026-09-29",
+      "depicts": "Syed Imran Hassan (adviser)",
+      "nazir_project": false,
+      "used_on": [
+        "/leadership/",
+        "/downloads/nazir-company-profile.pdf"
+      ]
+    },
+    {
+      "file": "public/images/people/khalid-mehmood-*.{avif,webp,jpg}",
+      "source": "Company profile, 2023 edition (source/Second_profile.pdf), p.15, extracted with pdfimages",
+      "owner": "Nazir and Company",
+      "date_fetched": "2026-09-29",
+      "depicts": "Khalid Mehmood (adviser)",
+      "nazir_project": false,
+      "used_on": [
+        "/leadership/",
+        "/downloads/nazir-company-profile.pdf"
+      ]
+    },
+    {
+      "file": "public/images/people/muhammad-yousaf-barakzai-*.{avif,webp,jpg}",
+      "source": "Company profile, 2023 edition (source/Second_profile.pdf), p.15, extracted with pdfimages",
+      "owner": "Nazir and Company",
+      "date_fetched": "2026-09-29",
+      "depicts": "Engr. Muhammad Yousaf Barakzai (adviser)",
+      "nazir_project": false,
+      "used_on": [
+        "/leadership/",
+        "/downloads/nazir-company-profile.pdf"
+      ]
+    },
+    {
+      "file": "public/images/people/behram-shahrokh-aslam-*.{avif,webp,jpg}",
+      "source": "Company profile, 2023 edition (source/Second_profile.pdf), p.15, extracted with pdfimages",
+      "owner": "Nazir and Company",
+      "date_fetched": "2026-09-29",
+      "depicts": "Behram Shahrokh Aslam (adviser)",
+      "nazir_project": false,
+      "used_on": [
+        "/leadership/",
+        "/downloads/nazir-company-profile.pdf"
+      ]
+    },
+    {
+      "file": "public/images/photos/transmission-towers-*.{avif,webp,jpg}",
+      "source": "Supplied by Omar in the build session (source/photos/), original web page not recorded",
+      "owner": "Unknown; Omar confirms the company holds the rights",
+      "date_fetched": "2026-09-30",
+      "depicts": "Lattice transmission towers at sunset (generic)",
+      "nazir_project": false,
+      "used_on": [
+        "/services/",
+        "/downloads/nazir-company-profile.pdf"
+      ]
+    },
+    {
+      "file": "public/images/photos/substation-*.{avif,webp,jpg}",
+      "source": "Supplied by Omar in the build session (source/photos/), original web page not recorded",
+      "owner": "Unknown; Omar confirms the company holds the rights",
+      "date_fetched": "2026-09-30",
+      "depicts": "Outdoor high-voltage substation (generic)",
+      "nazir_project": false,
+      "used_on": [
+        "/services/",
+        "/downloads/nazir-company-profile.pdf (cover)"
+      ]
+    },
+    {
+      "file": "public/images/photos/power-channel-*.{avif,webp,jpg}",
+      "source": "Supplied by Omar in the build session (source/photos/), original web page not recorded",
+      "owner": "Unknown; Omar confirms the company holds the rights",
+      "date_fetched": "2026-09-30",
+      "depicts": "Concrete-lined hydropower channel with bridge (generic; resembles a hydropower power channel, not confirmed as a company project)",
+      "nazir_project": false,
+      "used_on": [
+        "/services/",
+        "/downloads/nazir-company-profile.pdf"
+      ]
+    },
+    {
+      "file": "public/images/photos/pipeline-*.{avif,webp,jpg}",
+      "source": "Supplied by Omar in the build session (source/photos/), original web page not recorded",
+      "owner": "Unknown; Omar confirms the company holds the rights",
+      "date_fetched": "2026-09-30",
+      "depicts": "Above-ground pipelines (generic)",
+      "nazir_project": false,
+      "used_on": [
+        "/services/",
+        "/downloads/nazir-company-profile.pdf"
+      ]
+    }
+  ]
 }

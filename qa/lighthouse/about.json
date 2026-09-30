@@ -6,10 +6,10 @@
   "accessibility": 100,
   "bestPractices": 100,
   "seo": 100,
-  "lcp": 1206,
+  "lcp": 1205,
   "cls": 0,
   "tbt": 0,
-  "kb": 59
+  "kb": 60
  },
  "failing": [
   {
@@ -27,7 +27,7 @@
    "k": "render-blocking-insight",
    "title": "Render-blocking requests",
    "score": 0,
-   "display": "Est savings of 410 ms"
+   "display": "Est savings of 400 ms"
   }
  ]
 }

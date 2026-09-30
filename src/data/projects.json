@@ -18,8 +18,9 @@
     "value": {
       "amount": 2608.0,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2007,
+      "verified": false,
+      "show": true
     },
     "flagship": true,
     "hotline": false,
@@ -54,8 +55,9 @@
     "value": {
       "amount": 130.53,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 1997,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -90,8 +92,9 @@
     "value": {
       "amount": 95.53,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 1996,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -126,8 +129,9 @@
     "value": {
       "amount": 100.32,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 1995,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -158,8 +162,9 @@
     "value": {
       "amount": 42.75,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 1985,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -194,8 +199,9 @@
     "value": {
       "amount": 34.36,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 1984,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -230,8 +236,9 @@
     "value": {
       "amount": 48.49,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 1983,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -266,8 +273,9 @@
     "value": {
       "amount": 11.4,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 1978,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -298,8 +306,9 @@
     "value": {
       "amount": 19.2,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 1977,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -330,8 +339,9 @@
     "value": {
       "amount": 1989.0,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2020,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -362,8 +372,9 @@
     "value": {
       "amount": 600.0,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2020,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -394,8 +405,9 @@
     "value": {
       "amount": 567.0,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2018,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -426,8 +438,9 @@
     "value": {
       "amount": 72.0,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2017,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -458,8 +471,9 @@
     "value": {
       "amount": 72.0,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2016,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -490,8 +504,9 @@
     "value": {
       "amount": 60.0,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2016,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -522,8 +537,9 @@
     "value": {
       "amount": 230.0,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2015,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -554,8 +570,9 @@
     "value": {
       "amount": 72.0,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2015,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -586,8 +603,9 @@
     "value": {
       "amount": 272.0,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2015,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -618,8 +636,9 @@
     "value": {
       "amount": 192.933,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2013,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -650,8 +669,9 @@
     "value": {
       "amount": 47.948,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2013,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -682,8 +702,9 @@
     "value": {
       "amount": 216.956,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2013,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -714,8 +735,9 @@
     "value": {
       "amount": 151.826,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2011,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -746,8 +768,9 @@
     "value": {
       "amount": 58.0,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2011,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -761,8 +784,8 @@
   },
   {
     "id": "pakistan-15-31",
-    "slug": "sialkot-international-airport-package-iii-a-3-landside-development",
-    "name": "Sialkot International Airport, Package III-A-3 (landside development)",
+    "slug": "sialkot-international-airport-package-iii-a-3-landside-works",
+    "name": "Sialkot International Airport, Package III-A-3 landside works (2011)",
     "client": "Sialkot International Airport Ltd (SIAL)",
     "country": "Pakistan",
     "country_slug": "pakistan",
@@ -772,14 +795,15 @@
     "voltage_kv": null,
     "length_km": null,
     "year_start": null,
-    "year_end": null,
+    "year_end": 2011,
     "role": "unknown",
     "scope": "Construction of Sialkot International Airport Package III-A-3, landside development works.",
     "value": {
       "amount": 215.575,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2011,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -789,7 +813,7 @@
       "page": 31,
       "url": null
     },
-    "notes": "Listed twice in the profile: completion 2011 (p.31, Rs 215.575 million) and 2005 (p.32, Rs 215.58 million). Year withheld until confirmed."
+    "notes": "A contract with the same package name is listed for 2005 (p.32); the company confirms these are two projects at the same location."
   },
   {
     "id": "pakistan-16-31",
@@ -810,8 +834,9 @@
     "value": {
       "amount": 44.65,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2010,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -842,8 +867,9 @@
     "value": {
       "amount": 72.0,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2009,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -874,8 +900,9 @@
     "value": {
       "amount": 338.637,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2009,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -906,8 +933,9 @@
     "value": {
       "amount": 281.951,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2009,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -938,8 +966,9 @@
     "value": {
       "amount": 78.167,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2009,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -970,8 +999,9 @@
     "value": {
       "amount": 35.189,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2009,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -985,8 +1015,8 @@
   },
   {
     "id": "pakistan-22-31",
-    "slug": "sambrial-dry-port-dhanawali-metalled-road",
-    "name": "Sambrial Dry Port–Dhanawali metalled road",
+    "slug": "sambrial-dry-port-dhanawali-metalled-road-group-2",
+    "name": "Sambrial Dry Port–Dhanawali metalled road, Group 2",
     "client": "Provincial Highway Division, Sialkot",
     "country": "Pakistan",
     "country_slug": "pakistan",
@@ -996,14 +1026,15 @@
     "voltage_kv": null,
     "length_km": null,
     "year_start": null,
-    "year_end": null,
+    "year_end": 2009,
     "role": "unknown",
-    "scope": "Construction of the metalled road from Sambrial Dry Port to Dhanawali.",
+    "scope": "Construction of the metalled road from Sambrial Dry Port to Dhanawali, Group 2.",
     "value": {
       "amount": 45.531,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2009,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1013,12 +1044,12 @@
       "page": 31,
       "url": null
     },
-    "notes": "Listed twice in the profile: 2009, Group 2, Rs 45.531 million (p.31) and 2007, Rs 455.31 million (p.32). Year and value withheld until confirmed."
+    "notes": "A separate contract on the same road is listed for 2007 (p.32)."
   },
   {
     "id": "pakistan-23-31",
     "slug": "fencing-and-barbed-wire-on-bypasses-tmp-bwp-sections-i-and-ii",
-    "name": "Fencing and barbed wire on bypasses (TMP-BWP), Sections I and II",
+    "name": "Fencing and barbed wire on bypasses (TMP-BWP), Sections I and II (2009)",
     "client": "National Highway Authority",
     "country": "Pakistan",
     "country_slug": "pakistan",
@@ -1028,14 +1059,15 @@
     "voltage_kv": null,
     "length_km": null,
     "year_start": null,
-    "year_end": null,
+    "year_end": 2009,
     "role": "unknown",
     "scope": "Construction of fencing and barbed wire on bypasses (TMP-BWP project), Sections I and II.",
     "value": {
       "amount": 56.99,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2009,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1045,7 +1077,106 @@
       "page": 31,
       "url": null
     },
-    "notes": "Listed with completion 2009 (p.31, Rs 56.99 million) and 2005 (p.32, Rs 56.985 million). Year withheld until confirmed."
+    "notes": ""
+  },
+  {
+    "id": "pakistan-24-32",
+    "slug": "sambrial-dry-port-dhanawali-metalled-road",
+    "name": "Sambrial Dry Port–Dhanawali metalled road (2007)",
+    "client": "Provincial Highway Division, Sialkot",
+    "country": "Pakistan",
+    "country_slug": "pakistan",
+    "region": "Punjab",
+    "group": "regional",
+    "sector": "civil",
+    "voltage_kv": null,
+    "length_km": null,
+    "year_start": null,
+    "year_end": 2007,
+    "role": "unknown",
+    "scope": "Construction of the metalled road from Sambrial Dry Port to Dhanawali.",
+    "value": {
+      "amount": 455.31,
+      "currency": "Rs million",
+      "year": 2007,
+      "verified": false,
+      "show": false
+    },
+    "flagship": false,
+    "hotline": false,
+    "images": [],
+    "source": {
+      "pdf": "Nazir_and_Sons_profile.pdf",
+      "page": 32,
+      "url": null
+    },
+    "notes": ""
+  },
+  {
+    "id": "pakistan-27-32",
+    "slug": "fencing-and-barbed-wire-on-bypasses-tmp-bwp-sections-i-and-ii-2005",
+    "name": "Fencing and barbed wire on bypasses (TMP-BWP), Sections I and II (2005)",
+    "client": "National Highway Authority",
+    "country": "Pakistan",
+    "country_slug": "pakistan",
+    "region": null,
+    "group": "regional",
+    "sector": "civil",
+    "voltage_kv": null,
+    "length_km": null,
+    "year_start": null,
+    "year_end": 2005,
+    "role": "unknown",
+    "scope": "Construction of fencing and barbed wire on bypasses (TMP-BWP project), Sections I and II.",
+    "value": {
+      "amount": 56.985,
+      "currency": "Rs million",
+      "year": 2005,
+      "verified": false,
+      "show": false
+    },
+    "flagship": false,
+    "hotline": false,
+    "images": [],
+    "source": {
+      "pdf": "Nazir_and_Sons_profile.pdf",
+      "page": 32,
+      "url": null
+    },
+    "notes": ""
+  },
+  {
+    "id": "pakistan-29-32",
+    "slug": "sialkot-international-airport-package-iii-a-3-landside-works-2005",
+    "name": "Sialkot International Airport, Package III-A-3 landside works (2005)",
+    "client": "Sialkot International Airport Ltd (SIAL)",
+    "country": "Pakistan",
+    "country_slug": "pakistan",
+    "region": "Punjab",
+    "group": "regional",
+    "sector": "civil",
+    "voltage_kv": null,
+    "length_km": null,
+    "year_start": null,
+    "year_end": 2005,
+    "role": "unknown",
+    "scope": "Construction of Sialkot International Airport Package III-A-3, landside development works.",
+    "value": {
+      "amount": 215.58,
+      "currency": "Rs million",
+      "year": 2005,
+      "verified": false,
+      "show": false
+    },
+    "flagship": false,
+    "hotline": false,
+    "images": [],
+    "source": {
+      "pdf": "Nazir_and_Sons_profile.pdf",
+      "page": 32,
+      "url": null
+    },
+    "notes": "A contract with the same package name is listed for 2011 (p.31); the company confirms these are two projects at the same location."
   },
   {
     "id": "pakistan-25-32",
@@ -1066,8 +1197,9 @@
     "value": {
       "amount": 220.0,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2007,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1098,8 +1230,9 @@
     "value": {
       "amount": 133,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2006,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1130,8 +1263,9 @@
     "value": {
       "amount": 7290.0,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2005,
+      "verified": false,
+      "show": true
     },
     "flagship": false,
     "hotline": false,
@@ -1162,12 +1296,13 @@
     "year_start": 2004,
     "year_end": 2005,
     "role": "jv",
-    "scope": "Civil works contracts for the Ghazi-Barotha Hydropower Project, as a 2.4% partner in a joint venture led by Impregilo of Italy.",
+    "scope": "Civil works contracts for the Ghazi-Barotha Hydropower Project, as a partner (2.4%) in Ghazi-Barotha Contractors (GBC), the joint venture led by Impregilo of Italy with Ed. Züblin, Campenon Bernard and Saadullah Khan & Brothers.",
     "value": {
       "amount": 15898.26,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2005,
+      "verified": false,
+      "show": true
     },
     "flagship": false,
     "hotline": false,
@@ -1175,9 +1310,9 @@
     "source": {
       "pdf": "Nazir_and_Sons_profile.pdf",
       "page": 32,
-      "url": null
+      "url": "https://www.italaw.com/sites/default/files/case-documents/ita0422.pdf"
     },
-    "notes": "Listed twice in the profile (2004 and 2005, same value); shown once, completion 2005. Joint-venture share from the second profile (p.12)."
+    "notes": "Listed twice in the profile (2004 and 2005, same value); shown once, completion 2005. Joint-venture share from the second profile (p.12). The ICSID record of Impregilo v. Pakistan lists Nazir & Company as a GBC member."
   },
   {
     "id": "pakistan-32-32",
@@ -1198,8 +1333,9 @@
     "value": {
       "amount": 38.6,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2005,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1230,8 +1366,9 @@
     "value": {
       "amount": null,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2004,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1262,8 +1399,9 @@
     "value": {
       "amount": 83.27,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2004,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1294,8 +1432,9 @@
     "value": {
       "amount": 46.68,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2004,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1326,8 +1465,9 @@
     "value": {
       "amount": 44.67,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2004,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1358,8 +1498,9 @@
     "value": {
       "amount": 22.23,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2004,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1390,8 +1531,9 @@
     "value": {
       "amount": 32.0,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2003,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1422,8 +1564,9 @@
     "value": {
       "amount": 20.22,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2003,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1458,8 +1601,9 @@
     "value": {
       "amount": 30.65,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2002,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1494,8 +1638,9 @@
     "value": {
       "amount": 548.37,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2002,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1530,8 +1675,9 @@
     "value": {
       "amount": 449.43,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2002,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1566,8 +1712,9 @@
     "value": {
       "amount": 372.1,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2002,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1598,8 +1745,9 @@
     "value": {
       "amount": 233.51,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2002,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1634,8 +1782,9 @@
     "value": {
       "amount": 198.5,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2002,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1670,8 +1819,9 @@
     "value": {
       "amount": 22.24,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2002,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1702,8 +1852,9 @@
     "value": {
       "amount": 86.5,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2002,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1719,7 +1870,7 @@
     "id": "pakistan-48-34",
     "slug": "ghazi-faqirabad-road-repairs",
     "name": "Ghazi–Faqirabad road repairs",
-    "client": "GBC",
+    "client": "Ghazi-Barotha Contractors (GBC)",
     "country": "Pakistan",
     "country_slug": "pakistan",
     "region": null,
@@ -1729,13 +1880,14 @@
     "length_km": null,
     "year_start": null,
     "year_end": 2001,
-    "role": "unknown",
+    "role": "sub",
     "scope": "Repairing the Ghazi–Faqirabad road, including diversions.",
     "value": {
       "amount": 47.09,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 2001,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1766,8 +1918,9 @@
     "value": {
       "amount": 576.37,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 1995,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1798,8 +1951,9 @@
     "value": {
       "amount": 458.48,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 1993,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1830,8 +1984,9 @@
     "value": {
       "amount": 129.9,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 1992,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1862,8 +2017,9 @@
     "value": {
       "amount": 513.7,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 1989,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1898,8 +2054,9 @@
     "value": {
       "amount": 20.94,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 1989,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1930,8 +2087,9 @@
     "value": {
       "amount": 16.42,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 1988,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -1966,8 +2124,9 @@
     "value": {
       "amount": 42.49,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 1987,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2002,8 +2161,9 @@
     "value": {
       "amount": 112.0,
       "currency": "Rs million",
-      "year": null,
-      "verified": false
+      "year": 1985,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2035,7 +2195,8 @@
       "amount": 16.15,
       "currency": "USD million (approx.)",
       "year": null,
-      "verified": false
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2067,7 +2228,8 @@
       "amount": 2.45,
       "currency": "USD million (approx.)",
       "year": null,
-      "verified": false
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2099,7 +2261,8 @@
       "amount": 0.69,
       "currency": "USD million (approx.)",
       "year": null,
-      "verified": false
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2131,7 +2294,8 @@
       "amount": 0.57,
       "currency": "USD million (approx.)",
       "year": null,
-      "verified": false
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2163,7 +2327,8 @@
       "amount": 0.15,
       "currency": "USD million (approx.)",
       "year": null,
-      "verified": false
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2194,8 +2359,9 @@
     "value": {
       "amount": 20625000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 2015,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2226,8 +2392,9 @@
     "value": {
       "amount": 112598244,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 2014,
+      "verified": false,
+      "show": true
     },
     "flagship": true,
     "hotline": false,
@@ -2258,8 +2425,9 @@
     "value": {
       "amount": 288000000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 2014,
+      "verified": false,
+      "show": true
     },
     "flagship": false,
     "hotline": false,
@@ -2290,8 +2458,9 @@
     "value": {
       "amount": 48517500,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 2013,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2322,8 +2491,9 @@
     "value": {
       "amount": 44968750,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 2012,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2354,8 +2524,9 @@
     "value": {
       "amount": 46200000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 2011,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2386,8 +2557,9 @@
     "value": {
       "amount": 16443750,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 2009,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2403,7 +2575,7 @@
     "id": "saudi-arabia-8-35",
     "slug": "wadi-jaleel-380-110-kv-line-access-roads-and-tower-foundations",
     "name": "Wadi Jaleel 380/110 kV line: access roads and tower foundations",
-    "client": "EWR / N.P.C.C",
+    "client": "EWR / National Power Construction Corporation",
     "country": "Saudi Arabia",
     "country_slug": "saudi-arabia",
     "region": "Makkah",
@@ -2418,8 +2590,9 @@
     "value": {
       "amount": 22500000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 2006,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2450,8 +2623,9 @@
     "value": {
       "amount": 46500000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 2005,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2482,8 +2656,9 @@
     "value": {
       "amount": 5000000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 2005,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2514,8 +2689,9 @@
     "value": {
       "amount": 19927000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 2004,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2546,8 +2722,9 @@
     "value": {
       "amount": 39003750,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 2003,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2578,8 +2755,9 @@
     "value": {
       "amount": 8800000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 2003,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2610,8 +2788,9 @@
     "value": {
       "amount": 1377000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 2003,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2642,8 +2821,9 @@
     "value": {
       "amount": 3250000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 2002,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2659,7 +2839,7 @@
     "id": "saudi-arabia-16-36",
     "slug": "energy-meters-and-standby-generator-interlocking-al-minar-village-jeddah",
     "name": "Energy meters and standby generator interlocking, Al Minar Village, Jeddah",
-    "client": "MODA",
+    "client": "Ministry of Defence and Aviation (MODA)",
     "country": "Saudi Arabia",
     "country_slug": "saudi-arabia",
     "region": "Makkah",
@@ -2674,8 +2854,9 @@
     "value": {
       "amount": 580000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 2001,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2706,8 +2887,9 @@
     "value": {
       "amount": 410000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 2001,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2738,8 +2920,9 @@
     "value": {
       "amount": 5600000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 2001,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2770,8 +2953,9 @@
     "value": {
       "amount": 26250000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 2001,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2802,8 +2986,9 @@
     "value": {
       "amount": 40725000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 2001,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2834,8 +3019,9 @@
     "value": {
       "amount": 20000000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 2000,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2866,8 +3052,9 @@
     "value": {
       "amount": 14375000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 1999,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2898,8 +3085,9 @@
     "value": {
       "amount": 6000000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 1999,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2930,8 +3118,9 @@
     "value": {
       "amount": 6000000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 1999,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2947,7 +3136,7 @@
     "id": "saudi-arabia-25-37",
     "slug": "yanbu-madinah-380-kv-and-badr-al-musayjid-110-kv-line-rehabilitation",
     "name": "Yanbu–Madinah 380 kV and Badr–Al Musayjid 110 kV line rehabilitation",
-    "client": "Saudi Electricity Company (formerly SCECO) / N.P.C.C",
+    "client": "Saudi Electricity Company (formerly SCECO) / National Power Construction Corporation",
     "country": "Saudi Arabia",
     "country_slug": "saudi-arabia",
     "region": "Madinah",
@@ -2962,8 +3151,9 @@
     "value": {
       "amount": 1325000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 1997,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -2994,8 +3184,9 @@
     "value": {
       "amount": 917000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 1997,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3026,8 +3217,9 @@
     "value": {
       "amount": 12960000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 1996,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3058,8 +3250,9 @@
     "value": {
       "amount": 12190000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 1993,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3090,8 +3283,9 @@
     "value": {
       "amount": 3972500,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 1993,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3122,8 +3316,9 @@
     "value": {
       "amount": 2500000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 1992,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3154,8 +3349,9 @@
     "value": {
       "amount": 602000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 1992,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3186,8 +3382,9 @@
     "value": {
       "amount": 8370000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 1991,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3218,8 +3415,9 @@
     "value": {
       "amount": 7000000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 1991,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3250,8 +3448,9 @@
     "value": {
       "amount": 14500000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 1990,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3282,8 +3481,9 @@
     "value": {
       "amount": 7920000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 1990,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3314,8 +3514,9 @@
     "value": {
       "amount": 2970000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 1990,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3346,8 +3547,9 @@
     "value": {
       "amount": 10800000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 1988,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3378,8 +3580,9 @@
     "value": {
       "amount": 6000000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 1988,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3410,8 +3613,9 @@
     "value": {
       "amount": 2009000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 1986,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3427,7 +3631,7 @@
     "id": "saudi-arabia-41-38",
     "slug": "shoaiba-makkah-taif-110-kv-towers-assembly-and-erection",
     "name": "Shoaiba–Makkah–Taif 110 kV towers: assembly and erection",
-    "client": "S.S.E.M / SECC",
+    "client": "Saudi Services for Electro-Mechanic Works (SSEM) / SECC",
     "country": "Saudi Arabia",
     "country_slug": "saudi-arabia",
     "region": "Makkah",
@@ -3442,8 +3646,9 @@
     "value": {
       "amount": 1200000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 1986,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3474,8 +3679,9 @@
     "value": {
       "amount": 2840000,
       "currency": "SR",
-      "year": null,
-      "verified": false
+      "year": 1979,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3506,8 +3712,9 @@
     "value": {
       "amount": 28.65,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 2011,
+      "verified": false,
+      "show": true
     },
     "flagship": true,
     "hotline": false,
@@ -3538,8 +3745,9 @@
     "value": {
       "amount": 2.85,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 2010,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3570,8 +3778,9 @@
     "value": {
       "amount": 17.55,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 2009,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3587,7 +3796,7 @@
     "id": "libya-4-39",
     "slug": "66-kv-double-circuit-single-conductor-line-foundations-erection-and-stringing",
     "name": "66 kV double-circuit single-conductor line: foundations, erection and stringing",
-    "client": "ECCO",
+    "client": "Electrical Construction Company (ECCO)",
     "country": "Libya",
     "country_slug": "libya",
     "region": null,
@@ -3602,8 +3811,9 @@
     "value": {
       "amount": 1.68,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 2008,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3634,8 +3844,9 @@
     "value": {
       "amount": 0.33,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 2007,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3666,8 +3877,9 @@
     "value": {
       "amount": 0.92,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 2006,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3698,8 +3910,9 @@
     "value": {
       "amount": 0.78,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 2006,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3715,7 +3928,7 @@
     "id": "libya-8-39",
     "slug": "66-kv-double-circuit-single-conductor-line-stringing",
     "name": "66 kV double-circuit single-conductor line: stringing",
-    "client": "ECCO",
+    "client": "Electrical Construction Company (ECCO)",
     "country": "Libya",
     "country_slug": "libya",
     "region": null,
@@ -3730,8 +3943,9 @@
     "value": {
       "amount": 1.36,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 2005,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3762,8 +3976,9 @@
     "value": {
       "amount": 12.33,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 2004,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": true,
@@ -3794,8 +4009,9 @@
     "value": {
       "amount": 2.5,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 2004,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3826,8 +4042,9 @@
     "value": {
       "amount": 1.0,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 2003,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3858,8 +4075,9 @@
     "value": {
       "amount": 1.4,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 2003,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3890,8 +4108,9 @@
     "value": {
       "amount": 2.9,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 2002,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3922,8 +4141,9 @@
     "value": {
       "amount": 151.0,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 2001,
+      "verified": false,
+      "show": true
     },
     "flagship": true,
     "hotline": false,
@@ -3954,8 +4174,9 @@
     "value": {
       "amount": 1.2,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 2000,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -3986,8 +4207,9 @@
     "value": {
       "amount": 0.4,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1997,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4018,8 +4240,9 @@
     "value": {
       "amount": 1.45,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1997,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4050,8 +4273,9 @@
     "value": {
       "amount": 1.7,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1997,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4082,8 +4306,9 @@
     "value": {
       "amount": 0.6,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1995,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4114,8 +4339,9 @@
     "value": {
       "amount": 16.55,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1994,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4146,8 +4372,9 @@
     "value": {
       "amount": null,
       "currency": "LD",
-      "year": null,
-      "verified": false
+      "year": 1994,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4178,8 +4405,9 @@
     "value": {
       "amount": 1.2,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1994,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4210,8 +4438,9 @@
     "value": {
       "amount": 2.0,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1994,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4242,8 +4471,9 @@
     "value": {
       "amount": 1.0,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1994,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4274,8 +4504,9 @@
     "value": {
       "amount": 1.0,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1994,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4306,8 +4537,9 @@
     "value": {
       "amount": 1.0,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1994,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4338,8 +4570,9 @@
     "value": {
       "amount": 0.6,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1994,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4370,8 +4603,9 @@
     "value": {
       "amount": 0.4,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1994,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4402,8 +4636,9 @@
     "value": {
       "amount": 0.5,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1994,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4434,8 +4669,9 @@
     "value": {
       "amount": 0.58,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1994,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4466,8 +4702,9 @@
     "value": {
       "amount": 0.9,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1993,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4498,8 +4735,9 @@
     "value": {
       "amount": 3.5,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1993,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4530,8 +4768,9 @@
     "value": {
       "amount": 1.0,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1992,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4562,8 +4801,9 @@
     "value": {
       "amount": 1.95,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1992,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4594,8 +4834,9 @@
     "value": {
       "amount": 1.0,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1991,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4626,8 +4867,9 @@
     "value": {
       "amount": 0.3,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1991,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4658,8 +4900,9 @@
     "value": {
       "amount": 8.2,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1989,
+      "verified": false,
+      "show": false
     },
     "flagship": true,
     "hotline": false,
@@ -4690,8 +4933,9 @@
     "value": {
       "amount": 1.0,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1982,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4722,8 +4966,9 @@
     "value": {
       "amount": 1.3,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1982,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4754,8 +4999,9 @@
     "value": {
       "amount": 2.3,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1981,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4786,8 +5032,9 @@
     "value": {
       "amount": 8.62,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1981,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4818,8 +5065,9 @@
     "value": {
       "amount": 3.3,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1981,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4850,8 +5098,9 @@
     "value": {
       "amount": 0.57,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1981,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4882,8 +5131,9 @@
     "value": {
       "amount": 1.2,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1980,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4914,8 +5164,9 @@
     "value": {
       "amount": 1.33,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1980,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -4946,8 +5197,9 @@
     "value": {
       "amount": 8.652,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1980,
+      "verified": false,
+      "show": false
     },
     "flagship": true,
     "hotline": false,
@@ -4978,8 +5230,9 @@
     "value": {
       "amount": 3.73,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1978,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5010,8 +5263,9 @@
     "value": {
       "amount": 1.0,
       "currency": "LD million",
-      "year": null,
-      "verified": false
+      "year": 1978,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5042,8 +5296,9 @@
     "value": {
       "amount": 3921.0,
       "currency": "USD thousand",
-      "year": null,
-      "verified": false
+      "year": 1986,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5074,8 +5329,9 @@
     "value": {
       "amount": 3504.0,
       "currency": "USD thousand",
-      "year": null,
-      "verified": false
+      "year": 1986,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5106,8 +5362,9 @@
     "value": {
       "amount": 2807.0,
       "currency": "USD thousand",
-      "year": null,
-      "verified": false
+      "year": 1986,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5138,8 +5395,9 @@
     "value": {
       "amount": 2457.0,
       "currency": "USD thousand",
-      "year": null,
-      "verified": false
+      "year": 1986,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5170,8 +5428,9 @@
     "value": {
       "amount": 1499.0,
       "currency": "USD thousand",
-      "year": null,
-      "verified": false
+      "year": 1986,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5202,8 +5461,9 @@
     "value": {
       "amount": 746.0,
       "currency": "USD thousand",
-      "year": null,
-      "verified": false
+      "year": 1986,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5234,8 +5494,9 @@
     "value": {
       "amount": 9180.0,
       "currency": "USD thousand",
-      "year": null,
-      "verified": false
+      "year": 1983,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5266,8 +5527,9 @@
     "value": {
       "amount": 4032.0,
       "currency": "USD thousand",
-      "year": null,
-      "verified": false
+      "year": 1983,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5298,8 +5560,9 @@
     "value": {
       "amount": 3270.0,
       "currency": "USD thousand",
-      "year": null,
-      "verified": false
+      "year": 1983,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5330,8 +5593,9 @@
     "value": {
       "amount": 3213.0,
       "currency": "USD thousand",
-      "year": null,
-      "verified": false
+      "year": 1983,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5362,8 +5626,9 @@
     "value": {
       "amount": 2575.0,
       "currency": "USD thousand",
-      "year": null,
-      "verified": false
+      "year": 1983,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5394,8 +5659,9 @@
     "value": {
       "amount": 2211.0,
       "currency": "USD thousand",
-      "year": null,
-      "verified": false
+      "year": 1983,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5426,8 +5692,9 @@
     "value": {
       "amount": 953.0,
       "currency": "USD thousand",
-      "year": null,
-      "verified": false
+      "year": 1983,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5458,8 +5725,9 @@
     "value": {
       "amount": 2050.0,
       "currency": "USD thousand",
-      "year": null,
-      "verified": false
+      "year": 1982,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5490,8 +5758,9 @@
     "value": {
       "amount": 11680.0,
       "currency": "USD thousand",
-      "year": null,
-      "verified": false
+      "year": 1980,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5522,8 +5791,9 @@
     "value": {
       "amount": 3201.0,
       "currency": "USD thousand",
-      "year": null,
-      "verified": false
+      "year": 1980,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5554,8 +5824,9 @@
     "value": {
       "amount": 1552.0,
       "currency": "USD thousand",
-      "year": null,
-      "verified": false
+      "year": 1980,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5586,8 +5857,9 @@
     "value": {
       "amount": 3685.0,
       "currency": "USD thousand",
-      "year": null,
-      "verified": false
+      "year": 1978,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5618,8 +5890,9 @@
     "value": {
       "amount": 1399.0,
       "currency": "USD thousand",
-      "year": null,
-      "verified": false
+      "year": 1978,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5650,8 +5923,9 @@
     "value": {
       "amount": 1656.0,
       "currency": "USD thousand",
-      "year": null,
-      "verified": false
+      "year": 1977,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5682,8 +5956,9 @@
     "value": {
       "amount": 2249.0,
       "currency": "USD thousand",
-      "year": null,
-      "verified": false
+      "year": 1977,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5714,8 +5989,9 @@
     "value": {
       "amount": 3028.0,
       "currency": "USD thousand",
-      "year": null,
-      "verified": false
+      "year": 1977,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5746,8 +6022,9 @@
     "value": {
       "amount": 3633.0,
       "currency": "USD thousand",
-      "year": null,
-      "verified": false
+      "year": 1977,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5778,8 +6055,9 @@
     "value": {
       "amount": 56.765,
       "currency": "million (currency not stated)",
-      "year": null,
-      "verified": false
+      "year": 1982,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5810,8 +6088,9 @@
     "value": {
       "amount": 5.35,
       "currency": "million (currency not stated)",
-      "year": null,
-      "verified": false
+      "year": 1979,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5842,8 +6121,9 @@
     "value": {
       "amount": null,
       "currency": "MR",
-      "year": null,
-      "verified": false
+      "year": 1998,
+      "verified": false,
+      "show": false
     },
     "flagship": true,
     "hotline": false,
@@ -5874,8 +6154,9 @@
     "value": {
       "amount": null,
       "currency": "MR",
-      "year": null,
-      "verified": false
+      "year": 1998,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5906,8 +6187,9 @@
     "value": {
       "amount": null,
       "currency": "MR",
-      "year": null,
-      "verified": false
+      "year": 1998,
+      "verified": false,
+      "show": false
     },
     "flagship": false,
     "hotline": false,
@@ -5938,8 +6220,9 @@
     "value": {
       "amount": 62.72,
       "currency": "million (currency not stated)",
-      "year": null,
-      "verified": false
+      "year": 1997,
+      "verified": false,
+      "show": false
     },
     "flagship": true,
     "hotline": false,

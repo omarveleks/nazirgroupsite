@@ -1,0 +1,107 @@
+{
+  "people": {
+    "behram-shahrokh-aslam": {
+      "widths": [
+        240,
+        480
+      ],
+      "ratio": [
+        4,
+        5
+      ]
+    },
+    "director": {
+      "widths": [
+        240,
+        480
+      ],
+      "ratio": [
+        4,
+        5
+      ]
+    },
+    "founder": {
+      "widths": [
+        240,
+        480
+      ],
+      "ratio": [
+        4,
+        5
+      ]
+    },
+    "khalid-mehmood": {
+      "widths": [
+        240,
+        480
+      ],
+      "ratio": [
+        4,
+        5
+      ]
+    },
+    "muhammad-yousaf-barakzai": {
+      "widths": [
+        240,
+        480
+      ],
+      "ratio": [
+        4,
+        5
+      ]
+    },
+    "syed-imran-hassan": {
+      "widths": [
+        240,
+        480
+      ],
+      "ratio": [
+        4,
+        5
+      ]
+    }
+  },
+  "photos": {
+    "pipeline": {
+      "widths": [
+        480,
+        600
+      ],
+      "ratio": [
+        16,
+        9
+      ]
+    },
+    "power-channel": {
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "ratio": [
+        16,
+        9
+      ]
+    },
+    "substation": {
+      "widths": [
+        480,
+        960
+      ],
+      "ratio": [
+        16,
+        9
+      ]
+    },
+    "transmission-towers": {
+      "widths": [
+        480,
+        567
+      ],
+      "ratio": [
+        16,
+        9
+      ]
+    }
+  }
+}

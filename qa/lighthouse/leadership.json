@@ -6,10 +6,10 @@
   "accessibility": 100,
   "bestPractices": 100,
   "seo": 100,
-  "lcp": 1354,
+  "lcp": 1361,
   "cls": 0,
   "tbt": 0,
-  "kb": 58
+  "kb": 86
  },
  "failing": [
   {
@@ -17,6 +17,17 @@
    "title": "Reduce unused CSS",
    "score": 0,
    "display": "Est savings of 45 KiB"
+  },
+  {
+   "k": "cache-insight",
+   "title": "Use efficient cache lifetimes",
+   "score": 0.5,
+   "display": "Est savings of 28 KiB"
+  },
+  {
+   "k": "lcp-discovery-insight",
+   "title": "LCP request discovery",
+   "score": 0
   },
   {
    "k": "network-dependency-tree-insight",
@@ -27,7 +38,7 @@
    "k": "render-blocking-insight",
    "title": "Render-blocking requests",
    "score": 0,
-   "display": "Est savings of 450 ms"
+   "display": "Est savings of 400 ms"
   }
  ]
 }

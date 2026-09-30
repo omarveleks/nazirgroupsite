@@ -6,10 +6,10 @@
   "accessibility": 100,
   "bestPractices": 100,
   "seo": 100,
-  "lcp": 1205,
+  "lcp": 1204,
   "cls": 0,
   "tbt": 0,
-  "kb": 65
+  "kb": 66
  },
  "failing": [
   {

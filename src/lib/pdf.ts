@@ -20,21 +20,21 @@ import {
   type Project,
 } from './data';
 
-const NAVY = rgb(11 / 255, 31 / 255, 58 / 255);
-const MUTED = rgb(91 / 255, 103 / 255, 115 / 255);
-const AMBER = rgb(224 / 255, 161 / 255, 0);
-const RULE = rgb(201 / 255, 194 / 255, 178 / 255);
-const A4: [number, number] = [595.28, 841.89];
-const M = 42;
+export const NAVY = rgb(11 / 255, 31 / 255, 58 / 255);
+export const MUTED = rgb(91 / 255, 103 / 255, 115 / 255);
+export const AMBER = rgb(224 / 255, 161 / 255, 0);
+export const RULE = rgb(201 / 255, 194 / 255, 178 / 255);
+export const A4: [number, number] = [595.28, 841.89];
+export const M = 42;
 
 
-interface Fonts {
+export interface Fonts {
   reg: PDFFont;
   bold: PDFFont;
   mono: PDFFont;
 }
 
-async function setup(title: string) {
+export async function setup(title: string) {
   const doc = await PDFDocument.create();
   doc.setTitle(title);
   doc.setAuthor(company.name);
@@ -51,7 +51,7 @@ async function setup(title: string) {
 }
 
 /** Replace characters the standard fonts cannot encode. */
-function safe(font: PDFFont, s: string): string {
+export function safe(font: PDFFont, s: string): string {
   const map: Record<string, string> = { ' ': ' ', '−': '-', '→': '->' };
   let out = '';
   for (const ch of s) {
@@ -66,7 +66,7 @@ function safe(font: PDFFont, s: string): string {
   return out;
 }
 
-function wrap(font: PDFFont, size: number, text: string, width: number): string[] {
+export function wrap(font: PDFFont, size: number, text: string, width: number): string[] {
   const words = safe(font, text).split(/\s+/);
   const lines: string[] = [];
   let line = '';
@@ -82,13 +82,13 @@ function wrap(font: PDFFont, size: number, text: string, width: number): string[
   return lines;
 }
 
-function logo(page: PDFPage, x: number, yTop: number, h: number) {
+export function logo(page: PDFPage, x: number, yTop: number, h: number, color = NAVY) {
   const scale = h / 94;
-  page.drawSvgPath(ROOF_PATH, { x, y: yTop, scale, borderColor: NAVY, borderWidth: 4 * scale });
-  page.drawSvgPath(WORD_PATH, { x: x + WORD_OFFSET.x * scale, y: yTop - WORD_OFFSET.y * scale, scale, color: NAVY, borderWidth: 0 });
+  page.drawSvgPath(ROOF_PATH, { x, y: yTop, scale, borderColor: color, borderWidth: 4 * scale });
+  page.drawSvgPath(WORD_PATH, { x: x + WORD_OFFSET.x * scale, y: yTop - WORD_OFFSET.y * scale, scale, color, borderWidth: 0 });
 }
 
-function text(page: PDFPage, s: string, x: number, y: number, size: number, font: PDFFont, color = NAVY) {
+export function text(page: PDFPage, s: string, x: number, y: number, size: number, font: PDFFont, color = NAVY) {
   page.drawText(safe(font, s), { x, y, size, font, color });
 }
 

@@ -74,11 +74,24 @@ export function runContentChecks(dist, mode) {
     }
   });
 
-  check('No contract values rendered', (d) => {
+  check('Contract values only where approved (value.show), in original currency and year', (d) => {
+    const data = JSON.parse(fs.readFileSync('src/data/projects.json', 'utf8'));
+    const allowed = new Map();
+    for (const p of data) {
+      if (!p.value?.show) continue;
+      const [cur, unit] = p.value.currency.split(' ');
+      const n = p.value.amount.toLocaleString('en-GB', { maximumFractionDigits: 2 });
+      allowed.set(`/projects/${p.country_slug}/${p.slug}/`, `${cur} ${n}${unit ? ` ${unit}` : ''}${p.value.year ? ` (${p.value.year})` : ''}`);
+    }
     const re = /\b(Rs\.?|SR|LD|USD|MR)\s?\d[\d,.]*\s*(million|thousand)?/g;
     for (const p of pages) {
       // The PKHA enlistment limit (Rs 1,000 million) is a registration category, not a contract value
-      const t = p.text.replace(/Rs 1,000 million/g, '');
+      let t = p.text.replace(/Rs 1,000 million/g, '');
+      const ok = allowed.get(p.url);
+      if (ok) {
+        if (!t.includes(ok)) d.push(`${p.url}: approved value "${ok}" not shown`);
+        t = t.split(ok).join('');
+      }
       const m = t.match(re);
       if (m) d.push(`${p.url}: ${m.slice(0, 3).join(' | ')}`);
       if (/\bmillion\b/i.test(t)) d.push(`${p.url}: contains "million"`);
@@ -235,7 +248,7 @@ export function runContentChecks(dist, mode) {
     const walk = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(path.join(dir, e.name)) : [path.join(dir, e.name)]));
     for (const f of walk(dist)) {
       const b = path.basename(f);
-      if (/image-credits|facts\.md|OPEN_ITEMS|profile\.pdf/i.test(b)) d.push(`published: ${path.relative(dist, f)}`);
+      if (/image-credits|facts\.md|OPEN_ITEMS|Nazir_and_Sons|Second_profile/i.test(b)) d.push(`published: ${path.relative(dist, f)}`);
     }
     for (const p of pages) if (/image-credits/.test(p.html)) d.push(`${p.url}: links image-credits`);
   });
@@ -261,7 +274,7 @@ export function runContentChecks(dist, mode) {
 
   check('Font subset covers every character shown (fonts are subset and inlined)', (d) => {
     const ok = (c) =>
-      (c >= 0x20 && c <= 0x7e) || [0xa0, 0xa9, 0xb1, 0xb7, 0x2013, 0x2014, 0x2018, 0x2019, 0x201a, 0x201b, 0x201c, 0x201d, 0x2026, 0x203a].includes(c);
+      (c >= 0x20 && c <= 0x7e) || [0xa0, 0xa9, 0xb1, 0xb7, 0xfc, 0x2013, 0x2014, 0x2018, 0x2019, 0x201a, 0x201b, 0x201c, 0x201d, 0x2026, 0x203a].includes(c);
     const seen = new Map();
     for (const p of pages) {
       const extra = p.root.querySelectorAll('[placeholder], svg text').map((n) => n.getAttribute('placeholder') ?? n.text).join(' ');

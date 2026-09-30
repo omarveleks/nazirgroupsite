@@ -6,6 +6,7 @@ import {
   projects,
   country as getCountry,
   fmtKm,
+  fmtValue,
   fmtKv,
   projectUrl,
   ROLE_LABEL,
@@ -36,6 +37,7 @@ const others = c.projects
   .map((o) => o.x);
 const kv = fmtKv(p.voltage_kv, p);
 const km = fmtKm(p.length_km);
+const value = fmtValue(p);
 const url = new URL(projectUrl(p), Astro.site).href;
 const crumbs = {
   '@context': 'https://schema.org',
@@ -76,10 +78,11 @@ const desc = [p.name, p.client, c.name, p.year_end ? String(p.year_end) : '', kv
             {km && <div><dt>Length</dt><dd class="fig">{km}</dd></div>}
             {p.role !== 'unknown' && <div><dt>Role</dt><dd>{ROLE_LABEL[p.role]}</dd></div>}
             <div><dt>Sector</dt><dd>{SECTOR_LABEL[p.sector]}</dd></div>
+            {value && <div><dt>{p.role === 'jv' ? 'Joint-venture contract value' : 'Contract value'}</dt><dd class="fig">{value}</dd></div>}
           </dl>
           <h2 class="h">Scope</h2>
           <p class="scope">{p.scope}</p>
-          <p class="src"><span class="k">Source</span> {sourceText(p)}</p>
+          <p class="src"><span class="k">Source</span> {sourceText(p)}{p.source.url && <>; also <a href={p.source.url} rel="noopener">{new URL(p.source.url).hostname.replace(/^www\./, '')}</a></>}</p>
         </div>
         <figure class="drawing">
           <SectorGlyph sector={p.sector} />

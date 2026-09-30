@@ -9,14 +9,14 @@
   "lcp": 1206,
   "cls": 0,
   "tbt": 0,
-  "kb": 69
+  "kb": 70
  },
  "failing": [
   {
    "k": "unused-css-rules",
    "title": "Reduce unused CSS",
    "score": 0,
-   "display": "Est savings of 42 KiB"
+   "display": "Est savings of 43 KiB"
   },
   {
    "k": "network-dependency-tree-insight",

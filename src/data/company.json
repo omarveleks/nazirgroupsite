@@ -34,10 +34,9 @@
     ],
     "education": "University of Houston, Texas",
     "bio": [
-      "Sheikh Tanveer Ahmed is the Director of Nazir and Company.",
+      "Sheikh Tanveer Ahmed is the Director of Nazir and Company. He leads the company and oversees its work in Pakistan and abroad.",
       "He joined the company in 1985.",
       "He was the company's Director in Libya from 1987 to 2002 and its Director in Saudi Arabia from 2004 to 2014.",
-      "He has also served as Director of Projects and Procurement.",
       "He is a graduate of the University of Houston, Texas."
     ]
   },
@@ -45,22 +44,26 @@
     {
       "name": "Syed Imran Hassan",
       "discipline": "Adviser",
-      "line": "Member of the company's team of advisers."
+      "line": "Member of the company's team of advisers.",
+      "photo": "syed-imran-hassan"
     },
     {
       "name": "Khalid Mehmood",
       "discipline": "Telecommunication",
-      "line": "Adviser on telecommunication works."
+      "line": "Adviser on telecommunication works.",
+      "photo": "khalid-mehmood"
     },
     {
       "name": "Engr. Muhammad Yousaf Barakzai",
       "discipline": "Civil works",
-      "line": "Adviser on civil works."
+      "line": "Adviser on civil works.",
+      "photo": "muhammad-yousaf-barakzai"
     },
     {
       "name": "Behram Shahrokh Aslam",
       "discipline": "Electrical",
-      "line": "Adviser; electrical engineer listed on the company's PEC licence."
+      "line": "Adviser; electrical engineer listed on the company's PEC licence.",
+      "photo": "behram-shahrokh-aslam"
     }
   ],
   "pec": {

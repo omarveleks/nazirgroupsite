@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import SectorGlyph from '../components/SectorGlyph.astro';
+import Photo from '../components/Photo.astro';
 import { byNewest, projectUrl, fmtKv } from '../lib/data';
 import { services, serviceProjects } from '../lib/services';
 
@@ -32,6 +33,11 @@ const rows = services.map((s) => {
             <div class="svc-body">
               <h2>{s.title}</h2>
               <p>{s.intro}</p>
+              {s.photo && (
+                <div class="svc-photo">
+                  <Photo {...s.photo} sizes="(min-width: 48rem) 36rem, calc(100vw - 2rem)" />
+                </div>
+              )}
               <p class="svc-count"><span class="fig">{s.count}</span> documented {s.count === 1 ? 'project' : 'projects'}{s.all ? ':' : '. Recent examples:'}</p>
               <ul class="ex">
                 {s.examples.map((p) => (
@@ -95,6 +101,10 @@ const rows = services.map((s) => {
   }
   .svc h2 {
     font-size: var(--step-2);
+  }
+  .svc-photo {
+    max-width: 36rem;
+    margin: 1rem 0 1.25rem;
   }
   .svc-count {
     font-size: var(--step--1);

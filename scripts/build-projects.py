@@ -44,7 +44,7 @@ CLIENTS = {
     "PUNJAB_HWY": "Punjab Highway Department",
     "PUNJAB_CW": "Punjab Communication and Works Department",
     "NLC": "National Logistics Cell",
-    "GBC": "GBC",
+    "GBC": "Ghazi-Barotha Contractors (GBC)",
     "LDA": "Lahore Development Authority",
     "LCCHS": "Lahore Cantt. Cooperative Housing Society",
     # Saudi Arabia
@@ -56,22 +56,22 @@ CLIENTS = {
     "SIEMENS_SEC": "Siemens / Saudi Electricity Company (WRB)",
     "MASS_SEC": "MASS Project / Saudi Electricity Company (WRB)",
     "SCECO": "Saudi Electricity Company (formerly SCECO)",
-    "SCECO_NPCC": "Saudi Electricity Company (formerly SCECO) / N.P.C.C",
+    "SCECO_NPCC": "Saudi Electricity Company (formerly SCECO) / National Power Construction Corporation",
     "SCECO_SIEMENS": "Saudi Electricity Company (formerly SCECO) / Siemens",
-    "EWR_NPCC": "EWR / N.P.C.C",
+    "EWR_NPCC": "EWR / National Power Construction Corporation",
     "EWR_MASS": "EWR / MASS",
     "EWR_SIEMENS": "EWR / Siemens",
     "EWR_SUED": "EWR / Suedrohrbau",
-    "MODA": "MODA",
+    "MODA": "Ministry of Defence and Aviation (MODA)",
     "SOI": "SOI / LTII",
     "RCD": "Royal Committee for Development",
     "NEPCO": "NEPCO",
-    "SSEM": "S.S.E.M / SECC",
+    "SSEM": "Saudi Services for Electro-Mechanic Works (SSEM) / SECC",
     # Libya
     "GECOL": "GECOL",
     "GECOL_ELPCO": "GECOL (formerly ELPCO)",
     "GEC": "GEC",
-    "ECCO": "ECCO",
+    "ECCO": "Electrical Construction Company (ECCO)",
     "ECT": "ECT",
     "SIRTE": "Sirte Oil Company",
     "AGOCO": "Arabian Gulf Oil Company",
@@ -94,7 +94,7 @@ CLIENTS = {
 }
 
 # Clients that are themselves contractors: the company worked under them.
-SUB_CLIENTS = {"IEC_WAPDA", "SIEMENS_SEC", "MASS_SEC", "SCECO_NPCC", "SCECO_SIEMENS",
+SUB_CLIENTS = {"IEC_WAPDA", "GBC", "SSEM", "SIEMENS_SEC", "MASS_SEC", "SCECO_NPCC", "SCECO_SIEMENS",
                "EWR_NPCC", "EWR_MASS", "EWR_SIEMENS", "EWR_SUED", "ENERGOINVEST_SOE",
                "ENERGOINVEST", "ITOCHU", "SOE_ENERGOINVEST", "PTT_NIPPON",
                "PTT_MITSUBISHI", "FURUKAWA", "JAMES_SCOTT", "CI2000"}
@@ -110,7 +110,7 @@ def row(*a):
 G = "national-grid"
 row("pakistan", G, P1, 29, 1, "Barotha–Rewat 500 kV transmission lines", "NGC_WAPDA", 2007, 500, 156, T, "unknown",
     "Contract No. 2017-9: construction of the Barotha–Rewat 500 kV transmission lines.", 2608.00, "Rs million",
-    "Length 156 km from the second profile (p.14).", {"flagship": True, "region": "Punjab", "km_src": (P2, 14)})
+    "Length 156 km from the second profile (p.14).", {"show_value": True, "flagship": True, "region": "Punjab", "km_src": (P2, 14)})
 row("pakistan", G, P1, 29, 2, "Guddu–Sibi 220 kV transmission lines (Section II)", "NGC", 1997, 220, 175, T, "unknown",
     "Contract No. GSO-6(A) Section II: construction of 220 kV transmission lines from Guddu to Sibi.", 130.53, "Rs million",
     "Length 175 km from the second profile (p.14).", {"region": "Sindh and Balochistan", "km_src": (P2, 14)})
@@ -163,9 +163,9 @@ row("pakistan", G, P1, 31, 13, "Chach Interchange, Motorway M-1", "NHA", 2011, N
     "Construction of Chach Interchange on Motorway M-1.", 151.826, "Rs million", "", {"region": "Punjab"})
 row("pakistan", G, P1, 31, 14, "Dream Land Housing City, Mian Channu", "DLH", 2011, None, None, C, "unknown",
     "Construction works at Dream Land Housing City, Mian Channu.", 58.00, "Rs million", "", {"region": "Punjab"})
-row("pakistan", G, P1, 31, 15, "Sialkot International Airport, Package III-A-3 (landside development)", "SIAL", None, None, None, C, "unknown",
+row("pakistan", G, P1, 31, 15, "Sialkot International Airport, Package III-A-3 landside works (2011)", "SIAL", 2011, None, None, C, "unknown",
     "Construction of Sialkot International Airport Package III-A-3, landside development works.", 215.575, "Rs million",
-    "Listed twice in the profile: completion 2011 (p.31, Rs 215.575 million) and 2005 (p.32, Rs 215.58 million). Year withheld until confirmed.", {"region": "Punjab", "dupe": (32, 29)})
+    "A contract with the same package name is listed for 2005 (p.32); the company confirms these are two projects at the same location.", {"region": "Punjab"})
 row("pakistan", G, P1, 31, 16, "Dualisation of old G.T. Road, Gujranwala (2010)", "PHD_GRW", 2010, None, None, C, "unknown",
     "Dualisation of the old G.T. Road, Gujranwala.", 44.65, "Rs million", "", {"region": "Punjab"})
 row("pakistan", G, P1, 31, 17, "Star City Housing Society, Vehari", "SCH", 2009, None, None, C, "unknown",
@@ -178,22 +178,28 @@ row("pakistan", G, P1, 31, 20, "Narowal–Lahore road, Group I and II (KM 3 to 1
     "Construction of the road from Narowal to Lahore via Baddomalhi, Narang, Kala Khatai and Shahdara, Group I and II (KM 3 to 13).", 78.167, "Rs million", "", {"region": "Punjab"})
 row("pakistan", G, P1, 31, 21, "Narowal–Lahore road via Baddomalhi, Narang and Kala Khatai (2009)", "PHD_SKT", 2009, None, None, C, "unknown",
     "Construction of the road from Narowal to Lahore via Baddomalhi, Narang and Kala Khatai.", 35.189, "Rs million", "", {"region": "Punjab"})
-row("pakistan", G, P1, 31, 22, "Sambrial Dry Port–Dhanawali metalled road", "PHD_SKT", None, None, None, C, "unknown",
-    "Construction of the metalled road from Sambrial Dry Port to Dhanawali.", 45.531, "Rs million",
-    "Listed twice in the profile: 2009, Group 2, Rs 45.531 million (p.31) and 2007, Rs 455.31 million (p.32). Year and value withheld until confirmed.", {"region": "Punjab", "dupe": (32, 24)})
-row("pakistan", G, P1, 31, 23, "Fencing and barbed wire on bypasses (TMP-BWP), Sections I and II", "NHA", None, None, None, C, "unknown",
-    "Construction of fencing and barbed wire on bypasses (TMP-BWP project), Sections I and II.", 56.99, "Rs million",
-    "Listed with completion 2009 (p.31, Rs 56.99 million) and 2005 (p.32, Rs 56.985 million). Year withheld until confirmed.", {"dupe": (32, 27)})
+row("pakistan", G, P1, 31, 22, "Sambrial Dry Port–Dhanawali metalled road, Group 2", "PHD_SKT", 2009, None, None, C, "unknown",
+    "Construction of the metalled road from Sambrial Dry Port to Dhanawali, Group 2.", 45.531, "Rs million",
+    "A separate contract on the same road is listed for 2007 (p.32).", {"region": "Punjab"})
+row("pakistan", G, P1, 31, 23, "Fencing and barbed wire on bypasses (TMP-BWP), Sections I and II (2009)", "NHA", 2009, None, None, C, "unknown",
+    "Construction of fencing and barbed wire on bypasses (TMP-BWP project), Sections I and II.", 56.99, "Rs million", "", {})
+row("pakistan", G, P1, 32, 24, "Sambrial Dry Port–Dhanawali metalled road (2007)", "PHD_SKT", 2007, None, None, C, "unknown",
+    "Construction of the metalled road from Sambrial Dry Port to Dhanawali.", 455.31, "Rs million", "", {"region": "Punjab"})
+row("pakistan", G, P1, 32, 27, "Fencing and barbed wire on bypasses (TMP-BWP), Sections I and II (2005)", "NHA", 2005, None, None, C, "unknown",
+    "Construction of fencing and barbed wire on bypasses (TMP-BWP project), Sections I and II.", 56.985, "Rs million", "", {})
+row("pakistan", G, P1, 32, 29, "Sialkot International Airport, Package III-A-3 landside works (2005)", "SIAL", 2005, None, None, C, "unknown",
+    "Construction of Sialkot International Airport Package III-A-3, landside development works.", 215.58, "Rs million",
+    "A contract with the same package name is listed for 2011 (p.31); the company confirms these are two projects at the same location.", {"region": "Punjab"})
 row("pakistan", G, P1, 32, 25, "Twenty housing units", "PRIVATE", 2007, None, None, C, "unknown",
     "Construction of 20 housing units.", 220.00, "Rs million", "", {})
 row("pakistan", G, P1, 32, 26, "Dualisation of old G.T. Road, Gujranwala (2006)", "PHD_GRW", 2006, None, None, C, "unknown",
     "Dualisation of the old G.T. Road, Gujranwala.", 133, "Rs million", "", {"region": "Punjab"})
 row("pakistan", G, P1, 32, 28, "Pindi Bhattian–Faisalabad Motorway (M-3)", "NHA", 2005, None, 52.5, C, "jv",
     "Construction, commissioning, management, operation and maintenance of the Pindi Bhattian–Faisalabad Motorway (M-3), as a 10% partner in a joint venture led by Hussain Cotex.", 7290.00, "Rs million",
-    "Joint-venture share and length (52.5 km) from the second profile (p.12).", {"region": "Punjab", "km_src": (P2, 12)})
+    "Joint-venture share and length (52.5 km) from the second profile (p.12).", {"show_value": True, "region": "Punjab", "km_src": (P2, 12)})
 row("pakistan", G, P1, 32, 30, "Ghazi-Barotha Hydropower Project, civil works", "WAPDA", 2005, None, None, C, "jv",
-    "Civil works contracts for the Ghazi-Barotha Hydropower Project, as a 2.4% partner in a joint venture led by Impregilo of Italy.", 15898.26, "Rs million",
-    "Listed twice in the profile (2004 and 2005, same value); shown once, completion 2005. Joint-venture share from the second profile (p.12).", {"region": "Punjab", "year_start": 2004})
+    "Civil works contracts for the Ghazi-Barotha Hydropower Project, as a partner (2.4%) in Ghazi-Barotha Contractors (GBC), the joint venture led by Impregilo of Italy with Ed. Züblin, Campenon Bernard and Saadullah Khan & Brothers.", 15898.26, "Rs million",
+    "Listed twice in the profile (2004 and 2005, same value); shown once, completion 2005. Joint-venture share from the second profile (p.12). The ICSID record of Impregilo v. Pakistan lists Nazir & Company as a GBC member.", {"region": "Punjab", "year_start": 2004, "show_value": True, "url": "https://www.italaw.com/sites/default/files/case-documents/ita0422.pdf"})
 row("pakistan", G, P1, 32, 32, "Narowal–Lahore road via Baddomalhi, Narang, Kala Khatai and Shahdara (2005)", "PHD_SKT", 2005, None, None, C, "unknown",
     "Construction of the road from Narowal to Lahore via Baddomalhi, Narang, Kala Khatai and Shahdara (L-26.70).", 38.60, "Rs million", "", {"region": "Punjab"})
 row("pakistan", G, P1, 32, 33, "DHA Lahore Phase VI structures, water supply, electrification and street lights", "DHA", 2004, None, None, C, "unknown",
@@ -272,9 +278,9 @@ G = None
 row("saudi-arabia", G, P1, 35, 1, "Riyadh HV and LV overhead distribution network, up to 35 kV", "SEC_WOA", 2015, 35, None, D, "unknown",
     "Construction, maintenance, expansion and reinforcement of the HV and LV overhead distribution network up to 35 kV in Riyadh.", 20625000, "SR", "", {"region": "Riyadh"})
 row("saudi-arabia", G, P1, 35, 2, "380/110 kV overhead lines and fibre-optic network, Makkah, Taif and Madinah", "SEC_WOA", 2014, 380, None, T, "main",
-    "Turnkey project for the construction of 380 kV / 110 kV overhead transmission lines and establishment of a fibre-optic cable network in the Makkah, Taif and Madinah area.", 112598244, "SR", "", {"flagship": True, "region": "Makkah and Madinah"})
+    "Turnkey project for the construction of 380 kV / 110 kV overhead transmission lines and establishment of a fibre-optic cable network in the Makkah, Taif and Madinah area.", 112598244, "SR", "", {"show_value": True, "flagship": True, "region": "Makkah and Madinah"})
 row("saudi-arabia", G, P1, 35, 3, "Distribution network up to 33 kV, Makkah, Taif and Madinah", "SEC_MULTI", 2014, 33, None, D, "unknown",
-    "Construction of the distribution network up to 33 kV, underground cable and overhead line, in the Makkah, Taif and Madinah area.", 288000000, "SR", "", {"region": "Makkah and Madinah"})
+    "Construction of the distribution network up to 33 kV, underground cable and overhead line, in the Makkah, Taif and Madinah area.", 288000000, "SR", "", {"show_value": True, "region": "Makkah and Madinah"})
 row("saudi-arabia", G, P1, 35, 4, "Wadi Al Faraa 33 kV distribution network", "SEC_WRB", 2013, 33, None, D, "unknown",
     "Construction of the 33 kV distribution network, Wadi Al Faraa.", 48517500, "SR", "", {"region": "Madinah"})
 row("saudi-arabia", G, P1, 35, 5, "Mahd Al Dhahab 33 kV distribution network", "SEC_WRB", 2012, 33, None, D, "unknown",
@@ -356,7 +362,7 @@ row("saudi-arabia", G, P1, 38, 42, "Makkah–Taif 110 kV overhead line extension
 
 # ---------------------------------------------------------------- Libya (P1 pp.39-43)
 row("libya", G, P1, 39, 1, "Samnu–Sebha 220 kV double-circuit twin-bundle line", "GECOL", 2011, 220, None, T, "unknown",
-    "Construction of the 220 kV double-circuit twin-bundle transmission line from Samnu to the 220 kV Sebha grid station, Sebha province.", 28.65, "LD million", "", {"flagship": True, "region": "Sebha"})
+    "Construction of the 220 kV double-circuit twin-bundle transmission line from Samnu to the 220 kV Sebha grid station, Sebha province.", 28.65, "LD million", "", {"show_value": True, "flagship": True, "region": "Sebha"})
 row("libya", G, P1, 39, 2, "Jalo area infrastructure works", "GEC", 2010, None, None, C, "unknown",
     "Construction of infrastructure works in the Jalo area.", 2.85, "LD million", "", {"region": "Al Wahat"})
 row("libya", G, P1, 39, 3, "33 kV transmission lines and substations", "GECOL_ELPCO", 2009, 33, None, D, "unknown",
@@ -382,7 +388,7 @@ row("libya", G, P1, 40, 12, "Underground telephone cable civil works, Aziziya to
 row("libya", G, P1, 40, 13, "Steel pole refurbishment, 33 kV Sarir and 11 kV Messla overhead lines", "AGOCO", 2002, 33, None, O, "unknown",
     "Refurbishment of steel poles on the 33 kV overhead lines at Sarir and the 11 kV overhead line in the Messla field.", 2.9, "LD million", "", {"region": "Messla and Sarir fields"})
 row("libya", G, P1, 40, 14, "Benghazi–eastern border 220 kV double-circuit lines, 750 km", "SOE_LY", 2001, 220, 750, T, "main",
-    "Turnkey project for 220 kV double-circuit transmission lines from Benghazi to the eastern border (750 km).", 151.00, "LD million", "", {"flagship": True, "region": "Cyrenaica"})
+    "Turnkey project for 220 kV double-circuit transmission lines from Benghazi to the eastern border (750 km).", 151.00, "LD million", "", {"show_value": True, "flagship": True, "region": "Cyrenaica"})
 row("libya", G, P1, 40, 15, "Sarir area 11 kV overhead lines", "AGOCO", 2000, 11, None, O, "unknown",
     "Construction of 11 kV overhead lines in the Sarir area.", 1.2, "LD million", "", {"region": "Sarir field"})
 row("libya", G, P1, 40, 16, "Sarir field flow line, 20 km", "AGOCO", 1997, None, 20, X, "unknown",
@@ -562,7 +568,7 @@ for (country, group, pdf, page, sr, name, ck, year, kv, km, sector, role, scope,
         "year_end": year,
         "role": role,
         "scope": scope,
-        "value": {"amount": value, "currency": cur, "year": None, "verified": False},
+        "value": {"amount": value, "currency": cur, "year": year, "verified": False, "show": bool(extra.get("show_value"))},
         "flagship": bool(extra.get("flagship")),
         "hotline": bool(extra.get("hotline")),
         "images": [],

@@ -28,7 +28,7 @@ export interface Project {
   year_end: number | null;
   role: 'main' | 'jv' | 'sub' | 'unknown';
   scope: string;
-  value: { amount: number | null; currency: string; year: number | null; verified: boolean };
+  value: { amount: number | null; currency: string; year: number | null; verified: boolean; show: boolean };
   flagship: boolean;
   hotline: boolean;
   images: string[];
@@ -145,6 +145,18 @@ export function fmtKv(kv: number | null, p?: Project): string {
 export function fmtKm(km: number | null): string {
   if (km === null) return '';
   return `${km.toLocaleString('en-GB')} km`;
+}
+
+/**
+ * Contract value as listed in the company profile, in its original currency and
+ * year. Only for projects approved for display (value.show); never converted.
+ */
+export function fmtValue(p: Project): string {
+  const v = p.value;
+  if (!v.show || v.amount === null) return '';
+  const [cur, unit] = v.currency.split(' ');
+  const n = v.amount.toLocaleString('en-GB', { maximumFractionDigits: 2 });
+  return `${cur} ${n}${unit ? ` ${unit}` : ''}${v.year ? ` (${v.year})` : ''}`;
 }
 
 export function yearText(p: Project): string {
