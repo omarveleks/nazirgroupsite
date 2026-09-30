@@ -25,7 +25,7 @@ jobs:
     env:
       SITE_MODE: ${{ vars.SITE_MODE || 'review' }}
       PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL || 'https://nazir-and-company.pages.dev' }}
-      PUBLIC_FORM_ENABLED: ${{ vars.PUBLIC_FORM_ENABLED || 'false' }}
+      PUBLIC_FORM_ENABLED: ${{ vars.PUBLIC_FORM_ENABLED || 'true' }}
       PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.PUBLIC_TURNSTILE_SITE_KEY || '' }}
       CF_PAGES_PROJECT: ${{ vars.CF_PAGES_PROJECT || 'nazir-and-company' }}
       ASTRO_TELEMETRY_DISABLED: '1'

@@ -2,10 +2,13 @@
  * Cloudflare Pages Function: POST /api/contact
  *
  * Environment (Cloudflare Pages > Settings > Variables and secrets):
- *   MAIL_TO               destination address (required; without it the form reports "not yet connected")
- *   MAIL_API_KEY          API key for the mail provider (secret)
- *   MAIL_PROVIDER         resend | sendgrid | postmark (default resend)
- *   MAIL_FROM             verified sender address at the provider
+ *   MAIL_TO               destination address (secret; required, else the form reports "not yet connected")
+ *   MAIL_API_KEY          API key for the mail provider (secret). For Cloudflare: an API token
+ *                         with "Email Sending: Edit"
+ *   MAIL_PROVIDER         cloudflare | resend | sendgrid | postmark (default cloudflare)
+ *   MAIL_FROM             sender address (default website@nazirco.com; for Cloudflare it must be on
+ *                         a domain with Email Routing or Email Sending in the same account)
+ *   CF_ACCOUNT_ID         Cloudflare account ID (Cloudflare provider only)
  *   TURNSTILE_SECRET_KEY  Cloudflare Turnstile secret (secret)
  *   RATE_LIMIT            optional KV namespace binding for rate limiting
  *
@@ -22,6 +25,7 @@ interface Env {
   MAIL_API_KEY?: string;
   MAIL_PROVIDER?: string;
   MAIL_FROM?: string;
+  CF_ACCOUNT_ID?: string;
   TURNSTILE_SECRET_KEY?: string;
   RATE_LIMIT?: KV;
 }
@@ -131,11 +135,28 @@ interface Mail {
 }
 
 async function send(env: Env, m: Mail): Promise<boolean> {
-  const provider = (env.MAIL_PROVIDER ?? 'resend').toLowerCase();
-  const from = env.MAIL_FROM ?? env.MAIL_TO!;
+  const provider = (env.MAIL_PROVIDER ?? 'cloudflare').toLowerCase();
+  const from = env.MAIL_FROM ?? 'website@nazirco.com';
   const to = env.MAIL_TO!;
   let res: Response;
-  if (provider === 'sendgrid') {
+  if (provider === 'cloudflare') {
+    // Cloudflare Email Service: sending to a verified Email Routing destination address is free
+    res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${env.CF_ACCOUNT_ID}/email/sending/send`, {
+      method: 'POST',
+      headers: { authorization: `Bearer ${env.MAIL_API_KEY}`, 'content-type': 'application/json' },
+      body: JSON.stringify({
+        from: { email: from, name: 'Nazir and Company website' },
+        to,
+        replyTo: m.replyTo,
+        subject: m.subject,
+        text: m.text,
+        attachments: m.file ? [{ content: m.file.b64, filename: m.file.name, type: m.file.type, disposition: 'attachment' }] : undefined,
+      }),
+    });
+    if (!res.ok) return false;
+    const data = (await res.json().catch(() => null)) as { success?: boolean } | null;
+    return data?.success === true;
+  } else if (provider === 'sendgrid') {
     res = await fetch('https://api.sendgrid.com/v3/mail/send', {
       method: 'POST',
       headers: { authorization: `Bearer ${env.MAIL_API_KEY}`, 'content-type': 'application/json' },
@@ -179,7 +200,8 @@ async function send(env: Env, m: Mail): Promise<boolean> {
 }
 
 export const onRequestPost = async ({ request, env }: Ctx): Promise<Response> => {
-  if (!env.MAIL_TO || !env.MAIL_API_KEY) return reply(request, false, 503, 'Form not yet connected.');
+  const cf = (env.MAIL_PROVIDER ?? 'cloudflare').toLowerCase() === 'cloudflare';
+  if (!env.MAIL_TO || !env.MAIL_API_KEY || (cf && !env.CF_ACCOUNT_ID)) return reply(request, false, 503, 'Form not yet connected.');
 
   const len = Number(request.headers.get('content-length') ?? '0');
   if (len > MAX_BODY) return reply(request, false, 413, 'The enquiry is too large. Attach a file of up to 5 MB.');

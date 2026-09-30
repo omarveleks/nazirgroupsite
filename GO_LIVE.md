@@ -35,6 +35,9 @@ Cloudflare keeps every deployment. **Workers & Pages › nazir-and-company › D
 
 ## 2. Contact form (before going public)
 
+**Current set-up (Cloudflare only, no third-party account):** Email Routing is on for nazirco.com and the destination address is verified. The Pages Function sends through Cloudflare Email Service. In **Workers & Pages › nazir-and-company › Settings › Variables and secrets** (Production), add as **Secret**: `MAIL_TO` (the verified destination address), `MAIL_API_KEY` (a Cloudflare API token with **Account › Email Sending › Edit**) and `CF_ACCOUNT_ID` (the account ID). Optional: `MAIL_FROM` (default `website@nazirco.com`). Then redeploy. The steps below describe the alternative providers.
+
+
 1. Choose a mail provider: Resend (default), SendGrid or Postmark. Verify the sending domain there.
 2. In **Workers & Pages › nazir-and-company › Settings › Variables and secrets** (Production), add:
    - `MAIL_TO` = the company mailbox (plain text variable)

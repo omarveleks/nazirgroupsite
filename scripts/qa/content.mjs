@@ -195,13 +195,12 @@ export function runContentChecks(dist, mode) {
     }
   });
 
-  check('Every project has a source and a page', (d) => {
+  check('Every project has a source (in projects.json) and a page', (d) => {
     const projects = JSON.parse(fs.readFileSync(path.resolve(dist, '../src/data/projects.json'), 'utf8'));
     for (const pr of projects) {
       if (!pr.source?.pdf || !pr.source?.page) d.push(`${pr.slug}: no source`);
       const f = path.join(dist, 'projects', pr.country_slug, pr.slug, 'index.html');
       if (!fs.existsSync(f)) d.push(`${pr.slug}: no page`);
-      else if (!/Source/.test(fs.readFileSync(f, 'utf8'))) d.push(`${pr.slug}: page shows no source`);
     }
   });
 

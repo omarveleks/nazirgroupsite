@@ -12,7 +12,6 @@ import {
   projectUrl,
   ROLE_LABEL,
   SECTOR_LABEL,
-  sourceText,
   yearText,
   type Project,
 } from '../../../lib/data';
@@ -77,15 +76,9 @@ const desc = [p.name, p.client, c.name, p.year_end ? String(p.year_end) : '', kv
           <div><dt>Sector</dt><dd>{SECTOR_LABEL[p.sector]}</dd></div>
           {value && <div><dt>{p.role === 'jv' ? 'Joint-venture contract value' : 'Contract value'}</dt><dd>{value}</dd></div>}
         </dl>
-        <div class="grid2 scope-row">
-          <div>
-            <span class="eb">Scope</span>
-            <p class="scope">{p.scope}</p>
-          </div>
-          <p class="src">
-            <strong>Source:</strong> {sourceText(p)}{p.source.url && <>; also <a href={p.source.url} rel="noopener">{new URL(p.source.url).hostname.replace(/^www\./, '')}</a></>}.
-            The photograph shows the type of work and is illustrative.
-          </p>
+        <div class="scope-row">
+          <span class="eb">Scope</span>
+          <p class="scope">{p.scope}</p>
         </div>
       </div>
     </section>
@@ -111,9 +104,6 @@ const desc = [p.name, p.client, c.name, p.year_end ? String(p.year_end) : '', kv
 <style>
   .scope-row {
     margin-top: clamp(3rem, 6vw, 5rem);
-    align-items: start;
-  }
-  .scope-row .src {
-    margin: 0;
+    max-width: 48rem;
   }
 </style>
