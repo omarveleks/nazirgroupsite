@@ -1,5 +1,8 @@
 # Build, run the full QA gate, then deploy to Cloudflare Pages.
 # Needs repository secrets CLOUDFLARE_API_TOKEN (Pages:Edit) and CLOUDFLARE_ACCOUNT_ID.
+# Safety: the workflow only ever creates a NEW Pages project, or deploys to a
+# project whose every deployment came from this repository. It never deletes
+# anything and never touches any other project, Worker, DNS record or setting.
 # Optional repository variables: CF_PAGES_PROJECT (default nazir-and-company),
 # SITE_MODE (review|live, default review), PUBLIC_SITE_URL, PUBLIC_FORM_ENABLED,
 # PUBLIC_TURNSTILE_SITE_KEY.
@@ -27,6 +30,39 @@ jobs:
       ASTRO_TELEMETRY_DISABLED: '1'
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history, to recognise this site's own deployments
+      - name: Pages project - create it new, or confirm it holds only this site
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          SITE_URL_VAR: ${{ vars.PUBLIC_SITE_URL }}
+        run: |
+          set -euo pipefail
+          api="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects"
+          auth="Authorization: Bearer $CLOUDFLARE_API_TOKEN"
+          code=$(curl -sS -o project.json -w '%{http_code}' -H "$auth" "$api/$CF_PAGES_PROJECT")
+          if [ "$code" = "404" ]; then
+            echo "Creating new Pages project $CF_PAGES_PROJECT"
+            curl -sSf -X POST -H "$auth" -H 'Content-Type: application/json' \
+              --data "{\"name\":\"$CF_PAGES_PROJECT\",\"production_branch\":\"main\"}" "$api" > /dev/null
+            curl -sSf -H "$auth" "$api/$CF_PAGES_PROJECT" > project.json
+          elif [ "$code" = "200" ]; then
+            curl -sSf -H "$auth" "$api/$CF_PAGES_PROJECT/deployments" > deployments.json
+            for h in $(jq -r '.result[].deployment_trigger.metadata.commit_hash // "none"' deployments.json); do
+              if ! git cat-file -e "$h^{commit}" 2>/dev/null; then
+                echo "::error::A Pages project named $CF_PAGES_PROJECT already exists and holds deployments that did not come from this repository. Nothing was changed. Set the repository variable CF_PAGES_PROJECT to a new name."
+                exit 1
+              fi
+            done
+            echo "Project $CF_PAGES_PROJECT exists and holds only this site's deployments"
+          else
+            echo "::error::Cloudflare API returned HTTP $code"; cat project.json; exit 1
+          fi
+          sub=$(jq -r '.result.subdomain' project.json)
+          echo "Pages address: https://$sub"
+          if [ -z "$SITE_URL_VAR" ]; then echo "PUBLIC_SITE_URL=https://$sub" >> "$GITHUB_ENV"; fi
+          rm -f project.json deployments.json
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -43,13 +79,8 @@ jobs:
             QA_REPORT.md
             qa/results.json
             qa/lighthouse/
-      - name: Create the Pages project if it does not exist
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: npx --yes wrangler@4 pages project create "$CF_PAGES_PROJECT" --production-branch=main || true
       - name: Deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: npx --yes wrangler@4 pages deploy dist --project-name="$CF_PAGES_PROJECT" --branch=main --commit-dirty=true
+        run: npx --yes wrangler@4 pages deploy dist --project-name="$CF_PAGES_PROJECT" --branch=main --commit-hash="$GITHUB_SHA" --commit-dirty=true
