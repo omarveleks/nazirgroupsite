@@ -5,7 +5,7 @@ import Track from '../../components/Track.astro';
 import Register from '../../components/Register.astro';
 import ClientsGrid from '../../components/ClientsGrid.astro';
 import { countries, projects, stats, byNewest } from '../../lib/data';
-import { countryMeta, numberWord, PRESENCE_ORDER } from '../../lib/site';
+import { FEATURED, countryMeta, numberWord, PRESENCE_ORDER } from '../../lib/site';
 
 const all = [...projects].sort(byNewest);
 // Country cards, largest record first (Libya keeps its own page for prominence)
@@ -29,7 +29,18 @@ const cards = [...countries]
     Projects That Power Nations
   </Statement>
 
-  <section class="sec--tight" id="countries" aria-labelledby="countries-h">
+  <section class="sec--tight" id="featured" aria-labelledby="feat-h">
+    <div class="w grid2 head-row">
+      <div>
+        <span class="eb">Selected Work</span>
+        <h2 class="h" id="feat-h">Featured Projects</h2>
+      </div>
+      <p class="body-grey">Landmark transmission and infrastructure projects for national utilities and energy leaders across Asia, the Middle East and Africa.</p>
+    </div>
+    <Track items={FEATURED} label="Featured projects" />
+  </section>
+
+  <section class="sec" id="countries" aria-labelledby="countries-h">
     <div class="w grid2 head-row">
       <div>
         <span class="eb">By Country</span>
