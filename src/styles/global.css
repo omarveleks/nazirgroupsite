@@ -967,6 +967,9 @@ mark.hl {
   object-fit: cover;
   border-radius: var(--r);
 }
+.abt {
+  padding-bottom: 4rem;
+}
 .abt .lede {
   margin: 2rem 0 2.25rem;
 }
@@ -2264,4 +2267,7 @@ mark.hl {
     animation: none !important;
     scroll-behavior: auto !important;
   }
+}
+.gl abbr {
+  text-decoration: none;
 }

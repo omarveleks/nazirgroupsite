@@ -7,7 +7,7 @@ import { country } from '../lib/data';
   {PRESENCE_ORDER.map((slug) => (
     <li>
       <a href={`/projects/${slug}/`}>
-        <h3>{country(slug).name}</h3>
+        <h3>{slug === 'saudi-arabia' ? <abbr title="Saudi Arabia">KSA</abbr> : country(slug).name}</h3>
         <span>{countryMeta(slug).descriptor}</span>
       </a>
     </li>
