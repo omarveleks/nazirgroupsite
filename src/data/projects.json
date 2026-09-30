@@ -586,8 +586,8 @@
   },
   {
     "id": "pakistan-9-30",
-    "slug": "periodic-maintenance-km-1104-000-to-1106-500",
-    "name": "Periodic maintenance, KM 1104+000 to 1106+500",
+    "slug": "national-highway-works-km-1104-000-to-1106-500",
+    "name": "National highway works, KM 1104+000 to 1106+500",
     "client": "National Highway Authority",
     "country": "Pakistan",
     "country_slug": "pakistan",
@@ -599,7 +599,7 @@
     "year_start": null,
     "year_end": 2015,
     "role": "unknown",
-    "scope": "Periodic maintenance works between KM 1104+000 and KM 1106+500.",
+    "scope": "Highway works between KM 1104+000 and KM 1106+500.",
     "value": {
       "amount": 272.0,
       "currency": "Rs million",
@@ -1048,8 +1048,8 @@
   },
   {
     "id": "pakistan-23-31",
-    "slug": "fencing-and-barbed-wire-on-bypasses-tmp-bwp-sections-i-and-ii",
-    "name": "Fencing and barbed wire on bypasses (TMP-BWP), Sections I and II (2009)",
+    "slug": "bypass-works-tmp-bwp-sections-i-and-ii",
+    "name": "Bypass works (TMP-BWP), Sections I and II (2009)",
     "client": "National Highway Authority",
     "country": "Pakistan",
     "country_slug": "pakistan",
@@ -1061,7 +1061,7 @@
     "year_start": null,
     "year_end": 2009,
     "role": "unknown",
-    "scope": "Construction of fencing and barbed wire on bypasses (TMP-BWP project), Sections I and II.",
+    "scope": "Works on the bypasses of the TMP-BWP project, Sections I and II.",
     "value": {
       "amount": 56.99,
       "currency": "Rs million",
@@ -1114,8 +1114,8 @@
   },
   {
     "id": "pakistan-27-32",
-    "slug": "fencing-and-barbed-wire-on-bypasses-tmp-bwp-sections-i-and-ii-2005",
-    "name": "Fencing and barbed wire on bypasses (TMP-BWP), Sections I and II (2005)",
+    "slug": "bypass-works-tmp-bwp-sections-i-and-ii-2005",
+    "name": "Bypass works (TMP-BWP), Sections I and II (2005)",
     "client": "National Highway Authority",
     "country": "Pakistan",
     "country_slug": "pakistan",
@@ -1127,7 +1127,7 @@
     "year_start": null,
     "year_end": 2005,
     "role": "unknown",
-    "scope": "Construction of fencing and barbed wire on bypasses (TMP-BWP project), Sections I and II.",
+    "scope": "Works on the bypasses of the TMP-BWP project, Sections I and II.",
     "value": {
       "amount": 56.985,
       "currency": "Rs million",
@@ -1180,8 +1180,8 @@
   },
   {
     "id": "pakistan-25-32",
-    "slug": "twenty-housing-units",
-    "name": "Twenty housing units",
+    "slug": "residential-housing-units",
+    "name": "Residential housing units",
     "client": "Private sector",
     "country": "Pakistan",
     "country_slug": "pakistan",
@@ -1193,7 +1193,7 @@
     "year_start": null,
     "year_end": 2007,
     "role": "unknown",
-    "scope": "Construction of 20 housing units.",
+    "scope": "Construction of residential housing units.",
     "value": {
       "amount": 220.0,
       "currency": "Rs million",
@@ -1415,8 +1415,8 @@
   },
   {
     "id": "pakistan-35-33",
-    "slug": "re-carpeting-of-roads-and-streets-sectors-g-6-and-g-7-islamabad",
-    "name": "Re-carpeting of roads and streets, sectors G-6 and G-7, Islamabad",
+    "slug": "roads-and-streets-sectors-g-6-and-g-7-islamabad",
+    "name": "Roads and streets, sectors G-6 and G-7, Islamabad",
     "client": "Capital Development Authority",
     "country": "Pakistan",
     "country_slug": "pakistan",
@@ -1428,7 +1428,7 @@
     "year_start": null,
     "year_end": 2004,
     "role": "unknown",
-    "scope": "Rehabilitation and re-carpeting of roads and streets in sectors G-6 and G-7, Islamabad.",
+    "scope": "Rehabilitation of roads and streets in sectors G-6 and G-7, Islamabad.",
     "value": {
       "amount": 46.68,
       "currency": "Rs million",
@@ -1448,8 +1448,8 @@
   },
   {
     "id": "pakistan-36-33",
-    "slug": "fencing-and-barbed-wire-on-bypasses-tmp-bwp-sections-i-and-ii-2004",
-    "name": "Fencing and barbed wire on bypasses (TMP-BWP), Sections I and II (2004)",
+    "slug": "bypass-works-tmp-bwp-sections-i-and-ii-2004",
+    "name": "Bypass works (TMP-BWP), Sections I and II (2004)",
     "client": "National Highway Authority",
     "country": "Pakistan",
     "country_slug": "pakistan",
@@ -1461,7 +1461,7 @@
     "year_start": null,
     "year_end": 2004,
     "role": "unknown",
-    "scope": "Construction of fencing and barbed wire on bypasses (TMP-BWP project), Sections I and II.",
+    "scope": "Works on the bypasses of the TMP-BWP project, Sections I and II.",
     "value": {
       "amount": 44.67,
       "currency": "Rs million",
@@ -1868,8 +1868,8 @@
   },
   {
     "id": "pakistan-48-34",
-    "slug": "ghazi-faqirabad-road-repairs",
-    "name": "Ghazi–Faqirabad road repairs",
+    "slug": "ghazi-faqirabad-road-works",
+    "name": "Ghazi–Faqirabad road works",
     "client": "Ghazi-Barotha Contractors (GBC)",
     "country": "Pakistan",
     "country_slug": "pakistan",
@@ -1881,7 +1881,7 @@
     "year_start": null,
     "year_end": 2001,
     "role": "sub",
-    "scope": "Repairing the Ghazi–Faqirabad road, including diversions.",
+    "scope": "Works on the Ghazi–Faqirabad road, including diversions.",
     "value": {
       "amount": 47.09,
       "currency": "Rs million",
@@ -2070,8 +2070,8 @@
   },
   {
     "id": "pakistan-54-34",
-    "slug": "rohri-kot-diji-road-rectification-and-periodic-maintenance",
-    "name": "Rohri–Kot Diji road rectification and periodic maintenance",
+    "slug": "rohri-kot-diji-road-rectification",
+    "name": "Rohri–Kot Diji road rectification",
     "client": "National Highway Authority (formerly National Highway Board)",
     "country": "Pakistan",
     "country_slug": "pakistan",
@@ -2083,7 +2083,7 @@
     "year_start": null,
     "year_end": 1988,
     "role": "unknown",
-    "scope": "Rectification of the Rohri–Kot Diji road and periodic maintenance.",
+    "scope": "Rectification of the Rohri–Kot Diji road.",
     "value": {
       "amount": 16.42,
       "currency": "Rs million",
@@ -2837,8 +2837,8 @@
   },
   {
     "id": "saudi-arabia-16-36",
-    "slug": "energy-meters-and-standby-generator-interlocking-al-minar-village-jeddah",
-    "name": "Energy meters and standby generator interlocking, Al Minar Village, Jeddah",
+    "slug": "al-minar-village-electrical-works-jeddah",
+    "name": "Al Minar Village electrical works, Jeddah",
     "client": "Ministry of Defence and Aviation (MODA)",
     "country": "Saudi Arabia",
     "country_slug": "saudi-arabia",
@@ -2850,7 +2850,7 @@
     "year_start": null,
     "year_end": 2001,
     "role": "unknown",
-    "scope": "Installation of energy meters and adjustment of the network for the interlocking system of standby generators at Al Minar Village, Jeddah.",
+    "scope": "Energy metering and standby-generator interlocking for the network at Al Minar Village, Jeddah.",
     "value": {
       "amount": 580000,
       "currency": "SR",
@@ -4289,8 +4289,8 @@
   },
   {
     "id": "libya-19-40",
-    "slug": "hamada-field-corroded-trunk-line-renewal-15-km-extra-job",
-    "name": "Hamada field corroded trunk line renewal, 15 km extra job",
+    "slug": "hamada-field-trunk-line-renewal-15-km",
+    "name": "Hamada field trunk line renewal, 15 km",
     "client": "Arabian Gulf Oil Company",
     "country": "Libya",
     "country_slug": "libya",
@@ -4302,7 +4302,7 @@
     "year_start": null,
     "year_end": 1995,
     "role": "unknown",
-    "scope": "Renewal of corroded trunk lines, extra job of 15 km, Hamada field.",
+    "scope": "Renewal of 15 km of trunk lines, Hamada field.",
     "value": {
       "amount": 0.6,
       "currency": "LD million",
@@ -4619,8 +4619,8 @@
   },
   {
     "id": "libya-29-41",
-    "slug": "hamada-field-corroded-trunk-line-renewal",
-    "name": "Hamada field corroded trunk line renewal",
+    "slug": "hamada-field-trunk-line-renewal",
+    "name": "Hamada field trunk line renewal",
     "client": "Arabian Gulf Oil Company",
     "country": "Libya",
     "country_slug": "libya",
@@ -4632,7 +4632,7 @@
     "year_start": null,
     "year_end": 1994,
     "role": "unknown",
-    "scope": "Renewal of corroded trunk lines, Hamada field.",
+    "scope": "Renewal of trunk lines, Hamada field.",
     "value": {
       "amount": 0.5,
       "currency": "LD million",
