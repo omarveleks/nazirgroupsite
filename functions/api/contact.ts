@@ -134,7 +134,7 @@ interface Mail {
   file?: { name: string; type: string; b64: string };
 }
 
-async function send(env: Env, m: Mail): Promise<boolean> {
+async function send(env: Env, m: Mail): Promise<{ ok: boolean; ref: string }> {
   const provider = (env.MAIL_PROVIDER ?? 'cloudflare').toLowerCase();
   const from = env.MAIL_FROM ?? 'website@nazirco.com';
   const to = env.MAIL_TO!;
@@ -153,9 +153,11 @@ async function send(env: Env, m: Mail): Promise<boolean> {
         attachments: m.file ? [{ content: m.file.b64, filename: m.file.name, type: m.file.type, disposition: 'attachment' }] : undefined,
       }),
     });
-    if (!res.ok) return false;
-    const data = (await res.json().catch(() => null)) as { success?: boolean } | null;
-    return data?.success === true;
+    const data = (await res.json().catch(() => null)) as { success?: boolean; errors?: { code?: number; message?: string }[] } | null;
+    if (res.ok && data?.success === true) return { ok: true, ref: '' };
+    // logged for Workers & Pages > Functions > Real-time logs; the reference code is safe to show
+    console.error('Cloudflare Email Service', res.status, JSON.stringify(data?.errors ?? []));
+    return { ok: false, ref: `CF-${res.status}-${data?.errors?.[0]?.code ?? 'x'}` };
   } else if (provider === 'sendgrid') {
     res = await fetch('https://api.sendgrid.com/v3/mail/send', {
       method: 'POST',
@@ -196,12 +198,17 @@ async function send(env: Env, m: Mail): Promise<boolean> {
       }),
     });
   }
-  return res.ok;
+  if (!res.ok) console.error(provider, res.status, (await res.text().catch(() => '')).slice(0, 500));
+  return { ok: res.ok, ref: `${provider}-${res.status}` };
 }
 
 export const onRequestPost = async ({ request, env }: Ctx): Promise<Response> => {
   const cf = (env.MAIL_PROVIDER ?? 'cloudflare').toLowerCase() === 'cloudflare';
-  if (!env.MAIL_TO || !env.MAIL_API_KEY || (cf && !env.CF_ACCOUNT_ID)) return reply(request, false, 503, 'Form not yet connected.');
+  if (!env.MAIL_TO || !env.MAIL_API_KEY || (cf && !env.CF_ACCOUNT_ID)) {
+    // which setting is missing (names only, never values)
+    const miss = [!env.MAIL_TO && 'MAIL_TO', !env.MAIL_API_KEY && 'MAIL_API_KEY', cf && !env.CF_ACCOUNT_ID && 'CF_ACCOUNT_ID'].filter(Boolean).join(', ');
+    return reply(request, false, 503, `Form not yet connected. (Missing: ${miss})`);
+  }
 
   const len = Number(request.headers.get('content-length') ?? '0');
   if (len > MAX_BODY) return reply(request, false, 413, 'The enquiry is too large. Attach a file of up to 5 MB.');
@@ -265,9 +272,10 @@ export const onRequestPost = async ({ request, env }: Ctx): Promise<Response> =>
   ].join('\n');
 
   try {
-    const ok = await send(env, { subject, text, replyTo: email, file });
-    return ok ? reply(request, true, 200) : reply(request, false, 502, 'The enquiry could not be sent. Please try again later.');
-  } catch {
-    return reply(request, false, 502, 'The enquiry could not be sent. Please try again later.');
+    const r = await send(env, { subject, text, replyTo: email, file });
+    return r.ok ? reply(request, true, 200) : reply(request, false, 502, `The enquiry could not be sent. Please try again later. (Reference: ${r.ref})`);
+  } catch (e) {
+    console.error('send failed', String(e));
+    return reply(request, false, 502, 'The enquiry could not be sent. Please try again later. (Reference: NET)');
   }
 };
