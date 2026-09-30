@@ -17,7 +17,7 @@ export const milestones: Milestone[] = [
   { year: '1978', title: 'First documented projects in Libya', text: 'Civil works for desalination plants and for 30/10 kV substations.' },
   { year: '1979', title: 'Saudi Arabia and Iran', text: '110 kV Makkah–Taif line extension; stringing of the 230 kV Shiraz–Bushehr line.' },
   { year: '1980', title: '220 kV and 400 kV', text: 'Misurata–Sirte 220 kV lines and the Tripoli ring in Libya; the 358 km Nasiriya–Wasit–Baghdad 400 kV line in Iraq.', slug: 'misurata-sirte-220-kv-lines-and-tripoli-ring' },
-  { year: '1985', title: 'Sheikh Tanveer Ahmed joins', text: 'The company gains the leader who would go on to direct its operations in Libya and Saudi Arabia and guide it as Director today.' },
+  { year: '1985', title: 'Sheikh Tanveer Ahmed joins', text: 'The present Director joins the company, later leading its operations in Libya and Saudi Arabia.' },
   { year: '1997', title: 'HVDC in Mozambique', text: 'Work on the ±533 kV Songo–Apollo HVDC line for Consorzio Italia 2000.', slug: 'songo-apollo-533-kv-hvdc-transmission-line' },
   { year: '1998', title: '500 kV in Malaysia', text: 'Erection and stringing of double-circuit 500 kV lines for Tenaga Nasional Berhad.', slug: 'ayer-tawar-junjung-500-kv-double-circuit-line-80-km' },
   { year: '2001', title: '750 km in Libya', text: 'Turnkey 220 kV double-circuit lines from Benghazi to the eastern border.', slug: 'benghazi-eastern-border-220-kv-double-circuit-lines-750-km' },
