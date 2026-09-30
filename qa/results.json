@@ -1,6 +1,6 @@
 {
- "started": "2026-09-30T02:46:33.641Z",
- "finished": "2026-09-30T02:47:01.935Z",
+ "started": "2026-09-30T03:01:16.146Z",
+ "finished": "2026-09-30T03:12:52.905Z",
  "results": [
   {
    "section": "code",
@@ -155,6 +155,480 @@
    "pass": true,
    "details": [],
    "count": 0
+  },
+  {
+   "section": "browser",
+   "name": "axe: zero accessibility violations (WCAG 2.2 AA + best practice), every page",
+   "pass": true,
+   "details": [],
+   "count": 0
+  },
+  {
+   "section": "browser",
+   "name": "Zero console errors or warnings, every page",
+   "pass": true,
+   "details": [],
+   "count": 0
+  },
+  {
+   "section": "browser",
+   "name": "Zero failed requests, 404s or mixed content, every page",
+   "pass": true,
+   "details": [],
+   "count": 0
+  },
+  {
+   "section": "browser",
+   "name": "No horizontal scroll at 390 px, every page",
+   "pass": true,
+   "details": [],
+   "count": 0
+  },
+  {
+   "section": "browser",
+   "name": "Tap targets at least 44 px (non-inline controls), every page",
+   "pass": true,
+   "details": [],
+   "count": 0
+  },
+  {
+   "section": "browser",
+   "name": "No horizontal scroll 320–1920 px and at 200% text zoom (representative pages)",
+   "pass": true,
+   "details": [],
+   "count": 0
+  },
+  {
+   "section": "browser",
+   "name": "Screenshots saved at 360, 768 and 1280 px (30 pages each)",
+   "pass": true,
+   "details": [],
+   "count": 0
+  },
+  {
+   "section": "browser",
+   "name": "Screenshots saved at 390 and 1440 px (6 key pages)",
+   "pass": true,
+   "details": [],
+   "count": 0
+  },
+  {
+   "section": "browser",
+   "name": "Web Vitals on emulated devices, Slow 4G (LCP < 2.0 s, CLS = 0, INP < 100 ms)",
+   "pass": true,
+   "details": [],
+   "count": 0,
+   "table": [
+    {
+     "device": "iPhone SE",
+     "url": "/",
+     "lcp": 800,
+     "cls": 0,
+     "inp": 16,
+     "kb": 141
+    },
+    {
+     "device": "iPhone SE",
+     "url": "/projects/",
+     "lcp": 732,
+     "cls": 0,
+     "inp": 64,
+     "kb": 275
+    },
+    {
+     "device": "iPhone SE",
+     "url": "/projects/libya/",
+     "lcp": 920,
+     "cls": 0,
+     "inp": 24,
+     "kb": 105
+    },
+    {
+     "device": "iPhone SE",
+     "url": "/libya/",
+     "lcp": 880,
+     "cls": 0,
+     "inp": 16,
+     "kb": 180
+    },
+    {
+     "device": "iPhone SE",
+     "url": "/contact/",
+     "lcp": 724,
+     "cls": 0,
+     "inp": 24,
+     "kb": 70
+    },
+    {
+     "device": "iPhone SE",
+     "url": "/projects/pakistan/barotha-rewat-500-kv-transmission-lines/",
+     "lcp": 788,
+     "cls": 0,
+     "inp": 16,
+     "kb": 114
+    },
+    {
+     "device": "iPhone 14",
+     "url": "/",
+     "lcp": 808,
+     "cls": 0,
+     "inp": 16,
+     "kb": 268
+    },
+    {
+     "device": "iPhone 14",
+     "url": "/projects/",
+     "lcp": 736,
+     "cls": 0,
+     "inp": 24,
+     "kb": 264
+    },
+    {
+     "device": "iPhone 14",
+     "url": "/projects/libya/",
+     "lcp": 904,
+     "cls": 0,
+     "inp": 24,
+     "kb": 105
+    },
+    {
+     "device": "iPhone 14",
+     "url": "/libya/",
+     "lcp": 900,
+     "cls": 0,
+     "inp": 16,
+     "kb": 180
+    },
+    {
+     "device": "iPhone 14",
+     "url": "/contact/",
+     "lcp": 716,
+     "cls": 0,
+     "inp": 16,
+     "kb": 70
+    },
+    {
+     "device": "iPhone 14",
+     "url": "/projects/pakistan/barotha-rewat-500-kv-transmission-lines/",
+     "lcp": 772,
+     "cls": 0,
+     "inp": 16,
+     "kb": 114
+    },
+    {
+     "device": "Pixel 7",
+     "url": "/",
+     "lcp": 824,
+     "cls": 0,
+     "inp": 24,
+     "kb": 268
+    },
+    {
+     "device": "Pixel 7",
+     "url": "/projects/",
+     "lcp": 736,
+     "cls": 0,
+     "inp": 64,
+     "kb": 264
+    },
+    {
+     "device": "Pixel 7",
+     "url": "/projects/libya/",
+     "lcp": 904,
+     "cls": 0,
+     "inp": 24,
+     "kb": 105
+    },
+    {
+     "device": "Pixel 7",
+     "url": "/libya/",
+     "lcp": 892,
+     "cls": 0,
+     "inp": 16,
+     "kb": 180
+    },
+    {
+     "device": "Pixel 7",
+     "url": "/contact/",
+     "lcp": 732,
+     "cls": 0,
+     "inp": 24,
+     "kb": 70
+    },
+    {
+     "device": "Pixel 7",
+     "url": "/projects/pakistan/barotha-rewat-500-kv-transmission-lines/",
+     "lcp": 772,
+     "cls": 0,
+     "inp": 16,
+     "kb": 114
+    },
+    {
+     "device": "Low-end Android (360x640, 4x CPU)",
+     "url": "/",
+     "lcp": 1072,
+     "cls": 0,
+     "inp": 56,
+     "kb": 268
+    },
+    {
+     "device": "Low-end Android (360x640, 4x CPU)",
+     "url": "/projects/",
+     "lcp": 944,
+     "cls": 0,
+     "inp": 64,
+     "kb": 264
+    },
+    {
+     "device": "Low-end Android (360x640, 4x CPU)",
+     "url": "/projects/libya/",
+     "lcp": 1128,
+     "cls": 0,
+     "inp": 48,
+     "kb": 105
+    },
+    {
+     "device": "Low-end Android (360x640, 4x CPU)",
+     "url": "/libya/",
+     "lcp": 1020,
+     "cls": 0,
+     "inp": 40,
+     "kb": 180
+    },
+    {
+     "device": "Low-end Android (360x640, 4x CPU)",
+     "url": "/contact/",
+     "lcp": 912,
+     "cls": 0,
+     "inp": 32,
+     "kb": 70
+    },
+    {
+     "device": "Low-end Android (360x640, 4x CPU)",
+     "url": "/projects/pakistan/barotha-rewat-500-kv-transmission-lines/",
+     "lcp": 940,
+     "cls": 0,
+     "inp": 40,
+     "kb": 114
+    },
+    {
+     "device": "iPad",
+     "url": "/",
+     "lcp": 932,
+     "cls": 0,
+     "inp": 16,
+     "kb": 326
+    },
+    {
+     "device": "iPad",
+     "url": "/projects/",
+     "lcp": 752,
+     "cls": 0,
+     "inp": 16,
+     "kb": 251
+    },
+    {
+     "device": "iPad",
+     "url": "/projects/libya/",
+     "lcp": 1232,
+     "cls": 0,
+     "inp": 24,
+     "kb": 173
+    },
+    {
+     "device": "iPad",
+     "url": "/libya/",
+     "lcp": 1200,
+     "cls": 0,
+     "inp": 16,
+     "kb": 277
+    },
+    {
+     "device": "iPad",
+     "url": "/contact/",
+     "lcp": 736,
+     "cls": 0,
+     "inp": 16,
+     "kb": 70
+    },
+    {
+     "device": "iPad",
+     "url": "/projects/pakistan/barotha-rewat-500-kv-transmission-lines/",
+     "lcp": 876,
+     "cls": 0,
+     "inp": 16,
+     "kb": 127
+    }
+   ]
+  },
+  {
+   "section": "browser",
+   "name": "Page weight on first load (home < 500 KB, other pages < 350 KB)",
+   "pass": true,
+   "details": [],
+   "count": 0
+  },
+  {
+   "section": "browser",
+   "name": "Works without JavaScript (register, menu, form action)",
+   "pass": true,
+   "details": [],
+   "count": 0
+  },
+  {
+   "section": "browser",
+   "name": "Register filters, URL filters and Libya enquiry pre-selection work",
+   "pass": true,
+   "details": [],
+   "count": 0
+  },
+  {
+   "section": "browser",
+   "name": "Interactive blocks work by mouse and keyboard, and degrade without JavaScript",
+   "pass": true,
+   "details": [],
+   "count": 0
+  },
+  {
+   "section": "lighthouse",
+   "name": "Lighthouse mobile (Perf ≥ 95, A11y 100, BP ≥ 95, SEO 100, LCP < 2 s, CLS 0, TBT < 100 ms)",
+   "pass": true,
+   "details": [],
+   "count": 0,
+   "table": [
+    {
+     "url": "/",
+     "performance": 100,
+     "accessibility": 100,
+     "bestPractices": 100,
+     "seo": 100,
+     "lcp": 1507,
+     "cls": 0,
+     "tbt": 0,
+     "kb": 143
+    },
+    {
+     "url": "/projects/",
+     "performance": 99,
+     "accessibility": 100,
+     "bestPractices": 100,
+     "seo": 100,
+     "lcp": 1732,
+     "cls": 0,
+     "tbt": 0,
+     "kb": 161
+    },
+    {
+     "url": "/projects/libya/",
+     "performance": 100,
+     "accessibility": 100,
+     "bestPractices": 100,
+     "seo": 100,
+     "lcp": 1507,
+     "cls": 0,
+     "tbt": 0,
+     "kb": 107
+    },
+    {
+     "url": "/libya/",
+     "performance": 100,
+     "accessibility": 100,
+     "bestPractices": 100,
+     "seo": 100,
+     "lcp": 1583,
+     "cls": 0,
+     "tbt": 0,
+     "kb": 120
+    },
+    {
+     "url": "/contact/",
+     "performance": 100,
+     "accessibility": 100,
+     "bestPractices": 100,
+     "seo": 100,
+     "lcp": 1504,
+     "cls": 0,
+     "tbt": 0,
+     "kb": 72
+    },
+    {
+     "url": "/projects/pakistan/barotha-rewat-500-kv-transmission-lines/",
+     "performance": 100,
+     "accessibility": 100,
+     "bestPractices": 100,
+     "seo": 100,
+     "lcp": 1506,
+     "cls": 0,
+     "tbt": 0,
+     "kb": 81
+    },
+    {
+     "url": "/about/",
+     "performance": 100,
+     "accessibility": 100,
+     "bestPractices": 100,
+     "seo": 100,
+     "lcp": 1505,
+     "cls": 0,
+     "tbt": 0,
+     "kb": 112
+    },
+    {
+     "url": "/services/",
+     "performance": 100,
+     "accessibility": 100,
+     "bestPractices": 100,
+     "seo": 100,
+     "lcp": 1506,
+     "cls": 0,
+     "tbt": 0,
+     "kb": 88
+    },
+    {
+     "url": "/global-presence/",
+     "performance": 100,
+     "accessibility": 100,
+     "bestPractices": 100,
+     "seo": 100,
+     "lcp": 1660,
+     "cls": 0,
+     "tbt": 0,
+     "kb": 108
+    },
+    {
+     "url": "/leadership/",
+     "performance": 100,
+     "accessibility": 100,
+     "bestPractices": 100,
+     "seo": 100,
+     "lcp": 1581,
+     "cls": 0,
+     "tbt": 0,
+     "kb": 100
+    },
+    {
+     "url": "/capabilities/",
+     "performance": 100,
+     "accessibility": 100,
+     "bestPractices": 100,
+     "seo": 100,
+     "lcp": 1358,
+     "cls": 0,
+     "tbt": 0,
+     "kb": 87
+    },
+    {
+     "url": "/downloads/",
+     "performance": 100,
+     "accessibility": 100,
+     "bestPractices": 100,
+     "seo": 100,
+     "lcp": 1506,
+     "cls": 0,
+     "tbt": 0,
+     "kb": 69
+    }
+   ]
   },
   {
    "section": "review",

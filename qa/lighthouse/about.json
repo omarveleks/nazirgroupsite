@@ -6,7 +6,7 @@
   "accessibility": 100,
   "bestPractices": 100,
   "seo": 100,
-  "lcp": 1430,
+  "lcp": 1505,
   "cls": 0,
   "tbt": 0,
   "kb": 112
@@ -33,7 +33,7 @@
    "k": "render-blocking-insight",
    "title": "Render-blocking requests",
    "score": 0,
-   "display": "Est savings of 400 ms"
+   "display": "Est savings of 380 ms"
   }
  ]
 }

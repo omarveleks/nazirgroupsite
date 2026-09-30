@@ -48,6 +48,18 @@ function track(page, bag) {
   });
 }
 
+// Scroll through the page so lazy images load before a full-page capture
+async function loadLazy(page) {
+  await page.evaluate(async () => {
+    for (let y = 0; y < document.body.scrollHeight; y += 700) {
+      window.scrollTo(0, y);
+      await new Promise((r) => setTimeout(r, 50));
+    }
+    window.scrollTo(0, 0);
+  });
+  await page.waitForLoadState('networkidle');
+}
+
 export async function runBrowserChecks({ base, urls, screensDir, representative, keyPages, signoff }) {
   const browser = await chromium.launch();
   const results = [];
@@ -134,6 +146,7 @@ export async function runBrowserChecks({ base, urls, screensDir, representative,
       const page = await ctx.newPage();
       for (const u of representative) {
         await page.goto(base + u, { waitUntil: 'networkidle' });
+        await loadLazy(page);
         const name = (u.replace(/^\/|\/$/g, '').replace(/\//g, '__') || 'home') + '.jpg';
         await page.screenshot({ path: path.join(dir, name), fullPage: true, type: 'jpeg', quality: 55 });
       }
@@ -152,15 +165,7 @@ export async function runBrowserChecks({ base, urls, screensDir, representative,
       const page = await ctx.newPage();
       for (const u of signoff) {
         await page.goto(base + u, { waitUntil: 'networkidle' });
-        // scroll through so lazy images load before the full-page capture
-        await page.evaluate(async () => {
-          for (let y = 0; y < document.body.scrollHeight; y += 700) {
-            window.scrollTo(0, y);
-            await new Promise((r) => setTimeout(r, 50));
-          }
-          window.scrollTo(0, 0);
-        });
-        await page.waitForLoadState('networkidle');
+        await loadLazy(page);
         const name = (u.replace(/^\/|\/$/g, '').replace(/\//g, '__') || 'home') + '.jpg';
         await page.screenshot({ path: path.join(dir, name), fullPage: true, type: 'jpeg', quality: 60 });
       }
@@ -268,6 +273,98 @@ export async function runBrowserChecks({ base, urls, screensDir, representative,
     add('Register filters, URL filters and Libya enquiry pre-selection work', d);
   }
 
+  // 7. Interactive blocks: hero card, capability tabs, featured row, decades, menu (mouse and keyboard)
+  results.push(await interactiveChecks(browser, base));
+
   await browser.close();
   return results;
+}
+
+export async function interactiveChecks(browser, base) {
+  const d = [];
+  const visible = (page, sel) => page.locator(sel).evaluateAll((els) => els.map((e) => !e.hidden && getComputedStyle(e).display !== 'none'));
+  // desktop
+  {
+    const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+    const page = await ctx.newPage();
+    await page.goto(base + '/', { waitUntil: 'networkidle' });
+    // hero project card
+    const shown = async () => (await visible(page, '[data-carousel] [data-slide]')).indexOf(true);
+    if ((await shown()) !== 0) d.push('hero card: first slide not shown on load');
+    await page.click('[data-carousel] [data-next]');
+    if ((await shown()) !== 1) d.push('hero card: next does not show slide 2');
+    await page.click('[data-carousel] [data-to="3"]');
+    if ((await shown()) !== 3) d.push('hero card: dot 4 does not show slide 4');
+    if ((await page.getAttribute('[data-carousel] [data-to="3"]', 'aria-current')) !== 'true') d.push('hero card: active dot not marked');
+    await page.click('[data-carousel] [data-prev]');
+    if ((await shown()) !== 2) d.push('hero card: previous does not show slide 3');
+    // capability tabs: click, then keyboard
+    const tabs = page.locator('[data-tabs] [role="tab"]');
+    const n = await tabs.count();
+    if (n !== 5) d.push(`capabilities: ${n} tabs (expected 5)`);
+    await tabs.nth(2).click();
+    const sel = async () => (await tabs.evaluateAll((els) => els.map((e) => e.getAttribute('aria-selected')))).indexOf('true');
+    const panelShown = async () => (await visible(page, '[data-tabs] [role="tabpanel"]')).indexOf(true);
+    if ((await sel()) !== 2 || (await panelShown()) !== 2) d.push('capabilities: clicking tab 3 does not show panel 3');
+    const imgOn = await page.locator('[data-tabs] [data-img]').evaluateAll((els) => els.map((e) => e.classList.contains('is-on')).indexOf(true));
+    if (imgOn !== 2) d.push('capabilities: photo does not follow the tab');
+    await tabs.nth(2).focus();
+    await page.keyboard.press('ArrowDown');
+    if ((await sel()) !== 3) d.push('capabilities: ArrowDown does not select the next tab');
+    if ((await page.evaluate(() => document.activeElement?.getAttribute('role'))) !== 'tab') d.push('capabilities: focus does not follow the keyboard');
+    await page.keyboard.press('Home');
+    if ((await sel()) !== 0) d.push('capabilities: Home does not select the first tab');
+    // featured row
+    const track = page.locator('[data-track]').first();
+    await track.scrollIntoViewIfNeeded();
+    const before = await track.locator('[data-count]').textContent();
+    const left0 = await track.locator('[data-track-list]').evaluate((e) => e.scrollLeft);
+    await track.locator('[data-next]').click();
+    await page.waitForTimeout(900);
+    const left1 = await track.locator('[data-track-list]').evaluate((e) => e.scrollLeft);
+    const after = await track.locator('[data-count]').textContent();
+    if (!(left1 > left0)) d.push('featured row: next does not scroll');
+    if (before === after) d.push(`featured row: count stays "${after}"`);
+    await track.locator('[data-prev]').click();
+    await page.waitForTimeout(900);
+    if ((await track.locator('[data-track-list]').evaluate((e) => e.scrollLeft)) >= left1) d.push('featured row: previous does not scroll back');
+    // decades
+    await page.click('[data-decades] [data-d="1990s"]');
+    const dec = await page.locator('[data-decades] [data-dslide]').evaluateAll((els) => els.filter((e) => !e.hidden).map((e) => e.dataset.dslide));
+    if (dec.length !== 1 || dec[0] !== '1990s') d.push(`decades: shows ${dec.join(',')} after choosing 1990s`);
+    if ((await page.getAttribute('[data-decades] [data-d="1990s"]', 'aria-pressed')) !== 'true') d.push('decades: pressed state not set');
+    await ctx.close();
+  }
+  // phone: menu opens, closes on Escape and returns focus
+  {
+    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+    const page = await ctx.newPage();
+    await page.goto(base + '/libya/', { waitUntil: 'networkidle' });
+    await page.click('.nav-mobile summary');
+    if (!(await page.locator('.nav-panel a[href="/projects/"]').isVisible())) d.push('menu: panel does not open');
+    // the toggle event (which updates aria-expanded) fires just after the click
+    const expanded = await page
+      .waitForFunction(() => document.querySelector('.nav-mobile summary')?.getAttribute('aria-expanded') === 'true', null, { timeout: 1000 })
+      .then(() => true)
+      .catch(() => false);
+    if (!expanded) d.push('menu: aria-expanded not true when open');
+    await page.keyboard.press('Escape');
+    if (await page.locator('.nav-panel').isVisible()) d.push('menu: Escape does not close the panel');
+    if (!(await page.evaluate(() => document.activeElement?.tagName === 'SUMMARY'))) d.push('menu: focus does not return to the menu button');
+    await ctx.close();
+  }
+  // no JavaScript: first states shown, controls hidden
+  {
+    const ctx = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 1280, height: 900 } });
+    const page = await ctx.newPage();
+    await page.goto(base + '/', { waitUntil: 'load' });
+    if ((await visible(page, '[data-carousel] [data-slide]')).filter(Boolean).length !== 1) d.push('no JS: hero card does not show exactly one project');
+    if ((await visible(page, '[data-tabs] [role="tabpanel"]')).filter(Boolean).length !== 1) d.push('no JS: capability panel not shown');
+    if ((await visible(page, '[data-decades] [data-dslide]')).filter(Boolean).length !== 1) d.push('no JS: heritage card not shown');
+    for (const sel of ['.dots', '.arr', '.tnav', '.dec']) {
+      if (await page.locator(sel).first().isVisible()) d.push(`no JS: ${sel} controls visible (they need JavaScript)`);
+    }
+    await ctx.close();
+  }
+  return { name: 'Interactive blocks work by mouse and keyboard, and degrade without JavaScript', pass: d.length === 0, details: d, count: d.length };
 }
