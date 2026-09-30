@@ -86,9 +86,10 @@ export const HERO_SLIDES: Slide[] = [
 export const FEATURED: Slide[] = [
   card('benghazi-eastern-border-220-kv-double-circuit-lines-750-km', 'Benghazi–Eastern Border 220 kV Transmission', 'tower-mono'),
   card('380-110-kv-overhead-lines-and-fibre-optic-network-makkah-taif-and-madinah', 'Makkah, Taif & Madinah 380 kV Network', 'substation'),
-  card('samnu-sebha-220-kv-double-circuit-twin-bundle-line', 'Samnu–Sebha 220 kV Transmission', 'desert-lines'),
   card('barotha-rewat-500-kv-transmission-lines', 'Barotha–Rewat 500 kV Transmission', 'distribution-pole'),
-  { tag: 'Libya', title: 'Oil-Field Electrical Systems', href: '/projects/libya/?sector=oil-and-gas-electrical#register', photo: 'offshore-platform' },
+  card('songo-apollo-533-kv-hvdc-transmission-line', 'Songo–Apollo ±533 kV HVDC Transmission', 'tower-sky'),
+  card('samnu-sebha-220-kv-double-circuit-twin-bundle-line', 'Samnu–Sebha 220 kV Transmission', 'desert-lines'),
+  card('shoaiba-jeddah-380-kv-overhead-transmission-line', 'Shoaiba–Jeddah 380 kV Transmission', 'transmission-towers'),
   card('fatima-jinnah-town-phase-i-infrastructure-multan', 'Fatima Jinnah Town, Multan', 'construction-site'),
 ];
 
