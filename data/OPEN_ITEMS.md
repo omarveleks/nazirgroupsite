@@ -50,6 +50,6 @@ Facts left out, conflicts found, and decisions to confirm. Nothing here is shown
 
 ## E. Deployment
 
-35. **Cloudflare deploy from this session is blocked**: api.cloudflare.com is not in the session's allowed network hosts, so `wrangler pages deploy` cannot run here. A GitHub Actions workflow (`.github/workflows/deploy.yml`) deploys on push once the repository secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` are added. See GO_LIVE.md.
+35. **Deployed** (30 Sep 2026) by GitHub Actions to a new Cloudflare Pages project, `nazir-and-company`: https://nazir-and-company.pages.dev (review mode, noindex). Every push to `main` or `claude/gallant-knuth-fh3j1q` runs `npm run qa` and redeploys. The workflow only creates a new project or updates this one; it never deletes anything or touches other Cloudflare resources.
 36. **MAIL_TO / mail provider** not set: the contact form shows "Form not yet connected".
 37. **Turnstile site key** not set: the form works without it in review mode; set it before going live.
