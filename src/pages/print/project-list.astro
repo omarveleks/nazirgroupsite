@@ -1,0 +1,62 @@
+---
+// Project list (build-only, flowing pages): rendered to public/downloads/nazir-project-list.pdf
+import Print from '../../layouts/Print.astro';
+import Logo from '../../components/Logo.astro';
+import { company, countries, stats, byNewest, fmtKm, fmtKv, SECTOR_LABEL } from '../../lib/data';
+import { PRESENCE_ORDER, countryMeta, numberWord } from '../../lib/site';
+
+const order = [...countries].sort((a, b) => PRESENCE_ORDER.indexOf(a.slug) - PRESENCE_ORDER.indexOf(b.slug));
+---
+<Print title="Nazir and Company: Project List">
+  <div class="pl">
+    <header class="pl-head">
+      <div class="pl-logo"><Logo height={28} /></div>
+      <span class="p-eb">Project List</span>
+      <h1 class="p-h1">Projects Across {numberWord(stats.countries)} Countries</h1>
+      <p class="p-lede">Transmission lines, substations, distribution networks, oil-field electrical systems and civil infrastructure, by country.</p>
+    </header>
+    {order.map((c) => (
+      <section class="pl-c">
+        <div class="pl-ch">
+          <h2 class="p-h2">{c.name}</h2>
+          <span class="pl-cd">{countryMeta(c.slug).descriptor}</span>
+        </div>
+        <table class="pl-t">
+          <thead>
+            <tr><th>Project</th><th>Client</th><th>Sector</th><th class="r">kV</th><th class="r">km</th></tr>
+          </thead>
+          <tbody>
+            {[...c.projects].sort(byNewest).map((p) => (
+              <tr>
+                <td class="pn">{p.name}</td>
+                <td>{p.client}</td>
+                <td>{SECTOR_LABEL[p.sector]}</td>
+                <td class="r">{fmtKv(p.voltage_kv, p).replace(' kV DC', ' DC').replace(' kV', '') || '–'}</td>
+                <td class="r">{fmtKm(p.length_km).replace(' km', '') || '–'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+    ))}
+    <p class="pl-note">{company.name}. {company.pec.statement}.</p>
+  </div>
+  <style is:inline>
+    @page { size: A4; margin: 16mm 16mm 18mm; }
+    .pl-head { position: relative; padding-bottom: 8mm; margin-bottom: 4mm; border-bottom: 0.6pt solid var(--ink); }
+    .pl-logo { margin-bottom: 10mm; }
+    .pl-logo svg { color: var(--ink); width: 24mm; height: auto; }
+    .pl-head .p-h1 { font-size: 30pt; }
+    .pl-c { margin-top: 9mm; }
+    .pl-ch { display: flex; justify-content: space-between; align-items: baseline; gap: 6mm; margin-bottom: 3mm; break-after: avoid; }
+    .pl-ch .p-h2 { font-size: 20pt; }
+    .pl-cd { font: 400 7.5pt/1.3 var(--display); color: var(--blue); letter-spacing: .06em; text-transform: uppercase; }
+    .pl-t { width: 100%; border-collapse: collapse; font: 300 7.8pt/1.4 var(--body); }
+    .pl-t th { text-align: left; padding: 2mm 2mm 2mm 0; border-bottom: 0.8pt solid var(--ink); font: 600 6.2pt/1.2 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--grey); }
+    .pl-t td { padding: 1.9mm 2mm 1.9mm 0; border-bottom: 0.4pt solid var(--line); vertical-align: top; color: var(--grey); }
+    .pl-t td.pn { font: 400 8pt/1.35 var(--display); color: var(--ink); width: 44%; }
+    .pl-t .r { text-align: right; white-space: nowrap; padding-right: 0; padding-left: 2mm; }
+    .pl-t tr { break-inside: avoid; }
+    .pl-note { margin-top: 8mm; font-size: 7pt; color: var(--grey); }
+  </style>
+</Print>

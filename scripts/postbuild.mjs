@@ -13,6 +13,7 @@ const turnstile = process.env.PUBLIC_FORM_ENABLED === 'true' && !!process.env.PU
 
 // Build-only page used to render the Open Graph image: never deployed
 fs.rmSync(path.join(dist, 'og-card'), { recursive: true, force: true });
+fs.rmSync(path.join(dist, 'print'), { recursive: true, force: true });
 
 const csp = [
   "default-src 'self'",

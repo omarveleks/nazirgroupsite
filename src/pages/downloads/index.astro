@@ -1,31 +1,34 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
-import { projectListPdf, capabilityPdf } from '../../lib/pdf';
-import { companyProfilePdf } from '../../lib/profile-pdf';
+import fs from 'node:fs';
+import path from 'node:path';
 
-const kb = (b: Uint8Array) => `${Math.max(1, Math.round(b.byteLength / 1024))} KB`;
-const list = await projectListPdf();
-const cap = await capabilityPdf();
-const profile = await companyProfilePdf();
+// The PDFs are rendered from the /print/ pages by scripts/make-pdfs.mjs (npm run pdfs)
+const kb = (file: string) => {
+  const f = path.join(process.cwd(), 'public', 'downloads', file);
+  if (!fs.existsSync(f)) return '';
+  const k = Math.round(fs.statSync(f).size / 1024);
+  return k >= 1024 ? `${(k / 1024).toFixed(1)} MB` : `${k} KB`;
+};
 const docs = [
   {
     title: 'Company Profile',
-    text: 'Heritage, leadership, services, selected projects, Libya, global presence and registration.',
+    text: 'Eighteen pages: heritage, leadership, capabilities, services, featured projects, Libya, global presence, clients and registration.',
     href: '/downloads/nazir-company-profile.pdf',
-    size: kb(profile),
+    size: kb('nazir-company-profile.pdf'),
   },
   {
     title: 'Capability Statement',
     text: 'One page: registration, services, key figures and selected projects.',
     href: '/downloads/nazir-capability-statement.pdf',
-    size: kb(cap),
+    size: kb('nazir-capability-statement.pdf'),
   },
   {
     title: 'Project List',
-    text: 'Every project by country, with client, year, voltage and length.',
+    text: 'Every project by country, with client, sector, voltage and length.',
     href: '/downloads/nazir-project-list.pdf',
-    size: kb(list),
+    size: kb('nazir-project-list.pdf'),
   },
 ];
 ---
@@ -45,7 +48,7 @@ const docs = [
               <h2>{d.title}</h2>
               <p>{d.text}</p>
             </div>
-            <a class="pill" href={d.href} download>Download PDF <span class="size">({d.size})</span> <Icon name="download" /></a>
+            <a class="pill" href={d.href} download>Download PDF {d.size && <span class="size">({d.size})</span>} <Icon name="download" /></a>
           </li>
         ))}
       </ul>

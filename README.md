@@ -15,6 +15,7 @@ Built with Astro (static output), TypeScript and plain CSS. Hosted on Cloudflare
 | `npm run qa` | Release gate: builds live and review versions and runs every check (see QA_REPORT.md). Must pass before any deploy |
 | `npm run data` | Regenerate `src/data/projects.json` from the transcription in `scripts/build-projects.py` |
 | `npm run assets` | Regenerate the Open Graph image and favicons |
+| `npm run pdfs` | Re-render the downloadable PDFs (company profile, capability statement, project list) from the `/print/` pages into `public/downloads/`. Run after data or copy changes |
 | `node scripts/images.mjs` | Regenerate responsive photos, portraits and logos from `source/photos`, `source/portraits` and `source/logos` |
 | `python3 scripts/fonts.py` | Re-subset the self-hosted fonts (after adding a character to the site) |
 

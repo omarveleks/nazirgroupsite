@@ -1,0 +1,591 @@
+---
+// Company profile (build-only): rendered to public/downloads/nazir-company-profile.pdf
+import Print from '../../layouts/Print.astro';
+import Logo from '../../components/Logo.astro';
+import { company, contact, engineers, projects, stats, byNewest, clientsFor, country, fmtKm, fmtKv, fmtValue, projectBySlug, ROLE_LABEL, SECTOR_LABEL } from '../../lib/data';
+import { CAPABILITIES, CLIENT_MARKS, LIBYA_FEATURED, MAX_AC_KV, PRESENCE_ORDER, countryMeta, numberWord, projectPhoto } from '../../lib/site';
+import { services, serviceProjects } from '../../lib/services';
+import { milestones } from '../../lib/milestones';
+import { worldMap } from '../../lib/geo';
+import { logo as logoFile } from '../../lib/images';
+import { jpg, person, pad2, list } from '../../lib/print';
+
+const d = company.director;
+const f = company.founder;
+const edition = new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+const shown = engineers.shown.map((id) => engineers.engineers.find((e) => e.id === id)!);
+const selected = projects.filter((p) => p.flagship || p.value.show).sort(byNewest);
+const featuredA = selected.slice(0, 6);
+const featuredB = selected.slice(6, 12);
+const svcA = services.slice(0, 4);
+const svcB = services.slice(4);
+const lib = country('libya');
+const m = worldMap(PRESENCE_ORDER.concat('united-kingdom'));
+const names = Object.fromEntries(PRESENCE_ORDER.map((s) => [s, country(s).name]));
+const OFF: Record<string, [number, number, string]> = {
+  pakistan: [14, 5, 'start'],
+  'saudi-arabia': [-14, 22, 'end'],
+  libya: [-14, 5, 'end'],
+  iraq: [0, -16, 'middle'],
+  iran: [14, -10, 'start'],
+  malaysia: [0, -18, 'middle'],
+  mozambique: [14, 5, 'start'],
+  'united-kingdom': [14, 5, 'start'],
+};
+const branches = company.historic_branches.map((b) => (b === 'United Kingdom' ? 'the United Kingdom' : b));
+const allClients = clientsFor(projects);
+const half = Math.ceil(milestones.length / 2);
+const contents: [string, number][] = [
+  ['About the Company', 3],
+  ['Six Decades of Delivery', 4],
+  ['Leadership', 5],
+  ['Advisers and Engineers', 6],
+  ['Capabilities', 8],
+  ['Services', 9],
+  ['Featured Projects', 11],
+  ['Libya', 13],
+  ['Global Presence', 15],
+  ['Clients', 16],
+  ['Registration', 17],
+];
+const Foot = 'Nazir and Company (Pvt) Ltd  ·  Company Profile';
+const fact = (p: (typeof projects)[number]) =>
+  [
+    ['Client', p.client],
+    ['Voltage', fmtKv(p.voltage_kv, p)],
+    ['Length', fmtKm(p.length_km)],
+    [p.role === 'jv' ? 'JV contract value' : 'Contract value', fmtValue(p)],
+    ['Role', p.role !== 'unknown' ? ROLE_LABEL[p.role] : ''],
+    ['Sector', SECTOR_LABEL[p.sector]],
+  ].filter(([, v]) => v) as [string, string][];
+---
+<Print title="Nazir and Company: Company Profile">
+  <!-- 1 cover -->
+  <section class="page dark">
+    <div class="bleed shade cover-img"><img src={jpg('tower-sky', 2200)} alt="" /></div>
+    <div class="cover-logo"><Logo height={46} /></div>
+    <div class="on-photo cover-t">
+      <span class="p-eb">Company Profile</span>
+      <h1 class="cover-h">Powering Nations<br />Since {company.founded}</h1>
+      <p class="p-lede">High-voltage transmission, substations and critical infrastructure for national utilities, energy producers and governments across Asia, the Middle East and Africa.</p>
+    </div>
+    <div class="cover-foot">
+      <span>{company.name}</span>
+      <span>{edition}</span>
+    </div>
+    <span class="cover-bar"></span>
+  </section>
+
+  <!-- 2 contents -->
+  <section class="page">
+    <div class="contents-img ph-flat"><img src={jpg('tower-mono', 960)} alt="" /></div>
+    <div class="contents-t">
+      <span class="p-eb">Contents</span>
+      <h2 class="p-h1">Inside</h2>
+      <ol class="toc">
+        {contents.map(([t, n], i) => (
+          <li><span class="num">{pad2(i + 1)}</span><span class="toc-t">{t}</span><span class="toc-p">{pad2(n)}</span></li>
+        ))}
+      </ol>
+    </div>
+    <footer class="pfoot"><span>{Foot}</span><b>02</b></footer>
+  </section>
+
+  <!-- 3 about -->
+  <section class="page">
+    <div class="pad">
+      <span class="p-eb">About the Company</span>
+      <h2 class="p-h1">Delivering the Infrastructure Nations <mark class="hl">Run On</mark></h2>
+      <p class="p-lede">
+        For more than six decades, Nazir and Company has built the high-voltage networks, substations and civil infrastructure that power economies. From its headquarters in Lahore, the company delivers landmark projects for national utilities and energy leaders across Asia, the Middle East and Africa, with a reputation for engineering depth, disciplined execution and performance in the most demanding environments.
+      </p>
+      <div class="about-grid">
+        <div class="ph about-ph"><img src={jpg('substation', 960)} alt="" /></div>
+        <div>
+          <p class="p-body">
+            {f.name} founded the company in Lahore in {company.founded}. It was incorporated as a private limited company on {company.incorporated_text}, and holds Licence No. 1 of the Pakistan Engineering Council, the first the Council ever issued.
+          </p>
+          <p class="p-body">
+            By the late 1970s the company was building high-voltage transmission in Iraq and Libya. It has since delivered across {numberWord(stats.countries).toLowerCase()} countries in Asia, the Middle East and Africa, for national utilities, energy producers and governments.
+          </p>
+        </div>
+      </div>
+      <ul class="figs about-figs">
+        <li><span class="n">{company.founded}</span><span class="l">Founded in Lahore</span></li>
+        <li><span class="n">{stats.countries}</span><span class="l">Countries across Asia, the Middle East and Africa</span></li>
+        <li><span class="n">{MAX_AC_KV}<small>kV</small></span><span class="l">Transmission capability, up to HVDC</span></li>
+        <li><span class="n">No. 1</span><span class="l">Licence of the Pakistan Engineering Council</span></li>
+      </ul>
+    </div>
+    <footer class="pfoot"><span>{Foot}</span><b>03</b></footer>
+  </section>
+
+  <!-- 4 heritage -->
+  <section class="page">
+    <div class="pad">
+      <span class="p-eb">Heritage</span>
+      <h2 class="p-h1">Six Decades of Delivery</h2>
+      <p class="p-lede">From a Lahore contractor founded in {company.founded} to high-voltage transmission across North Africa, the Middle East and Asia.</p>
+      <div class="tl2">
+        {[milestones.slice(0, half), milestones.slice(half)].map((col) => (
+          <ol class="clean">
+            {col.map((ms) => (
+              <li class="ms">
+                <span class="ms-y">{ms.year}</span>
+                <div>
+                  <p class="p-h3 ms-t">{ms.title}</p>
+                  <p class="ms-d">{ms.text}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        ))}
+      </div>
+    </div>
+    <footer class="pfoot"><span>{Foot}</span><b>04</b></footer>
+  </section>
+
+  <!-- 5 leadership -->
+  <section class="page">
+    <div class="pad">
+      <span class="p-eb">Leadership</span>
+      <h2 class="p-h1">The People Behind the Delivery</h2>
+      <div class="lead2">
+        <div class="ph lead-ph"><img src={person('director')} alt="" /></div>
+        <div>
+          <span class="p-eb">{d.title}</span>
+          <h3 class="p-h2">{d.name}</h3>
+          {d.bio.map((s) => <p class="p-body lead-p">{s}</p>)}
+          <dl class="pfacts lead-facts">
+            <div><dt>With the company since</dt><dd>{d.joined}</dd></div>
+            {d.roles.map((r) => <div><dt>{r.title}</dt><dd>{r.from}–{r.to}</dd></div>)}
+          </dl>
+        </div>
+      </div>
+      <hr class="rule" />
+      <div class="founder">
+        <div class="ph founder-ph"><img src={person('founder')} alt="" /></div>
+        <div>
+          <span class="p-eb">Founder</span>
+          <h3 class="p-h2 founder-h">{f.name}</h3>
+          <p class="p-body">{f.born}–{f.died}</p>
+          <ul class="fdots">
+            {f.facts.map((t) => <li>{t}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <footer class="pfoot"><span>{Foot}</span><b>05</b></footer>
+  </section>
+
+  <!-- 6 advisers -->
+  <section class="page">
+    <div class="pad">
+      <span class="p-eb">Advisers</span>
+      <h2 class="p-h1">Key Advisers</h2>
+      <p class="p-lede">Senior advisers in electrical, telecommunication and civil works support the company's leadership.</p>
+      <ul class="clean adv">
+        {company.advisors.map((a) => (
+          <li>
+            <div class="ph adv-ph"><img src={person(a.photo)} alt="" /></div>
+            <p class="p-h3">{a.name}</p>
+            <span class="p-eb adv-d">{a.discipline}</span>
+            <p class="p-body">{a.line}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <footer class="pfoot"><span>{Foot}</span><b>06</b></footer>
+  </section>
+
+  <!-- 7 engineers -->
+  <section class="page">
+    <div class="bleed shade eng-img"><img src={jpg('site-engineer', 1400)} alt="" /></div>
+    <div class="on-photo eng-t">
+      <span class="p-eb">Engineers</span>
+      <h2 class="p-h1">Engineering Depth</h2>
+      <p class="p-lede">Engineers registered with the Pakistan Engineering Council and listed on the company licence.</p>
+    </div>
+    <div class="pad eng-pad">
+      <ul class="clean eng">
+        {shown.map((e) => (
+          <li>
+            <p class="p-h3">{e.name}</p>
+            <span class="p-eb adv-d">{e.discipline}</span>
+            <p class="p-body">{e.role}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="p-body eng-note">The full technical team is available on request.</p>
+    </div>
+    <footer class="pfoot"><span>{Foot}</span><b>07</b></footer>
+  </section>
+
+  <!-- 8 capabilities -->
+  <section class="page">
+    <div class="pad">
+      <span class="p-eb">Capabilities</span>
+      <h2 class="p-h1">End-to-End Delivery Across the Power Value Chain</h2>
+      <ol class="clean caps">
+        {CAPABILITIES.map((c, i) => (
+          <li>
+            <div class="ph cap-ph"><img src={jpg(c.photo, 960)} alt="" /></div>
+            <div>
+              <span class="num">{pad2(i + 1)}</span>
+              <p class="p-h2 cap-h">{c.title}</p>
+              <p class="p-body">{c.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+    <footer class="pfoot"><span>{Foot}</span><b>08</b></footer>
+  </section>
+
+  <!-- 9-10 services -->
+  {[svcA, svcB].map((group, gi) => (
+    <section class="page">
+      <div class="pad">
+        <span class="p-eb">Services</span>
+        <h2 class="p-h1">{gi === 0 ? 'What the Company Delivers' : 'Maintenance, Civil and Communications'}</h2>
+        <ol class="clean svc">
+          {group.map((s) => {
+            const ex = serviceProjects(s).sort(byNewest).slice(0, 2);
+            return (
+              <li>
+                {s.photo && <div class="ph svc-ph"><img src={jpg(s.photo.name, 960)} alt="" /></div>}
+                <div>
+                  <span class="num">{pad2(services.indexOf(s) + 1)}</span>
+                  <p class="p-h3 svc-h">{s.title}</p>
+                  <p class="p-body">{s.intro}</p>
+                  <ul class="clean svc-ex">
+                    {ex.map((p) => <li><span>{p.name}</span><span>{p.country}</span></li>)}
+                  </ul>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+        {gi === 1 && (
+          <div class="svc-quote">
+            <p class="p-h2">Built for the World's Toughest Terrain</p>
+            <p class="p-body">From the Sahara to the Arabian Peninsula, Nazir and Company delivers high-voltage transmission where conditions are most extreme and reliability matters most.</p>
+          </div>
+        )}
+      </div>
+      <footer class="pfoot"><span>{Foot}</span><b>{pad2(9 + gi)}</b></footer>
+    </section>
+  ))}
+
+  <!-- 11-12 featured projects -->
+  {[featuredA, featuredB].map((group, gi) => (
+    <section class="page">
+      <div class="pad">
+        <span class="p-eb">Featured Projects</span>
+        <h2 class="p-h1">{gi === 0 ? 'Landmark Projects' : 'Landmark Projects, Continued'}</h2>
+        <ul class="clean feat">
+          {group.map((p) => (
+            <li>
+              <div class="ph feat-ph"><img src={jpg(projectPhoto(p), 960)} alt="" /></div>
+              <span class="p-eb feat-tag">{p.country}</span>
+              <p class="p-h3 feat-h">{p.name}</p>
+              <dl class="pfacts">
+                {fact(p).slice(0, 4).map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+              </dl>
+            </li>
+          ))}
+        </ul>
+        {gi === 1 && (
+          <p class="ph-cap feat-note">
+            Contract values are shown as listed in the company profile, in the original currency; for joint ventures the value is that of the whole joint-venture contract. Photographs show the type of work and are illustrative.
+          </p>
+        )}
+      </div>
+      <footer class="pfoot"><span>{Foot}</span><b>{pad2(11 + gi)}</b></footer>
+    </section>
+  ))}
+
+  <!-- 13 Libya -->
+  <section class="page">
+    <div class="bleed shade libya-img"><img src={jpg('desert-lines', 2000)} alt="" /></div>
+    <div class="on-photo libya-t">
+      <span class="p-eb">Libya</span>
+      <h2 class="p-h1">A Legacy of Delivery in <span class="accent">Libya</span></h2>
+    </div>
+    <div class="pad libya-pad">
+      <p class="p-lede libya-lede">
+        For over three decades, Nazir and Company built the backbone of Libya's power network: high-voltage lines from Tripoli to Benghazi and deep into the Fezzan, and critical electrical systems for the country's leading oil producers. {company.libya_status}
+      </p>
+      <div class="two">
+        <div>
+          <p class="p-h3">From the Coast to the Fezzan</p>
+          <p class="p-body">Nazir and Company built transmission along the coast from Misurata to Sirte and around Tripoli, a turnkey line from Benghazi to the eastern border, and lines south through Hun to Sebha in the Fezzan.</p>
+        </div>
+        <div>
+          <p class="p-h3">Power for the Oil Fields</p>
+          <p class="p-body">For the Arabian Gulf Oil, Sirte Oil and Waha Oil companies, the company electrified wells, laid underground cables, built overhead lines and substations in the oil fields, and maintained a live line in service.</p>
+        </div>
+      </div>
+    </div>
+    <footer class="pfoot"><span>{Foot}</span><b>13</b></footer>
+  </section>
+
+  <!-- 14 Libya, continued -->
+  <section class="page">
+    <div class="pad">
+      <span class="p-eb">Libya</span>
+      <h2 class="p-h1">Landmark Lines</h2>
+      <ul class="clean lines">
+        {LIBYA_FEATURED.slice(0, 4).map((s) => {
+          const slug = s.href.split('/').filter(Boolean).at(-1)!;
+          const p = projectBySlug(slug);
+          return (
+            <li>
+              <p class="p-h3">{s.title}</p>
+              <p class="lines-m">{[p.client, fmtKv(p.voltage_kv, p), fmtKm(p.length_km), p.role !== 'unknown' ? ROLE_LABEL[p.role] : ''].filter(Boolean).join('  ·  ')}</p>
+            </li>
+          );
+        })}
+      </ul>
+      <div class="mc">
+        <div>
+          <span class="p-eb">Working With Main Contractors</span>
+          <p class="p-h2">Electrical Scope, Delivered</p>
+          <p class="p-body mc-p">Nazir and Company takes on the electrical scope of transmission, distribution and oil-sector programmes for main contractors, delivered by its own teams, with a large fleet of construction and stringing equipment mobilised for each project.</p>
+          <p class="p-body">Clients in Libya: {clientsFor(lib.projects).join(', ')}.</p>
+        </div>
+        <ol class="clean mc-list">
+          {['Overhead line foundations, tower erection and conductor stringing', 'Overhead distribution lines, underground cables and terminations', 'Substation civil works', 'Oil-field electrical works, including hazardous areas', 'Line maintenance, including live-line work'].map((t, i) => (
+            <li><span class="num">{pad2(i + 1)}</span><span>{t}</span></li>
+          ))}
+        </ol>
+      </div>
+    </div>
+    <footer class="pfoot"><span>{Foot}</span><b>14</b></footer>
+  </section>
+
+  <!-- 15 global presence -->
+  <section class="page">
+    <div class="pad">
+      <span class="p-eb">Global Presence</span>
+      <h2 class="p-h1">{numberWord(stats.countries)} Countries, Three Regions</h2>
+      <p class="p-lede">Headquartered in Lahore, Nazir and Company has delivered across Asia, the Middle East and Africa.</p>
+      <svg class="map" viewBox={`0 0 ${m.w} ${m.h}`} width={m.w} height={m.h} aria-hidden="true">
+        <path d={m.base} fill="#f5f6f8" stroke="#cfd5dc" stroke-width="0.6" />
+        {m.hi.map((h) => <path d={h.d} fill={h.slug === 'united-kingdom' ? '#f5f6f8' : '#e7eefb'} stroke="#1f4fb8" stroke-width="1" />)}
+        <g font-family="Inter Tight, Arial, sans-serif" font-size="17" fill="#0b1b2e">
+          {m.points.map((p) => {
+            const [dx, dy, anchor] = OFF[p.slug] ?? [12, 4, 'start'];
+            return (
+              <g>
+                <circle cx={p.x} cy={p.y} r={names[p.slug] ? 7 : 5} fill={names[p.slug] ? '#1f4fb8' : '#fff'} stroke="#1f4fb8" stroke-width="1.5" />
+                <text x={p.x + dx} y={p.y + dy} text-anchor={anchor}>{names[p.slug] ?? 'UK (branch)'}</text>
+              </g>
+            );
+          })}
+        </g>
+      </svg>
+      <ul class="clean gp">
+        {PRESENCE_ORDER.map((s) => (
+          <li><span class="gp-n">{country(s).name}</span><span class="gp-d">{countryMeta(s).descriptor}</span></li>
+        ))}
+      </ul>
+      <p class="ph-cap">The company has also held branch offices in {list(branches)}.</p>
+    </div>
+    <footer class="pfoot"><span>{Foot}</span><b>15</b></footer>
+  </section>
+
+  <!-- 16 clients -->
+  <section class="page">
+    <div class="pad">
+      <span class="p-eb">Clients</span>
+      <h2 class="p-h1">Trusted by National Utilities and Energy Leaders</h2>
+      <p class="p-lede">Nazir and Company has delivered for the organisations that build and run national power, energy and road networks.</p>
+      <ul class="clean logos">
+        {CLIENT_MARKS.map((c) => {
+          const l = c.logo ? logoFile(c.logo) : null;
+          return (
+            <li>
+              {l ? <img src={l.png} alt="" width={l.width} height={l.height} /> : (
+                <p class={`wmk${c.mark && c.mark.length <= 5 ? ' acr' : ''}`}>{c.mark}<small>{c.sub}</small></p>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+      <p class="p-eb all-h">Clients Served</p>
+      <p class="all">{allClients.join('   ·   ')}</p>
+    </div>
+    <footer class="pfoot"><span>{Foot}</span><b>16</b></footer>
+  </section>
+
+  <!-- 17 registration -->
+  <section class="page">
+    <div class="pad">
+      <span class="p-eb">Registration</span>
+      <h2 class="p-h1">Licence No. 1</h2>
+      <p class="p-lede">{company.pec.statement}, the first licence the Council issued. The company was incorporated as a private limited company on {company.incorporated_text}.</p>
+      <ul class="clean reg">
+        <li><span class="reg-k">Pakistan Engineering Council</span><span class="reg-v">Licence No. 1</span></li>
+        <li><span class="reg-k">Pre-qualified</span><span class="reg-v">{company.prequalified_short.join(' · ')}</span></li>
+        <li><span class="reg-k">Projects financed by</span><span class="reg-v">{list(company.financiers)}</span></li>
+        <li><span class="reg-k">Incorporated</span><span class="reg-v">{company.incorporated_text}</span></li>
+      </ul>
+      <div class="two reg-two">
+        <div>
+          <span class="p-eb">Fields of Work</span>
+          <ul class="clean pillz">
+            {company.fields_of_specialisation.map((x) => <li>{x}</li>)}
+          </ul>
+        </div>
+        <div>
+          <span class="p-eb">Mobilisation</span>
+          <p class="p-h3">Equipped for Every Project</p>
+          <p class="p-body mob">The company has access to a large fleet of construction and stringing equipment, and can mobilise it per project. Further documents are available on request.</p>
+        </div>
+      </div>
+      <div class="ph reg-ph"><img src={jpg('engineering-drawings', 1400)} alt="" /></div>
+    </div>
+    <footer class="pfoot"><span>{Foot}</span><b>17</b></footer>
+  </section>
+
+  <!-- 18 back cover -->
+  <section class="page dark">
+    <div class="bleed shade back-img"><img src={jpg('transmission-towers', 1600)} alt="" /></div>
+    <div class="on-photo back-t">
+      <span class="p-eb">Contact</span>
+      <h2 class="cover-h">Let's Build<br />What's Next</h2>
+      <p class="p-lede">Discuss transmission, substation and infrastructure programmes with the business development team.</p>
+    </div>
+    <div class="back-foot">
+      <div>
+        <span class="p-eb">Head Office</span>
+        <p class="back-addr">{contact.address.line1}<br />{contact.address.line2}<br />{contact.address.city}, {contact.address.country}</p>
+        {contact.phones.map((p) => <p class="back-addr">Tel {p}</p>)}
+        {contact.emails.map((e) => <p class="back-addr">{e}</p>)}
+      </div>
+      <div class="back-logo"><Logo height={52} /><p>{company.pec.short}</p></div>
+    </div>
+    <span class="cover-bar"></span>
+  </section>
+<style is:inline>
+  .cover-img { height: 100%; }
+  .cover-logo { position: absolute; z-index: 2; top: 18mm; left: 18mm; color: #fff; }
+  .cover-logo svg, .back-logo svg { color: #fff; width: 34mm; height: auto; }
+  .cover-t { top: 150mm; }
+  .cover-h { margin: 0; font: 300 50pt/0.98 var(--display); letter-spacing: -0.04em; color: #fff; }
+  .cover-foot { position: absolute; z-index: 2; left: 18mm; right: 18mm; bottom: 16mm; display: flex; justify-content: space-between; padding-top: 4mm; border-top: 0.6pt solid rgba(255,255,255,.3); font: 400 8pt/1 var(--body); color: rgba(255,255,255,.8); letter-spacing: .04em; }
+  .cover-bar { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; height: 3mm; background: var(--blue); }
+
+  .contents-img { position: absolute; left: 0; top: 0; bottom: 0; width: 80mm; }
+  .contents-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .contents-t { position: absolute; left: 96mm; right: 18mm; top: 26mm; }
+  .toc { list-style: none; margin: 14mm 0 0; padding: 0; border-top: 0.6pt solid var(--line); }
+  .toc li { display: grid; grid-template-columns: 10mm 1fr auto; align-items: baseline; padding: 4.2mm 0; border-bottom: 0.6pt solid var(--line); }
+  .toc-t { font: 300 14pt/1.2 var(--display); color: var(--ink); letter-spacing: -0.01em; }
+  .toc-p { font: 400 9pt/1 var(--display); color: var(--grey); }
+
+  .about-grid { display: grid; grid-template-columns: 64mm 1fr; gap: 9mm; margin: 9mm 0 8mm; }
+  .about-ph { height: 72mm; }
+  .about-figs { margin-top: 2mm; }
+  mark.hl { background: linear-gradient(transparent 58%, var(--tint) 58%); color: inherit; padding: 0 .06em; }
+
+  .tl2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 10mm; margin-top: 10mm; }
+  .ms { display: grid; grid-template-columns: 15mm 1fr; gap: 3mm; padding: 3.2mm 0; border-top: 0.6pt solid var(--line); }
+  .ms-y { font: 300 12pt/1.2 var(--display); color: var(--blue); letter-spacing: -0.01em; }
+  .ms-t { font-size: 10pt; }
+  .ms-d { margin: 1mm 0 0; font-size: 8.5pt; line-height: 1.45; color: var(--grey); }
+
+  .lead2 { display: grid; grid-template-columns: 56mm 1fr; gap: 10mm; margin-top: 8mm; }
+  .lead-ph { height: 70mm; }
+  .lead-ph img, .founder-ph img, .adv-ph img { object-position: 50% 15%; }
+  .lead-p { margin-bottom: 1.5mm; }
+  .page .rule { margin: 6mm 0; }
+  .lead-facts { margin-top: 4mm; grid-template-columns: 1fr 1fr 1fr; }
+  .founder { display: grid; grid-template-columns: 40mm 1fr; gap: 10mm; }
+  .founder-ph { height: 46mm; }
+  .founder-h { font-size: 20pt; }
+  .fdots { margin: 2mm 0 0; padding-left: 4mm; color: var(--grey); font-size: 8.8pt; }
+  .fdots li { margin-bottom: 0.6mm; }
+
+  .adv { display: grid; grid-template-columns: 1fr 1fr; gap: 12mm 12mm; margin-top: 12mm; }
+  .adv-ph { width: 42mm; height: 42mm; border-radius: 50%; margin-bottom: 5mm; }
+  .adv-d { margin: 1.5mm 0 2mm; font-size: 6.5pt; }
+
+  .eng-img { height: 118mm; }
+  .eng-t { top: 50mm; }
+  .eng-pad { top: 118mm; padding-top: 12mm; }
+  .eng { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10mm 8mm; }
+  .eng li { padding-top: 4mm; border-top: 0.6pt solid var(--line); }
+  .eng-note { margin-top: 10mm; color: var(--ink); font-weight: 500; }
+
+  .caps { margin-top: 7mm; }
+  .caps li { display: grid; grid-template-columns: 40mm 1fr; gap: 8mm; align-items: center; padding: 2.6mm 0; border-top: 0.6pt solid var(--line); }
+  .cap-ph { height: 23mm; }
+  .cap-h { margin: 1mm 0 1mm; font-size: 14pt; }
+  .caps .p-body { font-size: 8.8pt; line-height: 1.45; margin: 0; }
+
+  .svc { margin-top: 6mm; }
+  .svc > li { display: grid; grid-template-columns: 44mm 1fr; gap: 7mm; padding: 3.2mm 0; border-top: 0.6pt solid var(--line); }
+  .svc-ph { height: 30mm; }
+  .svc-h { margin: 1.5mm 0 1.5mm; }
+  .svc .p-body { font-size: 8.2pt; line-height: 1.45; margin-bottom: 1.5mm; }
+  .svc-ex li { display: flex; justify-content: space-between; gap: 4mm; padding: 1mm 0; border-top: 0.4pt solid var(--line); font: 300 8pt/1.35 var(--display); color: var(--ink); }
+  .svc-ex li span:last-child { color: var(--grey); white-space: nowrap; }
+  .svc-quote { margin-top: 6mm; padding: 6mm 8mm; border-radius: 1.6mm; background: var(--soft); }
+  .svc-quote .p-h2 { font-size: 17pt; margin-bottom: 2mm; }
+
+  .feat { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm 9mm; margin-top: 7mm; }
+  .feat-ph { height: 28mm; margin-bottom: 3mm; }
+  .feat-tag { margin-bottom: 1.2mm; font-size: 6.5pt; }
+  .feat-h { font-size: 10pt; margin-bottom: 2mm; min-height: 8.5mm; }
+  .feat-note { margin-top: 8mm; }
+
+  .libya-img { height: 150mm; }
+  .libya-t { top: 100mm; }
+  .libya-pad { top: 150mm; padding-top: 12mm; }
+  .libya-lede { margin-top: 0; max-width: none; color: var(--slate); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; margin-top: 9mm; }
+  .two .p-h3 { margin-bottom: 2.5mm; }
+
+  .lines { margin-top: 9mm; }
+  .lines li { padding: 3.6mm 0; border-top: 0.6pt solid var(--line); }
+  .lines-m { margin: 1mm 0 0; font: 400 8pt/1.4 var(--display); color: var(--blue); letter-spacing: .02em; }
+  .mc { display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; margin-top: 10mm; padding-top: 9mm; border-top: 0.6pt solid var(--ink); }
+  .mc-p { margin-top: 4mm; }
+  .mc-list li { display: grid; grid-template-columns: 9mm 1fr; padding: 3mm 0; border-top: 0.6pt solid var(--line); font: 300 10pt/1.35 var(--display); color: var(--ink); }
+
+  .map { display: block; width: 100%; height: auto; margin: 8mm 0 4mm; }
+  .gp { display: grid; grid-template-columns: 1fr 1fr; gap: 0 10mm; border-top: 0.6pt solid var(--line); margin-bottom: 4mm; }
+  .gp li { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; padding: 2.6mm 0; border-bottom: 0.6pt solid var(--line); }
+  .gp-n { font: 300 15pt/1.1 var(--display); color: var(--ink); letter-spacing: -0.02em; }
+  .gp-d { font-size: 7.5pt; color: var(--grey); text-align: right; }
+
+  .logos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6pt; background: var(--line); border: 0.6pt solid var(--line); margin: 10mm 0 10mm; }
+  .logos li { height: 27mm; display: grid; place-items: center; padding: 4mm; background: #fff; text-align: center; }
+  .logos img { max-width: 80%; max-height: 13mm; width: auto; height: auto; filter: grayscale(1); opacity: .8; }
+  .wmk { margin: 0; font: 600 12pt/1.1 var(--display); color: #1d3557; }
+  .wmk.acr { font-size: 15pt; letter-spacing: .04em; }
+  .wmk small { display: block; margin-top: 1.2mm; font: 500 5.5pt/1.3 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--grey); }
+  .all-h { margin-top: 2mm; }
+  .all { margin: 0; font: 300 8pt/1.7 var(--display); color: var(--ink); }
+
+  .reg { margin: 10mm 0 0; border-top: 0.6pt solid var(--ink); }
+  .reg li { display: grid; grid-template-columns: 62mm 1fr; padding: 3.8mm 0; border-bottom: 0.6pt solid var(--line); }
+  .reg-k { font: 600 7pt/1.4 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--grey); }
+  .reg-v { font: 300 12pt/1.3 var(--display); color: var(--ink); }
+  .reg-two { margin-top: 11mm; }
+  .pillz { display: flex; flex-wrap: wrap; gap: 2mm; }
+  .pillz li { padding: 1.4mm 3mm; border: 0.6pt solid var(--line-strong); border-radius: 99px; font: 400 7.5pt/1.3 var(--display); color: var(--ink); }
+  .mob { margin-top: 2.5mm; }
+  .reg-ph { height: 50mm; margin-top: 11mm; }
+
+  .back-img { height: 100%; }
+  .back-t { top: 70mm; }
+  .back-foot { position: absolute; z-index: 2; left: 18mm; right: 18mm; bottom: 22mm; display: flex; justify-content: space-between; align-items: flex-end; padding-top: 7mm; border-top: 0.6pt solid rgba(255,255,255,.3); }
+  .back-addr { margin: 0; font: 300 11pt/1.5 var(--display); color: #fff; }
+  .back-logo { text-align: right; }
+  .back-logo p { margin: 3mm 0 0; font: 400 7.5pt/1.3 var(--body); color: rgba(255,255,255,.8); }
+  .accent { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: 0; }
+</style>
+</Print>

@@ -15,7 +15,8 @@
     "preview": "node scripts/serve.mjs",
     "data": "python3 scripts/build-projects.py",
     "assets": "astro build && node scripts/make-assets.mjs && npm run build",
-    "qa": "node scripts/qa/run.mjs"
+    "qa": "node scripts/qa/run.mjs",
+    "pdfs": "astro build && node scripts/make-pdfs.mjs && npm run build"
   },
   "dependencies": {
     "astro": "^7.3.5"
@@ -36,7 +37,6 @@
     "html-validate": "^11.16.1",
     "lighthouse": "^13.5.0",
     "node-html-parser": "^9.0.4",
-    "pdf-lib": "^1.17.1",
     "playwright": "1.56.1",
     "sharp": "^0.35.5",
     "topojson-client": "^3.1.0",

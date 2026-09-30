@@ -1,0 +1,76 @@
+---
+// Capability statement (build-only, one page): rendered to public/downloads/nazir-capability-statement.pdf
+import Print from '../../layouts/Print.astro';
+import Logo from '../../components/Logo.astro';
+import { company, contact, stats, fmtKm, fmtKv, projectBySlug } from '../../lib/data';
+import { CAPABILITIES, MAX_AC_KV, PRESENCE_ORDER } from '../../lib/site';
+import { country } from '../../lib/data';
+import { jpg, pad2, list } from '../../lib/print';
+
+const sel = company.home_selected.map(projectBySlug);
+---
+<Print title="Nazir and Company: Capability Statement">
+  <section class="page">
+    <div class="cs-top dark">
+      <div class="bleed shade cs-img"><img src={jpg('tower-sky', 1600)} alt="" /></div>
+      <div class="cs-logo"><Logo height={30} /></div>
+      <div class="on-photo cs-t">
+        <span class="p-eb">Capability Statement</span>
+        <h1 class="p-h1">Powering Nations Since {company.founded}</h1>
+      </div>
+    </div>
+    <div class="cs-pad">
+      <p class="cs-lede">High-voltage transmission, substations and critical infrastructure for national utilities, energy producers and governments across Asia, the Middle East and Africa. Founded in Lahore in {company.founded}; {company.pec.statement}, the first licence the Council issued.</p>
+      <ul class="figs cs-figs">
+        <li><span class="n">{company.founded}</span><span class="l">Founded in Lahore</span></li>
+        <li><span class="n">{stats.countries}</span><span class="l">Countries across three regions</span></li>
+        <li><span class="n">{MAX_AC_KV}<small>kV</small></span><span class="l">Transmission, up to HVDC</span></li>
+        <li><span class="n">No. 1</span><span class="l">PEC licence</span></li>
+      </ul>
+      <div class="cs-two">
+        <div>
+          <span class="p-eb">Capabilities</span>
+          <ol class="clean cs-caps">
+            {CAPABILITIES.map((c, i) => (
+              <li><span class="num">{pad2(i + 1)}</span><div><p class="p-h3">{c.title}</p><p class="cs-s">{c.text}</p></div></li>
+            ))}
+          </ol>
+        </div>
+        <div>
+          <span class="p-eb">Selected Projects</span>
+          <ul class="clean cs-proj">
+            {sel.map((p) => (
+              <li><p class="cs-pn">{p.name}</p><p class="cs-pm">{[p.country, fmtKv(p.voltage_kv, p), fmtKm(p.length_km)].filter(Boolean).join('  ·  ')}</p></li>
+            ))}
+          </ul>
+          <span class="p-eb cs-h2">Presence</span>
+          <p class="cs-s">{PRESENCE_ORDER.map((s) => country(s).name).join('  ·  ')}</p>
+          <span class="p-eb cs-h2">Registration</span>
+          <p class="cs-s">Pakistan Engineering Council, Licence No. 1. Pre-qualified: {list(company.prequalified_short)}. Projects financed by the {list(company.financiers)}.</p>
+        </div>
+      </div>
+    </div>
+    <footer class="pfoot"><span>{company.name}  ·  {contact.address.line1}, {contact.address.line2}, {contact.address.city}{contact.phones.map((p) => `  ·  Tel ${p}`).join('')}{contact.emails.map((e) => `  ·  ${e}`).join('')}</span><b>{company.pec.short.toUpperCase()}</b></footer>
+  </section>
+  <style is:inline>
+    .cs-top { position: absolute; left: 0; right: 0; top: 0; height: 78mm; }
+    .cs-img { height: 78mm; }
+    .cs-logo { position: absolute; z-index: 2; top: 14mm; left: 18mm; }
+    .cs-logo svg { color: #fff; width: 24mm; height: auto; }
+    .cs-t { bottom: 12mm; }
+    .cs-t .p-h1 { font-size: 30pt; color: #fff; }
+    .cs-pad { position: absolute; left: 18mm; right: 18mm; top: 88mm; }
+    .cs-lede { margin: 0 0 6mm; font: 300 10.5pt/1.55 var(--body); color: var(--slate); }
+    .cs-figs { padding: 6mm 8mm; }
+    .cs-figs .n { font-size: 20pt; }
+    .cs-figs .l { font-size: 7pt; }
+    .cs-two { display: grid; grid-template-columns: 1.1fr 1fr; gap: 10mm; margin-top: 8mm; }
+    .cs-caps li { display: grid; grid-template-columns: 8mm 1fr; padding: 2.4mm 0; border-top: 0.6pt solid var(--line); }
+    .cs-caps .p-h3 { font-size: 10.5pt; }
+    .cs-s { margin: 0.8mm 0 0; font-size: 8pt; line-height: 1.45; color: var(--grey); }
+    .cs-proj li { padding: 1.8mm 0; border-top: 0.6pt solid var(--line); }
+    .cs-pn { margin: 0; font: 400 8.6pt/1.3 var(--display); color: var(--ink); }
+    .cs-pm { margin: 0.6mm 0 0; font: 400 7pt/1.3 var(--display); color: var(--blue); letter-spacing: .02em; }
+    .cs-h2 { margin: 5mm 0 1.5mm; }
+  </style>
+</Print>
