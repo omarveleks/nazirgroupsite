@@ -110,7 +110,7 @@ const norm = (s: string) => s.toLowerCase().replace(/[–—-]/g, ' ');
               data-country={p.country}
               data-text={norm(`${p.name} ${p.client} ${p.country} ${p.region ?? ''} ${p.scope} ${p.voltage_kv ?? ''} kv`)}
             >
-              <th scope="row" class="nm" data-label="Project"><a href={projectUrl(p)}>{p.name}</a></th>
+              <th scope="row" class="nm"><a href={projectUrl(p)}>{p.name}</a></th>
               {showCountry && <td data-label="Country">{p.country}</td>}
               <td data-label="Client">{p.client}</td>
               <td class="num fig" data-label="kV">{fmtKv(p.voltage_kv, p).replace(' kV DC', ' DC').replace(' kV', '') || '—'}</td>
@@ -127,11 +127,12 @@ const norm = (s: string) => s.toLowerCase().replace(/[–—-]/g, ' ');
 
 <script src="../scripts/register.ts"></script>
 
-<style>
+<style is:global>
+  /* global (no scoping attributes on the 187 rows) but every rule sits under .register */
   .register {
     container-type: inline-size;
   }
-  .filters {
+  .register .filters {
     display: grid;
     gap: 1.25rem 1.5rem;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 11rem), 1fr));
@@ -141,36 +142,36 @@ const norm = (s: string) => s.toLowerCase().replace(/[–—-]/g, ' ');
     border-bottom: 1px solid var(--line);
   }
   @media (scripting: none) {
-    .filters,
-    .count {
+    .register .filters,
+    .register .count {
       display: none;
     }
   }
-  .f {
+  .register .f {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     min-width: 0;
   }
-  .f--search {
+  .register .f--search {
     grid-column: 1 / -1;
   }
   @media (min-width: 60em) {
-    .filters {
+    .register .filters {
       grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
     }
-    .f--search {
+    .register .f--search {
       grid-column: span 2;
     }
   }
-  .f label {
+  .register .f label {
     font: 600 0.75rem/1.3 var(--display);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--ink);
   }
-  .f input,
-  .f select {
+  .register .f input,
+  .register .f select {
     width: 100%;
     min-height: 3.25rem;
     padding: 0.75rem 1rem;
@@ -180,13 +181,13 @@ const norm = (s: string) => s.toLowerCase().replace(/[–—-]/g, ' ');
     color: var(--ink);
     font: 300 1rem/1.3 var(--body);
   }
-  .f input:focus,
-  .f select:focus {
+  .register .f input:focus,
+  .register .f select:focus {
     outline: none;
     border-color: var(--blue);
     box-shadow: 0 0 0 3px var(--tint);
   }
-  .f--reset button {
+  .register .f--reset button {
     min-height: 3.25rem;
     padding: 0.75rem 1.5rem;
     border: 1px solid var(--line-strong);
@@ -196,47 +197,47 @@ const norm = (s: string) => s.toLowerCase().replace(/[–—-]/g, ' ');
     font: 500 0.9375rem/1 var(--body);
     cursor: pointer;
   }
-  .f--reset button:hover {
+  .register .f--reset button:hover {
     border-color: var(--ink);
   }
-  .count {
+  .register .count {
     margin: 0 0 1.5rem;
     font-size: 0.9375rem;
     color: var(--grey);
   }
-  .count .fig {
+  .register .count .fig {
     color: var(--ink);
     font-weight: 500;
   }
-  .group + .group {
+  .register .group + .group {
     margin-top: 4rem;
   }
-  .group-h {
+  .register .group-h {
     margin-bottom: 1.25rem;
     font: 300 clamp(1.5rem, 2.4vw, 2.25rem) / 1.15 var(--display);
   }
-  .group-n {
+  .register .group-n {
     font-size: 0.7em;
     color: var(--grey);
   }
-  .reg {
+  .register .reg {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.9375rem;
     line-height: 1.45;
   }
-  .reg th,
-  .reg td {
+  .register .reg th,
+  .register .reg td {
     text-align: left;
     vertical-align: top;
     padding: 1rem 0.75rem;
     border-bottom: 1px solid var(--line);
   }
-  .reg th:first-child,
-  .reg td:first-child {
+  .register .reg th:first-child,
+  .register .reg td:first-child {
     padding-left: 0;
   }
-  .reg thead th {
+  .register .reg thead th {
     font: 600 0.75rem/1.3 var(--display);
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -244,54 +245,54 @@ const norm = (s: string) => s.toLowerCase().replace(/[–—-]/g, ' ');
     border-bottom: 1px solid var(--ink);
     white-space: nowrap;
   }
-  .reg .num {
+  .register .reg .num {
     text-align: right;
     white-space: nowrap;
   }
-  .reg .yr {
+  .register .reg .yr {
     white-space: nowrap;
   }
-  .reg .nm {
+  .register .reg .nm {
     font: 400 1.0625rem/1.35 var(--display);
     overflow-wrap: anywhere;
   }
-  .reg .nm a {
+  .register .reg .nm a {
     color: var(--ink);
     text-decoration: underline;
     text-decoration-color: var(--line-strong);
     text-underline-offset: 0.25em;
   }
-  .reg .nm a:hover {
+  .register .reg .nm a:hover {
     text-decoration-color: var(--blue);
   }
-  .reg tbody tr:hover {
+  .register .reg tbody tr:hover {
     background: var(--tint);
   }
-  .reg tr[hidden] {
+  .register .reg tr[hidden] {
     display: none;
   }
-  .empty {
+  .register .empty {
     color: var(--grey);
   }
 
   /* Stacked cards on phones (and whenever the register is narrow, e.g. at 200% text) */
   @container (max-width: 47.99rem) {
-    .reg thead {
+    .register .reg thead {
       position: absolute;
       width: 1px;
       height: 1px;
       overflow: hidden;
       clip: rect(0 0 0 0);
     }
-    .reg,
-    .reg tbody,
-    .reg tr,
-    .reg th,
-    .reg td {
+    .register .reg,
+    .register .reg tbody,
+    .register .reg tr,
+    .register .reg th,
+    .register .reg td {
       display: block;
       width: 100%;
     }
-    .reg tr {
+    .register .reg tr {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       column-gap: 1rem;
@@ -301,23 +302,23 @@ const norm = (s: string) => s.toLowerCase().replace(/[–—-]/g, ' ');
       border-radius: var(--r);
       background: #fff;
     }
-    .reg th,
-    .reg td,
-    .reg th:first-child,
-    .reg td:first-child {
+    .register .reg th,
+    .register .reg td,
+    .register .reg th:first-child,
+    .register .reg td:first-child {
       border: 0;
       padding: 0.3rem 0;
       text-align: left;
     }
-    .reg .nm {
+    .register .reg .nm {
       grid-column: 1 / -1;
       order: -1;
       padding-bottom: 0.5rem;
     }
-    .reg .num {
+    .register .reg .num {
       text-align: left;
     }
-    .reg td::before {
+    .register .reg td::before {
       content: attr(data-label);
       display: block;
       font: 600 0.6875rem/1.3 var(--display);
@@ -325,7 +326,7 @@ const norm = (s: string) => s.toLowerCase().replace(/[–—-]/g, ' ');
       text-transform: uppercase;
       color: var(--grey);
     }
-    .reg tr[hidden] {
+    .register .reg tr[hidden] {
       display: none;
     }
   }

@@ -10,8 +10,10 @@ interface Props {
   sizes?: string;
   level?: 'h2' | 'h3';
 }
-// the card is min(80vw, 30rem) wide in rows, so 30rem from 600 px up
-const { item, sizes = '(min-width: 37.5em) 30rem, 80vw', level = 'h3' } = Astro.props;
+// the card is min(80vw, 30rem) wide in rows, so 30rem from 600 px up. On phones the hint
+// is 45vw: 3x screens still get the 900 px file, lower-density ones the 480 px file, which
+// keeps the rows of cards from delaying first paint on /projects/ (Lighthouse LCP)
+const { item, sizes = '(min-width: 37.5em) 30rem, 45vw', level = 'h3' } = Astro.props;
 const H = level;
 ---
 <a class="pc" href={item.href}>
