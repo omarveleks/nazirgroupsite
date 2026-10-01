@@ -65,7 +65,7 @@ const fact = (p: (typeof projects)[number]) =>
     <div class="cover-logo"><Logo height={46} /></div>
     <div class="on-photo cover-t">
       <span class="p-eb">Company Profile</span>
-      <h1 class="cover-h">Powering Nations<br />Since {company.founded}</h1>
+      <h1 class="cover-h">Electrical and Civil Engineering<br />Since {company.founded}</h1>
       <p class="p-lede">High-voltage transmission, substations and critical infrastructure for national utilities, energy producers and governments across Asia, the Middle East and Africa.</p>
     </div>
     <div class="cover-foot">
@@ -96,7 +96,7 @@ const fact = (p: (typeof projects)[number]) =>
       <span class="p-eb">About the Company</span>
       <h2 class="p-h1">Delivering the Infrastructure Nations <mark class="hl">Run On</mark></h2>
       <p class="p-lede">
-        For more than six decades, Nazir and Company has built the high-voltage networks, substations and civil infrastructure that power economies. From its headquarters in Lahore, the company delivers landmark projects for national utilities and energy leaders across Asia, the Middle East and Africa, with a reputation for engineering depth, disciplined execution and performance in the most demanding environments.
+        For more than six decades, Nazir and Company has built the high-voltage networks, substations and civil infrastructure for utilities, industry and government. From its headquarters in Lahore, the company delivers landmark projects for national utilities and energy leaders across Asia, the Middle East and Africa, with a reputation for engineering depth, disciplined execution and performance in the most demanding environments.
       </p>
       <div class="about-grid">
         <div class="ph about-ph"><img src={jpg('substation', 960)} alt="" /></div>
@@ -266,7 +266,7 @@ const fact = (p: (typeof projects)[number]) =>
         </ol>
         {gi === 1 && (
           <div class="svc-quote">
-            <p class="p-h2">Built for the World's Toughest Terrain</p>
+            <p class="p-h2">Experience in Demanding Terrain</p>
             <p class="p-body">From the Sahara to the Arabian Peninsula, Nazir and Company delivers high-voltage transmission where conditions are most extreme and reliability matters most.</p>
           </div>
         )}
@@ -280,7 +280,7 @@ const fact = (p: (typeof projects)[number]) =>
     <section class="page">
       <div class="pad">
         <span class="p-eb">Featured Projects</span>
-        <h2 class="p-h1">{gi === 0 ? 'Landmark Projects' : 'Landmark Projects, Continued'}</h2>
+        <h2 class="p-h1">{gi === 0 ? 'Selected Projects' : 'Selected Projects, Continued'}</h2>
         <ul class="clean feat">
           {group.map((p) => (
             <li>
@@ -308,11 +308,11 @@ const fact = (p: (typeof projects)[number]) =>
     <div class="bleed shade libya-img"><img src={jpg('desert-lines', 2000)} alt="" /></div>
     <div class="on-photo libya-t">
       <span class="p-eb">Libya</span>
-      <h2 class="p-h1">A Legacy of Delivery in <span class="accent">Libya</span></h2>
+      <h2 class="p-h1">Experience in <span class="accent">Libya</span></h2>
     </div>
     <div class="pad libya-pad">
       <p class="p-lede libya-lede">
-        For over three decades, Nazir and Company built the backbone of Libya's power network: high-voltage lines from Tripoli to Benghazi and deep into the Fezzan, and critical electrical systems for the country's leading oil producers. {company.libya_status}
+        For over three decades, Nazir and Company built high-voltage lines from Tripoli to Benghazi and deep into the Fezzan, and electrical systems for the country's leading oil producers. {company.libya_status}
       </p>
       <div class="two">
         <div>
@@ -332,7 +332,7 @@ const fact = (p: (typeof projects)[number]) =>
   <section class="page">
     <div class="pad">
       <span class="p-eb">Libya</span>
-      <h2 class="p-h1">Landmark Lines</h2>
+      <h2 class="p-h1">Key Lines</h2>
       <ul class="clean lines">
         {LIBYA_FEATURED.slice(0, 4).map((s) => {
           const slug = s.href.split('/').filter(Boolean).at(-1)!;
