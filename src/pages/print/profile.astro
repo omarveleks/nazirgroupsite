@@ -65,7 +65,7 @@ const fact = (p: (typeof projects)[number]) =>
     <div class="cover-logo"><Logo height={46} /></div>
     <div class="on-photo cover-t">
       <span class="p-eb">Company Profile</span>
-      <h1 class="cover-h">Electrical and Civil Engineering<br />Since {company.founded}</h1>
+      <h1 class="cover-h">Built to Last<br />Since {company.founded}</h1>
       <p class="p-lede">High-voltage transmission, substations and critical infrastructure for national utilities, energy producers and governments across Asia, the Middle East and Africa.</p>
     </div>
     <div class="cover-foot">
@@ -149,6 +149,18 @@ const fact = (p: (typeof projects)[number]) =>
     <div class="pad">
       <span class="p-eb">Leadership</span>
       <h2 class="p-h1">The People Behind the Delivery</h2>
+      <div class="founder">
+        <div class="ph founder-ph"><img src={person('founder')} alt="" /></div>
+        <div>
+          <span class="p-eb">Founder</span>
+          <h3 class="p-h2 founder-h">{f.name}</h3>
+          <p class="p-body">{f.born}–{f.died}</p>
+          <ul class="fdots">
+            {f.facts.map((t) => <li>{t}</li>)}
+          </ul>
+        </div>
+      </div>
+      <hr class="rule" />
       <div class="lead2">
         <div class="ph lead-ph"><img src={person('director')} alt="" /></div>
         <div>
@@ -159,18 +171,6 @@ const fact = (p: (typeof projects)[number]) =>
             <div><dt>With the company since</dt><dd>{d.joined}</dd></div>
             {d.roles.map((r) => <div><dt>{r.title}</dt><dd>{r.from}–{r.to}</dd></div>)}
           </dl>
-        </div>
-      </div>
-      <hr class="rule" />
-      <div class="founder">
-        <div class="ph founder-ph"><img src={person('founder')} alt="" /></div>
-        <div>
-          <span class="p-eb">Founder</span>
-          <h3 class="p-h2 founder-h">{f.name}</h3>
-          <p class="p-body">{f.born}–{f.died}</p>
-          <ul class="fdots">
-            {f.facts.map((t) => <li>{t}</li>)}
-          </ul>
         </div>
       </div>
     </div>
@@ -490,13 +490,13 @@ const fact = (p: (typeof projects)[number]) =>
   .ms-t { font-size: 10pt; }
   .ms-d { margin: 1mm 0 0; font-size: 8.5pt; line-height: 1.45; color: var(--grey); }
 
-  .lead2 { display: grid; grid-template-columns: 56mm 1fr; gap: 10mm; margin-top: 8mm; }
+  .lead2 { display: grid; grid-template-columns: 56mm 1fr; gap: 10mm; }
   .lead-ph { height: 70mm; }
   .lead-ph img, .founder-ph img, .adv-ph img { object-position: 50% 15%; }
   .lead-p { margin-bottom: 1.5mm; }
   .page .rule { margin: 6mm 0; }
   .lead-facts { margin-top: 4mm; grid-template-columns: 1fr 1fr 1fr; }
-  .founder { display: grid; grid-template-columns: 40mm 1fr; gap: 10mm; }
+  .founder { display: grid; grid-template-columns: 40mm 1fr; gap: 10mm; margin-top: 8mm; }
   .founder-ph { height: 46mm; }
   .founder-h { font-size: 20pt; }
   .fdots { margin: 2mm 0 0; padding-left: 4mm; color: var(--grey); font-size: 8.8pt; }

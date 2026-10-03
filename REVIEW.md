@@ -23,7 +23,7 @@ How to use this list: open each page on a phone and on a computer, read every se
 The site follows the approved v7 design: white pages, large light headlines, full-width photographs, corporate blue for buttons and active states.
 
 ### Home (`/`)
-- [ ] Hero: "Electrical and Civil Engineering Since 1958", with the project card (Benghazi–eastern border, Makkah/Taif/Madinah, Barotha–Rewat, Nasiriya–Baghdad).
+- [ ] Hero: "Built to Last Since 1958", with the project card (Benghazi–eastern border, Makkah/Taif/Madinah, Barotha–Rewat, Nasiriya–Baghdad).
 - [ ] Figures band: 1958; 7 countries; 500 kV; PEC Licence No. 1.
 - [ ] Capabilities list (five items), featured projects (six cards), Libya band, heritage timeline by decade.
 - [ ] Global presence rows, "Discover" tiles, clients grid and registration row.
