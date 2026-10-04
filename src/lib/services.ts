@@ -23,7 +23,7 @@ const maxAc = Math.max(...tx.filter((p) => !/HVDC/.test(p.name)).map((p) => p.vo
 export const services: Service[] = [
   {
     id: 'transmission',
-    title: `Overhead Transmission Lines, ${minKv} kV to ${maxAc} kV and HVDC`,
+    title: `Overhead Transmission Lines (OHTL), ${minKv} kV to ${maxAc} kV and HVDC`,
     intro:
       'Foundations, tower assembly and erection, conductor stringing and complete turnkey lines, including 500 kV lines in Pakistan and Malaysia, 400 kV lines in Iraq and Iran, 380 kV lines in Saudi Arabia and the ±533 kV HVDC line from Songo to Apollo.',
     glyph: 'transmission',

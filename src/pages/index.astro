@@ -28,13 +28,17 @@ const localBusiness = {
     addressRegion: 'Punjab',
     addressCountry: 'PK',
   },
+  logo: new URL('/icons/icon-512.png', Astro.site).href,
+  foundingDate: String(company.founded),
+  description: 'Construction and engineering contractor: overhead transmission lines (OHTL), substations, turnkey EPC lines and civil works.',
+  areaServed: ['Pakistan', 'Libya', 'Saudi Arabia', 'Iraq', 'Iran', 'Malaysia', 'Mozambique'].map((name) => ({ '@type': 'Country', name })),
   parentOrganization: { '@id': new URL('/#organization', Astro.site).href },
 };
 const n = HERO_SLIDES.length;
 ---
 <Base
-  title="Nazir and Company | Built to Last Since 1958"
-  description="Nazir and Company (Pvt) Ltd, Lahore: high-voltage transmission, substations and critical infrastructure for national utilities, energy producers and governments across Asia, the Middle East and Africa since 1958."
+  title="Nazir and Company | Construction, Transmission Lines and EPC"
+  description="Nazir and Company (Pvt) Ltd, Lahore: construction and engineering contractor since 1958. Overhead transmission lines (OHTL) up to 500 kV and HVDC, substations, turnkey EPC lines and civil works in Pakistan, Libya, Saudi Arabia and beyond."
   jsonLd={[localBusiness]}
   heroPhoto="tower-sky"
 >
@@ -73,9 +77,9 @@ const n = HERO_SLIDES.length;
       <div class="abp"><Img name="substation" alt="Grid substation" sizes="(min-width: 60em) 45vw, 100vw" /></div>
       <div class="abt">
         <span class="eb">About Nazir and Company</span>
-        <h2 class="h" id="about-h">Delivering the Infrastructure Nations <mark class="hl">Run On</mark></h2>
+        <h2 class="h" id="about-h">A Lahore Construction and <mark class="hl">Engineering Company</mark></h2>
         <p class="lede">
-          For more than six decades, Nazir and Company has built the high-voltage networks, substations and civil infrastructure for utilities, industry and government. From its headquarters in Lahore, the company delivers landmark projects for national utilities and energy leaders across Asia, the Middle East and Africa, with a reputation for engineering depth, disciplined execution and performance in the most demanding environments.
+          For more than six decades, Nazir and Company has built high-voltage networks, substations and civil infrastructure for utilities, industry and government. From its headquarters in Lahore, the company delivers overhead transmission lines (OHTL), substations, turnkey lines and construction works for national utilities and energy companies across Asia, the Middle East and Africa.
         </p>
         <Go href="/about/" label="About the Company" />
       </div>

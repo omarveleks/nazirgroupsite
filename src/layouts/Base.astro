@@ -44,25 +44,56 @@ const isCurrent = (href: string) => (current ? current === href : path === href 
 const year = new Date().getFullYear();
 const hero = heroPhoto ? photo(heroPhoto) : null;
 
+const address = {
+  '@type': 'PostalAddress',
+  streetAddress: '100 Abu Bakr Block, New Garden Town',
+  addressLocality: 'Lahore',
+  addressRegion: 'Punjab',
+  addressCountry: 'PK',
+};
+const knowsAbout = [
+  'Overhead transmission lines (OHTL)',
+  'High-voltage transmission lines up to 500 kV and HVDC',
+  'Turnkey EPC transmission lines',
+  'Substations',
+  'Distribution networks',
+  'Oil-field electrical works',
+  'Civil construction and road works',
+];
+const areaServed = ['Pakistan', 'Libya', 'Saudi Arabia', 'Iraq', 'Iran', 'Malaysia', 'Mozambique'].map((name) => ({ '@type': 'Country', name }));
 const org = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   '@id': new URL('/#organization', site).href,
   name: company.name,
-  alternateName: 'Nazir & Company (Pvt) Ltd',
+  legalName: 'Nazir and Company (Pvt) Ltd',
+  alternateName: ['Nazir & Company (Pvt) Ltd', 'Nazir & Company', 'Nazir and Co'],
   url: new URL('/', site).href,
   logo: new URL('/icons/icon-512.png', site).href,
+  image: new URL(ogImage, site).href,
   foundingDate: String(company.founded),
+  foundingLocation: { '@type': 'Place', name: 'Lahore, Pakistan' },
   founder: { '@type': 'Person', name: company.founder.name },
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '100 Abu Bakr Block, New Garden Town',
-    addressLocality: 'Lahore',
-    addressCountry: 'PK',
-  },
-  description: `Electrical and civil engineering contractor, founded in ${company.founded}, with projects in ${stats.countries} countries.`,
+  address,
+  areaServed,
+  knowsAbout,
+  description: `Construction and engineering contractor in Lahore, founded in ${company.founded}: overhead transmission lines (OHTL), substations, turnkey EPC lines and civil works, with projects in ${stats.countries} countries.`,
 };
-const ld = [org, ...jsonLd];
+// Home page only: the site name shown in search results (the LocalBusiness node is in index.astro)
+const homeLd = Astro.url.pathname === '/'
+  ? [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        '@id': new URL('/#website', site).href,
+        name: company.name,
+        alternateName: ['Nazir & Company', 'Nazir'],
+        url: new URL('/', site).href,
+        publisher: { '@id': new URL('/#organization', site).href },
+      },
+    ]
+  : [];
+const ld = [org, ...homeLd, ...jsonLd];
 ---
 <!doctype html>
 <html lang="en-GB">
