@@ -23,8 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
-      SITE_MODE: ${{ vars.SITE_MODE || 'review' }}
-      PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL || 'https://nazir-and-company.pages.dev' }}
+      SITE_MODE: ${{ vars.SITE_MODE || 'live' }}
+      PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL || 'https://nazirco.com' }}
       PUBLIC_FORM_ENABLED: ${{ vars.PUBLIC_FORM_ENABLED || 'true' }}
       PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.PUBLIC_TURNSTILE_SITE_KEY || '' }}
       CF_PAGES_PROJECT: ${{ vars.CF_PAGES_PROJECT || 'nazir-and-company' }}
@@ -62,7 +62,7 @@ jobs:
           fi
           sub=$(jq -r '.result.subdomain' project.json)
           echo "Pages address: https://$sub"
-          if [ -z "$SITE_URL_VAR" ]; then echo "PUBLIC_SITE_URL=https://$sub" >> "$GITHUB_ENV"; fi
+          if [ -z "$SITE_URL_VAR" ] && [ "$SITE_MODE" != "live" ]; then echo "PUBLIC_SITE_URL=https://$sub" >> "$GITHUB_ENV"; fi
           rm -f project.json deployments.json
       - uses: actions/setup-node@v4
         with:

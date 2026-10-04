@@ -1,7 +1,8 @@
 /**
- * Live mode only: permanently redirect the *.pages.dev address to the custom
- * domain, keeping path and query. Set REDIRECT_TO (e.g. https://nazirandco.com)
- * in Cloudflare Pages when the domain is attached. Without it this does nothing.
+ * Live site: permanently redirect the production pages.dev address and www to
+ * https://nazirco.com, keeping path and query. REDIRECT_TO (Cloudflare Pages
+ * variable) overrides the target. Preview deployments (<hash>.nazir-and-company.pages.dev)
+ * are not redirected, so older deployments stay reachable for rollback checks.
  * Which paths reach this middleware is controlled by _routes.json (see postbuild).
  */
 interface Ctx {
@@ -10,14 +11,13 @@ interface Ctx {
   next: () => Promise<Response>;
 }
 
+const FROM = new Set(['nazir-and-company.pages.dev', 'www.nazirco.com']);
+
 export const onRequest = async ({ request, env, next }: Ctx): Promise<Response> => {
-  const target = env.REDIRECT_TO;
-  if (target) {
-    const url = new URL(request.url);
-    if (url.hostname.endsWith('.pages.dev')) {
-      const to = new URL(url.pathname + url.search, target);
-      return Response.redirect(to.href, 301);
-    }
+  const url = new URL(request.url);
+  if (FROM.has(url.hostname)) {
+    const to = new URL(url.pathname + url.search, env.REDIRECT_TO || 'https://nazirco.com');
+    return Response.redirect(to.href, 301);
   }
   return next();
 };

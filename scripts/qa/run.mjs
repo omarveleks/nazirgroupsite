@@ -29,7 +29,9 @@ function record(section, r) {
   if (!r.pass) r.details.slice(0, 10).forEach((x) => console.log('      ' + x));
 }
 function build(mode) {
-  const r = sh('npm', ['run', 'build'], { SITE_MODE: mode });
+  // the review artefact always describes the pages.dev address, whatever the live domain is
+  const env = mode === 'review' ? { SITE_MODE: mode, PUBLIC_SITE_URL: 'https://nazir-and-company.pages.dev' } : { SITE_MODE: mode };
+  const r = sh('npm', ['run', 'build'], env);
   const warn = r.out.split('\n').filter((l) => /\b(warn|error)\b/i.test(l) && !/contact\/error/.test(l));
   record(mode, { name: `npm run build (SITE_MODE=${mode}) completes without errors or warnings`, pass: r.ok && warn.length === 0, details: r.ok ? warn : [r.out.slice(-2000)], count: warn.length || (r.ok ? 0 : 1) });
   return r.ok;
