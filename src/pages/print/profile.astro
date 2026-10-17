@@ -184,7 +184,7 @@ const fact = (p: (typeof projects)[number]) =>
       <h2 class="p-h1">Key Advisers</h2>
       <p class="p-lede">Senior advisers in electrical, telecommunication and civil works support the company's leadership.</p>
       <ul class="clean adv">
-        {company.advisors.map((a) => (
+        {company.advisors.filter((a) => a.photo).map((a) => (
           <li>
             <div class="ph adv-ph"><img src={person(a.photo)} alt="" /></div>
             <p class="p-h3">{a.name}</p>
