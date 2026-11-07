@@ -69,7 +69,8 @@
       "name": "Sh Omar",
       "discipline": "Business development",
       "line": "Mr Omar is the scion of the Nazir family and advises on business development.",
-      "photo": null
+      "photo": "omar",
+      "in_profile_pdf": false
     }
   ],
   "pec": {
