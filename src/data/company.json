@@ -5,7 +5,7 @@
   "incorporated": "1972-08-12",
   "incorporated_text": "12 August 1972",
   "founder": {
-    "name": "Alhaj Sheikh Nazir Ahmed",
+    "name": "Alhaj Sh Nazir Ahmed",
     "born": 1930,
     "died": 2005,
     "facts": [
@@ -17,7 +17,7 @@
     ]
   },
   "director": {
-    "name": "Sheikh Tanveer Ahmed",
+    "name": "Sh Tanveer Ahmed",
     "title": "Director",
     "joined": 1985,
     "roles": [
@@ -34,7 +34,7 @@
     ],
     "education": "University of Houston, Texas",
     "bio": [
-      "Sheikh Tanveer Ahmed is the Director of Nazir and Company. He leads the company and oversees its work in Pakistan and abroad.",
+      "Sh Tanveer Ahmed is the Director of Nazir and Company. He leads the company and oversees its work in Pakistan and abroad.",
       "He joined the company in 1985.",
       "He was the company's Director in Libya from 1987 to 2002 and its Director in Saudi Arabia from 2004 to 2014.",
       "He is a graduate of the University of Houston, Texas."
@@ -66,9 +66,9 @@
       "photo": "behram-shahrokh-aslam"
     },
     {
-      "name": "Sheikh Omar Tanveer",
+      "name": "Sh Omar",
       "discipline": "Business development",
-      "line": "Adviser on business development.",
+      "line": "Mr Omar is the scion of the Nazir family and advises on business development.",
       "photo": null
     }
   ],
